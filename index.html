@@ -3,96 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Here We Go! 1年 文法ページ</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+<title>Here We Go! 1年　文法ページ</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --be:#1F4E9C; --gv:#C2185B; --ink:#222; --sub:#666;
-  --bg:#F4F1EA; --card:#fff; --rule:#DDD6C8;
+  --be:#1F4E9C; --gv:#C2185B; --ink:#2A2A33; --sub:#6B6B78;
+  --card:#FFFFFF; --rule:#E7E2D6;
+  --u1:#2E7DD1; --u2:#22A58C; --u3:#E08A1E; --u4:#8A5CD6; --u5:#E4557A;
 }
 *{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
 body{
-  margin:0; padding:24px 16px 60px;
-  background:var(--bg); color:var(--ink);
-  font-family:"Zen Kaku Gothic New",sans-serif;
+  background:#FFFDF7;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(255,211,77,.30), transparent 42%),
+    radial-gradient(circle at 88% 4%, rgba(110,190,255,.28), transparent 44%),
+    radial-gradient(circle at 78% 92%, rgba(255,160,190,.24), transparent 42%),
+    radial-gradient(circle at 8% 88%, rgba(140,230,190,.24), transparent 40%);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  padding:0 16px 70px;
 }
-.wrap{max-width:760px; margin:0 auto;}
+.wrap{max-width:880px;margin:0 auto;}
+
+/* ===== ヘッダー ===== */
+header{text-align:center;padding:34px 0 22px;}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#FFF3C9;border:2px solid #F0C44A;border-radius:999px;
+  padding:5px 16px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  font-size:12.5px;color:#9A6B06;margin-bottom:12px;
+}
+.badge svg{width:15px;height:15px;}
 h1{
-  font-family:"Zen Maru Gothic",sans-serif; font-weight:700;
-  font-size:22px; margin:0 0 4px; color:var(--be);
-  display:flex; align-items:center; gap:8px;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;
+  font-size:clamp(25px,6.4vw,36px);line-height:1.3;margin:0 0 6px;
+  color:var(--be);
 }
-h1 svg{width:26px;height:26px;}
-.lead{font-size:13px; color:var(--sub); margin:0 0 22px; line-height:1.7;}
-h2{
-  font-family:"Zen Maru Gothic",sans-serif; font-weight:700;
-  font-size:16px; margin:26px 0 10px; padding:0 0 6px;
-  border-bottom:2px solid var(--rule);
+h1 .en{font-family:"Lexend",sans-serif;font-weight:700;}
+.tagline{font-size:14px;color:var(--sub);margin:0;line-height:1.8;}
+
+/* ===== つかいかた ===== */
+.howto{
+  background:var(--card);border:2px solid var(--rule);border-radius:16px;
+  padding:16px 18px;margin:0 0 30px;
+  box-shadow:0 2px 0 rgba(0,0,0,.04);
 }
-.list{display:grid; gap:10px;}
-a.item{
-  display:flex; align-items:center; gap:12px;
-  background:var(--card); border:1.5px solid var(--rule);
-  border-radius:12px; padding:14px 16px;
-  text-decoration:none; color:var(--ink);
-  transition:.15s;
+.howto h2{
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:15px;
+  margin:0 0 10px;color:var(--ink);display:flex;align-items:center;gap:7px;
 }
-a.item:hover{border-color:var(--be); transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,.07);}
-a.item .no{
-  flex:0 0 auto; font-family:"Lexend",sans-serif; font-weight:600;
-  font-size:13px; color:#fff; background:var(--be);
-  border-radius:8px; padding:5px 10px; min-width:52px; text-align:center;
+.howto h2 svg{width:19px;height:19px;color:#E0A61E;}
+.steps{display:grid;gap:9px;margin:0;padding:0;list-style:none;}
+.steps li{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.65;}
+.steps .n{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:var(--be);color:#fff;font-family:"Lexend",sans-serif;font-weight:700;
+  font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px;
 }
-a.item .ttl{font-weight:500; font-size:15px;}
-a.item .en{font-family:"Lexend",sans-serif; color:var(--be); font-weight:600;}
-.soon{
-  display:flex; align-items:center; gap:12px;
-  background:#EFEBE1; border:1.5px dashed var(--rule);
-  border-radius:12px; padding:14px 16px; 
-  color:#9a948a;
+.steps b{color:var(--be);}
+.pill{
+  display:inline-block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  font-size:11.5px;border-radius:6px;padding:1px 8px;margin:0 1px;
+  background:#0E7A54;color:#fff;
 }
-.soon .no{
-  flex:0 0 auto; font-family:"Lexend",sans-serif; font-weight:600;
-  font-size:13px; color:#fff; background:#BDB7AA;
-  border-radius:8px; padding:5px 10px; min-width:52px; text-align:center;
+.pill.k{background:#C88A16;}
+
+/* ===== ユニット ===== */
+.unit{margin:0 0 26px;}
+.uhead{display:flex;align-items:center;gap:11px;margin:0 0 11px;}
+.unum{
+  flex:0 0 auto;width:42px;height:42px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Lexend",sans-serif;font-weight:700;font-size:19px;color:#fff;
+  box-shadow:0 3px 0 rgba(0,0,0,.14);
 }
-.soon .ttl{font-size:15px;}
-.note{
-  margin-top:28px; font-size:12px; color:var(--sub); line-height:1.8;
-  background:#fff; border-left:4px solid var(--gv);
-  padding:12px 14px; border-radius:0 8px 8px 0;
+.utxt .ut{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:17px;line-height:1.3;}
+.utxt .us{font-size:12px;color:var(--sub);margin-top:1px;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:11px;}
+a.card{
+  display:block;background:var(--card);border:2px solid var(--rule);
+  border-radius:14px;padding:13px 15px;text-decoration:none;color:var(--ink);
+  transition:transform .13s, box-shadow .13s, border-color .13s;
+  box-shadow:0 2px 0 rgba(0,0,0,.04);
 }
-footer{margin-top:30px; text-align:center; font-size:11px; color:#9a948a;}
+a.card:hover{transform:translateY(-3px);box-shadow:0 7px 16px rgba(0,0,0,.10);}
+a.card .top{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+a.card .no{
+  font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5px;color:#fff;
+  border-radius:7px;padding:3px 10px;flex:0 0 auto;
+}
+a.card .theme{
+  font-family:"Lexend",sans-serif;font-weight:700;font-size:15px;
+  line-height:1.3;word-break:break-word;
+}
+a.card .jp{font-size:12.5px;color:var(--sub);line-height:1.6;}
+a.card .go{
+  margin-top:9px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  font-size:12px;display:flex;align-items:center;gap:4px;
+}
+a.card .go svg{width:13px;height:13px;}
+
+/* ユニットごとの色 */
+.u1 .unum{background:var(--u1);} .u1 a.card .no{background:var(--u1);}
+.u1 a.card:hover{border-color:var(--u1);} .u1 a.card .theme,.u1 a.card .go{color:var(--u1);}
+.u2 .unum{background:var(--u2);} .u2 a.card .no{background:var(--u2);}
+.u2 a.card:hover{border-color:var(--u2);} .u2 a.card .theme,.u2 a.card .go{color:var(--u2);}
+.u3 .unum{background:var(--u3);} .u3 a.card .no{background:var(--u3);}
+.u3 a.card:hover{border-color:var(--u3);} .u3 a.card .theme,.u3 a.card .go{color:var(--u3);}
+.u4 .unum{background:var(--u4);} .u4 a.card .no{background:var(--u4);}
+.u4 a.card:hover{border-color:var(--u4);} .u4 a.card .theme,.u4 a.card .go{color:var(--u4);}
+.u5 .unum{background:var(--u5);} .u5 a.card .no{background:var(--u5);}
+.u5 a.card:hover{border-color:var(--u5);} .u5 a.card .theme,.u5 a.card .go{color:var(--u5);}
+
+/* ===== 合言葉 ===== */
+.motto{
+  background:#fff;border:2px solid var(--rule);border-left:7px solid var(--gv);
+  border-radius:0 14px 14px 0;padding:14px 18px;margin:28px 0 0;
+}
+.motto .h{
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14.5px;
+  display:flex;align-items:center;gap:8px;margin-bottom:5px;
+}
+.motto .h svg{width:20px;height:20px;color:#FF6B8A;}
+.motto p{margin:0;font-size:13px;line-height:1.85;color:#4A4A55;}
+.cb{color:var(--be);font-weight:700;}
+.cp{color:var(--gv);font-weight:700;}
+
+footer{
+  margin-top:34px;text-align:center;font-size:11.5px;color:#9A948A;line-height:1.9;
+}
+footer .lg{
+  display:inline-block;background:#FFEBD2;border:1.5px solid #F0B968;border-radius:8px;
+  padding:3px 13px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  font-size:12px;color:#9A5F06;margin-bottom:6px;
+}
+@media (max-width:560px){
+  .cards{grid-template-columns:1fr;}
+  header{padding:26px 0 18px;}
+}
 </style>
 </head>
 <body>
-<svg style="display:none">
-  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4 11-11 3 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 6.5l3 3" stroke="currentColor" stroke-width="1.8"/></symbol>
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.8-9.3-9C1.2 8.4 3.1 4.8 6.6 4.4c2-.2 3.7.8 4.6 2.3l.8 1.3.8-1.3c.9-1.5 2.6-2.5 4.6-2.3 3.5.4 5.4 4 3.9 7.6-1.8 4.2-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
+
 <div class="wrap">
-  <h1><svg><use href="#i-pen"/></svg>Here We Go! 1年　文法ページ</h1>
-  <p class="lead">ノートに答えを書いてから、ページ下の「答えを見る」を押してね。<br>
-  英語の読み方がわからないときは、右上の「カタカナ」ボタン。</p>
+  <header>
+    <div class="badge"><svg><use href="#i-star"/></svg>中学1年　英語</div>
+    <h1><span class="en">Here We Go!</span> 1年<br>文法ページ</h1>
+    <p class="tagline">やりたいセクションを えらんでね。<br>Unit 1 から じゅんばんに やると いちばん わかりやすいよ。</p>
+  </header>
 
-  <h2>Unit 1</h2>
-  <div class="list">
-    <a class="item" href="u1-1.html">
-      <span class="no">1-1</span>
-      <span class="ttl"><span class="en">I am ～.</span>　わたしは ～ です</span>
-    </a>
-    <a class="item" href="u1-2.html">
-      <span class="no">1-2</span>
-      <span class="ttl"><span class="en">I like ～. / I don't like ～.</span>　わたしは ～ が好きです</span>
-    </a>
-    <div class="soon"><span class="no">1-3</span><span class="ttl">Are you ～? / Do you ～?（じゅんび中）</span></div>
+  <div class="howto">
+    <h2><svg><use href="#i-pen"/></svg>つかいかた</h2>
+    <ul class="steps">
+      <li><span class="n">1</span><div><b>1ページ目を読んで、ノートに写す</b>。鉛筆マークのところだけ写せばOK。</div></li>
+      <li><span class="n">2</span><div><b>2〜4ページの問題をノートに解く</b>。ページには書きこまなくていいよ。</div></li>
+      <li><span class="n">3</span><div>とけたら、その問題の右下の <span class="pill">答えを見る</span> を押す。ページ全体の <span class="pill">全体の答えを見る</span> でもOK。</div></li>
+      <li><span class="n">4</span><div>英語の読み方がわからないときは、ページ右上の <span class="pill k">カタカナ</span> を押す。</div></li>
+    </ul>
   </div>
 
-  <div class="note">
-    <strong>合言葉：</strong>1つの文に 心臓（動詞）は 1つだけ。<br>
-    be動詞（<span style="color:#1F4E9C;font-weight:700">青</span>）と 一般動詞（<span style="color:#C2185B;font-weight:700">ピンク</span>）は いっしょに つかわない。
+  <section class="unit u1">
+    <div class="uhead">
+      <div class="unum">1</div>
+      <div class="utxt"><div class="ut">Unit 1</div><div class="us">わたしのこと　教科書 p.28〜33</div></div>
+    </div>
+    <div class="cards">
+      <a class="card" href="u1-1.html"><div class="top"><span class="no">1-1</span><span class="theme">I am ～.</span></div>
+        <div class="jp">わたしは ～ です</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u1-2.html"><div class="top"><span class="no">1-2</span><span class="theme">I like ～. / I don't like ～.</span></div>
+        <div class="jp">わたしは ～ が好きです／好きではありません</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u1-3.html"><div class="top"><span class="no">1-3</span><span class="theme">I can ～. / I can't ～.</span></div>
+        <div class="jp">わたしは ～ できます／できません</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </section>
+
+  <section class="unit u2">
+    <div class="uhead">
+      <div class="unum">2</div>
+      <div class="utxt"><div class="ut">Unit 2</div><div class="us">相手にたずねる　教科書 p.38〜43</div></div>
+    </div>
+    <div class="cards">
+      <a class="card" href="u2-1.html"><div class="top"><span class="no">2-1</span><span class="theme">You are ～. / Are you ～?</span></div>
+        <div class="jp">あなたは ～ です／～ ですか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u2-2.html"><div class="top"><span class="no">2-2</span><span class="theme">Do you ～?</span></div>
+        <div class="jp">あなたは ～ しますか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u2-3.html"><div class="top"><span class="no">2-3</span><span class="theme">Can you ～?</span></div>
+        <div class="jp">あなたは ～ できますか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </section>
+
+  <section class="unit u3">
+    <div class="uhead">
+      <div class="unum">3</div>
+      <div class="utxt"><div class="ut">Unit 3</div><div class="us">なにを・したいこと　教科書 p.48〜53</div></div>
+    </div>
+    <div class="cards">
+      <a class="card" href="u3-1.html"><div class="top"><span class="no">3-1</span><span class="theme">What do you ～?</span></div>
+        <div class="jp">あなたは なにを ～ しますか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u3-2.html"><div class="top"><span class="no">3-2</span><span class="theme">I like dancing.</span></div>
+        <div class="jp">動詞の -ing 形　～すること</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u3-3.html"><div class="top"><span class="no">3-3</span><span class="theme">I want to ～.</span></div>
+        <div class="jp">わたしは ～ したいです</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </section>
+
+  <section class="unit u4">
+    <div class="uhead">
+      <div class="unum">4</div>
+      <div class="utxt"><div class="ut">Unit 4</div><div class="us">ほかの人・もののこと　教科書 p.62〜67</div></div>
+    </div>
+    <div class="cards">
+      <a class="card" href="u4-1.html"><div class="top"><span class="no">4-1</span><span class="theme">He is ～. / She is ～.</span></div>
+        <div class="jp">彼は ～ です／彼女は ～ です</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u4-2.html"><div class="top"><span class="no">4-2</span><span class="theme">Who's ～?</span></div>
+        <div class="jp">～は だれ ですか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u4-3.html"><div class="top"><span class="no">4-3</span><span class="theme">Is this ～? / This is not ～.</span></div>
+        <div class="jp">これは ～ ですか／～ ではありません</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </section>
+
+  <section class="unit u5">
+    <div class="uhead">
+      <div class="unum">5</div>
+      <div class="utxt"><div class="ut">Unit 5</div><div class="us">さそう・どこ・いつ　教科書 p.74〜79</div></div>
+    </div>
+    <div class="cards">
+      <a class="card" href="u5-1.html"><div class="top"><span class="no">5-1</span><span class="theme">Look at this. / Don't ～. / Let's ～.</span></div>
+        <div class="jp">命令文　～して／～しないで／～しましょう</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u5-2.html"><div class="top"><span class="no">5-2</span><span class="theme">Where ～?</span></div>
+        <div class="jp">～は どこ ですか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+      <a class="card" href="u5-3.html"><div class="top"><span class="no">5-3</span><span class="theme">When ～?</span></div>
+        <div class="jp">～は いつ ですか</div><div class="go">はじめる<svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </section>
+
+  <div class="motto">
+    <div class="h"><svg><use href="#i-heart"/></svg>ずっと使う合言葉</div>
+    <p>
+      1つの文に <b>心臓（動詞）は 1つだけ</b>。<br>
+      <span class="cb">青＝be動詞（am・are・is）</span>　<span class="cp">ピンク＝一般動詞（like・play・have）</span>　この2つは いっしょに使いません。<br>
+      <span class="en">can</span>・<span class="en">want to</span>・<span class="en">Do</span>・命令文 のうしろは、かざりのない <b>「もとの形」</b>。
+    </p>
   </div>
 
-  <footer>学習空間稲里教室</footer>
+  <footer>
+    <div class="lg">学習空間 稲里教室</div><br>
+    光村図書『Here We Go! ENGLISH COURSE 1』準拠
+  </footer>
 </div>
 </body>
 </html>

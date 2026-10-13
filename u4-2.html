@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 4-2｜オンライン版（4ページ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --key:#1F4E9C; --vb:#0E7A54; --ng:#B5273F;
+    --ink:#16202B; --mut:#55616D; --rule:#D7DDE3; --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#E9ECEF;color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .en{font-family:"Lexend","Segoe UI",Verdana,sans-serif;}
+
+  .sheet{width:210mm;min-height:297mm;margin:8mm auto;padding:7mm 8mm 8mm;
+    background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.13);
+    page-break-after:always;position:relative;display:flex;flex-direction:column;}
+  .sheet:last-of-type{page-break-after:auto;}
+
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2.5px solid var(--key);padding-bottom:3px;margin-bottom:7px;flex:none;}
+  .head .tag{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:19pt;color:var(--key);}
+  .head .tag small{font-size:11pt;font-weight:700;color:var(--mut);margin-left:8px;}
+  .head .sub{font-size:9.5pt;color:var(--mut);text-align:right;line-height:1.4;}
+  .head .sub b{color:var(--ink);}
+  .name{display:inline-block;border:1px solid var(--rule);font-size:9.5pt;color:var(--mut);
+    padding:2px 10px;border-radius:3px;white-space:nowrap;margin-top:3px;}
+
+  .hint{background:#F5F8FB;border-left:4px solid #9AB4D6;border-radius:3px;
+    padding:2px 11px;margin:0 0 3px;font-size:9pt;line-height:1.4;color:#2A3742;}
+  .hint b{color:var(--key);}
+  .hero{display:flex;align-items:center;gap:11px;margin:0 0 6px;
+    background:linear-gradient(100deg,#1F4E9C 0%,#2E68C4 62%,#3C7BDC 100%);
+    border-radius:7px;padding:4px 14px;color:#fff;}
+  .hero .star{position:relative;flex:none;width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;}
+  .hero .star svg{width:34px;height:34px;color:#FFD34D;}
+  .hero .star span{position:absolute;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;font-size:7.5pt;color:#1F4E9C;line-height:1;}
+  .hero .mid{flex:1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .hero .lbl{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFD34D;color:#1F4E9C;border-radius:11px;padding:0 9px;flex-basis:100%;
+    align-self:flex-start;width:max-content;}
+  .hero .big{font-family:"Lexend",sans-serif;font-weight:700;font-size:20pt;line-height:1.15;}
+  .hero .jp{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;}
+
+  .stepnum{display:inline-flex;align-items:center;justify-content:center;
+    width:19px;height:19px;border-radius:50%;background:var(--key);color:#fff;
+    font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
+  h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
+    color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  .blk-sec{margin-bottom:8px;}
+  .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
+  .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
+  .talk b{background:linear-gradient(transparent 60%, rgba(255,215,0,.6) 60%);}
+  .talk .en{font-weight:600;}
+
+  .exbox{border:2px solid var(--key);border-radius:5px;padding:3px 13px;margin:2px 0;}
+  .exline{display:flex;align-items:baseline;gap:12px;padding:0;}
+  .exline .s{font-size:13pt;font-weight:600;}
+  .exline .t{font-size:10.5pt;color:var(--mut);}
+
+  .blocks{display:flex;align-items:stretch;gap:6px;margin:2px 0;flex-wrap:wrap;}
+  .blk{border-radius:6px;padding:2px 12px;text-align:center;min-width:72px;}
+  .blk .w{font-size:13pt;font-weight:700;line-height:1.15;}
+  .blk .r{font-size:8pt;margin-top:0;opacity:.88;}
+  .blk.fill{background:var(--key);color:#fff;}
+  .blk.line{border:2px dashed var(--key);color:var(--key);}
+  .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
+
+  .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
+    padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
+  .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
+
+  table.kind{width:100%;border-collapse:collapse;font-size:9pt;margin:3px 0;}
+  table.kind th,table.kind td{border:1px solid var(--rule);padding:0.5px 10px;text-align:left;}
+  table.kind thead th{background:#EEF2F8;color:var(--key);font-size:9.5pt;font-weight:700;}
+  table.kind td.k{width:26%;font-weight:700;}
+  table.kind td.k svg{margin-right:5px;color:var(--key);}
+  table.kind td.e{font-family:"Lexend",sans-serif;font-weight:600;font-size:10.5pt;}
+  table.kind td.e u{text-decoration-color:var(--key);text-decoration-thickness:2px;text-underline-offset:2px;}
+  table.kind td.j{width:27%;color:var(--mut);font-size:10pt;}
+
+  .judge{display:flex;gap:9px;margin:3px 0;}
+  .judge .col{flex:1;border-radius:5px;overflow:hidden;border:2px solid;}
+  .judge .col.yes{border-color:var(--key);}
+  .judge .col.no{border-color:var(--vb);}
+  .judge .ttl{padding:2px 11px;font-weight:700;font-size:10pt;color:#fff;display:flex;align-items:center;gap:8px;}
+  .judge .yes .ttl{background:var(--key);}
+  .judge .no .ttl{background:var(--vb);}
+  .judge .ttl small{display:block;font-weight:500;font-size:9pt;opacity:.93;}
+  .judge .in{padding:3px 11px;font-size:9pt;}
+  .judge .ex{font-family:"Lexend",sans-serif;font-size:10.5pt;font-weight:600;line-height:1.3;}
+  .judge .yes .ex{color:var(--key);} .judge .no .ex{color:var(--vb);}
+  .judge .memo{font-size:9.5pt;color:var(--mut);margin-top:3px;border-top:1px dotted var(--rule);padding-top:2px;}
+
+  .heart{background:var(--ink);color:#fff;border-radius:5px;padding:4px 14px;margin:2px 0;
+    display:flex;gap:13px;align-items:center;}
+  .heart .txt{flex:1;}
+  .heart .h{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:900;margin-bottom:1px;}
+  .heart p{margin:0;font-size:9pt;line-height:1.4;}
+  .heart .xm{color:#FF9BA8;font-weight:600;}
+  @keyframes beat{0%,100%{transform:scale(1);}12%{transform:scale(1.14);}24%{transform:scale(1);}36%{transform:scale(1.09);}}
+  .beat{animation:beat 1.6s ease-in-out infinite;transform-origin:center;}
+  @media print{.beat{animation:none;}}
+
+  .warn{border:1.5px solid var(--ng);border-radius:5px;padding:4px 13px;margin:4px 0;}
+  .warn .h{font-size:10pt;font-weight:700;color:var(--ng);margin-bottom:0;}
+  .warn .row{font-size:10pt;padding:0;line-height:1.35;}
+  .warn .why{font-size:9pt;color:var(--mut);}
+  .bad{color:var(--ng);font-weight:600;} .bad s{text-decoration-thickness:1px;}
+  .good{color:var(--vb);font-weight:600;}
+
+  h3.sec{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:700;
+    margin:0 0 4px;padding:1px 0 1px 10px;border-left:5px solid var(--key);}
+  h3.sec em{font-style:normal;font-size:9.5pt;font-weight:500;color:var(--mut);margin-left:8px;}
+  h3.sec.sec2{margin-top:14px;padding-top:10px;border-top:2px dashed var(--rule);}
+  .half{flex:0 0 auto;}
+  .half.bottom{margin-top:auto;padding-top:7px;border-top:2px dashed var(--rule);}
+
+  .faint{margin-top:4px;font-size:8.5pt;color:#A8B0B8;line-height:1.4;}
+  .faint .en{font-weight:500;}
+  .wordbank{border:1.5px dashed var(--mut);border-radius:4px;padding:4px 12px;margin:0 0 6px;
+    font-size:11.5pt;background:#FAFBFC;}
+  .wordbank b{font-size:9.5pt;color:var(--mut);margin-right:9px;}
+  .wordbank .w{display:inline-block;margin:0 12px 0 0;font-weight:600;}
+
+  ol.q{margin:0;padding-left:1.6em;}
+  ol.q > li{font-size:11.5pt;padding:2px 0;}
+  ol.q.sp > li{padding:2.5px 0;}
+  .bl{display:inline-block;border-bottom:1.4px solid var(--ink);min-width:60px;height:1.15em;vertical-align:-3px;margin:0 2px;}
+  .bl.s{min-width:42px;} .bl.l{min-width:125px;}
+  .jp-cue{color:var(--mut);font-size:10.5pt;}
+  .paren{color:var(--mut);}
+
+  .grid2{display:flex;flex-wrap:wrap;gap:3px 14px;}
+  .grid2 > div{width:calc(50% - 8px);font-size:11.5pt;padding:2px 0;}
+  .tfbox{display:inline-block;border:1.3px solid var(--ink);width:21px;height:17px;
+    vertical-align:-3px;margin-left:7px;border-radius:2px;}
+
+  .keychips{font-size:10.5pt;margin-bottom:4px;line-height:1.8;}
+  .chip{display:inline-block;padding:1px 9px;border-radius:11px;background:var(--key);color:#fff;
+    font-weight:700;margin-right:4px;font-size:10pt;}
+
+  .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
+  .lines.tight div{height:7.0mm;}
+
+  .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
+  .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
+  .cond ul{margin:0;padding-left:1.2em;} .cond li{padding:0;}
+
+  .checklist{margin-top:5px;font-size:10pt;color:var(--mut);display:flex;flex-wrap:wrap;gap:3px 16px;}
+  .checklist span::before{content:"□ ";font-size:11pt;color:var(--ink);}
+  .checklist span.key{color:var(--ng);font-weight:700;}
+
+  .ribbon{margin-top:6px;border:1.5px solid var(--ink);border-radius:4px;
+    padding:3px 13px;font-size:10.5pt;display:flex;align-items:center;gap:10px;}
+  .ribbon b{font-family:"Zen Maru Gothic",sans-serif;font-size:11pt;white-space:nowrap;}
+  .ribbon .s{color:var(--mut);}
+  .ribbon svg{color:var(--ng);}
+
+  .foot{border-top:1px solid var(--rule);padding-top:3px;margin-top:6px;
+    font-size:8.5pt;color:var(--mut);display:flex;justify-content:space-between;flex:none;}
+
+  .ans{font-size:12pt;line-height:1.45;}
+  .ans h4{font-family:"Zen Maru Gothic",sans-serif;font-size:13pt;font-weight:900;
+    margin:7px 0 2px;color:#fff;background:var(--key);padding:2px 13px;border-radius:4px;}
+  .ans h4:first-of-type{margin-top:3px;}
+  .ans ol{margin:0;padding-left:1.7em;} .ans li{padding:1px 0;}
+  .ans .a{font-weight:700;color:var(--vb);font-size:13.5pt;}
+  .ans .row{font-size:13.5pt;font-weight:700;letter-spacing:.04em;margin:2px 0;}
+  .ans .cm{color:var(--mut);font-size:11pt;font-weight:400;letter-spacing:0;}
+  .ans .exp{background:#F4F7FA;border-left:4px solid var(--key);padding:3px 13px;
+    font-size:10pt;color:#2A3742;margin:2px 0;line-height:1.4;}
+  .ans .exp b{color:var(--key);}
+  .teacher{background:#FFF4E5;border:1.5px solid #C1611A;border-radius:4px;
+    padding:5px 13px;font-size:10pt;margin-top:auto;line-height:1.45;}
+  .teacher .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:11.5pt;color:#8A4310;margin-bottom:1px;}
+
+  .ic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none;}
+  .ic-l{width:26px;height:26px;vertical-align:-6px;}
+  .ic-xl{width:36px;height:36px;flex:none;}
+
+  .bar-ui{max-width:210mm;margin:14px auto 0;display:flex;gap:10px;align-items:center;}
+  .bar-ui button{font-family:inherit;font-size:11pt;padding:8px 18px;border:none;border-radius:4px;
+    background:var(--ink);color:#fff;cursor:pointer;}
+  .bar-ui span{font-size:9.5pt;color:#55616D;}
+  @media print{
+    body{background:#fff;}
+    /* 用紙の余白・ヘッダー/フッターの設定に関係なく1枚に収まるよう、
+       印刷時だけ全体をわずかに縮小する */
+    .sheet{margin:0;box-shadow:none;width:auto;height:266mm;min-height:266mm;
+      padding:4mm 6mm;overflow:hidden;zoom:0.93;}
+    .bar-ui{display:none;}
+    @page{size:A4 portrait;margin:8mm;}
+  }
+</style>
+
+<style>
+  /* ===== オンライン版 ===== */
+  body{background:#EEF1F4;padding-bottom:40px;}
+  .sheet{width:100%;max-width:230mm;min-height:0;margin:14px auto;
+         padding:9mm 17mm 8mm;box-shadow:0 2px 10px rgba(0,0,0,.12);
+         page-break-after:auto;height:auto;overflow:visible;}
+  @media (max-width:560px){
+    .sheet{padding:5mm 9mm;margin:8px auto;border-radius:0;}
+    .head .tag{font-size:16pt;}
+  }
+  /* 問題行：左＝問題／右＝ひとこと解説 */
+  .row{display:flex;gap:12px;align-items:flex-start;}
+  .qmain{flex:1 1 auto;min-width:0;}
+  .qnote{flex:0 0 34%;max-width:34%;font-size:9pt;line-height:1.5;color:#245C45;
+    background:#F2F8F4;border-left:3px solid var(--vb);border-radius:4px;
+    padding:3px 9px;opacity:0;transition:opacity .18s;}
+  .qnote b{color:var(--vb);}
+  .qnote .x{color:var(--ng);font-weight:600;}
+  @media (max-width:620px){
+    .row{flex-direction:column;gap:4px;}
+    .qnote{flex:none;max-width:100%;width:100%;}
+  }
+  /* 答えの表示 */
+  .bl{position:relative;}
+  .bl .ansfill{position:absolute;left:0;right:0;bottom:1px;text-align:center;
+    color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:11pt;white-space:nowrap;opacity:0;transition:opacity .18s;}
+  .lines .fill2{color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:12.5pt;padding-left:4px;opacity:0;transition:opacity .18s;}
+  .tfbox{position:relative;}
+  .tfbox .ansmark{position:absolute;left:0;right:0;top:-3px;text-align:center;
+    color:var(--vb);font-weight:700;font-size:13pt;opacity:0;transition:opacity .18s;}
+  .expbox{margin-top:7px;background:#F2F8F4;border-left:5px solid var(--vb);
+    border-radius:5px;padding:6px 12px;font-size:9.5pt;line-height:1.6;
+    color:#245C45;display:none;}
+  .expbox b{color:var(--vb);}
+  .expbox .x{color:var(--ng);font-weight:600;}
+  .model{display:none;margin-top:7px;background:#F2F8F4;border:2px solid var(--vb);
+    border-radius:6px;padding:8px 12px;font-size:10.5pt;line-height:1.6;}
+  .model .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;color:var(--vb);
+    font-size:11pt;margin-bottom:2px;}
+  .model .ex{font-family:"Lexend",sans-serif;font-size:13pt;font-weight:700;color:var(--vb);}
+
+  .sheet.showans .bl .ansfill{opacity:1;}
+  .sheet.showans .lines .fill2{opacity:1;}
+  .sheet.showans .tfbox .ansmark{opacity:1;}
+  .sheet.showans .qnote{opacity:1;}
+  .sheet.showans .expbox{display:block;}
+  .sheet.showans .model{display:block;}
+
+  /* 各ページ右下の答えボタン */
+  .ansbar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:12px;}
+  .ansbar .msg{font-size:9.5pt;color:var(--mut);}
+  .abtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14pt;
+    border:none;border-radius:10px;padding:10px 26px;cursor:pointer;
+    background:var(--vb);color:#fff;box-shadow:0 3px 0 #085C3E;}
+  .abtn:active{transform:translateY(3px);box-shadow:none;}
+  .abtn.on{background:var(--ng);box-shadow:0 3px 0 #8A1B2E;}
+  .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
+    padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#C88A16;}
+  .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
+  .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
+    color:#6B4E0B;margin-top:3px;line-height:1.7;}
+  .copy .cpx.jp{font-family:"Zen Kaku Gothic New",sans-serif;font-size:11pt;}
+  .copy .min{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9pt;color:#9A7C3A;margin-left:8px;}
+  /* 一般動詞はピンクをテーマカラーにする（be動詞は青のまま） */
+  :root{--gv:#C2185B;}
+  .judge .col.no{border-color:var(--gv);}
+  .judge .no .ttl{background:var(--gv);}
+  .judge .no .ex{color:var(--gv);}
+  .judge .no .memo b{color:var(--gv);}
+  .hero .lblpen{width:13px;height:13px;vertical-align:-2px;margin-right:5px;color:#1F4E9C;}
+  .heart .hearts{display:flex;align-items:center;gap:6px;flex:none;}
+  .heart .hearts svg{width:30px;height:30px;}
+  .heart .hb{color:#6FA8FF;} .heart .hp{color:#FF6B8A;}
+  .heart .or{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10pt;opacity:.9;}
+  .heart .cb{color:#9CC4FF;} .heart .cp{color:#FFA7BC;}
+  .copy.sum{align-items:flex-start;margin-top:10px;}
+  .copy.sum svg{margin-top:2px;}
+  ul.sumlist{margin:4px 0 0;padding-left:1.2em;font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:500;font-size:11pt;line-height:1.8;color:#5F4A12;}
+  ul.sumlist li{padding:1px 0;}
+  ul.sumlist b{color:#8A5A0B;}
+
+  /* ブロック間を半行ずつ空ける */
+  .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
+  /* きほんの文（書き写す3文）の鉛筆マーク */
+  .exline .pn{width:14px;height:14px;flex:none;color:#C88A16;align-self:center;margin-right:-5px;}
+
+  /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
+  .talk{text-indent:1em;}
+
+  /* ===== 設問ごと／ページ全体の答え表示 ===== */
+  .showans .bl .ansfill{opacity:1;}
+  .showans .lines .fill2{opacity:1;}
+  .showans .tfbox .ansmark{opacity:1;}
+  .showans .qnote{opacity:1;}
+  .showans .expbox{display:block;}
+  .showans .model{display:block;}
+  .showans .modelnote{display:block;}
+
+  .qsec{position:relative;}
+  .secbar{display:flex;justify-content:flex-end;margin-top:7px;}
+  .sbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10.5pt;
+    border:2px solid var(--vb);border-radius:8px;padding:4px 18px;cursor:pointer;
+    background:#fff;color:var(--vb);}
+  .sbtn:active{transform:translateY(2px);}
+  .sbtn.on{background:var(--vb);color:#fff;}
+
+  /* ===== ヒント（語群）ボタン ===== */
+  .hintwrap{margin:5px 0 0;}
+  .hbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:1.5px dashed #A49C90;border-radius:7px;padding:3px 14px;cursor:pointer;
+    background:#F7F5F0;color:#7A736A;}
+  .hbtn.on{background:#EDE8DE;color:#5F594F;}
+  .hintwrap .faint{display:none;margin-top:4px;}
+  .hintwrap.open .faint{display:block;}
+
+  /* ===== よくある間違いさがしクイズ ===== */
+  .quiz{border:2px solid var(--ng);border-radius:8px;padding:8px 12px 9px;margin:9px 0 0;}
+  .quiz .qzh{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12pt;
+    color:var(--ng);}
+  .quiz .qzh .qzs{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:var(--mut);margin-left:9px;}
+  .qzi{border-top:1px dotted #E6BDC4;padding:5px 0 4px;}
+  .qzi:first-of-type{border-top:none;padding-top:4px;}
+  .qzq{display:flex;align-items:center;gap:10px;}
+  .qzq .no{font-family:"Lexend",sans-serif;font-weight:600;font-size:10pt;
+    color:var(--mut);flex:none;}
+  .qzq .xm{color:var(--ng);font-weight:700;font-family:"Lexend",sans-serif;font-size:12.5pt;}
+  .qzb{margin-left:auto;flex:none;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;font-size:10pt;border:2px solid var(--ng);border-radius:7px;
+    padding:3px 16px;cursor:pointer;background:#fff;color:var(--ng);}
+  .qzb:active{transform:translateY(2px);}
+  .qzb.on{background:var(--ng);color:#fff;}
+  .qza{display:none;margin:4px 0 1px 26px;}
+  .qzi.open .qza{display:block;}
+  .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
+  .qza .qzp b{color:var(--vb);}
+
+  /* ===== レベル4 書き方の例を解答欄に ===== */
+  .lines .fill2 .exlab{display:inline-block;background:var(--vb);color:#fff;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-size:8.5pt;font-weight:700;
+    border-radius:4px;padding:0 7px;margin-right:8px;vertical-align:2px;}
+  .modelnote{display:none;font-size:9.5pt;line-height:1.6;color:var(--mut);
+    margin-top:3px;text-indent:1em;}
+
+
+  /* ①②③…のブロックを細い濃いめの灰色の枠で囲う */
+  .blk-sec{border:1px solid #8A8A8A;border-radius:8px;
+    padding:8px 11px 7px;margin:0 0 9px;}
+  .blk-sec + .blk-sec{border-top:1px solid #8A8A8A;margin-top:0;padding-top:8px;}
+  .blk-sec > h3.st:first-child{margin-top:0;}
+
+
+
+  .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
+    padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
+  .guide b{color:#8A5A0B;}
+  /* カタカナ表示 */
+  .toolbar{display:flex;justify-content:flex-end;margin:0 0 6px;}
+  .kbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11pt;
+    border:2px solid #C88A16;border-radius:8px;padding:5px 16px;cursor:pointer;
+    background:#FFF8E8;color:#8A5A0B;}
+  .kbtn.on{background:#C88A16;color:#fff;}
+  ruby.rb{ruby-position:over;-webkit-ruby-position:before;}
+  /* rt の display は変えない（Safari が ruby-text を解さないため）。
+     ふだんは文字サイズ0で場所を取らせず、表示時にサイズを与える。 */
+  ruby.rb rt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:0;line-height:0;visibility:hidden;color:#8A5A0B;
+    -webkit-text-fill-color:#8A5A0B;letter-spacing:0;text-align:center;}
+  .sheet.showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
+  /* カタカナが長い語（student→ステューデント など）でも隣とぶつからないよう、
+     カタカナ表示中だけ単語のまわりに少し余白を取る */
+  .sheet.showkana ruby.rb{margin:0 2.5px;}
+  /* カタカナを出すときは、上の行と重ならないよう行間を広げる */
+  .sheet.showkana .talk, .sheet.showkana .hint, .sheet.showkana .qnote,
+  .sheet.showkana .goal, .sheet.showkana .goal li, .sheet.showkana .flow ol,
+  .sheet.showkana .flow li, .sheet.showkana .warn .row, .sheet.showkana .copy,
+  .sheet.showkana .cond, .sheet.showkana .cond li, .sheet.showkana .checklist,
+  .sheet.showkana ol.q > li, .sheet.showkana .grid2 > div,
+  .sheet.showkana table.kind td, .sheet.showkana .exline, .sheet.showkana .exline .s,
+  .sheet.showkana .judge .ex, .sheet.showkana .judge .memo, .sheet.showkana .eqbox,
+  .sheet.showkana .hero .big, .sheet.showkana .hero .jp, .sheet.showkana .lines div,
+  .sheet.showkana .model, .sheet.showkana .model .ex, .sheet.showkana .expbox,
+  .sheet.showkana .faint, .sheet.showkana .ribbon, .sheet.showkana .heart p,
+  .sheet.showkana .keychips, .sheet.showkana .blk .w, .sheet.showkana .sec em{
+    line-height:2.1;}
+  @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.8-9.3-9C1.2 8.4 3.1 4.8 6.6 4.4c2-.2 3.7.8 4.6 2.3l.8 1.3.8-1.3c.9-1.5 2.6-2.5 4.6-2.3 3.5.4 5.4 4 3.9 7.6-1.8 4.2-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="6.5" r="3.3" fill="currentColor"/><path d="M12 11c-3.6 0-6.2 2.4-6.2 5.6V21h12.4v-4.4C18.2 13.4 15.6 11 12 11z" fill="currentColor"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4.4" r="2.4" fill="currentColor"/><path d="M13.7 8.1 9.6 10c-.7.3-1.1 1-1.1 1.8v3.4h2.4v-2.6l2-.9-1 4.1 3.4 3.5.6 3.1h2.4l-.8-4.2-2.7-2.8 1.1-4.4 1.7 2.3 3.1.6.4-2.3-2.3-.5-2.2-2.9c-.6-.8-1.7-1.1-2.6-.7z" fill="currentColor"/><path d="M8.2 17.6 4 19.1l.8 2.2 4.2-1.5z" fill="currentColor"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 4.5h6v2H9z" fill="currentColor"/><path d="M7 11h10M7 14.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7.5V6a1.7 1.7 0 0 1 1.7-1.7h2.6A1.7 1.7 0 0 1 15 6v1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 13h19" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 2.5c.9 1.2 1.4 2 1.4 2.6a1.4 1.4 0 1 1-2.8 0c0-.6.5-1.4 1.4-2.6z" fill="currentColor"/><rect x="4" y="12" width="16" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12M4 15.5c1.6 0 1.6 1.6 3.2 1.6s1.6-1.6 3.2-1.6 1.6 1.6 3.2 1.6 1.6-1.6 3.2-1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor"/><circle cx="15" cy="10" r="1.3" fill="currentColor"/><path d="M8 14.5c1 1.4 2.3 2.1 4 2.1s3-.7 4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 4 − 2 <small>Here We Go!</small></div>
+    <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.64〜65</div>
+  </div>
+
+  <div class="hero">
+    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="mid">
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
+      <div class="big">Who&#39;s ～?</div>
+      <div class="jp">～は だれ ですか</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
+    <p class="talk">3-1 で <span class="en">What</span>（なに）を習いました。<br>　今回は <span class="en">Who</span>（<b>だれ</b>）です。<br>　「あの人はだれ？」とたずねるときに使います。</p>
+    <div class="exbox">
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Who&#39;s that girl?</span><span class="t">あの 女の子は だれ ですか。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">She&#39;s my sister.</span><span class="t">彼女は わたしの 姉妹 です。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Who&#39;s that boy?</span><span class="t">あの 男の子は だれ ですか。</span></div>
+    </div>
+    <p class="talk"><span class="en">Who&#39;s</span> は <span class="en">Who is</span> を短くした形です。<br>　答えは <span class="en">he</span> や <span class="en">she</span> を使って、<b>名前や関係</b>を言います。</p>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">2</span>つくり方は <span class="en">Who&#39;s</span> ＋ だれのことか</h3>
+    <p class="talk">やり方はかんたん。<br>　<b><span class="en">Who&#39;s</span> のうしろに「だれのことか」を置く</b>だけです。</p>
+    <div class="blocks">
+      <div class="blk fill" style="background:#D98400;"><div class="w en">Who&#39;s</div><div class="r">だれですか</div></div>
+      <div class="plus">＋</div>
+      <div class="blk line"><div class="w">だれのこと</div><div class="r">that girl / that boy / he …</div></div>
+      <div class="plus">＋</div>
+      <div class="blk fill" style="background:var(--ng);"><div class="w">?</div><div class="r">わすれない</div></div>
+    </div>
+    <p class="talk"><span class="en">that</span> は「あの」という意味です。<br>　<span class="en">that girl</span>（あの女の子）、<span class="en">that boy</span>（あの男の子）のように使います。</p>
+    <p class="talk"><span class="en">Who&#39;s</span> は <span class="en">Who is</span> の短い形。<br>　<b>&#39;（アポストロフィ）を忘れない</b>のは今までと同じです。</p>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜答えは <span class="en">Yes / No</span> ではなく <b>名前や関係</b></h3>
+    <p class="talk">ここが今回のヤマです。<br>　<span class="en">Who</span> は「だれ？」と中身を聞いているので、<b>はい／いいえでは答えられません</b>。<br>　3-1 の <span class="en">What</span> と同じ考え方です。</p>
+    <div class="judge">
+      <div class="col yes">
+        <div class="ttl"><svg class="ic-l"><use href="#i-smile"/></svg>
+          <span>◯ 名前や関係で答える<small>Who で聞かれたとき</small></span></div>
+        <div class="in"><div class="ex">Who&#39;s that girl?<br>— She&#39;s my sister.</div></div>
+      </div>
+      <div class="col no">
+        <div class="ttl"><svg class="ic-l"><use href="#i-person"/></svg>
+          <span>✕ はい／いいえ<small>Who には合わない</small></span></div>
+        <div class="in"><div class="ex">Who&#39;s that girl?<br>— Yes, she is.</div></div>
+      </div>
+    </div>
+    <div class="heart">
+      <div class="hearts">
+        <svg class="hb beat"><use href="#i-heart"/></svg>
+        <span class="or">か</span>
+        <svg class="hp beat"><use href="#i-heart"/></svg>
+      </div>
+      <div class="txt">
+        <div class="h">合言葉：<span class="en">Who</span>・<span class="en">What</span> で聞かれたら 中身で答える</div>
+        <p><b class="cb"><span class="en">Is he ～?</span> → <span class="en">Yes / No</span></b>　<b class="cp"><span class="en">Who&#39;s ～?</span> → 名前や関係</b>　
+        先頭を見れば、答え方が決まります。<br>
+        <span class="xm">✕ Who&#39;s that girl? — Yes, she is ✕</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">4</span>答えるときは <span class="en">he</span> か <span class="en">she</span> に言いかえる</h3>
+    <p class="talk"><span class="en">that girl</span> と聞かれたら、答えでは <b><span class="en">she</span></b> に言いかえます。<br>　<span class="en">that boy</span> なら <b><span class="en">he</span></b> です。</p>
+    <table class="kind">
+      <thead><tr><th>たずねる文</th><th>答えの主語</th><th>答えの文</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Who&#39;s that <u>girl</u>?</td><td class="k" style="color:var(--key);font-weight:700;">she</td><td class="e">She&#39;s my sister.</td></tr>
+        <tr><td class="k">Who&#39;s that <u>boy</u>?</td><td class="k" style="color:var(--key);font-weight:700;">he</td><td class="e">He&#39;s my friend.</td></tr>
+      </tbody>
+    </table>
+    <p class="talk"><span class="en">That girl is my sister.</span> と答えても通じますが、<b><span class="en">she</span> を使うほうが自然</b>です。</p>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">5</span><span class="en">Who</span> と <span class="en">What</span> の使い分け</h3>
+    <p class="talk">どちらも「中身をたずねる」ことばですが、聞いているものがちがいます。</p>
+    <div class="eqbox">
+      <span class="eq">Who&#39;s that girl?</span>　→　<b>人</b>をたずねる（だれ）<br>
+      <span class="eq">What do you like?</span>　→　<b>もの</b>をたずねる（なに）
+    </div>
+    <p class="talk"><b>人なら <span class="en">Who</span>、ものなら <span class="en">What</span></b>。<br>　日本語の「だれ」「なに」と同じ区別です。</p>
+  </div>
+
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Who that girl? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Who&#39;s that girl?</span><span class="qzp"><b>ポイント</b>　<span class="en">Who</span> だけでは文になりません。<b><span class="en">Who&#39;s</span></b>（＝<span class="en">Who is</span>）にします。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Whos that girl? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Who&#39;s that girl?</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。<span class="en">Who is</span> → <span class="en">Who&#39;s</span>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Who&#39;s that girl? — Yes, she is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ She&#39;s my sister.</span><span class="qzp"><b>ポイント</b>　<span class="en">Who</span> で聞かれたら <b>名前や関係で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Who&#39;s that boy? — She&#39;s my friend. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He&#39;s my friend.</span><span class="qzp"><b>ポイント</b>　<span class="en">boy</span>（男の子）なので <b><span class="en">he</span></b>。<span class="en">she</span> は女の人です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Who&#39;s that girl. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Who&#39;s that girl?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ What&#39;s that girl? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Who&#39;s that girl?</span><span class="qzp"><b>ポイント</b>　人をたずねるときは <b><span class="en">Who</span></b>。<span class="en">What</span> は「もの」用です。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「～はだれですか」は <b><span class="en">Who&#39;s ～?</span></b>　<span class="en">Who&#39;s</span>＝<span class="en">Who is</span>、&#39; を忘れない。</li>
+        <li><b>答えは <span class="en">Yes / No</span> ではなく、名前や関係。</b></li>
+        <li>答えの主語は <b><span class="en">he</span>（男の人）／<span class="en">she</span>（女の人）</b> に言いかえる。</li>
+        <li><b>人なら <span class="en">Who</span>、ものなら <span class="en">What</span>。</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 4-2　Who's ～?</span><span>1 / 4　文法わかる</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 4 − 2 <small>基本事項チェック</small></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em></h3>
+  <ol class="q">
+    <li>「～はだれですか」は（（<span class="bl"><span class="ansfill">Who's</span></span>））～? と言う。これは <span class="en">Who（<span class="bl s"><span class="ansfill">is</span></span>）</span> を短くした形。</li>
+    <li><span class="en">Who</span> で聞かれたら、答えに（（<span class="bl"><span class="ansfill">Yes / No</span></span>））は使わず、（（<span class="bl s"><span class="ansfill">名前</span></span>））や関係を答える。</li>
+    <li>答えの主語は、男の人なら（（<span class="bl s"><span class="ansfill">he</span></span>））、女の人なら（（<span class="bl s"><span class="ansfill">she</span></span>））。</li>
+    <li>人をたずねるときは <span class="en">Who</span>、ものをたずねるときは（（<span class="bl s"><span class="ansfill">What</span></span>））。</li>
+    <li>たずねる文の終わりは（（<span class="bl s"><span class="ansfill">?</span></span>））にする。</li>
+  </ol>
+  <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint">語群：<span class="en">Who&#39;s</span> ／ <span class="en">is</span> ／ <span class="en">he</span> ／ <span class="en">she</span> ／ <span class="en">What</span> ／ <span class="en">Yes / No</span> ／ 名前 ／ ?</div></div>
+  <div class="expbox"><b>なぜ？</b>　<span class="en">Who</span> も <span class="en">What</span> も「知りたいところ」を表すことば。だから<b>いちばん前に立ちます</b>。<br>知りたい中身を聞いているので、<span class="en">Yes / No</span> では答えになりません。3-1 とまったく同じ考え方です。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#D98400;">B　<span class="en">Who&#39;s</span>？ それとも <span class="en">What</span>？<em>（　）に入るものを書こう</em></h3>
+  <div class="hint">ここが<b>いちばん大事</b>。たずねているのが<b>人かものか</b>だけを見ましょう。</div>
+  <div class="grid2">
+    <div>1. <span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）that girl?</span>（だれ）</div>
+    <div>2. <span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）do you like?</span>（なに）</div>
+    <div>3. <span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）that boy?</span>（だれ）</div>
+    <div>4. <span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）sport do you like?</span>（どんなスポーツ）</div>
+    <div>5. <span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）your teacher?</span>（だれ）</div>
+    <div>6. <span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）do you study?</span>（なに）</div>
+    <div>7. <span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）that man?</span>（だれ）</div>
+    <div>8. <span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）color do you like?</span>（どんな色）</div>
+    <div>9. <span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）that woman?</span>（だれ）</div>
+    <div>10. <span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）do you eat?</span>（なに）</div>
+  </div>
+  <div class="expbox"><b>見つけ方</b>　日本語を見るだけ。<br>「<b>だれ</b>」→ <span class="en">Who&#39;s</span>（1・3・5・7・9）　「<b>なに・どんな</b>」→ <span class="en">What</span>（2・4・6・8・10）<br><span class="en">man</span> は男の人、<span class="en">woman</span> は女の人という意味です。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#D98400;">C　正しい文には ○、まちがっている文には ✕ を書こう</h3>
+  <div class="grid2">
+    <div><span class="en">1. Who&#39;s that girl?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">2. Who that girl?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">3. He&#39;s my friend.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">4. Whos that boy?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">5. She&#39;s my sister.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">6. Who&#39;s that girl.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">7. Who&#39;s your teacher?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">8. What&#39;s that boy?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+  </div>
+  <div class="expbox"><b>直し方</b>　2 → <span class="en">Who&#39;s that girl?</span>（<span class="en">is</span> が必要）　4 → <span class="en">Who&#39;s that boy?</span>（&#39;を入れる）<br>6 → <span class="en">Who&#39;s that girl?</span>（終わりを ? に）　8 → <span class="en">Who&#39;s that boy?</span>（人なので <span class="en">Who</span>）</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2">D　答え方　正しいほうを選ぼう</h3>
+  <div class="hint"><span class="en">Who</span> なら<b>名前や関係</b>。男の人は <span class="en">he</span>、女の人は <span class="en">she</span>。</div>
+  <div class="grid2">
+    <div>1. <span class="en">Who&#39;s that girl?</span>　—（ア <span class="en">She&#39;s my sister.</span> ／イ <span class="en">Yes, she is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div>2. <span class="en">Who&#39;s that boy?</span>　—（ア <span class="en">She&#39;s my friend.</span> ／イ <span class="en">He&#39;s my friend.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div>3. <span class="en">Who&#39;s that man?</span>　—（ア <span class="en">No, he isn&#39;t.</span> ／イ <span class="en">He&#39;s my teacher.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div>4. <span class="en">What do you like?</span>　—（ア <span class="en">I like music.</span> ／イ <span class="en">Yes, I do.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div>5. <span class="en">Who&#39;s that woman?</span>　—（ア <span class="en">She&#39;s my mother.</span> ／イ <span class="en">He&#39;s my mother.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div>6. <span class="en">Who&#39;s your teacher?</span>　—（ア <span class="en">Yes, he is.</span> ／イ <span class="en">Mike is.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+  </div>
+  <div class="expbox"><b>ここが大事</b>　<span class="en">Who</span> の文に <span class="en">Yes / No</span> で答えると、答えになりません（1・3・6）。<br>男の人か女の人かで <span class="en">he</span>／<span class="en">she</span> を選びます（2・5）。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ribbon">
+    <svg class="ic-l beat"><use href="#i-heart"/></svg>
+    <b>合言葉</b><span class="s"><span class="en">Who</span> は「だれ」。答えは <b>名前や関係</b>で言う。<span class="en">Yes / No</span> は使わない。</span>
+  </div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 4-2　Who's ～?</span><span>2 / 4　文法たしかめ</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 4 − 2 <small>レベル 1・2</small></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="half qsec">
+    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em></h3>
+    <div class="hint"><b>コツ</b>　「だれ」なら <span class="en">Who&#39;s</span>。答えは男の人なら <span class="en">He&#39;s</span>、女の人なら <span class="en">She&#39;s</span>。</div>
+    <ol class="q sp">
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あの女の子はだれですか。</span>　<span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）that girl?</span></div><div class="qnote">「だれ」なので <b><span class="en">Who&#39;s</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの姉妹です。</span>　<span class="en">（<span class="bl"><span class="ansfill">She's</span></span>）my sister.</span></div><div class="qnote">女の子なので <b><span class="en">She&#39;s</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あの男の子はだれですか。</span>　<span class="en">Who&#39;s that（<span class="bl s"><span class="ansfill">boy</span></span>）?</span></div><div class="qnote">「男の子」は <b><span class="en">boy</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちです。</span>　<span class="en">（<span class="bl"><span class="ansfill">He's</span></span>）my friend.</span></div><div class="qnote">男の子なので <b><span class="en">He&#39;s</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">短くしない形にしよう。</span>　<span class="en">Who&#39;s that girl?</span> →　<span class="en">（<span class="bl s"><span class="ansfill">Who</span></span>）（<span class="bl s"><span class="ansfill">is</span></span>）that girl?</span></div><div class="qnote"><span class="en">Who&#39;s</span> をもどすと <b><span class="en">Who is</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたの先生はだれですか。</span>　<span class="en">（<span class="bl"><span class="ansfill">Who's</span></span>）your teacher?</span></div><div class="qnote"><span class="en">your</span> は「あなたの」。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにが好きですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）do you like?</span></div><div class="qnote">「なに」なので <b><span class="en">What</span></b>。<span class="en">Who</span> ではありません。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの先生です。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">is</span></span>）my teacher.</span></div><div class="qnote"><span class="en">he</span> なので <b><span class="en">is</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あの女の人はだれですか。</span>　<span class="en">Who&#39;s that（<span class="bl s"><span class="ansfill">woman</span></span>）?</span></div><div class="qnote">「女の人」は <b><span class="en">woman</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの母です。</span>　<span class="en">She&#39;s my（<span class="bl s"><span class="ansfill">mother</span></span>）.</span></div><div class="qnote">「母」は <b><span class="en">mother</span></b>。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="half bottom qsec">
+    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em></h3>
+    <div class="hint"><b>コツ</b>　語群の<b>大文字で始まることば</b>が先頭。<span class="en">Who&#39;s</span> か <span class="en">What</span> です。</div>
+    <ol class="q">
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あの女の子はだれですか。</span>　<span class="paren en">（ that girl / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that girl?</span></div></div></div><div class="qnote">2つだけ。<span class="en">Who&#39;s</span> が先頭、終わりは <b>?</b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの姉妹です。</span>　<span class="paren en">（ my sister / She&#39;s ）</span><div class="lines tight"><div><span class="fill2">She&#39;s my sister.</span></div></div></div><div class="qnote"><span class="en">my sister</span> でひとかたまり。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あの男の子はだれですか。</span>　<span class="paren en">（ boy / Who&#39;s / that ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that boy?</span></div></div></div><div class="qnote"><span class="en">that boy</span> でひとかたまり。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちです。</span>　<span class="paren en">（ friend / He&#39;s / my ）</span><div class="lines tight"><div><span class="fill2">He&#39;s my friend.</span></div></div></div><div class="qnote">男の子なので <span class="en">He&#39;s</span>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたの先生はだれですか。</span>　<span class="paren en">（ teacher / your / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s your teacher?</span></div></div></div><div class="qnote"><span class="en">your teacher</span> でひとかたまり。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにが好きですか。</span>　<span class="paren en">（ like / you / What / do ）</span><div class="lines tight"><div><span class="fill2">What do you like?</span></div></div></div><div class="qnote">語群に <span class="en">What</span> がある。3-1 の形です。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの先生です。</span>　<span class="paren en">（ my / is / teacher / She ）</span><div class="lines tight"><div><span class="fill2">She is my teacher.</span></div></div></div><div class="qnote">語群が <span class="en">She</span> と <span class="en">is</span>。短くしない形です。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 4-2　Who's ～?</span><span>3 / 4　文法かるく使える</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 4 − 2 <small>レベル 3・4</small></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="half qsec">
+    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em></h3>
+    <ol class="q">
+      <li><div class="row"><div class="qmain">あの女の子はだれですか。<div class="lines"><div><span class="fill2">Who&#39;s that girl?</span></div></div></div><div class="qnote"><span class="en">Who is that girl?</span> でも正解。</div></div></li>
+      <li><div class="row"><div class="qmain">彼女はわたしの姉妹です。<div class="lines"><div><span class="fill2">She&#39;s my sister.</span></div></div></div><div class="qnote"><span class="en">She is my sister.</span> でも正解。</div></div></li>
+      <li><div class="row"><div class="qmain">あの男の子はだれですか。<div class="lines"><div><span class="fill2">Who&#39;s that boy?</span></div></div></div><div class="qnote">男の子は <span class="en">boy</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">彼はわたしの友だちです。<div class="lines"><div><span class="fill2">He&#39;s my friend.</span></div></div></div><div class="qnote">男の人なので <span class="en">He&#39;s</span>。<span class="en">She&#39;s</span> にしないこと。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたの先生はだれですか。<div class="lines"><div><span class="fill2">Who&#39;s your teacher?</span></div></div></div><div class="qnote">「あなたの」は <span class="en">your</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたはなにが好きですか。<div class="lines"><div><span class="fill2">What do you like?</span></div></div></div><div class="qnote">「なに」なので <span class="en">What</span>。<span class="en">Who</span> とまちがえないこと。</div></div></li>
+    </ol>
+    <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint"><span class="en">that girl ／ my sister ／ that boy ／ my friend ／ your teacher ／ like</span></div></div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="half bottom qsec">
+    <h3 class="sec">レベル4チェック　自由英作文<em>写真を見せながら、人をしょうかいする会話を書こう</em></h3>
+    <div class="cond">
+      <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
+      <ul>
+        <li><span class="en">Who&#39;s ～?</span> の文を <b>2つ以上</b></li>
+        <li>それぞれの答えを <span class="en">He&#39;s ～.</span> か <span class="en">She&#39;s ～.</span> で書く</li>
+        <li>しょうかいのあとに <span class="en">He is ～.</span> などで<b>ようすを1つ</b>足す</li>
+      </ul>
+    </div>
+    <div class="lines">
+      <div><span class="fill2"><span class="exlab">書き方の例</span>Who&#39;s that girl? — She&#39;s my sister.</span></div>
+      <div><span class="fill2">Who&#39;s that boy? — He&#39;s my friend.</span></div>
+      <div><span class="fill2">He is kind.</span></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="modelnote">これは例です。同じでなくてかまいません。家族・友だち・先生 を写真で見せているつもりで書いてみよう。</div>
+    <div class="checklist">
+      <span class="key">Who&#39;s のアポストロフィ</span>
+      <span>答えに Yes / No を使っていない</span>
+      <span>男の人は he、女の人は she</span>
+      <span>終わりは ?</span>
+    </div>
+    <div class="ribbon">
+      <svg class="ic-l beat"><use href="#i-heart"/></svg>
+      <b>書けたら 見直し</b><span class="s">じぶんの文の答えに○をつけよう。<span class="en">Who</span> の文の答えが <span class="en">Yes</span> や <span class="en">No</span> なら、そこがまちがい。</span>
+    </div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 4-2　Who's ～?</span><span>4 / 4　文法しっかり使える</span></div>
+</section>
+
+<script>
+// ===== カタカナ辞書 =====
+const KANA = {
+  "a":"ア","am":"アム","i":"アイ","i'm":"アイム","is":"イズ",
+  "australia":"オーストレイリア","japan":"ジャパン","nagano":"ナガノ",
+  "eri":"エリ","ken":"ケン","tina":"ティナ","yumi":"ユミ","yuta":"ユウタ",
+  "student":"ステューデント","fan":"ファン","soccer":"サッカー","baseball":"ベイスボール",
+  "tennis":"テニス","dog":"ドッグ","dogs":"ドッグズ","cat":"キャット","cats":"キャッツ",
+  "music":"ミューズィック","tv":"ティーヴィー",
+  "from":"フロム","happy":"ハピィ","hungry":"ハングリィ","today":"トゥデイ",
+  "twelve":"トゥエルヴ","thirteen":"サーティーン",
+  "like":"ライク","play":"プレイ","have":"ハヴ","run":"ラン","watch":"ウォッチ",
+  "fast":"ファスト","well":"ウェル","not":"ノット","do":"ドゥー","don't":"ドウント",
+  "who":"フー","who's":"フーズ","he":"ヒー","she":"シー","is":"イズ","he's":"ヒーズ","she's":"シーズ","that":"ザット","this":"ズィス","girl":"ガール","boy":"ボイ","man":"マン","woman":"ウーマン","my":"マイ","friend":"フレンド","brother":"ブラザー","sister":"スィスター","teacher":"ティーチャー","mike":"マイク","emma":"エマ","saki":"サキ",
+  "spring":"スプリング","natto":"ナットウ","fish":"フィッシュ","milk":"ミルク",
+  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ"
+};
+
+// ===== 英単語にカタカナを付ける =====
+(function attachKana(){
+  const SEL = '.en, .exline .s, .judge .ex, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el=>{
+    if(el.dataset.kanaDone) return;
+    if(el.closest('.bad, .xm, .x, s')) return;   // ✕ の誤答例にはカタカナを付けない
+    el.dataset.kanaDone = '1';
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    const nodes = []; let n;
+    while(n = walker.nextNode()) nodes.push(n);
+    nodes.forEach(node=>{
+      if(!/[A-Za-z]/.test(node.nodeValue)) return;
+      if(node.parentElement.classList.contains('rb')) return;
+      if(node.parentElement.closest('.bad, .xm, .x, s')) return;
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(/([A-Za-z][A-Za-z']*)/).forEach(part=>{
+        const key = part.toLowerCase().replace(/[’]/g,"'");
+        if(KANA[key]){
+          const ru = document.createElement('ruby');
+          ru.className = 'rb';
+          ru.appendChild(document.createTextNode(part));
+          const rt = document.createElement('rt');
+          rt.textContent = KANA[key];
+          ru.appendChild(rt);
+          frag.appendChild(ru);
+        } else {
+          frag.appendChild(document.createTextNode(part));
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+})();
+
+function toggleKana(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showkana');
+  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.classList.toggle('on', on);
+}
+
+function toggleSheet(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '全体の答えをかくす' : '全体の答えを見る';
+  btn.classList.toggle('on', on);
+  s.querySelectorAll('.qsec').forEach(q=>{
+    q.classList.toggle('showans', on);
+    const b = q.querySelector('.sbtn');
+    if(b){ b.textContent = on ? '答えをかくす' : '答えを見る'; b.classList.toggle('on', on); }
+  });
+  if(on) btn.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function toggleSec(btn){
+  const s = btn.closest('.qsec');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.classList.toggle('on', on);
+}
+function toggleQz(btn){
+  const i = btn.closest('.qzi');
+  const on = i.classList.toggle('open');
+  btn.textContent = on ? 'とじる' : '答え';
+  btn.classList.toggle('on', on);
+}
+function toggleHint(btn){
+  const w = btn.closest('.hintwrap');
+  const on = w.classList.toggle('open');
+  btn.textContent = on ? 'ヒントをとじる' : 'どうしてもわからない時のヒント';
+  btn.classList.toggle('on', on);
+}
+
+</script>
+</body>
+</html>
