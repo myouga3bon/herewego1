@@ -289,6 +289,12 @@
     font-weight:500;font-size:11pt;line-height:1.8;color:#5F4A12;}
   ul.sumlist li{padding:1px 0;}
   ul.sumlist b{color:#8A5A0B;}
+
+  /* ブロック間を半行ずつ空ける */
+  .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
+  /* きほんの文（書き写す3文）の鉛筆マーク */
+  .exline .pn{width:14px;height:14px;flex:none;color:#C88A16;align-self:center;margin-right:-5px;}
+
   .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
     padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
   .guide b{color:#8A5A0B;}
@@ -362,9 +368,9 @@
     <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
     <p class="talk">前回の <span class="en">I am ～.</span> は「わたしは<b>どんな人か</b>」を言う文でした。今回は<b>「わたしは なにをするか・どう思うか」</b>を言う文です。<span class="en">like</span>（好きだ）や <span class="en">play</span>（する）のような<b>動作のことば</b>を使います。</p>
     <div class="exbox">
-      <div class="exline"><span class="s en">I like spring.</span><span class="t">わたしは 春が 好きです。</span></div>
-      <div class="exline"><span class="s en">I play soccer.</span><span class="t">わたしは サッカーを します。</span></div>
-      <div class="exline"><span class="s en">I don&#39;t like spring.</span><span class="t">わたしは 春が 好きではありません。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I like spring.</span><span class="t">わたしは 春が 好きです。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I play soccer.</span><span class="t">わたしは サッカーを します。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I don&#39;t like spring.</span><span class="t">わたしは 春が 好きではありません。</span></div>
     </div>
     <p class="talk">3つとも、まず <span class="en">I</span> から始まっていますね。そのつぎに<b>動作のことば</b>が来ます。<span class="en">like</span> のなかまには <span class="en">play・have・watch・run</span> などがあり、<b>ぜんぶ同じ使い方</b>です。1つ覚えれば、あとは入れかえるだけ。</p>
     <div class="copy">

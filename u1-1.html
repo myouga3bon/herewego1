@@ -289,6 +289,12 @@
     font-weight:500;font-size:11pt;line-height:1.8;color:#5F4A12;}
   ul.sumlist li{padding:1px 0;}
   ul.sumlist b{color:#8A5A0B;}
+
+  /* ブロック間を半行ずつ空ける */
+  .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
+  /* きほんの文（書き写す3文）の鉛筆マーク */
+  .exline .pn{width:14px;height:14px;flex:none;color:#C88A16;align-self:center;margin-right:-5px;}
+
   .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
     padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
   .guide b{color:#8A5A0B;}
@@ -362,9 +368,9 @@
     <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
     <p class="talk">英語で<b>「わたしは ～ です」</b>と言いたいときは、<span class="en">I am ～.</span> という形を使います。中学英語のいちばん最初に出てきて、これから3年間ずっと使う形です。ここだけは、しっかりおさえておきましょう。</p>
     <div class="exbox">
-      <div class="exline"><span class="s en">I am Eri.</span><span class="t">わたしは エリ です。</span></div>
-      <div class="exline"><span class="s en">I am a student.</span><span class="t">わたしは 生徒 です。</span></div>
-      <div class="exline"><span class="s en">I am from Japan.</span><span class="t">わたしは 日本 出身 です。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I am Eri.</span><span class="t">わたしは エリ です。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I am a student.</span><span class="t">わたしは 生徒 です。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I am from Japan.</span><span class="t">わたしは 日本 出身 です。</span></div>
     </div>
     <p class="talk">3つとも形は同じですね。<span class="en">I am</span> のうしろが入れかわっているだけ。つまり<b>「<span class="en">I am</span>」までは、いつも同じ</b>です。ここに気づくと、ぐっとラクになります。</p>
     <div class="copy">
