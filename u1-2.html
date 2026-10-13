@@ -298,6 +298,70 @@
   /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
   .talk{text-indent:1em;}
 
+  /* ===== 設問ごと／ページ全体の答え表示 ===== */
+  .showans .bl .ansfill{opacity:1;}
+  .showans .lines .fill2{opacity:1;}
+  .showans .tfbox .ansmark{opacity:1;}
+  .showans .qnote{opacity:1;}
+  .showans .expbox{display:block;}
+  .showans .model{display:block;}
+  .showans .modelnote{display:block;}
+
+  .qsec{position:relative;}
+  .secbar{display:flex;justify-content:flex-end;margin-top:7px;}
+  .sbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10.5pt;
+    border:2px solid var(--vb);border-radius:8px;padding:4px 18px;cursor:pointer;
+    background:#fff;color:var(--vb);}
+  .sbtn:active{transform:translateY(2px);}
+  .sbtn.on{background:var(--vb);color:#fff;}
+
+  /* ===== ヒント（語群）ボタン ===== */
+  .hintwrap{margin:5px 0 0;}
+  .hbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:1.5px dashed #A49C90;border-radius:7px;padding:3px 14px;cursor:pointer;
+    background:#F7F5F0;color:#7A736A;}
+  .hbtn.on{background:#EDE8DE;color:#5F594F;}
+  .hintwrap .faint{display:none;margin-top:4px;}
+  .hintwrap.open .faint{display:block;}
+
+  /* ===== よくある間違いさがしクイズ ===== */
+  .quiz{border:2px solid var(--ng);border-radius:8px;padding:8px 12px 9px;margin:9px 0 0;}
+  .quiz .qzh{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12pt;
+    color:var(--ng);}
+  .quiz .qzh .qzs{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:var(--mut);margin-left:9px;}
+  .qzi{border-top:1px dotted #E6BDC4;padding:5px 0 4px;}
+  .qzi:first-of-type{border-top:none;padding-top:4px;}
+  .qzq{display:flex;align-items:center;gap:10px;}
+  .qzq .no{font-family:"Lexend",sans-serif;font-weight:600;font-size:10pt;
+    color:var(--mut);flex:none;}
+  .qzq .xm{color:var(--ng);font-weight:700;font-family:"Lexend",sans-serif;font-size:12.5pt;}
+  .qzb{margin-left:auto;flex:none;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;font-size:10pt;border:2px solid var(--ng);border-radius:7px;
+    padding:3px 16px;cursor:pointer;background:#fff;color:var(--ng);}
+  .qzb:active{transform:translateY(2px);}
+  .qzb.on{background:var(--ng);color:#fff;}
+  .qza{display:none;margin:4px 0 1px 26px;}
+  .qzi.open .qza{display:block;}
+  .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
+  .qza .qzp b{color:var(--vb);}
+
+  /* ===== レベル4 書き方の例を解答欄に ===== */
+  .lines .fill2 .exlab{display:inline-block;background:var(--vb);color:#fff;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-size:8.5pt;font-weight:700;
+    border-radius:4px;padding:0 7px;margin-right:8px;vertical-align:2px;}
+  .modelnote{display:none;font-size:9.5pt;line-height:1.6;color:var(--mut);
+    margin-top:3px;text-indent:1em;}
+
+
+  /* ①②③…のブロックを細い濃いめの灰色の枠で囲う */
+  .blk-sec{border:1px solid #8A8A8A;border-radius:8px;
+    padding:8px 11px 7px;margin:0 0 9px;}
+  .blk-sec + .blk-sec{border-top:1px solid #8A8A8A;margin-top:0;padding-top:8px;}
+  .blk-sec > h3.st:first-child{margin-top:0;}
+
+
 
   .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
     padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
@@ -379,7 +443,7 @@
     <p class="talk">3つとも、まず <span class="en">I</span> から始まっていますね。<br>　そのつぎに<b>動作のことば</b>が来ます。<br>　<span class="en">like</span> のなかまには <span class="en">play・have・watch・run</span> などがあり、<b>ぜんぶ同じ使い方</b>です。<br>　1つ覚えれば、あとは入れかえるだけ。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
-      <div>きほんの文を3回ずつ書きうつそう！</div>
+      <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
     </div>
   </div>
 
@@ -459,13 +523,32 @@
     </div>
   </div>
 
-  <div class="warn">
-    <div class="h">✕ よくあるまちがい　こう直そう</div>
-    <div class="row"><span class="bad">✕ <span class="en">I am like spring</span> ✕</span>　→　<span class="good en">○ I like spring.</span>　<span class="why">心臓（動詞）が2つある</span></div>
-    <div class="row"><span class="bad">✕ <span class="en">I like not natto</span> ✕</span>　→　<span class="good en">○ I don&#39;t like natto.</span>　<span class="why"><span class="en">not</span> だけでは打ち消せない</span></div>
-    <div class="row"><span class="bad">✕ <span class="en">I dont like natto</span> ✕</span>　→　<span class="good en">○ I don&#39;t like natto.</span>　<span class="why">&#39;（アポストロフィ）を書く</span></div>
-    <div class="row"><span class="bad">✕ <span class="en">I spring like</span> ✕</span>　→　<span class="good en">○ I like spring.</span>　<span class="why">日本語の順にしない</span></div>
-    <div class="row"><span class="bad">✕ <span class="en">I don&#39;t likes dogs</span> ✕</span>　→　<span class="good en">○ I don&#39;t like dogs.</span>　<span class="why"><span class="en">don&#39;t</span> のうしろは形を変えない</span></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ I am like spring. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I like spring.</span><span class="qzp"><b>ポイント</b>　心臓（動詞）が2つ。<b>am</b> と <b>like</b> の両方は使えません。<b>am</b> を消します。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ I not like natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I don&#39;t like natto.</span><span class="qzp"><b>ポイント</b>　<b>not</b> だけでは打ち消せません。<b>don't</b> を動詞のすぐ前に置きます。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ I like not natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I don&#39;t like natto.</span><span class="qzp"><b>ポイント</b>　<b>don't</b> の場所がちがいます。動詞 <b>like</b> の<b>うしろ</b>ではなく<b>すぐ前</b>です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ I dont like natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I don&#39;t like natto.</span><span class="qzp"><b>ポイント</b>　<b>'（アポストロフィ）</b>を忘れています。<b>don't</b>＝<b>do not</b> の o が消えたしるしです。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ I spring like. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I like spring.</span><span class="qzp"><b>ポイント</b>　日本語の順にしています。英語は「だれが → どうする → なにを」。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I don&#39;t likes dogs. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I don&#39;t like dogs.</span><span class="qzp"><b>ポイント</b>　<b>don't</b> のうしろの動詞は<b>形を変えません</b>。<b>like</b> のままでよい。</span></div>
+    </div>
   </div>
 
   <div class="copy sum">
@@ -491,6 +574,7 @@
     <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
+  <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em></h3>
   <ol class="q">
     <li>「わたしは～が好きです」は <span class="en">I（<span class="bl s"><span class="ansfill">like</span></span>）～.</span>　<span class="en">like</span> は「する・思う」を表す（<span class="bl s"><span class="ansfill">動作</span></span>）のことば。</li>
@@ -499,10 +583,14 @@
     <li>英語のならび方は「だれが → どうする → なにを」。日本語とは（<span class="bl s"><span class="ansfill">ぎゃく</span></span>）になる。</li>
     <li>1つの文に心臓は（<span class="bl s"><span class="ansfill">1</span></span>）つだけ。だから（<span class="bl s"><span class="ansfill">am</span></span>）と <span class="en">like</span> はいっしょに使わない。</li>
   </ol>
-  <div class="faint">どうしても分からないときだけ見よう　語群：<span class="en">like</span> ／ <span class="en">don&#39;t</span> ／ <span class="en">do not</span> ／ <span class="en">am</span> ／ 前 ／ ぎゃく ／ 動作 ／ 1</div>
+  <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint">語群：<span class="en">like</span> ／ <span class="en">don&#39;t</span> ／ <span class="en">do not</span> ／ <span class="en">am</span> ／ 前 ／ ぎゃく ／ 動作 ／ 1</div></div>
   <div class="expbox"><b>なぜ？</b>　<span class="en">like</span> は「好きだ」という<b>動作・気もちを表すことば</b>。<span class="en">am</span> は「＝」のしるしなので、はたらきがちがいます。<br>
   「～ない」は <span class="en">not</span> だけでは足りません。<b><span class="en">don&#39;t</span>（＝<span class="en">do not</span>）を動詞のすぐ前</b>に置きます。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
 
+  <div class="qsec">
   <h3 class="sec sec2" style="border-left-color:var(--gv);">B　<span class="en">am</span>？ それとも <span class="en">like</span>？<em>（　）に <span class="en">am</span> か <span class="en">like</span> を書こう</em></h3>
   <div class="hint">ここが<b>いちばん大事</b>。うしろが「どんな人か」なら <span class="en">am</span>、「なにが好きか」なら <span class="en">like</span>。</div>
   <div class="grid2">
@@ -521,7 +609,10 @@
   <b>「わたし＝それ」になる</b>（生徒・長野出身・うれしい・12歳・サッカーファン）→ <span class="en">am</span>（1・2・4・7・10）<br>
   <b>「それが好き」という意味になる</b>（犬・音楽・サッカー・ねこ・英語）→ <span class="en">like</span>（3・5・6・8・9）<br>
   <span class="en">I am dogs.</span> だと「わたしは犬です」になってしまいます。声に出すと変だと気づけます。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
 
+  <div class="qsec">
   <h3 class="sec sec2" style="border-left-color:var(--gv);">C　正しい文には ○、まちがっている文には ✕ を書こう</h3>
   <div class="grid2">
     <div><span class="en">1. I like spring.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
@@ -536,7 +627,10 @@
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I like spring.</span>（<span class="en">am</span> を消す）　4 → <span class="en">I don&#39;t like natto.</span>（<span class="en">not</span> を <span class="en">don&#39;t</span> にして前へ）<br>
   5 → <span class="en">I don&#39;t like fish.</span>（&#39;を入れる）　8 → <span class="en">I like spring.</span>（「どうする → なにを」の順に）<br>
   2は<b>心臓（動詞）が2つ</b>のまちがい。4・5・8は<b>書き方と順番</b>のまちがいです。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
 
+  <div class="qsec">
   <h3 class="sec sec2">D　どちらの文？　記号で答えよう</h3>
   <div class="keychips">
     <span class="chip">ア</span><svg class="ic" style="color:var(--key)"><use href="#i-person"/></svg> どんな人か（<span class="en">am</span> の文）　
@@ -551,12 +645,14 @@
     <div>6. <span class="en">I am happy.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　英語の文は、この<b>2種類しかありません</b>。どちらの仲間かが分かれば、<span class="en">am</span> を入れるかどうかで迷わなくなります。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s">1つの文に 心臓（動詞）は 1つだけ。<span class="en">am</span> と <span class="en">like・play・have</span> は いっしょに使わない。</span>
   </div>
-  <div class="ansbar"><span class="msg">このページが終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 1-2　I like ～.</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -568,7 +664,7 @@
     <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
-  <div class="half">
+  <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em></h3>
     <div class="hint"><b>コツ</b>　「どんな人か」なら <span class="en">am</span>、「なにをするか」なら <span class="en">like・play・have</span>。「～ない」は動詞の前に <span class="en">don&#39;t</span>。</div>
     <ol class="q sp">
@@ -583,9 +679,10 @@
       <li><div class="row"><div class="qmain"><span class="jp-cue">短い形にしよう。</span>　<span class="en">I do not like fish.</span> →　<span class="en">I（<span class="bl"><span class="ansfill">don&#39;t</span></span>）like fish.</span></div><div class="qnote"><b><span class="en">do not</span> ＝ <span class="en">don&#39;t</span></b>。&#39;（アポストロフィ）を忘れずに。</div></div></li>
       <li><div class="row"><div class="qmain"><span class="jp-cue">短くしない形にしよう。</span>　<span class="en">I don&#39;t like milk.</span> →　<span class="en">I（<span class="bl s"><span class="ansfill">do</span></span>）（<span class="bl s"><span class="ansfill">not</span></span>）like milk.</span></div><div class="qnote">9番の逆。<span class="en">don&#39;t</span> をもとにもどすと <b><span class="en">do not</span></b>。</div></div></li>
     </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="half bottom">
+  <div class="half bottom qsec">
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em></h3>
     <div class="hint"><b>コツ</b>　まず語群に <span class="en">am</span> があるか見る。なければ動作の文。<span class="en">don&#39;t</span> があれば<b>動詞のすぐ前</b>に置きます。</div>
     <ol class="q">
@@ -597,8 +694,9 @@
       <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはテレビを見ます。</span>　<span class="paren en">（ TV / watch / I ）</span><div class="lines tight"><div><span class="fill2">I watch TV.</span></div></div></div><div class="qnote">「見る」は <b><span class="en">watch</span></b>。<span class="en">TV</span> は大文字2つで書きます。</div></div></li>
       <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはうれしいです。</span>　<span class="paren en">（ happy / am / I ）</span><div class="lines tight"><div><span class="fill2">I am happy.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> があるので be動詞の文。</div></div></li>
     </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
-  <div class="ansbar"><span class="msg">このページが終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 1-2　I like ～.</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -610,7 +708,7 @@
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
-  <div class="half">
+  <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em></h3>
     <ol class="q">
       <li><div class="row"><div class="qmain">わたしは犬が好きです。<div class="lines"><div><span class="fill2">I like dogs.</span></div></div></div><div class="qnote"><b><span class="en">dogs</span> と <span class="en">s</span> をつける。</b>「犬というもの全部」の意味になります。</div></div></li>
@@ -620,10 +718,12 @@
       <li><div class="row"><div class="qmain">わたしは音楽が好きではありません。<div class="lines"><div><span class="fill2">I don&#39;t like music.</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">music</span> に <span class="en">s</span> はつけません。</div></div></li>
       <li><div class="row"><div class="qmain">わたしはうれしいです。<div class="lines"><div><span class="fill2">I am happy.</span></div></div></div><div class="qnote"><span class="en">I&#39;m happy.</span> でも正解。気もちは <span class="en">am</span> の文。</div></div></li>
     </ol>
-    <div class="faint">どうしても書けないときだけ見よう　<span class="en">dogs ／ natto ／ soccer ／ student ／ music ／ happy</span></div>
+    <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint"><span class="en">dogs ／ natto ／ soccer ／ student ／ music ／ happy</span></div></div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="half bottom">
+  <div class="half bottom qsec">
     <h3 class="sec">レベル4チェック　自由英作文<em>じぶんの「好き・きらい」を書こう</em></h3>
     <div class="cond">
       <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
@@ -634,14 +734,11 @@
       </ul>
     </div>
     <div class="lines">
-      <div></div><div></div><div></div><div></div><div></div>
+      <div><span class="fill2"><span class="exlab">書き方の例</span>I like music. I like soccer.</span></div>
+      <div><span class="fill2">I don&#39;t like natto. I am a soccer fan.</span></div>
+      <div></div><div></div><div></div>
     </div>
-    <div class="model">
-      <div class="h">書き方の例</div>
-      <div class="ex">I like music. I like soccer. I don&#39;t like natto. I am a soccer fan.</div>
-      <div style="margin-top:5px;">自分でチェック　□ <span class="en">I like ～.</span> が2つ以上　□ <span class="en">I don&#39;t like ～.</span> が1つ以上　□ <span class="en">I am ～.</span> が1つ　□ <span class="en">am</span> と <span class="en">like</span> が同じ文にない　□ ピリオド<br>
-      書くことが思いつかないときは、<b>教科・スポーツ・食べ物・動物・音楽</b>の5つから選んでみよう。</div>
-    </div>
+    <div class="modelnote">これは例です。同じでなくてかまいません。書くことが思いつかないときは、教科・スポーツ・食べ物・動物・音楽 の5つから選んでみよう。</div>
     <div class="checklist">
       <span class="key">am と like を同じ文に入れていない</span>
       <span>don&#39;t は動詞のすぐ前</span>
@@ -652,8 +749,9 @@
       <svg class="ic-l beat"><use href="#i-heart"/></svg>
       <b>書けたら 見直し</b><span class="s">じぶんの文の「心臓（動詞）」に○をつけよう。1文に2つ○がついたら、そこがまちがい。</span>
     </div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
-  <div class="ansbar"><span class="msg">このページが終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 1-2　I like ～.</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -719,10 +817,34 @@ function toggleKana(btn){
 function toggleSheet(btn){
   const s = btn.closest('.sheet');
   const on = s.classList.toggle('showans');
-  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.textContent = on ? '全体の答えをかくす' : '全体の答えを見る';
   btn.classList.toggle('on', on);
+  s.querySelectorAll('.qsec').forEach(q=>{
+    q.classList.toggle('showans', on);
+    const b = q.querySelector('.sbtn');
+    if(b){ b.textContent = on ? '答えをかくす' : '答えを見る'; b.classList.toggle('on', on); }
+  });
   if(on) btn.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
+function toggleSec(btn){
+  const s = btn.closest('.qsec');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.classList.toggle('on', on);
+}
+function toggleQz(btn){
+  const i = btn.closest('.qzi');
+  const on = i.classList.toggle('open');
+  btn.textContent = on ? 'とじる' : '答え';
+  btn.classList.toggle('on', on);
+}
+function toggleHint(btn){
+  const w = btn.closest('.hintwrap');
+  const on = w.classList.toggle('open');
+  btn.textContent = on ? 'ヒントをとじる' : 'どうしてもわからない時のヒント';
+  btn.classList.toggle('on', on);
+}
+
 </script>
 </body>
 </html>
