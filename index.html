@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Here We Go! 1年 文法ページ</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --be:#1F4E9C; --gv:#C2185B; --ink:#222; --sub:#666;
+  --bg:#F4F1EA; --card:#fff; --rule:#DDD6C8;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; padding:24px 16px 60px;
+  background:var(--bg); color:var(--ink);
+  font-family:"Zen Kaku Gothic New",sans-serif;
+}
+.wrap{max-width:760px; margin:0 auto;}
+h1{
+  font-family:"Zen Maru Gothic",sans-serif; font-weight:700;
+  font-size:22px; margin:0 0 4px; color:var(--be);
+  display:flex; align-items:center; gap:8px;
+}
+h1 svg{width:26px;height:26px;}
+.lead{font-size:13px; color:var(--sub); margin:0 0 22px; line-height:1.7;}
+h2{
+  font-family:"Zen Maru Gothic",sans-serif; font-weight:700;
+  font-size:16px; margin:26px 0 10px; padding:0 0 6px;
+  border-bottom:2px solid var(--rule);
+}
+.list{display:grid; gap:10px;}
+a.item{
+  display:flex; align-items:center; gap:12px;
+  background:var(--card); border:1.5px solid var(--rule);
+  border-radius:12px; padding:14px 16px;
+  text-decoration:none; color:var(--ink);
+  transition:.15s;
+}
+a.item:hover{border-color:var(--be); transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,.07);}
+a.item .no{
+  flex:0 0 auto; font-family:"Lexend",sans-serif; font-weight:600;
+  font-size:13px; color:#fff; background:var(--be);
+  border-radius:8px; padding:5px 10px; min-width:52px; text-align:center;
+}
+a.item .ttl{font-weight:500; font-size:15px;}
+a.item .en{font-family:"Lexend",sans-serif; color:var(--be); font-weight:600;}
+.soon{
+  display:flex; align-items:center; gap:12px;
+  background:#EFEBE1; border:1.5px dashed var(--rule);
+  border-radius:12px; padding:14px 16px; 
+  color:#9a948a;
+}
+.soon .no{
+  flex:0 0 auto; font-family:"Lexend",sans-serif; font-weight:600;
+  font-size:13px; color:#fff; background:#BDB7AA;
+  border-radius:8px; padding:5px 10px; min-width:52px; text-align:center;
+}
+.soon .ttl{font-size:15px;}
+.note{
+  margin-top:28px; font-size:12px; color:var(--sub); line-height:1.8;
+  background:#fff; border-left:4px solid var(--gv);
+  padding:12px 14px; border-radius:0 8px 8px 0;
+}
+footer{margin-top:30px; text-align:center; font-size:11px; color:#9a948a;}
+</style>
+</head>
+<body>
+<svg style="display:none">
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4 11-11 3 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 6.5l3 3" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+<div class="wrap">
+  <h1><svg><use href="#i-pen"/></svg>Here We Go! 1年　文法ページ</h1>
+  <p class="lead">ノートに答えを書いてから、ページ下の「答えを見る」を押してね。<br>
+  英語の読み方がわからないときは、右上の「カタカナ」ボタン。</p>
+
+  <h2>Unit 1</h2>
+  <div class="list">
+    <a class="item" href="u1-1.html">
+      <span class="no">1-1</span>
+      <span class="ttl"><span class="en">I am ～.</span>　わたしは ～ です</span>
+    </a>
+    <div class="soon"><span class="no">1-2</span><span class="ttl">I like ～. / I don't like ～.（じゅんび中）</span></div>
+    <div class="soon"><span class="no">1-3</span><span class="ttl">Are you ～? / Do you ～?（じゅんび中）</span></div>
+  </div>
+
+  <div class="note">
+    <strong>合言葉：</strong>1つの文に 心臓（動詞）は 1つだけ。<br>
+    be動詞（<span style="color:#1F4E9C;font-weight:700">青</span>）と 一般動詞（<span style="color:#C2185B;font-weight:700">ピンク</span>）は いっしょに つかわない。
+  </div>
+
+  <footer>学習空間稲里教室</footer>
+</div>
+</body>
+</html>
