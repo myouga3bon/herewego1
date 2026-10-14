@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 8-3｜オンライン版（4ページ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --key:#1F4E9C; --vb:#0E7A54; --ng:#B5273F;
+    --ink:#16202B; --mut:#55616D; --rule:#D7DDE3; --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#E9ECEF;color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .en{font-family:"Lexend","Segoe UI",Verdana,sans-serif;}
+
+  .sheet{width:210mm;min-height:297mm;margin:8mm auto;padding:7mm 8mm 8mm;
+    background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.13);
+    page-break-after:always;position:relative;display:flex;flex-direction:column;}
+  .sheet:last-of-type{page-break-after:auto;}
+
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2.5px solid var(--key);padding-bottom:3px;margin-bottom:7px;flex:none;}
+  .head .tag{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:19pt;color:var(--key);}
+  .head .tag small{font-size:11pt;font-weight:700;color:var(--mut);margin-left:8px;}
+  .head .sub{font-size:9.5pt;color:var(--mut);text-align:right;line-height:1.4;}
+  .head .sub b{color:var(--ink);}
+  .name{display:inline-block;border:1px solid var(--rule);font-size:9.5pt;color:var(--mut);
+    padding:2px 10px;border-radius:3px;white-space:nowrap;margin-top:3px;}
+
+  .hint{background:#F5F8FB;border-left:4px solid #9AB4D6;border-radius:3px;
+    padding:2px 11px;margin:0 0 3px;font-size:9pt;line-height:1.4;color:#2A3742;}
+  .hint b{color:var(--key);}
+  .hero{display:flex;align-items:center;gap:11px;margin:0 0 6px;
+    background:linear-gradient(100deg,#1F4E9C 0%,#2E68C4 62%,#3C7BDC 100%);
+    border-radius:7px;padding:4px 14px;color:#fff;}
+  .hero .star{position:relative;flex:none;width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;}
+  .hero .star svg{width:34px;height:34px;color:#FFD34D;}
+  .hero .star span{position:absolute;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;font-size:7.5pt;color:#1F4E9C;line-height:1;}
+  .hero .mid{flex:1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .hero .lbl{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFD34D;color:#1F4E9C;border-radius:11px;padding:0 9px;flex-basis:100%;
+    align-self:flex-start;width:max-content;}
+  .hero .big{font-family:"Lexend",sans-serif;font-weight:700;font-size:20pt;line-height:1.15;}
+  .hero .jp{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;}
+
+  .stepnum{display:inline-flex;align-items:center;justify-content:center;
+    width:19px;height:19px;border-radius:50%;background:var(--key);color:#fff;
+    font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
+  h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
+    color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  .blk-sec{margin-bottom:8px;}
+  .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
+  .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
+  .talk b{background:linear-gradient(transparent 60%, rgba(255,215,0,.6) 60%);}
+  .talk .en{font-weight:600;}
+
+  .exbox{border:2px solid var(--key);border-radius:5px;padding:3px 13px;margin:2px 0;}
+  .exline{display:flex;align-items:baseline;gap:12px;padding:0;}
+  .exline .s{font-size:13pt;font-weight:600;}
+  .exline .t{font-size:10.5pt;color:var(--mut);}
+
+  .blocks{display:flex;align-items:stretch;gap:6px;margin:2px 0;flex-wrap:wrap;}
+  .blk{border-radius:6px;padding:2px 12px;text-align:center;min-width:72px;}
+  .blk .w{font-size:13pt;font-weight:700;line-height:1.15;}
+  .blk .r{font-size:8pt;margin-top:0;opacity:.88;}
+  .blk.fill{background:var(--key);color:#fff;}
+  .blk.line{border:2px dashed var(--key);color:var(--key);}
+  .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
+
+  .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
+    padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
+  .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
+
+  table.kind{width:100%;border-collapse:collapse;font-size:9pt;margin:3px 0;}
+  table.kind th,table.kind td{border:1px solid var(--rule);padding:0.5px 10px;text-align:left;}
+  table.kind thead th{background:#EEF2F8;color:var(--key);font-size:9.5pt;font-weight:700;}
+  table.kind td.k{width:26%;font-weight:700;}
+  table.kind td.k svg{margin-right:5px;color:var(--key);}
+  table.kind td.e{font-family:"Lexend",sans-serif;font-weight:600;font-size:10.5pt;}
+  table.kind td.e u{text-decoration-color:var(--key);text-decoration-thickness:2px;text-underline-offset:2px;}
+  table.kind td.j{width:27%;color:var(--mut);font-size:10pt;}
+
+  .judge{display:flex;gap:9px;margin:3px 0;}
+  .judge .col{flex:1;border-radius:5px;overflow:hidden;border:2px solid;}
+  .judge .col.yes{border-color:var(--key);}
+  .judge .col.no{border-color:var(--vb);}
+  .judge .ttl{padding:2px 11px;font-weight:700;font-size:10pt;color:#fff;display:flex;align-items:center;gap:8px;}
+  .judge .yes .ttl{background:var(--key);}
+  .judge .no .ttl{background:var(--vb);}
+  .judge .ttl small{display:block;font-weight:500;font-size:9pt;opacity:.93;}
+  .judge .in{padding:3px 11px;font-size:9pt;}
+  .judge .ex{font-family:"Lexend",sans-serif;font-size:10.5pt;font-weight:600;line-height:1.3;}
+  .judge .yes .ex{color:var(--key);} .judge .no .ex{color:var(--vb);}
+  .judge .memo{font-size:9.5pt;color:var(--mut);margin-top:3px;border-top:1px dotted var(--rule);padding-top:2px;}
+
+  .heart{background:var(--ink);color:#fff;border-radius:5px;padding:4px 14px;margin:2px 0;
+    display:flex;gap:13px;align-items:center;}
+  .heart .txt{flex:1;}
+  .heart .h{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:900;margin-bottom:1px;}
+  .heart p{margin:0;font-size:9pt;line-height:1.4;}
+  .heart .xm{color:#FF9BA8;font-weight:600;}
+  @keyframes beat{0%,100%{transform:scale(1);}12%{transform:scale(1.14);}24%{transform:scale(1);}36%{transform:scale(1.09);}}
+  .beat{animation:beat 1.6s ease-in-out infinite;transform-origin:center;}
+  @media print{.beat{animation:none;}}
+
+  .warn{border:1.5px solid var(--ng);border-radius:5px;padding:4px 13px;margin:4px 0;}
+  .warn .h{font-size:10pt;font-weight:700;color:var(--ng);margin-bottom:0;}
+  .warn .row{font-size:10pt;padding:0;line-height:1.35;}
+  .warn .why{font-size:9pt;color:var(--mut);}
+  .bad{color:var(--ng);font-weight:600;} .bad s{text-decoration-thickness:1px;}
+  .good{color:var(--vb);font-weight:600;}
+
+  h3.sec{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:700;
+    margin:0 0 4px;padding:1px 0 1px 10px;border-left:5px solid var(--key);}
+  h3.sec em{font-style:normal;font-size:9.5pt;font-weight:500;color:var(--mut);margin-left:8px;}
+  h3.sec.sec2{margin-top:14px;padding-top:10px;border-top:2px dashed var(--rule);}
+  .half{flex:0 0 auto;}
+  .half.bottom{margin-top:auto;padding-top:7px;border-top:2px dashed var(--rule);}
+
+  .faint{margin-top:4px;font-size:8.5pt;color:#A8B0B8;line-height:1.4;}
+  .faint .en{font-weight:500;}
+  .wordbank{border:1.5px dashed var(--mut);border-radius:4px;padding:4px 12px;margin:0 0 6px;
+    font-size:11.5pt;background:#FAFBFC;}
+  .wordbank b{font-size:9.5pt;color:var(--mut);margin-right:9px;}
+  .wordbank .w{display:inline-block;margin:0 12px 0 0;font-weight:600;}
+
+  ol.q{margin:0;padding-left:1.6em;}
+  ol.q > li{font-size:11.5pt;padding:2px 0;}
+  ol.q.sp > li{padding:2.5px 0;}
+  .bl{display:inline-block;border-bottom:1.4px solid var(--ink);min-width:60px;height:1.15em;vertical-align:-3px;margin:0 2px;}
+  .bl.s{min-width:42px;} .bl.l{min-width:125px;}
+  .jp-cue{color:var(--mut);font-size:10.5pt;}
+  .paren{color:var(--mut);}
+
+  .grid2{display:flex;flex-wrap:wrap;gap:3px 14px;}
+  .grid2 > div{width:calc(50% - 8px);font-size:11.5pt;padding:2px 0;}
+  .tfbox{display:inline-block;border:1.3px solid var(--ink);width:21px;height:17px;
+    vertical-align:-3px;margin-left:7px;border-radius:2px;}
+
+  .keychips{font-size:10.5pt;margin-bottom:4px;line-height:1.8;}
+  .chip{display:inline-block;padding:1px 9px;border-radius:11px;background:var(--key);color:#fff;
+    font-weight:700;margin-right:4px;font-size:10pt;}
+
+  .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
+  .lines.tight div{height:7.0mm;}
+
+  .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
+  .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
+  .cond ul{margin:0;padding-left:1.2em;} .cond li{padding:0;}
+
+  .checklist{margin-top:5px;font-size:10pt;color:var(--mut);display:flex;flex-wrap:wrap;gap:3px 16px;}
+  .checklist span::before{content:"□ ";font-size:11pt;color:var(--ink);}
+  .checklist span.key{color:var(--ng);font-weight:700;}
+
+  .ribbon{margin-top:6px;border:1.5px solid var(--ink);border-radius:4px;
+    padding:3px 13px;font-size:10.5pt;display:flex;align-items:center;gap:10px;}
+  .ribbon b{font-family:"Zen Maru Gothic",sans-serif;font-size:11pt;white-space:nowrap;}
+  .ribbon .s{color:var(--mut);}
+  .ribbon svg{color:var(--ng);}
+
+  .foot{border-top:1px solid var(--rule);padding-top:3px;margin-top:6px;
+    font-size:8.5pt;color:var(--mut);display:flex;justify-content:space-between;flex:none;}
+
+  .ans{font-size:12pt;line-height:1.45;}
+  .ans h4{font-family:"Zen Maru Gothic",sans-serif;font-size:13pt;font-weight:900;
+    margin:7px 0 2px;color:#fff;background:var(--key);padding:2px 13px;border-radius:4px;}
+  .ans h4:first-of-type{margin-top:3px;}
+  .ans ol{margin:0;padding-left:1.7em;} .ans li{padding:1px 0;}
+  .ans .a{font-weight:700;color:var(--vb);font-size:13.5pt;}
+  .ans .row{font-size:13.5pt;font-weight:700;letter-spacing:.04em;margin:2px 0;}
+  .ans .cm{color:var(--mut);font-size:11pt;font-weight:400;letter-spacing:0;}
+  .ans .exp{background:#F4F7FA;border-left:4px solid var(--key);padding:3px 13px;
+    font-size:10pt;color:#2A3742;margin:2px 0;line-height:1.4;}
+  .ans .exp b{color:var(--key);}
+  .teacher{background:#FFF4E5;border:1.5px solid #C1611A;border-radius:4px;
+    padding:5px 13px;font-size:10pt;margin-top:auto;line-height:1.45;}
+  .teacher .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:11.5pt;color:#8A4310;margin-bottom:1px;}
+
+  .ic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none;}
+  .ic-l{width:26px;height:26px;vertical-align:-6px;}
+  .ic-xl{width:36px;height:36px;flex:none;}
+
+  .bar-ui{max-width:210mm;margin:14px auto 0;display:flex;gap:10px;align-items:center;}
+  .bar-ui button{font-family:inherit;font-size:11pt;padding:8px 18px;border:none;border-radius:4px;
+    background:var(--ink);color:#fff;cursor:pointer;}
+  .bar-ui span{font-size:9.5pt;color:#55616D;}
+  @media print{
+    body{background:#fff;}
+    /* 用紙の余白・ヘッダー/フッターの設定に関係なく1枚に収まるよう、
+       印刷時だけ全体をわずかに縮小する */
+    .sheet{margin:0;box-shadow:none;width:auto;height:266mm;min-height:266mm;
+      padding:4mm 6mm;overflow:hidden;zoom:0.93;}
+    .bar-ui{display:none;}
+    @page{size:A4 portrait;margin:8mm;}
+  }
+</style>
+
+<style>
+  /* ===== オンライン版 ===== */
+  body{background:#EEF1F4;padding-bottom:40px;}
+  .sheet{width:100%;max-width:230mm;min-height:0;margin:14px auto;
+         padding:9mm 17mm 8mm;box-shadow:0 2px 10px rgba(0,0,0,.12);
+         page-break-after:auto;height:auto;overflow:visible;}
+  @media (max-width:560px){
+    .sheet{padding:5mm 9mm;margin:8px auto;border-radius:0;}
+    .head .tag{font-size:16pt;}
+  }
+  /* 問題行：左＝問題／右＝ひとこと解説 */
+  .row{display:flex;gap:12px;align-items:flex-start;}
+  .qmain{flex:1 1 auto;min-width:0;}
+  .qnote{flex:0 0 34%;max-width:34%;font-size:9pt;line-height:1.5;color:#245C45;
+    background:#F2F8F4;border-left:3px solid var(--vb);border-radius:4px;
+    padding:3px 9px;opacity:0;transition:opacity .18s;}
+  .qnote b{color:var(--vb);}
+  .qnote .x{color:var(--ng);font-weight:600;}
+  @media (max-width:620px){
+    .row{flex-direction:column;gap:4px;}
+    .qnote{flex:none;max-width:100%;width:100%;}
+  }
+  /* 答えの表示 */
+  .bl{position:relative;}
+  .bl .ansfill{position:absolute;left:0;right:0;bottom:1px;text-align:center;
+    color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:11pt;white-space:nowrap;opacity:0;transition:opacity .18s;}
+  .lines .fill2{color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:12.5pt;padding-left:4px;opacity:0;transition:opacity .18s;}
+  .tfbox{position:relative;}
+  .tfbox .ansmark{position:absolute;left:0;right:0;top:-3px;text-align:center;
+    color:var(--vb);font-weight:700;font-size:13pt;opacity:0;transition:opacity .18s;}
+  .expbox{margin-top:7px;background:#F2F8F4;border-left:5px solid var(--vb);
+    border-radius:5px;padding:6px 12px;font-size:9.5pt;line-height:1.6;
+    color:#245C45;display:none;}
+  .expbox b{color:var(--vb);}
+  .expbox .x{color:var(--ng);font-weight:600;}
+  .model{display:none;margin-top:7px;background:#F2F8F4;border:2px solid var(--vb);
+    border-radius:6px;padding:8px 12px;font-size:10.5pt;line-height:1.6;}
+  .model .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;color:var(--vb);
+    font-size:11pt;margin-bottom:2px;}
+  .model .ex{font-family:"Lexend",sans-serif;font-size:13pt;font-weight:700;color:var(--vb);}
+
+  .sheet.showans .bl .ansfill{opacity:1;}
+  .sheet.showans .lines .fill2{opacity:1;}
+  .sheet.showans .tfbox .ansmark{opacity:1;}
+  .sheet.showans .qnote{opacity:1;}
+  .sheet.showans .expbox{display:block;}
+  .sheet.showans .model{display:block;}
+
+  /* 各ページ右下の答えボタン */
+  .ansbar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:12px;}
+  .ansbar .msg{font-size:9.5pt;color:var(--mut);}
+  .abtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14pt;
+    border:none;border-radius:10px;padding:10px 26px;cursor:pointer;
+    background:var(--vb);color:#fff;box-shadow:0 3px 0 #085C3E;}
+  .abtn:active{transform:translateY(3px);box-shadow:none;}
+  .abtn.on{background:var(--ng);box-shadow:0 3px 0 #8A1B2E;}
+  .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
+    padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#C88A16;}
+  .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
+  .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
+    color:#6B4E0B;margin-top:3px;line-height:1.7;}
+  .copy .cpx.jp{font-family:"Zen Kaku Gothic New",sans-serif;font-size:11pt;}
+  .copy .min{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9pt;color:#9A7C3A;margin-left:8px;}
+  /* 一般動詞はピンクをテーマカラーにする（be動詞は青のまま） */
+  :root{--gv:#C2185B;}
+  .judge .col.no{border-color:var(--gv);}
+  .judge .no .ttl{background:var(--gv);}
+  .judge .no .ex{color:var(--gv);}
+  .judge .no .memo b{color:var(--gv);}
+  .hero .lblpen{width:13px;height:13px;vertical-align:-2px;margin-right:5px;color:#1F4E9C;}
+  .heart .hearts{display:flex;align-items:center;gap:6px;flex:none;}
+  .heart .hearts svg{width:30px;height:30px;}
+  .heart .hb{color:#6FA8FF;} .heart .hp{color:#FF6B8A;}
+  .heart .or{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10pt;opacity:.9;}
+  .heart .cb{color:#9CC4FF;} .heart .cp{color:#FFA7BC;}
+  .copy.sum{align-items:flex-start;margin-top:10px;}
+  .copy.sum svg{margin-top:2px;}
+  ul.sumlist{margin:4px 0 0;padding-left:1.2em;font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:500;font-size:11pt;line-height:1.8;color:#5F4A12;}
+  ul.sumlist li{padding:1px 0;}
+  ul.sumlist b{color:#8A5A0B;}
+
+  /* ブロック間を半行ずつ空ける */
+  .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
+  /* きほんの文（書き写す3文）の鉛筆マーク */
+  .exline .pn{width:14px;height:14px;flex:none;color:#C88A16;align-self:center;margin-right:-5px;}
+
+  /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
+  .talk{text-indent:1em;}
+
+  /* ===== 設問ごと／ページ全体の答え表示 ===== */
+  .showans .bl .ansfill{opacity:1;}
+  .showans .lines .fill2{opacity:1;}
+  .showans .tfbox .ansmark{opacity:1;}
+  .showans .qnote{opacity:1;}
+  .showans .expbox{display:block;}
+  .showans .model{display:block;}
+  .showans .modelnote{display:block;}
+
+  .qsec{position:relative;}
+  .secbar{display:flex;justify-content:flex-end;margin-top:7px;}
+  .sbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10.5pt;
+    border:2px solid var(--vb);border-radius:8px;padding:4px 18px;cursor:pointer;
+    background:#fff;color:var(--vb);}
+  .sbtn:active{transform:translateY(2px);}
+  .sbtn.on{background:var(--vb);color:#fff;}
+
+  /* ===== ヒント（語群）ボタン ===== */
+  .hintwrap{margin:5px 0 0;}
+  .hbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:1.5px dashed #A49C90;border-radius:7px;padding:3px 14px;cursor:pointer;
+    background:#F7F5F0;color:#7A736A;}
+  .hbtn.on{background:#EDE8DE;color:#5F594F;}
+  .hintwrap .faint{display:none;margin-top:4px;}
+  .hintwrap.open .faint{display:block;}
+
+  /* ===== よくある間違いさがしクイズ ===== */
+  .quiz{border:2px solid var(--ng);border-radius:8px;padding:8px 12px 9px;margin:9px 0 0;}
+  .quiz .qzh{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12pt;
+    color:var(--ng);}
+  .quiz .qzh .qzs{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:var(--mut);margin-left:9px;}
+  .qzi{border-top:1px dotted #E6BDC4;padding:5px 0 4px;}
+  .qzi:first-of-type{border-top:none;padding-top:4px;}
+  .qzq{display:flex;align-items:center;gap:10px;}
+  .qzq .no{font-family:"Lexend",sans-serif;font-weight:600;font-size:10pt;
+    color:var(--mut);flex:none;}
+  .qzq .xm{color:var(--ng);font-weight:700;font-family:"Lexend",sans-serif;font-size:12.5pt;}
+  .qzb{margin-left:auto;flex:none;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;font-size:10pt;border:2px solid var(--ng);border-radius:7px;
+    padding:3px 16px;cursor:pointer;background:#fff;color:var(--ng);}
+  .qzb:active{transform:translateY(2px);}
+  .qzb.on{background:var(--ng);color:#fff;}
+  .qza{display:none;margin:4px 0 1px 26px;}
+  .qzi.open .qza{display:block;}
+  .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
+  .qza .qzp b{color:var(--vb);}
+
+  /* ===== レベル4 書き方の例を解答欄に ===== */
+  .lines .fill2 .exlab{display:inline-block;background:var(--vb);color:#fff;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-size:8.5pt;font-weight:700;
+    border-radius:4px;padding:0 7px;margin-right:8px;vertical-align:2px;}
+  .modelnote{display:none;font-size:9.5pt;line-height:1.6;color:var(--mut);
+    margin-top:3px;text-indent:1em;}
+
+
+  /* ①②③…のブロックを細い濃いめの灰色の枠で囲う */
+  .blk-sec{border:1px solid #8A8A8A;border-radius:8px;
+    padding:8px 11px 7px;margin:0 0 9px;}
+  .blk-sec + .blk-sec{border-top:1px solid #8A8A8A;margin-top:0;padding-top:8px;}
+  .blk-sec > h3.st:first-child{margin-top:0;}
+
+
+
+  .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
+    padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
+  .guide b{color:#8A5A0B;}
+  /* カタカナ表示 */
+  .toolbar{display:flex;justify-content:flex-end;margin:0 0 6px;}
+  .kbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11pt;
+    border:2px solid #C88A16;border-radius:8px;padding:5px 16px;cursor:pointer;
+    background:#FFF8E8;color:#8A5A0B;}
+  .kbtn.on{background:#C88A16;color:#fff;}
+  ruby.rb{ruby-position:over;-webkit-ruby-position:before;}
+  /* rt の display は変えない（Safari が ruby-text を解さないため）。
+     ふだんは文字サイズ0で場所を取らせず、表示時にサイズを与える。 */
+  ruby.rb rt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:0;line-height:0;visibility:hidden;color:#8A5A0B;
+    -webkit-text-fill-color:#8A5A0B;letter-spacing:0;text-align:center;}
+  .sheet.showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
+  /* カタカナが長い語（student→ステューデント など）でも隣とぶつからないよう、
+     カタカナ表示中だけ単語のまわりに少し余白を取る */
+  .sheet.showkana ruby.rb{margin:0 2.5px;}
+  /* カタカナを出すときは、上の行と重ならないよう行間を広げる */
+  .sheet.showkana .talk, .sheet.showkana .hint, .sheet.showkana .qnote,
+  .sheet.showkana .goal, .sheet.showkana .goal li, .sheet.showkana .flow ol,
+  .sheet.showkana .flow li, .sheet.showkana .warn .row, .sheet.showkana .copy,
+  .sheet.showkana .cond, .sheet.showkana .cond li, .sheet.showkana .checklist,
+  .sheet.showkana ol.q > li, .sheet.showkana .grid2 > div,
+  .sheet.showkana table.kind td, .sheet.showkana .exline, .sheet.showkana .exline .s,
+  .sheet.showkana .judge .ex, .sheet.showkana .judge .memo, .sheet.showkana .eqbox,
+  .sheet.showkana .hero .big, .sheet.showkana .hero .jp, .sheet.showkana .lines div,
+  .sheet.showkana .model, .sheet.showkana .model .ex, .sheet.showkana .expbox,
+  .sheet.showkana .faint, .sheet.showkana .ribbon, .sheet.showkana .heart p,
+  .sheet.showkana .keychips, .sheet.showkana .blk .w, .sheet.showkana .sec em{
+    line-height:2.1;}
+  @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.8-9.3-9C1.2 8.4 3.1 4.8 6.6 4.4c2-.2 3.7.8 4.6 2.3l.8 1.3.8-1.3c.9-1.5 2.6-2.5 4.6-2.3 3.5.4 5.4 4 3.9 7.6-1.8 4.2-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="6.5" r="3.3" fill="currentColor"/><path d="M12 11c-3.6 0-6.2 2.4-6.2 5.6V21h12.4v-4.4C18.2 13.4 15.6 11 12 11z" fill="currentColor"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4.4" r="2.4" fill="currentColor"/><path d="M13.7 8.1 9.6 10c-.7.3-1.1 1-1.1 1.8v3.4h2.4v-2.6l2-.9-1 4.1 3.4 3.5.6 3.1h2.4l-.8-4.2-2.7-2.8 1.1-4.4 1.7 2.3 3.1.6.4-2.3-2.3-.5-2.2-2.9c-.6-.8-1.7-1.1-2.6-.7z" fill="currentColor"/><path d="M8.2 17.6 4 19.1l.8 2.2 4.2-1.5z" fill="currentColor"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 4.5h6v2H9z" fill="currentColor"/><path d="M7 11h10M7 14.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7.5V6a1.7 1.7 0 0 1 1.7-1.7h2.6A1.7 1.7 0 0 1 15 6v1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 13h19" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 2.5c.9 1.2 1.4 2 1.4 2.6a1.4 1.4 0 1 1-2.8 0c0-.6.5-1.4 1.4-2.6z" fill="currentColor"/><rect x="4" y="12" width="16" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12M4 15.5c1.6 0 1.6 1.6 3.2 1.6s1.6-1.6 3.2-1.6 1.6 1.6 3.2 1.6 1.6-1.6 3.2-1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor"/><circle cx="15" cy="10" r="1.3" fill="currentColor"/><path d="M8 14.5c1 1.4 2.3 2.1 4 2.1s3-.7 4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 8 − 3 <small>Here We Go!</small></div>
+    <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.120〜121</div>
+  </div>
+
+  <div class="hero">
+    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="mid">
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
+      <div class="big">I was playing ～.</div>
+      <div class="jp">わたしは ～ しているところでした</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
+    <p class="talk">8-1 の現在進行形を、<b>過去のこと</b>にします。<br>　やることは1つだけ。<br>　<b>be動詞を <span class="en">was</span>／<span class="en">were</span> に変える</b>だけです。</p>
+    <div class="exbox">
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I was playing soccer then.</span><span class="t">わたしは そのとき サッカーを しているところでした。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">He was running then.</span><span class="t">彼は そのとき 走っているところでした。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">You were studying then.</span><span class="t">あなたは そのとき 勉強しているところでした。</span></div>
+    </div>
+    <p class="talk"><span class="en">am → was</span>、<span class="en">is → was</span>、<span class="en">are → were</span>。<br>　7-4 で習ったとおりです。<br>　<b><span class="en">ing</span> の形はそのまま</b>。</p>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">2</span>いちばん大事｜変えるのは be動詞だけ</h3>
+    <p class="talk">ここが今回のヤマです。<br>　<b>動詞の <span class="en">ing</span> 形は、まったく変わりません</b>。<br>　変わるのは前の be動詞だけです。</p>
+    <table class="kind">
+      <thead><tr><th>主語</th><th>今のこと</th><th>そのときのこと</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><span class="en">I</span></td><td class="e">I <u>am</u> playing.</td><td class="e" style="color:#7A4FBF;">I <u>was</u> playing.</td></tr>
+        <tr><td class="k"><span class="en">he / she</span>・名前</td><td class="e">He <u>is</u> playing.</td><td class="e" style="color:#7A4FBF;">He <u>was</u> playing.</td></tr>
+        <tr><td class="k"><span class="en">you</span></td><td class="e">You <u>are</u> playing.</td><td class="e" style="color:#7A4FBF;">You <u>were</u> playing.</td></tr>
+      </tbody>
+    </table>
+    <p class="talk">右の列も <span class="en">playing</span> のまま。<br>　<b><span class="en">ed</span> をつけたり、形を変えたりはしません。</b></p>
+    <p class="talk"><span class="en">I was played soccer.</span> は<b>まちがい</b>。<br>　これは「過去形」と「進行形」を混ぜてしまった形です。<br>　進行形は<b>かならず <span class="en">ing</span></b>。</p>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">3</span>打ち消しとたずねる文</h3>
+    <p class="talk">やり方は 7-4 とまったく同じ。<br>　<b>打ち消しは うしろに <span class="en">not</span>、たずねる文は 前に出す</b>だけです。</p>
+    <table class="kind">
+      <thead><tr><th>ふつうの文</th><th>打ち消しの文</th><th>たずねる文</th></tr></thead>
+      <tbody>
+        <tr><td class="e">I was playing.</td><td class="e" style="color:var(--ng);">I was <u>not</u> playing.（wasn&#39;t）</td><td class="e">Were you playing?</td></tr>
+        <tr><td class="e">He was running.</td><td class="e" style="color:var(--ng);">He was <u>not</u> running.（wasn&#39;t）</td><td class="e">Was he running?</td></tr>
+      </tbody>
+    </table>
+    <p class="talk">答えは <span class="en">Yes, I was.</span>／<span class="en">No, I wasn&#39;t.</span>。<br>　<b><span class="en">didn&#39;t</span> は使いません</b>。<br>　be動詞の文だからです。</p>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">4</span>「そのとき」を表すことば</h3>
+    <p class="talk">過去進行形には、<b>いつのことかを表すことば</b>をいっしょに使うと分かりやすくなります。</p>
+    <div class="eqbox" style="border-left-color:#7A4FBF;background:rgba(122,79,191,.07);">
+      <span class="eq" style="color:#7A4FBF;">then</span>（そのとき）　<span class="eq" style="color:#7A4FBF;">at that time</span>（そのときに）　<span class="eq" style="color:#7A4FBF;">last night</span>（昨夜）<br>
+      置く場所は<b>文のいちばん後ろ</b>。<span class="en">I was playing soccer then.</span>
+    </div>
+    <p class="talk"><span class="en">now</span> なら現在進行形、<span class="en">then</span> なら過去進行形。<br>　<b>このことばが見分けの手がかり</b>になります。</p>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">5</span>3つの過去の文を整理する</h3>
+    <p class="talk">Unit 7・8 で、過去の言い方が3つ出てきました。<br>　まとめて確かめましょう。</p>
+    <table class="kind">
+      <thead><tr><th>言いたいこと</th><th>形</th><th>れい文</th></tr></thead>
+      <tbody>
+        <tr><td class="k">したこと</td><td class="k" style="color:var(--gv);font-weight:700;">動詞の過去形</td><td class="e">I played soccer.</td></tr>
+        <tr><td class="k">どんなようすだったか</td><td class="k" style="color:var(--key);font-weight:700;">was / were</td><td class="e">I was busy.</td></tr>
+        <tr><td class="k">している最中だったこと</td><td class="k" style="color:#7A4FBF;font-weight:700;">was / were ＋ ing</td><td class="e">I was playing soccer.</td></tr>
+      </tbody>
+    </table>
+    <div class="heart">
+      <div class="hearts">
+        <svg class="hb beat"><use href="#i-heart"/></svg>
+        <span class="or">か</span>
+        <svg class="hp beat"><use href="#i-heart"/></svg>
+      </div>
+      <div class="txt">
+        <div class="h">合言葉：<span class="en">was</span> のうしろは <span class="en">ing</span> か ようす</div>
+        <p><b class="cb">青＝<span class="en">was busy</span></b>　<b style="color:#C8AEF0;">むらさき＝<span class="en">was playing</span></b>　<b class="cp">ピンク＝<span class="en">played</span></b>　
+        <span class="en">was</span> のうしろに<b>過去形は来ません</b>。<br>
+        <span class="xm">✕ I was played soccer ✕</span>　<span class="xm">✕ I playing soccer then ✕</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ I am playing soccer then. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I was playing soccer then.</span><span class="qzp"><b>ポイント</b>　<span class="en">then</span>（そのとき）があるので、be動詞を <b>過去形</b>にします。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ I was play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I was playing soccer.</span><span class="qzp"><b>ポイント</b>　<b><span class="en">ing</span> が抜けています</b>。進行形はかならず <span class="en">ing</span>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ I playing soccer then. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I was playing soccer then.</span><span class="qzp"><b>ポイント</b>　<b>be動詞が抜けています</b>。<span class="en">ing</span> の前に <span class="en">was</span> が必要。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ You was playing soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ You were playing soccer.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">were</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ He were playing soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He was playing soccer.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">was</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I was played soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I was playing soccer.</span><span class="qzp"><b>ポイント</b>　<span class="en">was</span> のうしろに<b>過去形は来ません</b>。<span class="en">ing</span> の形にします。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「～しているところでした」は <b><span class="en">was</span>／<span class="en">were</span> ＋ 動詞ing</b>。</li>
+        <li><b>変えるのは be動詞だけ。</b><span class="en">ing</span> の形はそのまま。</li>
+        <li>打ち消しは <b><span class="en">wasn&#39;t</span>／<span class="en">weren&#39;t</span></b>、たずねる文は <b>前に出す</b>。</li>
+        <li><b><span class="en">was</span> のうしろに過去形は来ない。</b><span class="en">I was played ～.</span> はまちがい。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 8-3　過去進行形</span><span>1 / 4　文法わかる</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 8 − 3 <small>基本事項チェック</small></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em></h3>
+  <ol class="q">
+    <li>「～しているところでした」は、（<span class="bl s"><span class="ansfill">was</span></span>）か（<span class="bl s"><span class="ansfill">were</span></span>）＋ 動詞ing で表す。</li>
+    <li>主語が <span class="en">I</span>・<span class="en">he</span>・<span class="en">she</span> なら（<span class="bl s"><span class="ansfill">was</span></span>）、<span class="en">you</span> なら（<span class="bl s"><span class="ansfill">were</span></span>）。</li>
+    <li>動詞の（<span class="bl s"><span class="ansfill">ing</span></span>）の形は、現在進行形のときと変わらない。</li>
+    <li>打ち消しは be動詞のうしろに（<span class="bl s"><span class="ansfill">not</span></span>）を置く。短い形は <span class="en">wasn&#39;t</span>。</li>
+    <li>過去進行形には（<span class="bl s"><span class="ansfill">then</span></span>）（そのとき）などをいっしょに使う。</li>
+  </ol>
+  <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint">語群：<span class="en">was</span> ／ <span class="en">were</span> ／ <span class="en">ing</span> ／ <span class="en">not</span> ／ <span class="en">then</span></div></div>
+  <div class="expbox"><b>なぜ？</b>　進行形は <span class="en">I ＝ playing</span> という<b>be動詞の文</b>。過去にするなら、変えるのは「＝」の部分だけです。<br><span class="en">playing</span>（している最中）というようすは変わらないので、そのまま使います。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#7A4FBF;">B　<span class="en">was</span>？ それとも <span class="en">were</span>？<em>（　）に正しい形を書こう</em></h3>
+  <div class="hint">ここが<b>いちばん大事</b>。<b>主語だけ</b>を見ましょう。<span class="en">you</span> なら <span class="en">were</span>、それ以外は <span class="en">was</span>。</div>
+  <div class="grid2">
+    <div>1. <span class="en">I（<span class="bl s"><span class="ansfill">was</span></span>）playing soccer.</span></div>
+    <div>2. <span class="en">You（<span class="bl s"><span class="ansfill">were</span></span>）playing soccer.</span></div>
+    <div>3. <span class="en">He（<span class="bl s"><span class="ansfill">was</span></span>）running then.</span></div>
+    <div>4. <span class="en">She（<span class="bl s"><span class="ansfill">was</span></span>）cooking then.</span></div>
+    <div>5. <span class="en">You（<span class="bl s"><span class="ansfill">were</span></span>）watching TV.</span></div>
+    <div>6. <span class="en">Mike（<span class="bl s"><span class="ansfill">was</span></span>）studying math.</span></div>
+    <div>7. <span class="en">I（<span class="bl s"><span class="ansfill">was</span></span>）eating lunch then.</span></div>
+    <div>8. <span class="en">（<span class="bl s"><span class="ansfill">Were</span></span>）you reading a book?</span></div>
+    <div>9. <span class="en">（<span class="bl s"><span class="ansfill">Was</span></span>）he swimming then?</span></div>
+    <div>10. <span class="en">She（<span class="bl s"><span class="ansfill">was</span></span>）not cooking.</span></div>
+  </div>
+  <div class="expbox"><b>見つけ方</b>　主語を見るだけ。7-4 とまったく同じです。<br><span class="en">you</span> → <b><span class="en">were</span></b>（2・5・8）　<span class="en">I・he・she</span>・名前 → <b><span class="en">was</span></b>（1・3・4・6・7・9・10）<br>8・9は<b>たずねる文</b>なので前に出て、文のはじめだから大文字です。</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#7A4FBF;">C　正しい文には ○、まちがっている文には ✕ を書こう</h3>
+  <div class="grid2">
+    <div><span class="en">1. I was playing soccer then.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">2. I was played soccer then.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">3. He was running.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">4. I playing soccer then.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">5. You were studying.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">6. You was studying.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><span class="en">7. Were you watching TV?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><span class="en">8. I was play soccer.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+  </div>
+  <div class="expbox"><b>直し方</b>　2 → <span class="en">I was playing soccer then.</span>（<span class="en">played</span> → <span class="en">playing</span>）<br>4 → <span class="en">I was playing soccer then.</span>（<span class="en">was</span> を足す）　6 → <span class="en">You were studying.</span>（<span class="en">you</span> には <span class="en">were</span>）<br>8 → <span class="en">I was playing soccer.</span>（ing をつける）</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2">D　どの形を使う？　記号で答えよう</h3>
+  <div class="hint"><span class="chip">ア</span> 過去形（<span class="en">played</span>）　<span class="chip" style="background:var(--key);">イ</span> <span class="en">was / were</span>　<span class="chip" style="background:#7A4FBF;">ウ</span> <span class="en">was / were ＋ ing</span></div>
+  <div class="grid2">
+    <div>1. わたしはきのうサッカーを<b>しました</b>。（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div>2. わたしはそのときサッカーを<b>しているところでした</b>。（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
+    <div>3. わたしはきのう<b>いそがしかった</b>です。（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div>4. 彼はそのとき<b>走っているところでした</b>。（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
+    <div>5. 彼はきのう公園へ<b>行きました</b>。（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div>6. 彼はそのとき家に<b>いました</b>。（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+  </div>
+  <div class="expbox"><b>ここが大事</b>　日本語の終わり方で見分けます。<br>「<b>しました</b>」→ 過去形（1・5）　「<b>でした・いました</b>」→ <span class="en">was / were</span>（3・6）<br>「<b>しているところでした</b>」→ <span class="en">was / were ＋ ing</span>（2・4）</div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ribbon">
+    <svg class="ic-l beat"><use href="#i-heart"/></svg>
+    <b>合言葉</b><span class="s">過去進行形は <b><span class="en">was</span>／<span class="en">were</span> ＋ 動詞ing</b>。be動詞を過去形にするだけ。</span>
+  </div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 8-3　過去進行形</span><span>2 / 4　文法たしかめ</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 8 − 3 <small>レベル 1・2</small></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="half qsec">
+    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em></h3>
+    <div class="hint"><b>コツ</b>　<span class="en">then</span> があれば過去進行形の合図。be動詞を過去形に、<span class="en">ing</span> はそのまま。</div>
+    <ol class="q sp">
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはそのときサッカーをしているところでした。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">was</span></span>）playing soccer then.</span></div><div class="qnote">主語が <span class="en">I</span> なので <b><span class="en">was</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はそのとき走っているところでした。</span>　<span class="en">He was（<span class="bl"><span class="ansfill">running</span></span>）then.</span></div><div class="qnote"><span class="en">n</span> を重ねて <b><span class="en">running</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはそのとき勉強しているところでした。</span>　<span class="en">You（<span class="bl s"><span class="ansfill">were</span></span>）studying then.</span></div><div class="qnote">主語が <span class="en">you</span> なので <b><span class="en">were</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは今サッカーをしているところです。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">am</span></span>）playing soccer now.</span></div><div class="qnote"><span class="en">now</span> なので<b>現在</b>進行形。1番とくらべよう。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはきのうサッカーをしました。</span>　<span class="en">I（<span class="bl"><span class="ansfill">played</span></span>）soccer yesterday.</span></div><div class="qnote">「しました」なので<b>過去形</b>。進行形ではありません。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はそのとき料理をしているところでした。</span>　<span class="en">She（<span class="bl s"><span class="ansfill">was</span></span>）（<span class="bl"><span class="ansfill">cooking</span></span>）then.</span></div><div class="qnote">（　）が2つ。<b><span class="en">was</span> ＋ <span class="en">cooking</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはそのときテレビを見ていませんでした。</span>　<span class="en">I（<span class="bl"><span class="ansfill">wasn't</span></span>）watching TV then.</span></div><div class="qnote">打ち消しは <b><span class="en">wasn&#39;t</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはそのとき本を読んでいるところでしたか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Were</span></span>）you reading a book then?</span></div><div class="qnote">たずねる文は前に出す。<span class="en">you</span> なので <b><span class="en">Were</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">はい、読んでいました。</span>　<span class="en">Yes, I（<span class="bl s"><span class="ansfill">was</span></span>）.</span></div><div class="qnote">答えるのは自分のことなので <b><span class="en">I was</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はそのとき泳いでいるところでしたか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Was</span></span>）he（<span class="bl"><span class="ansfill">swimming</span></span>）then?</span></div><div class="qnote">主語が <span class="en">he</span> なので <b><span class="en">Was</span></b>。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="half bottom qsec">
+    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em></h3>
+    <div class="hint"><b>コツ</b>　語群に <span class="en">was</span>・<span class="en">were</span> と <span class="en">ing</span> の形があれば過去進行形です。</div>
+    <ol class="q">
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはそのときサッカーをしているところでした。</span>　<span class="paren en">（ soccer / was / then / I / playing ）</span><div class="lines tight"><div><span class="fill2">I was playing soccer then.</span></div></div></div><div class="qnote">「だれが → be動詞 → ing → なにを → いつ」の順。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼はそのとき走っているところでした。</span>　<span class="paren en">（ running / then / He / was ）</span><div class="lines tight"><div><span class="fill2">He was running then.</span></div></div></div><div class="qnote"><span class="en">then</span> はいちばん後ろ。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはそのとき勉強しているところでした。</span>　<span class="paren en">（ studying / You / then / were ）</span><div class="lines tight"><div><span class="fill2">You were studying then.</span></div></div></div><div class="qnote">語群が <span class="en">were</span>。主語は <span class="en">you</span>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはそのとき本を読んでいるところでしたか。</span>　<span class="paren en">（ a book / reading / Were / you ）</span><div class="lines tight"><div><span class="fill2">Were you reading a book?</span></div></div></div><div class="qnote">語群の <span class="en">Were</span> が大文字。だから先頭です。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはテレビを見ていませんでした。</span>　<span class="paren en">（ TV / watching / wasn&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I wasn&#39;t watching TV.</span></div></div></div><div class="qnote"><span class="en">wasn&#39;t</span> は <span class="en">I</span> のすぐうしろ。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはきのうサッカーをしました。</span>　<span class="paren en">（ soccer / played / yesterday / I ）</span><div class="lines tight"><div><span class="fill2">I played soccer yesterday.</span></div></div></div><div class="qnote">語群に be動詞がない。<b>過去形のふつうの文</b>です。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">彼女はそのとき料理をしているところでした。</span>　<span class="paren en">（ cooking / was / then / She ）</span><div class="lines tight"><div><span class="fill2">She was cooking then.</span></div></div></div><div class="qnote">2番と同じ形。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 8-3　過去進行形</span><span>3 / 4　文法かるく使える</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="head">
+    <div class="tag">Unit 8 − 3 <small>レベル 3・4</small></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+  </div>
+
+  <div class="half qsec">
+    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em></h3>
+    <ol class="q">
+      <li><div class="row"><div class="qmain">わたしはそのときサッカーをしているところでした。<div class="lines"><div><span class="fill2">I was playing soccer then.</span></div></div></div><div class="qnote"><span class="en">was</span> ＋ <span class="en">ing</span> の2つをそろえる。</div></div></li>
+      <li><div class="row"><div class="qmain">彼はそのとき走っているところでした。<div class="lines"><div><span class="fill2">He was running then.</span></div></div></div><div class="qnote"><span class="en">n</span> を重ねて <span class="en">running</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたはそのとき勉強しているところでした。<div class="lines"><div><span class="fill2">You were studying then.</span></div></div></div><div class="qnote"><span class="en">you</span> なので <span class="en">were</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">わたしはテレビを見ていませんでした。<div class="lines"><div><span class="fill2">I wasn&#39;t watching TV.</span></div></div></div><div class="qnote"><span class="en">I was not watching TV.</span> でも正解。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたはそのとき本を読んでいるところでしたか。<div class="lines"><div><span class="fill2">Were you reading a book then?</span></div></div></div><div class="qnote"><span class="en">Was you ～?</span> ではありません。</div></div></li>
+      <li><div class="row"><div class="qmain">わたしはきのうサッカーをしました。<div class="lines"><div><span class="fill2">I played soccer yesterday.</span></div></div></div><div class="qnote">「しました」なので過去形。進行形にしないこと。</div></div></li>
+    </ol>
+    <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint"><span class="en">was playing ／ running ／ were studying ／ wasn&#39;t watching ／ Were you ／ played</span></div></div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="half bottom qsec">
+    <h3 class="sec">レベル4チェック　自由英作文<em>「きのうの夜7時ごろ、なにをしていたか」を書こう</em></h3>
+    <div class="cond">
+      <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
+      <ul>
+        <li><span class="en">I was ～ing.</span> の文を <b>2つ以上</b></li>
+        <li><span class="en">He was ～ing.</span> か <span class="en">She was ～ing.</span> の文を <b>1つ以上</b></li>
+        <li><span class="en">then</span> か <span class="en">last night</span> を <b>1つ以上</b> 使う</li>
+      </ul>
+    </div>
+    <div class="lines">
+      <div><span class="fill2"><span class="exlab">書き方の例</span>I was studying math last night. I was listening to music.</span></div>
+      <div><span class="fill2">My brother was watching TV then.</span></div>
+      <div><span class="fill2">I wasn&#39;t playing games.</span></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="modelnote">これは例です。同じでなくてかまいません。勉強・テレビ・ごはん・おふろ など、昨夜の様子を思い出して書こう。</div>
+    <div class="checklist">
+      <span class="key">was / were と ing の2つがそろっている</span>
+      <span>you には were、それ以外は was</span>
+      <span>was のうしろを過去形にしていない</span>
+      <span>wasn&#39;t のアポストロフィ</span>
+    </div>
+    <div class="ribbon">
+      <svg class="ic-l beat"><use href="#i-heart"/></svg>
+      <b>書けたら 見直し</b><span class="s">じぶんの文の <span class="en">was</span>・<span class="en">were</span> のうしろに○をつけよう。<span class="en">ed</span> のついた形なら、そこがまちがい。</span>
+    </div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 8-3　過去進行形</span><span>4 / 4　文法しっかり使える</span></div>
+</section>
+
+<script>
+// ===== カタカナ辞書 =====
+const KANA = {
+  "a":"ア","am":"アム","i":"アイ","i'm":"アイム","is":"イズ",
+  "australia":"オーストレイリア","japan":"ジャパン","nagano":"ナガノ",
+  "eri":"エリ","ken":"ケン","tina":"ティナ","yumi":"ユミ","yuta":"ユウタ",
+  "student":"ステューデント","fan":"ファン","soccer":"サッカー","baseball":"ベイスボール",
+  "tennis":"テニス","dog":"ドッグ","dogs":"ドッグズ","cat":"キャット","cats":"キャッツ",
+  "music":"ミューズィック","tv":"ティーヴィー",
+  "from":"フロム","happy":"ハピィ","hungry":"ハングリィ","today":"トゥデイ",
+  "twelve":"トゥエルヴ","thirteen":"サーティーン",
+  "like":"ライク","play":"プレイ","have":"ハヴ","run":"ラン","watch":"ウォッチ",
+  "fast":"ファスト","well":"ウェル","not":"ノット","do":"ドゥー","don't":"ドウント",
+  "was":"ワズ","were":"ワー","wasn't":"ワズント","weren't":"ワーント","playing":"プレイイング","running":"ラニング","swimming":"スウィミング","studying":"スタディイング","watching":"ウォッチング","eating":"イーティング","cooking":"クッキング","reading":"リーディング","doing":"ドゥーイング","then":"ゼン","night":"ナイト","last":"ラスト","he":"ヒー","she":"シー","yes":"イエス","no":"ノウ","what":"ワット",
+  "spring":"スプリング","natto":"ナットウ","fish":"フィッシュ","milk":"ミルク",
+  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ"
+};
+
+// ===== 英単語にカタカナを付ける =====
+(function attachKana(){
+  const SEL = '.en, .exline .s, .judge .ex, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el=>{
+    if(el.dataset.kanaDone) return;
+    if(el.closest('.bad, .xm, .x, s')) return;   // ✕ の誤答例にはカタカナを付けない
+    el.dataset.kanaDone = '1';
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    const nodes = []; let n;
+    while(n = walker.nextNode()) nodes.push(n);
+    nodes.forEach(node=>{
+      if(!/[A-Za-z]/.test(node.nodeValue)) return;
+      if(node.parentElement.classList.contains('rb')) return;
+      if(node.parentElement.closest('.bad, .xm, .x, s')) return;
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(/([A-Za-z][A-Za-z']*)/).forEach(part=>{
+        const key = part.toLowerCase().replace(/[’]/g,"'");
+        if(KANA[key]){
+          const ru = document.createElement('ruby');
+          ru.className = 'rb';
+          ru.appendChild(document.createTextNode(part));
+          const rt = document.createElement('rt');
+          rt.textContent = KANA[key];
+          ru.appendChild(rt);
+          frag.appendChild(ru);
+        } else {
+          frag.appendChild(document.createTextNode(part));
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+})();
+
+function toggleKana(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showkana');
+  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.classList.toggle('on', on);
+}
+
+function toggleSheet(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '全体の答えをかくす' : '全体の答えを見る';
+  btn.classList.toggle('on', on);
+  s.querySelectorAll('.qsec').forEach(q=>{
+    q.classList.toggle('showans', on);
+    const b = q.querySelector('.sbtn');
+    if(b){ b.textContent = on ? '答えをかくす' : '答えを見る'; b.classList.toggle('on', on); }
+  });
+  if(on) btn.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function toggleSec(btn){
+  const s = btn.closest('.qsec');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.classList.toggle('on', on);
+}
+function toggleQz(btn){
+  const i = btn.closest('.qzi');
+  const on = i.classList.toggle('open');
+  btn.textContent = on ? 'とじる' : '答え';
+  btn.classList.toggle('on', on);
+}
+function toggleHint(btn){
+  const w = btn.closest('.hintwrap');
+  const on = w.classList.toggle('open');
+  btn.textContent = on ? 'ヒントをとじる' : 'どうしてもわからない時のヒント';
+  btn.classList.toggle('on', on);
+}
+
+</script>
+</body>
+</html>
