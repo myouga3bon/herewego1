@@ -378,22 +378,22 @@
   ruby.rb rt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
     font-size:0;line-height:0;visibility:hidden;color:#8A5A0B;
     -webkit-text-fill-color:#8A5A0B;letter-spacing:0;text-align:center;}
-  .sheet.showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
+  .showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
   /* カタカナが長い語（student→ステューデント など）でも隣とぶつからないよう、
      カタカナ表示中だけ単語のまわりに少し余白を取る */
-  .sheet.showkana ruby.rb{margin:0 2.5px;}
+  .showkana ruby.rb{margin:0 2.5px;}
   /* カタカナを出すときは、上の行と重ならないよう行間を広げる */
-  .sheet.showkana .talk, .sheet.showkana .hint, .sheet.showkana .qnote,
-  .sheet.showkana .goal, .sheet.showkana .goal li, .sheet.showkana .flow ol,
-  .sheet.showkana .flow li, .sheet.showkana .warn .row, .sheet.showkana .copy,
-  .sheet.showkana .cond, .sheet.showkana .cond li, .sheet.showkana .checklist,
-  .sheet.showkana ol.q > li, .sheet.showkana .grid2 > div,
-  .sheet.showkana table.kind td, .sheet.showkana .exline, .sheet.showkana .exline .s,
-  .sheet.showkana .judge .ex, .sheet.showkana .judge .memo, .sheet.showkana .eqbox,
-  .sheet.showkana .hero .big, .sheet.showkana .hero .jp, .sheet.showkana .lines div,
-  .sheet.showkana .model, .sheet.showkana .model .ex, .sheet.showkana .expbox,
-  .sheet.showkana .faint, .sheet.showkana .ribbon, .sheet.showkana .heart p,
-  .sheet.showkana .keychips, .sheet.showkana .blk .w, .sheet.showkana .sec em{
+  .showkana .talk, .showkana .hint, .showkana .qnote,
+  .showkana .goal, .showkana .goal li, .showkana .flow ol,
+  .showkana .flow li, .showkana .warn .row, .showkana .copy,
+  .showkana .cond, .showkana .cond li, .showkana .checklist,
+  .showkana ol.q > li, .showkana .grid2 > div,
+  .showkana table.kind td, .showkana .exline, .showkana .exline .s,
+  .showkana .judge .ex, .showkana .judge .memo, .showkana .eqbox,
+  .showkana .hero .big, .showkana .hero .jp, .showkana .lines div,
+  .showkana .model, .showkana .model .ex, .showkana .expbox,
+  .showkana .faint, .showkana .ribbon, .showkana .heart p,
+  .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
@@ -453,6 +453,64 @@
   .clock.over .cm{color:var(--ng);}
   @media (max-width:560px){ .clock .cl{width:26px;height:26px;} .clock .cm{font-size:8px;} }
 
+
+  /* ===== v3: 小さなカタカナボタン（ブロックごと） ===== */
+  .kbtn{font-size:9pt !important;padding:3px 11px !important;border-width:1.5px !important;}
+  .ksm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #D8C49A;border-radius:6px;padding:1px 8px;cursor:pointer;
+    background:#FFFBF2;color:#A8884A;margin-left:auto;flex:none;line-height:1.5;}
+  .ksm:hover{border-color:#C88A16;color:#8A5A0B;}
+  .ksm.on{background:#C88A16;border-color:#C88A16;color:#fff;}
+  h3.sec{display:flex;align-items:center;flex-wrap:wrap;gap:0 4px;}
+  h3.sec em{flex:0 1 auto;}
+  h3.sec .ksm{order:9;}
+  h3.st .ksm{margin-left:auto;}
+  @media print{.ksm{display:none;}}
+
+  /* ===== v3: 時計（オレンジの扇形／20分で赤） ===== */
+  .clock .cf{stroke:#D98400;}
+  .clock .cp{fill:rgba(240,150,20,.30);}
+  .clock .ct{stroke:#D98400;}
+  .clock .ch{stroke:#D98400;}
+  .clock .cc{fill:#D98400;}
+  .clock .cm{color:#B06B00;}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:rgba(181,39,63,.26);}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+
+  /* ===== v3: まちがえた問題のチェック ===== */
+  .ckw{display:inline-flex;align-items:center;margin-left:9px;vertical-align:middle;}
+  .ck{appearance:none;-webkit-appearance:none;width:17px;height:17px;flex:none;
+    border:2px solid #9FC2E8;border-radius:5px;background:#F2F8FF;
+    cursor:pointer;position:relative;margin:0;}
+  .ck:hover{border-color:#5E9BE0;}
+  .ck:checked{background:var(--ng);border-color:var(--ng);}
+  .ck:checked::after{content:"✕";position:absolute;inset:0;color:#fff;
+    font-size:12px;font-weight:700;line-height:13px;text-align:center;}
+  .cknote{font-size:9pt;color:#7E93A8;margin-right:auto;
+    display:inline-flex;align-items:center;gap:5px;}
+  .cknote i{display:inline-block;width:14px;height:14px;border:2px solid #9FC2E8;
+    border-radius:4px;background:#F2F8FF;}
+  .toolbar{align-items:center;gap:8px;}
+  @media print{.ckw{display:none;} .cknote{display:none;}}
+
+  /* ===== v3: 解き直しボタン ===== */
+  .retrybar{display:flex;align-items:center;justify-content:flex-end;gap:10px;
+    flex-wrap:wrap;margin:14px 0 0;padding-top:12px;border-top:2px dashed var(--rule);}
+  .retrybar .msg{font-size:10pt;color:var(--mut);margin-right:auto;}
+  .retrybar .rcount{font-family:"Lexend",sans-serif;font-weight:700;font-size:11pt;
+    color:var(--ng);}
+  .rbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13pt;
+    border:none;border-radius:10px;padding:10px 24px;cursor:pointer;
+    background:var(--ng);color:#fff;box-shadow:0 3px 0 #8A1B2E;}
+  .rbtn:active{transform:translateY(3px);box-shadow:none;}
+  .rbtn[disabled]{background:#C9C2B6;box-shadow:0 3px 0 #ADA69A;cursor:default;}
+  .rmsg{font-size:10pt;color:var(--ng);flex-basis:100%;text-align:right;}
+  @media print{.retrybar{display:none;}}
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -497,7 +555,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -513,7 +571,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
+    <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">3-1 の <span class="en">What</span>（なに）、4-2 の <span class="en">Who</span>（だれ）に続いて、今回は <span class="en">Where</span>（<b>どこ</b>）です。<br>　場所をたずねるときに使います。</p>
     <div class="exbox">
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Where is my bag?</span><span class="t">わたしの かばんは どこ ですか。</span></div>
@@ -528,13 +586,13 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">2</span>2つのパターンがある</h3>
+    <h3 class="st"><span class="stepnum">2</span>2つのパターンがある<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">Where</span> のうしろは、<b>be動詞の文なら <span class="en">is</span>、動作の文なら <span class="en">do you</span></b> になります。</p>
     <table class="kind">
       <thead><tr><th>たずねたいこと</th><th>形</th><th>れい文</th></tr></thead>
       <tbody>
-        <tr><td class="k">ものの場所</td><td class="k" style="color:var(--key);font-weight:700;">Where is ～?</td><td class="e">Where <u>is</u> my bag?</td></tr>
-        <tr><td class="k">することの場所</td><td class="k" style="color:var(--gv);font-weight:700;">Where do you ～?</td><td class="e">Where <u>do you</u> play soccer?</td></tr>
+        <tr><td class="k">ものが どこに あるか</td><td class="k" style="color:var(--key);font-weight:700;">Where is ～?</td><td class="e">Where <u>is</u> my bag?</td></tr>
+        <tr><td class="k">どこで するのか</td><td class="k" style="color:var(--gv);font-weight:700;">Where do you ～?</td><td class="e">Where <u>do you</u> play soccer?</td></tr>
       </tbody>
     </table>
     <p class="talk">見分け方は今までと同じ。<br>　<b>動作のことばがあるかどうか</b>です。<br>　<span class="en">play・live・study</span> があれば <span class="en">do you</span> を使います。</p>
@@ -546,7 +604,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜答えは場所。<span class="en">Yes / No</span> は使わない</h3>
+    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜答えは場所。<span class="en">Yes / No</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">Where</span> は「どこ？」と聞いているので、<b>場所を答えます</b>。<br>　<span class="en">What</span>・<span class="en">Who</span> と同じ考え方です。</p>
     <div class="judge">
       <div class="col yes">
@@ -576,7 +634,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>場所を表すことば</h3>
+    <h3 class="st"><span class="stepnum">4</span>場所を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">答えるときは、<b>場所を表すことば</b>を使います。<br>　よく使う4つをおぼえましょう。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -595,8 +653,8 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span><span class="en">Where do you ～?</span> の答え方</h3>
-    <p class="talk">動作の場所を聞かれたときは、<b>ふつうの文で答えます</b>。<br>　場所のことばを文の最後に置きます。</p>
+    <h3 class="st"><span class="stepnum">5</span><span class="en">Where do you ～?</span> の答え方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">「どこで するのか」を聞かれたときは、<b>ふつうの文で答えます</b>。<br>　場所のことばを文の最後に置きます。</p>
     <div class="eqbox" style="border-left-color:var(--gv);background:rgba(194,24,91,.06);">
       <span class="eq" style="color:var(--gv);">Where do you play soccer?</span><br>
       — <span class="eq" style="color:var(--gv);">I play soccer in the park.</span>（公園でします）　<b>場所はいちばん後ろ</b>
@@ -649,20 +707,20 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題にチェック</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em></h3>
+  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q">
-    <li>「～はどこですか」は（<span class="bl s"><span class="ansfill">Where</span></span>）を文の前に置く。そのうしろは <span class="en">（<span class="bl s"><span class="ansfill">is</span></span>）</span> ＋ 主語。</li>
-    <li>動作の場所をたずねるときは <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）</span> ～? の形を使う。</li>
-    <li><span class="en">Where</span> で聞かれたら、答えに（<span class="bl"><span class="ansfill">Yes / No</span></span>）は使わず、（<span class="bl s"><span class="ansfill">場所</span></span>）を答える。</li>
-    <li>答えの主語は（<span class="bl s"><span class="ansfill">it</span></span>）を使う。<span class="en">（<span class="bl"><span class="ansfill">It's</span></span>）</span> on the desk.</li>
-    <li>「～の上に」は（<span class="bl s"><span class="ansfill">on</span></span>）、「～の中に」は（<span class="bl s"><span class="ansfill">in</span></span>）。</li>
+    <li>「～はどこですか」は（<span class="bl s"><span class="ansfill">Where</span></span>）を文の前に置く。そのうしろは <span class="en">（<span class="bl s"><span class="ansfill">is</span></span>）</span> ＋ 主語。<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></li>
+    <li>「どこで するのか」をたずねるときは <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）</span> ～? の形を使う。<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></li>
+    <li><span class="en">Where</span> で聞かれたら、答えに（<span class="bl"><span class="ansfill">Yes / No</span></span>）は使わず、（<span class="bl s"><span class="ansfill">場所</span></span>）を答える。<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></li>
+    <li>答えの主語は（<span class="bl s"><span class="ansfill">it</span></span>）を使う。<span class="en">（<span class="bl"><span class="ansfill">It's</span></span>）</span> on the desk.<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></li>
+    <li>「～の上に」は（<span class="bl s"><span class="ansfill">on</span></span>）、「～の中に」は（<span class="bl s"><span class="ansfill">in</span></span>）。<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Where</span> ／ <span class="en">is</span> ／ <span class="en">do you</span> ／ <span class="en">it</span> ／ <span class="en">It&#39;s</span> ／ <span class="en">in</span> ／ <span class="en">on</span> ／ <span class="en">Yes / No</span> ／ 場所</div></div>
@@ -671,50 +729,50 @@
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2" style="border-left-color:#D98400;">B　<span class="en">is</span>？ それとも <span class="en">do you</span>？<em>（　）に入るものを書こう</em></h3>
+  <h3 class="sec sec2" style="border-left-color:#D98400;">B　<span class="en">is</span>？ それとも <span class="en">do you</span>？<em>（　）に入るものを書こう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint">ここが<b>いちばん大事</b>。<b>動作のことばがあるか</b>だけを見ましょう。</div>
-  <div class="grid2">
-    <div>1. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span></div>
-    <div>2. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）play soccer?</span></div>
-    <div>3. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）your school?</span></div>
-    <div>4. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）live?</span></div>
-    <div>5. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the station?</span></div>
-    <div>6. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）study?</span></div>
-    <div>7. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my cat?</span></div>
-    <div>8. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）eat lunch?</span></div>
-    <div>9. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the library?</span></div>
-    <div>10. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the park?</span></div>
+    <div class="grid2">
+    <div>1. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>2. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）play soccer?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>3. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）your school?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>4. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）live?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>5. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the station?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>6. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）study?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>7. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my cat?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>8. <span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）eat lunch?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>9. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the library?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>10. <span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）the park?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　<span class="en">Where</span> のうしろを見よう。<br><b>動作のことばがある</b>（<span class="en">play・live・study・eat</span>）→ <span class="en">do you</span>（2・4・6・8）<br><b>ものや場所の名前だけ</b>（かばん・学校・駅・ねこ・図書館・公園）→ <span class="en">is</span>（1・3・5・7・9・10）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2" style="border-left-color:#D98400;">C　正しい文には ○、まちがっている文には ✕ を書こう</h3>
-  <div class="grid2">
-    <div><span class="en">1. Where is my bag?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">2. Where my bag is?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">3. Where do you live?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">4. Where you do live?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">5. It&#39;s on the desk.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">6. Its on the desk.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">7. Where&#39;s the station?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">8. Where is you play soccer?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+  <h3 class="sec sec2" style="border-left-color:#D98400;">C　正しい文には ○、まちがっている文には ✕ を書こう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <div class="grid2">
+    <div><span class="en">1. Where is my bag?</span><span class="tfbox"><span class="ansmark">○</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">2. Where my bag is?</span><span class="tfbox"><span class="ansmark">✕</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">3. Where do you live?</span><span class="tfbox"><span class="ansmark">○</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">4. Where you do live?</span><span class="tfbox"><span class="ansmark">✕</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">5. It&#39;s on the desk.</span><span class="tfbox"><span class="ansmark">○</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">6. Its on the desk.</span><span class="tfbox"><span class="ansmark">✕</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">7. Where&#39;s the station?</span><span class="tfbox"><span class="ansmark">○</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div><span class="en">8. Where is you play soccer?</span><span class="tfbox"><span class="ansmark">✕</span></span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Where is my bag?</span>（<span class="en">is</span> → 主語 の順に）<br>4 → <span class="en">Where do you live?</span>（<span class="en">do you</span> の順に）　6 → <span class="en">It&#39;s on the desk.</span>（&#39;を入れる）<br>8 → <span class="en">Where do you play soccer?</span>（動作の文は <span class="en">do you</span>）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2">D　答え方　正しいほうを選ぼう</h3>
+  <h3 class="sec sec2">D　答え方　正しいほうを選ぼう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint"><span class="en">Where</span> なら<b>場所</b>。<span class="en">Is</span>・<span class="en">Do</span> なら <span class="en">Yes / No</span>。</div>
-  <div class="grid2">
-    <div>1. <span class="en">Where is my bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div>2. <span class="en">Is this your bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div>3. <span class="en">Where do you live?</span>　—（ア <span class="en">Yes, I do.</span> ／イ <span class="en">I live in Nagano.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div>4. <span class="en">Where is the station?</span>　—（ア <span class="en">It&#39;s near the park.</span> ／イ <span class="en">No, it isn&#39;t.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div>5. <span class="en">Do you play soccer?</span>　—（ア <span class="en">In the park.</span> ／イ <span class="en">Yes, I do.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div>6. <span class="en">Where is my cat?</span>　—（ア <span class="en">It&#39;s under the table.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div class="grid2">
+    <div>1. <span class="en">Where is my bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>2. <span class="en">Is this your bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>3. <span class="en">Where do you live?</span>　—（ア <span class="en">Yes, I do.</span> ／イ <span class="en">I live in Nagano.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>4. <span class="en">Where is the station?</span>　—（ア <span class="en">It&#39;s near the park.</span> ／イ <span class="en">No, it isn&#39;t.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>5. <span class="en">Do you play soccer?</span>　—（ア <span class="en">In the park.</span> ／イ <span class="en">Yes, I do.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
+    <div>6. <span class="en">Where is my cat?</span>　—（ア <span class="en">It&#39;s under the table.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）<label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Where</span> の文に <span class="en">Yes / No</span> で答えると、答えになりません（1・4・6）。<br><span class="en">Is</span>（2）・<span class="en">Do</span>（5）で聞かれたときだけ <span class="en">Yes / No</span> を使います。3は場所をふつうの文で答えています。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -730,41 +788,41 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題にチェック</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
   <div class="half qsec">
-    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em></h3>
+    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">Where</span> のうしろは、動作のことばがあれば <span class="en">do you</span>、なければ <span class="en">is</span>。</div>
     <ol class="q sp">
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしのかばんはどこですか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span></div><div class="qnote">ものの場所なので <b><span class="en">is</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それは机の上にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">on</span></span>）the desk.</span></div><div class="qnote">「～の上に」は <b><span class="en">on</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこに住んでいますか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">do</span></span>）you live?</span></div><div class="qnote"><span class="en">live</span> は動作のことば。<b><span class="en">do you</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それはかばんの中にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">in</span></span>）my bag.</span></div><div class="qnote">「～の中に」は <b><span class="en">in</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">駅はどこですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Where</span></span>）is the station?</span></div><div class="qnote">「どこ」なので <b><span class="en">Where</span></b>。文のはじめだから大文字。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それはテーブルの下にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">under</span></span>）the table.</span></div><div class="qnote">「～の下に」は <b><span class="en">under</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこでサッカーをしますか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">do</span></span>）（<span class="bl s"><span class="ansfill">you</span></span>）play soccer?</span></div><div class="qnote">（　）が2つ。<b><span class="en">do</span> → <span class="en">you</span></b> の順。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それは駅の近くにあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">near</span></span>）the station.</span></div><div class="qnote">「～の近くに」は <b><span class="en">near</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">短い形にしよう。</span>　<span class="en">Where is my bag?</span> →　<span class="en">（<span class="bl"><span class="ansfill">Where's</span></span>）my bag?</span></div><div class="qnote"><b><span class="en">Where is</span> ＝ <span class="en">Where&#39;s</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは公園でサッカーをします。</span>　<span class="en">I play soccer（<span class="bl s"><span class="ansfill">in</span></span>）the park.</span></div><div class="qnote">7番の答え。場所は<b>いちばん後ろ</b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしのかばんはどこですか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「ものが どこに あるか」なので <b><span class="en">is</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それは机の上にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">on</span></span>）the desk.</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「～の上に」は <b><span class="en">on</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこに住んでいますか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">do</span></span>）you live?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">live</span> は動作のことば。<b><span class="en">do you</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それはかばんの中にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">in</span></span>）my bag.</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「～の中に」は <b><span class="en">in</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">駅はどこですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Where</span></span>）is the station?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「どこ」なので <b><span class="en">Where</span></b>。文のはじめだから大文字。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それはテーブルの下にあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">under</span></span>）the table.</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「～の下に」は <b><span class="en">under</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこでサッカーをしますか。</span>　<span class="en">Where（<span class="bl s"><span class="ansfill">do</span></span>）（<span class="bl s"><span class="ansfill">you</span></span>）play soccer?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">（　）が2つ。<b><span class="en">do</span> → <span class="en">you</span></b> の順。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それは駅の近くにあります。</span>　<span class="en">It&#39;s（<span class="bl s"><span class="ansfill">near</span></span>）the station.</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「～の近くに」は <b><span class="en">near</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">短い形にしよう。</span>　<span class="en">Where is my bag?</span> →　<span class="en">（<span class="bl"><span class="ansfill">Where's</span></span>）my bag?</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><b><span class="en">Where is</span> ＝ <span class="en">Where&#39;s</span></b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは公園でサッカーをします。</span>　<span class="en">I play soccer（<span class="bl s"><span class="ansfill">in</span></span>）the park.</span><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">7番の答え。場所は<b>いちばん後ろ</b>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="half bottom qsec">
-    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em></h3>
+    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">Where</span> が先頭。そのうしろは <span class="en">is</span> ＋ 主語、または <span class="en">do</span> ＋ <span class="en">you</span> ＋ 動詞。</div>
     <ol class="q">
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしのかばんはどこですか。</span>　<span class="paren en">（ my bag / Where / is ）</span><div class="lines tight"><div><span class="fill2">Where is my bag?</span></div></div></div><div class="qnote"><span class="en">Where</span> → <span class="en">is</span> → 主語 の順。終わりは <b>?</b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それは机の上にあります。</span>　<span class="paren en">（ the desk / It&#39;s / on ）</span><div class="lines tight"><div><span class="fill2">It&#39;s on the desk.</span></div></div></div><div class="qnote"><span class="en">on the desk</span> でひとかたまり。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこに住んでいますか。</span>　<span class="paren en">（ live / you / Where / do ）</span><div class="lines tight"><div><span class="fill2">Where do you live?</span></div></div></div><div class="qnote"><span class="en">Where</span> → <span class="en">do</span> → <span class="en">you</span> → 動詞。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">駅はどこですか。</span>　<span class="paren en">（ the station / is / Where ）</span><div class="lines tight"><div><span class="fill2">Where is the station?</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">それはテーブルの下にあります。</span>　<span class="paren en">（ the table / under / It&#39;s ）</span><div class="lines tight"><div><span class="fill2">It&#39;s under the table.</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">under</span> が場所のことば。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこでサッカーをしますか。</span>　<span class="paren en">（ soccer / do / Where / play / you ）</span><div class="lines tight"><div><span class="fill2">Where do you play soccer?</span></div></div></div><div class="qnote">3番と同じ形。<span class="en">soccer</span> はいちばん後ろ。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは公園でサッカーをします。</span>　<span class="paren en">（ in the park / soccer / play / I ）</span><div class="lines tight"><div><span class="fill2">I play soccer in the park.</span></div></div></div><div class="qnote">語群に <span class="en">Where</span> がない。<b>ふつうの文</b>です。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしのかばんはどこですか。</span>　<span class="paren en">（ my bag / Where / is ）</span><div class="lines tight"><div><span class="fill2">Where is my bag?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">Where</span> → <span class="en">is</span> → 主語 の順。終わりは <b>?</b>。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それは机の上にあります。</span>　<span class="paren en">（ the desk / It&#39;s / on ）</span><div class="lines tight"><div><span class="fill2">It&#39;s on the desk.</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">on the desk</span> でひとかたまり。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこに住んでいますか。</span>　<span class="paren en">（ live / you / Where / do ）</span><div class="lines tight"><div><span class="fill2">Where do you live?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">Where</span> → <span class="en">do</span> → <span class="en">you</span> → 動詞。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">駅はどこですか。</span>　<span class="paren en">（ the station / is / Where ）</span><div class="lines tight"><div><span class="fill2">Where is the station?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">1番と同じ形。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">それはテーブルの下にあります。</span>　<span class="paren en">（ the table / under / It&#39;s ）</span><div class="lines tight"><div><span class="fill2">It&#39;s under the table.</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">2番と同じ形。<span class="en">under</span> が場所のことば。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">あなたはどこでサッカーをしますか。</span>　<span class="paren en">（ soccer / do / Where / play / you ）</span><div class="lines tight"><div><span class="fill2">Where do you play soccer?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">3番と同じ形。<span class="en">soccer</span> はいちばん後ろ。</div></div></li>
+      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは公園でサッカーをします。</span>　<span class="paren en">（ in the park / soccer / play / I ）</span><div class="lines tight"><div><span class="fill2">I play soccer in the park.</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">語群に <span class="en">Where</span> がない。<b>ふつうの文</b>です。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -775,21 +833,21 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題にチェック</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
   </div>
 
   <div class="half qsec">
-    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em></h3>
+    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q">
-      <li><div class="row"><div class="qmain">わたしのかばんはどこですか。<div class="lines"><div><span class="fill2">Where is my bag?</span></div></div></div><div class="qnote"><span class="en">Where&#39;s my bag?</span> でも正解。</div></div></li>
-      <li><div class="row"><div class="qmain">それは机の上にあります。<div class="lines"><div><span class="fill2">It&#39;s on the desk.</span></div></div></div><div class="qnote"><span class="en">It is on the desk.</span> でも正解。</div></div></li>
-      <li><div class="row"><div class="qmain">あなたはどこに住んでいますか。<div class="lines"><div><span class="fill2">Where do you live?</span></div></div></div><div class="qnote">動作のことばなので <span class="en">do you</span>。</div></div></li>
-      <li><div class="row"><div class="qmain">それはテーブルの下にあります。<div class="lines"><div><span class="fill2">It&#39;s under the table.</span></div></div></div><div class="qnote">「下に」は <span class="en">under</span>。</div></div></li>
-      <li><div class="row"><div class="qmain">駅はどこですか。<div class="lines"><div><span class="fill2">Where is the station?</span></div></div></div><div class="qnote"><span class="en">the station</span> に <span class="en">the</span> をつける。</div></div></li>
-      <li><div class="row"><div class="qmain">あなたはどこでサッカーをしますか。<div class="lines"><div><span class="fill2">Where do you play soccer?</span></div></div></div><div class="qnote">3番と同じ形。<span class="en">Where is</span> にしないこと。</div></div></li>
+      <li><div class="row"><div class="qmain">わたしのかばんはどこですか。<div class="lines"><div><span class="fill2">Where is my bag?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">Where&#39;s my bag?</span> でも正解。</div></div></li>
+      <li><div class="row"><div class="qmain">それは机の上にあります。<div class="lines"><div><span class="fill2">It&#39;s on the desk.</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">It is on the desk.</span> でも正解。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたはどこに住んでいますか。<div class="lines"><div><span class="fill2">Where do you live?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">動作のことばなので <span class="en">do you</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">それはテーブルの下にあります。<div class="lines"><div><span class="fill2">It&#39;s under the table.</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">「下に」は <span class="en">under</span>。</div></div></li>
+      <li><div class="row"><div class="qmain">駅はどこですか。<div class="lines"><div><span class="fill2">Where is the station?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote"><span class="en">the station</span> に <span class="en">the</span> をつける。</div></div></li>
+      <li><div class="row"><div class="qmain">あなたはどこでサッカーをしますか。<div class="lines"><div><span class="fill2">Where do you play soccer?</span></div></div><label class="ckw"><input type="checkbox" class="ck" aria-label="まちがえた"></label></div><div class="qnote">3番と同じ形。<span class="en">Where is</span> にしないこと。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">my bag ／ on the desk ／ live ／ under the table ／ the station ／ play soccer</span></div></div>
@@ -797,7 +855,7 @@
   </div>
 
   <div class="half bottom qsec">
-    <h3 class="sec">レベル4チェック　自由英作文<em>教室や自分の部屋のものについて、場所をたずねよう</em></h3>
+    <h3 class="sec">レベル4チェック　自由英作文<em>教室や自分の部屋のものについて、場所をたずねよう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="cond">
       <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
       <ul>
@@ -826,7 +884,14 @@
     </div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+    <div class="retrybar">
+    <span class="msg">まちがえた問題に <b>✕</b> のチェックを入れてから押そう</span>
+    <span class="rcount" id="rcount">0問</span>
+    <button class="rbtn" id="rbtn" onclick="makeRetry()" disabled>まちがったものを解き直し</button>
+    <span class="rmsg" id="rmsg"></span>
+  </div>
+
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 5-2　Where ～?</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -926,8 +991,14 @@ const KANA = {
 function toggleKana(btn){
   const s = btn.closest('.sheet');
   const on = s.classList.toggle('showkana');
-  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.textContent = on ? 'ぜんぶ消す' : 'ぜんぶカタカナ';
   btn.classList.toggle('on', on);
+  s.querySelectorAll('.blk-sec, .qsec').forEach(b => {
+    b.classList.toggle('showkana', on);
+    const x = b.querySelector('.ksm');
+    if(x){ x.textContent = on ? 'カタカナを消す' : 'カタカナ';
+           x.classList.toggle('on', on); }
+  });
 }
 
 function toggleSheet(btn){
@@ -983,6 +1054,7 @@ function toggleQz(btn){
   const lab  = document.getElementById('cmin');
   if(!box) return;
   const FULL = 30 * 60;           // 30分で一周
+  const WARN = 20 * 60;           // 20分を越えたら赤く
   const KEY  = 'hwg_timer_' + location.pathname;
   let sec = 0;
   try{ sec = parseInt(sessionStorage.getItem(KEY) || '0', 10) || 0; }catch(e){}
@@ -1002,7 +1074,7 @@ function toggleQz(btn){
     pie.setAttribute('d', sector(a));
     hand.setAttribute('transform', 'rotate(' + (sec / FULL * 360) % 360 + ',20,20)');
     lab.textContent = Math.floor(sec / 60) + '分';
-    box.classList.toggle('over', sec >= FULL);
+    box.classList.toggle('over', sec >= WARN);
   }
   draw();
   setInterval(() => {
@@ -1012,6 +1084,95 @@ function toggleQz(btn){
     draw();
   }, 1000);
 })();
+
+// ===== v3: ブロックごとのカタカナ =====
+function toggleKanaBlock(btn){
+  const b = btn.closest('.blk-sec, .qsec');
+  if(!b) return;
+  const on = b.classList.toggle('showkana');
+  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.classList.toggle('on', on);
+}
+
+// ===== v3: まちがえた問題の数をかぞえる =====
+function ckCount(){
+  const n = document.querySelectorAll('.ck:checked').length;
+  const c = document.getElementById('rcount');
+  const b = document.getElementById('rbtn');
+  if(c) c.textContent = n + '問';
+  if(b) b.disabled = (n === 0);
+}
+document.addEventListener('change', e => { if(e.target.classList.contains('ck')) ckCount(); });
+
+// ===== v3: まちがえた問題だけの解き直しページを作る =====
+function makeRetry(){
+  const picked = [...document.querySelectorAll('.ck:checked')];
+  const msg = document.getElementById('rmsg');
+  if(msg) msg.textContent = '';
+  if(!picked.length) return;
+
+  const groups = [];
+  picked.forEach(cb => {
+    const item = cb.closest('li') || cb.closest('.grid2 > div') || cb.closest('.row');
+    if(!item) return;
+    const sec = cb.closest('.qsec');
+    const h = sec && sec.querySelector('h3');
+    const head = h ? h.cloneNode(true) : null;
+    if(head) head.querySelectorAll('.ksm').forEach(x => x.remove());
+    const kind = item.tagName === 'LI' ? 'ol' : 'grid2';
+    const key = (head ? head.textContent.trim() : '') + '|' + kind;
+    let g = groups.find(x => x.key === key);
+    if(!g){ g = {key, head: head ? head.outerHTML : '', kind, items: []}; groups.push(g); }
+    const c = item.cloneNode(true);
+    c.querySelectorAll('.ckw').forEach(x => x.remove());
+    g.items.push(c.outerHTML);
+  });
+
+  let body = '';
+  groups.forEach(g => {
+    body += g.head;
+    body += (g.kind === 'ol')
+      ? '<ol class="q sp">' + g.items.join('\n') + '</ol>'
+      : '<div class="grid2">' + g.items.join('\n') + '</div>';
+  });
+
+  const styles = [...document.querySelectorAll('style')].map(s => s.outerHTML).join('\n');
+  const fonts  = [...document.querySelectorAll('link[rel="stylesheet"]')].map(l => l.outerHTML).join('\n');
+  const defs   = (document.querySelector('svg[width="0"]') || {outerHTML:''}).outerHTML;
+  const tagEl  = document.querySelector('.head .tag');
+  const title  = tagEl ? (tagEl.firstChild.textContent || '').trim() : '';
+
+  const html = '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    + '<title>解き直し｜' + title + '</title>' + fonts + styles
+    + '<style>.gauge{display:none;}.sheet{min-height:0;}</style></head><body>'
+    + defs
+    + '<section class="sheet showans-host">'
+    + '<div class="toolbar">'
+    + '<span class="cknote">まちがえた問題だけを集めました</span>'
+    + '<button class="kbtn" onclick="tk(this)">カタカナ</button></div>'
+    + '<div class="head"><div class="tag">' + title + ' <small>解き直し</small></div>'
+    + '<div class="sub"><b>まちがえた問題</b><br>'
+    + '<span class="name">名前　　　　　　　　　　　</span></div></div>'
+    + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
+    + body
+    + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<div class="foot"><span>' + title + '　解き直し</span>'
+    + '<span>まちがえた ' + picked.length + ' 問</span></div>'
+    + '</section>'
+    + '<script>'
+    + 'function tk(b){var s=b.closest(".sheet");var on=s.classList.toggle("showkana");'
+    + 'b.textContent=on?"カタカナを消す":"カタカナ";b.classList.toggle("on",on);}'
+    + 'function ta(b){var s=b.closest(".sheet");var on=s.classList.toggle("showans");'
+    + 'b.textContent=on?"答えをかくす":"答えを見る";b.classList.toggle("on",on);'
+    + 's.querySelectorAll(".qsec").forEach(function(q){q.classList.toggle("showans",on);});}'
+    + '<\/script></body></html>';
+
+  const w = window.open('', '_blank');
+  if(!w){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
+  w.document.open(); w.document.write(html); w.document.close();
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
