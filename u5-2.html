@@ -435,16 +435,23 @@
     .gauge .cap{width:7px;} .gauge .pct{font-size:8px;}
   }
 
-  /* ===== v2: パートごとのタイマー ===== */
-  .tmr{display:inline-flex;align-items:center;gap:5px;
-    background:#fff;border:2px solid #AEC4DE;border-radius:8px;
-    padding:4px 10px;margin-right:7px;
-    font-family:"Lexend",sans-serif;font-weight:600;font-size:10.5pt;
-    color:#5A6A7E;}
-  .tmr .tic{width:13px;height:13px;flex:none;color:#8CA3BE;}
-  .tmr.on{border-color:var(--key);background:#EEF4FC;color:var(--key);}
-  .tmr.on .tic{color:var(--key);}
-  @media print{.tmr{display:none;}}
+  /* ===== v2: アナログタイマー（30分で一周／セット全体の時間） ===== */
+  .clock{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:9px;}
+  .clock .cl{width:34px;height:34px;display:block;}
+  .clock .cf{fill:#fff;stroke:var(--key);stroke-width:2.4;}
+  .clock .cp{fill:rgba(31,78,156,.22);}
+  .clock .ct{stroke:var(--key);stroke-width:1.5;opacity:.55;}
+  .clock .ch{stroke:var(--key);stroke-width:2;stroke-linecap:round;}
+  .clock .cc{fill:var(--key);}
+  .clock .cm{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:var(--key);line-height:1;}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:rgba(181,39,63,.22);}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+  @media (max-width:560px){ .clock .cl{width:26px;height:26px;} .clock .cm{font-size:8px;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -472,10 +479,25 @@
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
+  <div class="clock" id="clock">
+    <svg class="cl" viewBox="0 0 40 40">
+      <circle class="cf" cx="20" cy="20" r="17"/>
+      <path class="cp" id="cpie" d=""/>
+      <g class="ct">
+        <line x1="20" y1="4.4" x2="20" y2="7.4"/>
+        <line x1="35.6" y1="20" x2="32.6" y2="20"/>
+        <line x1="20" y1="35.6" x2="20" y2="32.6"/>
+        <line x1="4.4" y1="20" x2="7.4" y2="20"/>
+      </g>
+      <line class="ch" id="chand" x1="20" y1="20" x2="20" y2="6.5"/>
+      <circle class="cc" cx="20" cy="20" r="2.1"/>
+    </svg>
+    <div class="cm" id="cmin">0分</div>
+  </div>
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -627,7 +649,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -708,7 +730,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -753,7 +775,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -953,36 +975,41 @@ function toggleQz(btn){
   update();
 })();
 
-// ===== v2: パートごとのタイマー（表示中のページの時間を数える） =====
-(function partTimer(){
-  const sheets = [...document.querySelectorAll('.sheet')];
-  if(!sheets.length) return;
-  const secs = sheets.map(() => 0);
-  function fmt(s){
-    const m = Math.floor(s / 60), r = s % 60;
-    return m + ':' + String(r).padStart(2, '0');
+// ===== v2: アナログタイマー（30分で一周。セット全体の時間を計る） =====
+(function setTimer(){
+  const box  = document.getElementById('clock');
+  const pie  = document.getElementById('cpie');
+  const hand = document.getElementById('chand');
+  const lab  = document.getElementById('cmin');
+  if(!box) return;
+  const FULL = 30 * 60;           // 30分で一周
+  const KEY  = 'hwg_timer_' + location.pathname;
+  let sec = 0;
+  try{ sec = parseInt(sessionStorage.getItem(KEY) || '0', 10) || 0; }catch(e){}
+
+  function sector(a){             // 12時から時計回りに a 度ぶんの扇形
+    if(a <= 0) return '';
+    if(a >= 359.9) a = 359.9;
+    const r = 17, c = 20, rad = a * Math.PI / 180;
+    const x = c + r * Math.sin(rad), y = c - r * Math.cos(rad);
+    return 'M' + c + ',' + c + ' L' + c + ',' + (c - r) +
+           ' A' + r + ',' + r + ' 0 ' + (a > 180 ? 1 : 0) + ',1 ' +
+           x.toFixed(2) + ',' + y.toFixed(2) + ' Z';
   }
-  function activeIndex(){
-    const vh = window.innerHeight;
-    let best = -1, bestArea = 0;
-    sheets.forEach((s, i) => {
-      const b = s.getBoundingClientRect();
-      const area = Math.max(0, Math.min(b.bottom, vh) - Math.max(b.top, 0));
-      if(area > bestArea){ bestArea = area; best = i; }
-    });
-    return bestArea > 40 ? best : -1;
+  function draw(){
+    const t = Math.min(sec, FULL);
+    const a = t / FULL * 360;
+    pie.setAttribute('d', sector(a));
+    hand.setAttribute('transform', 'rotate(' + (sec / FULL * 360) % 360 + ',20,20)');
+    lab.textContent = Math.floor(sec / 60) + '分';
+    box.classList.toggle('over', sec >= FULL);
   }
+  draw();
   setInterval(() => {
-    const i = activeIndex();
-    sheets.forEach((s, k) => {
-      const t = s.querySelector('.tmr');
-      if(!t) return;
-      t.classList.toggle('on', k === i);
-    });
-    if(i < 0 || document.hidden) return;
-    secs[i]++;
-    const t = sheets[i].querySelector('.tv');
-    if(t) t.textContent = fmt(secs[i]);
+    if(document.hidden) return;
+    sec++;
+    try{ sessionStorage.setItem(KEY, String(sec)); }catch(e){}
+    draw();
   }, 1000);
 })();
 
