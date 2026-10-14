@@ -395,6 +395,57 @@
   .sheet.showkana .faint, .sheet.showkana .ribbon, .sheet.showkana .heart p,
   .sheet.showkana .keychips, .sheet.showkana .blk .w, .sheet.showkana .sec em{
     line-height:2.1;}
+
+  /* ===== v2: 濃い背景の上のカタカナは白く ===== */
+  .hero ruby.rb rt,
+  .heart ruby.rb rt,
+  .blocks .blk.fill ruby.rb rt,
+  .judge .ttl ruby.rb rt,
+  .chip ruby.rb rt,
+  .exlab ruby.rb rt,
+  .abtn ruby.rb rt,
+  .sbtn.on ruby.rb rt,
+  .qzb.on ruby.rb rt{
+    color:#FFFFFF; -webkit-text-fill-color:#FFFFFF;
+    text-shadow:0 0 2px rgba(0,0,0,.45);}
+  /* 色つきの枠の中（判定ボックスのタイトル）は少し濃いめの影で読みやすく */
+  .judge .ttl ruby.rb rt{text-shadow:0 0 3px rgba(0,0,0,.6);}
+
+  /* ===== v2: 表のことばの鉛筆マーク ===== */
+  table.kind td.k .pn{width:13px;height:13px;color:#C88A16;
+    vertical-align:-2px;margin-right:5px;flex:none;}
+
+  /* ===== v2: エネルギーゲージ（乾電池） ===== */
+  .gauge{position:fixed;left:7px;top:50%;transform:translateY(-50%);z-index:60;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    pointer-events:none;user-select:none;}
+  .gauge .cap{width:9px;height:4px;background:#C2185B;border-radius:2px 2px 0 0;}
+  .gauge .body{width:19px;height:72px;border:2px solid #C2185B;border-radius:4px;
+    background:#fff;padding:2px;display:flex;flex-direction:column-reverse;
+    overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14);}
+  .gauge .fill{width:100%;height:0%;border-radius:2px;
+    background:repeating-linear-gradient(to top,
+      #FF6B8A 0, #FF6B8A 5.4px, #E0447A 5.4px, #E0447A 6.8px);
+    transition:height .3s ease;}
+  .gauge .pct{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:#C2185B;line-height:1;}
+  @media print{.gauge{display:none;}}
+  @media (max-width:560px){
+    .gauge{left:1px;} .gauge .body{width:14px;height:54px;}
+    .gauge .cap{width:7px;} .gauge .pct{font-size:8px;}
+  }
+
+  /* ===== v2: パートごとのタイマー ===== */
+  .tmr{display:inline-flex;align-items:center;gap:5px;
+    background:#fff;border:2px solid #AEC4DE;border-radius:8px;
+    padding:4px 10px;margin-right:7px;
+    font-family:"Lexend",sans-serif;font-weight:600;font-size:10.5pt;
+    color:#5A6A7E;}
+  .tmr .tic{width:13px;height:13px;flex:none;color:#8CA3BE;}
+  .tmr.on{border-color:var(--key);background:#EEF4FC;color:var(--key);}
+  .tmr.on .tic{color:var(--key);}
+  @media print{.tmr{display:none;}}
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -412,12 +463,19 @@
     <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor"/><circle cx="15" cy="10" r="1.3" fill="currentColor"/><path d="M8 14.5c1 1.4 2.3 2.1 4 2.1s3-.7 4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.3l3.4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 
 
+<div class="gauge" aria-hidden="true">
+  <div class="cap"></div>
+  <div class="body"><div class="fill" id="gfill"></div></div>
+  <div class="pct" id="gpct">0%</div>
+</div>
+
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -459,6 +517,10 @@
     </table>
     <p class="talk">見分け方は今までと同じ。<br>　<b>動作のことばがあるかどうか</b>です。<br>　<span class="en">play・live・study</span> があれば <span class="en">do you</span> を使います。</p>
     <p class="talk"><span class="en">Where is</span> は <span class="en">Where&#39;s</span> と短くできます。<br>　<span class="en">Who&#39;s</span> と同じしくみです。</p>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>2つの形 <span class="en">Where is ～? / Where do you ～?</span> を3回ずつ書き写そう！</div>
+    </div>
   </div>
 
   <div class="blk-sec">
@@ -494,15 +556,19 @@
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">4</span>場所を表すことば</h3>
     <p class="talk">答えるときは、<b>場所を表すことば</b>を使います。<br>　よく使う4つをおぼえましょう。</p>
-    <table class="kind">
+    <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
       <tbody>
-        <tr><td class="k"><span class="en">in</span></td><td class="k">～の中に</td><td class="e">It&#39;s <u>in</u> my bag.</td></tr>
-        <tr><td class="k"><span class="en">on</span></td><td class="k">～の上に</td><td class="e">It&#39;s <u>on</u> the desk.</td></tr>
-        <tr><td class="k"><span class="en">under</span></td><td class="k">～の下に</td><td class="e">It&#39;s <u>under</u> the table.</td></tr>
-        <tr><td class="k"><span class="en">near</span></td><td class="k">～の近くに</td><td class="e">It&#39;s <u>near</u> the station.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">in</span></td><td class="k">～の中に</td><td class="e">It&#39;s <u>in</u> my bag.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">on</span></td><td class="k">～の上に</td><td class="e">It&#39;s <u>on</u> the desk.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">under</span></td><td class="k">～の下に</td><td class="e">It&#39;s <u>under</u> the table.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">near</span></td><td class="k">～の近くに</td><td class="e">It&#39;s <u>near</u> the station.</td></tr>
       </tbody>
     </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>場所のことば <span class="en">in / on / under / near</span> を3回ずつ書き写そう！</div>
+    </div>
     <p class="talk">答えの主語は <b><span class="en">it</span></b>（それ）。<br>　<span class="en">Where is my bag?</span> → <span class="en">It&#39;s on the desk.</span> のように言います。</p>
   </div>
 
@@ -561,7 +627,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -642,7 +708,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -687,7 +753,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><div class="tmr"><svg class="tic"><use href="#i-clock"/></svg><span class="tv">0:00</span></div><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -758,12 +824,52 @@ const KANA = {
   "fast":"ファスト","well":"ウェル","not":"ノット","do":"ドゥー","don't":"ドウント",
   "where":"ウェア","is":"イズ","do":"ドゥー","in":"イン","on":"オン","under":"アンダー","near":"ニア","my":"マイ","your":"ユア","bag":"バッグ","desk":"デスク","table":"テイブル","room":"ルーム","school":"スクール","library":"ライブラリィ","park":"パーク","station":"ステイション","live":"リヴ","play":"プレイ","study":"スタディ","it's":"イッツ","it":"イット","the":"ザ","cat":"キャット",
   "spring":"スプリング","natto":"ナットウ","fish":"フィッシュ","milk":"ミルク",
-  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ"
+  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ",
+  // ===== v2: 共通語の追加 =====
+  "you":"ユー","your":"ユア","yes":"イエス","no":"ノウ","what":"ワット",
+  "who":"フー","where":"ウェア","when":"ウェン","how":"ハウ","why":"ワイ",
+  "where's":"ウェアズ","when's":"ウェンズ","who's":"フーズ","what's":"ワッツ",
+  "it's":"イッツ","he's":"ヒーズ","she's":"シーズ","you're":"ユア","that's":"ザッツ",
+  "let's":"レッツ","isn't":"イズント","aren't":"アーント","wasn't":"ワズント",
+  "weren't":"ワーント","doesn't":"ダズント","didn't":"ディドゥント","can't":"キャント",
+  "cannot":"キャナット","does":"ダズ","did":"ディッド","was":"ワズ","were":"ワー",
+  "he":"ヒー","she":"シー","it":"イット","we":"ウィー","they":"ゼイ","this":"ズィス",
+  "that":"ザット","these":"ズィーズ","those":"ゾウズ","there":"ゼア","here":"ヒア",
+  "in":"イン","on":"オン","at":"アット","to":"トゥ","of":"オヴ","and":"アンド",
+  "or":"オア","but":"バット","under":"アンダー","near":"ニア","by":"バイ","with":"ウィズ",
+  "for":"フォー","after":"アフター","before":"ビフォー","every":"エヴリィ","day":"デイ",
+  "now":"ナウ","then":"ゼン","yesterday":"イエスタデイ","tomorrow":"トゥモロウ",
+  "last":"ラスト","next":"ネクスト","week":"ウィーク","night":"ナイト","morning":"モーニング",
+  "eat":"イート","ate":"エイト","go":"ゴウ","went":"ウェント","see":"スィー","saw":"ソー",
+  "get":"ゲット","got":"ガット","make":"メイク","made":"メイド","had":"ハッド","has":"ハズ",
+  "study":"スタディ","studies":"スタディーズ","studied":"スタディド","live":"リヴ","lives":"リヴズ",
+  "cook":"クック","sing":"スィング","swim":"スウィム","dance":"ダンス","read":"リード",
+  "write":"ライト","speak":"スピーク","want":"ウォント","help":"ヘルプ","open":"オウプン",
+  "close":"クロウズ","look":"ルック","listen":"リスン","come":"カム","take":"テイク",
+  "jump":"ジャンプ","walk":"ウォーク","talk":"トーク","practice":"プラクティス",
+  "visit":"ヴィズィット","enjoy":"エンジョイ","stop":"スタップ","sit":"シット","stand":"スタンド",
+  "bag":"バッグ","desk":"デスク","table":"テイブル","room":"ルーム","school":"スクール",
+  "library":"ライブラリィ","park":"パーク","station":"ステイション","home":"ホウム",
+  "book":"ブック","books":"ブックス","pen":"ペン","cap":"キャップ","bike":"バイク",
+  "lunch":"ランチ","dinner":"ディナー","breakfast":"ブレックファスト","rice":"ライス",
+  "sushi":"スーシ","water":"ウォーター","picture":"ピクチャ","guitar":"ギター",
+  "piano":"ピアノ","math":"マス","science":"サイエンス","subject":"サブジェクト",
+  "color":"カラー","sport":"スポート","sports":"スポーツ","food":"フード",
+  "friend":"フレンド","brother":"ブラザー","sister":"スィスター","father":"ファーザー",
+  "mother":"マザー","teacher":"ティーチャー","doctor":"ダクター","singer":"スィンガー",
+  "girl":"ガール","boy":"ボイ","man":"マン","woman":"ウーマン","birthday":"バースデイ",
+  "kind":"カインド","tall":"トール","nice":"ナイス","cute":"キュート","busy":"ビズィ",
+  "tired":"タイアド","free":"フリー","sick":"スィック","sleepy":"スリーピィ","fun":"ファン",
+  "good":"グッド","well":"ウェル","high":"ハイ","please":"プリーズ","together":"トゥゲザー",
+  "monday":"マンデイ","sunday":"サンデイ","saturday":"サタデイ","summer":"サマー",
+  "winter":"ウィンター","august":"オーガスト","july":"ジュライ","america":"アメリカ",
+  "paris":"パリス","tokyo":"トウキョウ","kyoto":"キョウト","mike":"マイク","emma":"エマ",
+  "saki":"サキ","six":"スィックス","seven":"セヴン","five":"ファイヴ","ten":"テン"
 };
 
 // ===== 英単語にカタカナを付ける =====
 (function attachKana(){
-  const SEL = '.en, .exline .s, .judge .ex, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
   document.querySelectorAll(SEL).forEach(el=>{
     if(el.dataset.kanaDone) return;
     if(el.closest('.bad, .xm, .x, s')) return;   // ✕ の誤答例にはカタカナを付けない
@@ -826,6 +932,60 @@ function toggleQz(btn){
   btn.textContent = on ? 'とじる' : '答え';
   btn.classList.toggle('on', on);
 }
+// ===== v2: エネルギーゲージ（進んだ量を乾電池で表す） =====
+(function energyGauge(){
+  const fill = document.getElementById('gfill');
+  const pct  = document.getElementById('gpct');
+  if(!fill) return;
+  let shown = -1;
+  function update(){
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const r = max > 0 ? window.scrollY / max : 0;
+    const p = Math.max(0, Math.min(100, Math.round(r * 10) * 10));
+    if(p === shown) return;
+    shown = p;
+    fill.style.height = p + '%';
+    pct.textContent = p + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// ===== v2: パートごとのタイマー（表示中のページの時間を数える） =====
+(function partTimer(){
+  const sheets = [...document.querySelectorAll('.sheet')];
+  if(!sheets.length) return;
+  const secs = sheets.map(() => 0);
+  function fmt(s){
+    const m = Math.floor(s / 60), r = s % 60;
+    return m + ':' + String(r).padStart(2, '0');
+  }
+  function activeIndex(){
+    const vh = window.innerHeight;
+    let best = -1, bestArea = 0;
+    sheets.forEach((s, i) => {
+      const b = s.getBoundingClientRect();
+      const area = Math.max(0, Math.min(b.bottom, vh) - Math.max(b.top, 0));
+      if(area > bestArea){ bestArea = area; best = i; }
+    });
+    return bestArea > 40 ? best : -1;
+  }
+  setInterval(() => {
+    const i = activeIndex();
+    sheets.forEach((s, k) => {
+      const t = s.querySelector('.tmr');
+      if(!t) return;
+      t.classList.toggle('on', k === i);
+    });
+    if(i < 0 || document.hidden) return;
+    secs[i]++;
+    const t = sheets[i].querySelector('.tv');
+    if(t) t.textContent = fmt(secs[i]);
+  }, 1000);
+})();
+
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
   const on = w.classList.toggle('open');
