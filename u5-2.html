@@ -518,6 +518,26 @@
   .rmsg{font-size:10pt;color:var(--ng);flex-basis:100%;text-align:right;}
   @media print{.retrybar{display:none;}}
 
+
+  /* ===== v5: 英語を押すと読み上げ ===== */
+  .sp{cursor:pointer;border-radius:3px;transition:background .12s;}
+  .sp:hover{background:#E6F0FF;box-shadow:0 0 0 2px #E6F0FF;}
+  .sp.playing{background:#FFE9A8 !important;box-shadow:0 0 0 2px #FFE9A8;}
+  .hero .sp:hover, .heart .sp:hover, .judge .ttl .sp:hover,
+  .blocks .blk.fill .sp:hover{background:rgba(255,255,255,.26);
+    box-shadow:0 0 0 2px rgba(255,255,255,.26);}
+  .hero .sp.playing, .heart .sp.playing, .judge .ttl .sp.playing,
+  .blocks .blk.fill .sp.playing{background:rgba(255,220,120,.45) !important;
+    box-shadow:0 0 0 2px rgba(255,220,120,.45);}
+  .spnote{font-size:9pt;color:#5A7FA8;display:inline-flex;align-items:center;gap:4px;}
+  .spnote svg{width:13px;height:13px;color:#5A7FA8;}
+  .spbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #AEC4DE;border-radius:6px;padding:1px 9px;cursor:pointer;
+    background:#F4F8FD;color:#4A7FB5;line-height:1.5;flex:none;}
+  .spbtn:hover{border-color:#5E9BE0;}
+  .spbtn.on{background:var(--key);border-color:var(--key);color:#fff;}
+  @media print{.spnote,.spbtn{display:none;} .sp{cursor:auto;}}
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -536,6 +556,7 @@
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.3l3.4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.5v13L7.4 14.5H4z" fill="currentColor"/><path d="M15.4 9.2a4 4 0 0 1 0 5.6M18 6.6a7.6 7.6 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
@@ -562,7 +583,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -714,7 +735,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -795,7 +816,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -840,7 +861,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
@@ -1174,6 +1195,7 @@ function makeRetry(){
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
     + '<script>'
+    + 'var SV=null;function pv(){var vs=speechSynthesis.getVoices();SV=vs.filter(function(v){return /^en/i.test(v.lang);})[0]||null;}if(window.speechSynthesis){pv();speechSynthesis.addEventListener("voiceschanged",pv);document.addEventListener("click",function(e){var el=e.target.closest(".sp");if(!el)return;var c=el.cloneNode(true);c.querySelectorAll("rt").forEach(function(x){x.remove();});if(!el.closest(".showans"))c.querySelectorAll(".ansfill,.fill2,.ansmark").forEach(function(x){x.remove();});var t=c.textContent.replace(/[()（）]/g," ").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim();if(!t||!/[A-Za-z]/.test(t))return;speechSynthesis.cancel();el.classList.add("playing");var u=new SpeechSynthesisUtterance(t);u.lang=(SV&&SV.lang)||"en-US";if(SV)u.voice=SV;u.rate=0.9;u.onend=u.onerror=function(){el.classList.remove("playing");};speechSynthesis.speak(u);});}'
     + 'function tk(b){var s=b.closest(".sheet");var on=s.classList.toggle("showkana");'
     + 'b.textContent=on?"カタカナを消す":"カタカナ";b.classList.toggle("on",on);}'
     + 'function ta(b){var s=b.closest(".sheet");var on=s.classList.toggle("showans");'
@@ -1185,6 +1207,80 @@ function makeRetry(){
   if(!w){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
   w.document.open(); w.document.write(html); w.document.close();
 }
+
+// ===== v5: 英語を押すと読み上げる（Web Speech API） =====
+const SPEECH = {slow:false, voice:null, el:null};
+
+function toggleSlow(btn){
+  SPEECH.slow = !SPEECH.slow;
+  document.querySelectorAll('.spbtn').forEach(b => {
+    b.classList.toggle('on', SPEECH.slow);
+    b.textContent = SPEECH.slow ? 'ふつうの速さ' : 'ゆっくり';
+  });
+}
+
+(function initSpeech(){
+  if(!('speechSynthesis' in window)){
+    document.querySelectorAll('.spnote, .spbtn').forEach(e => e.remove());
+    return;
+  }
+  function pickVoice(){
+    const vs = speechSynthesis.getVoices();
+    SPEECH.voice = vs.find(v => /^en[-_]US/i.test(v.lang))
+                || vs.find(v => /^en[-_]GB/i.test(v.lang))
+                || vs.find(v => /^en/i.test(v.lang)) || null;
+  }
+  pickVoice();
+  speechSynthesis.addEventListener('voiceschanged', pickVoice);
+
+  // 読み上げ対象に .sp を付ける（まちがいの例ははずす）
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, '
+            + '.hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el => {
+    if(el.closest('.bad, .xm, .x, s, .qzq')) return;
+    if(el.closest('.hbtn, .kbtn, .ksm, .abtn, .sbtn, .qzb, .rbtn, .spbtn')) return;
+    el.classList.add('sp');
+  });
+
+  function textOf(el){
+    const c = el.cloneNode(true);
+    c.querySelectorAll('rt').forEach(x => x.remove());          // カタカナは読まない
+    c.querySelectorAll('br').forEach(b => b.replaceWith(document.createTextNode('. ')));
+    // 答えが隠れているときは、答えを読み上げない
+    if(!el.closest('.showans')){
+      c.querySelectorAll('.ansfill, .fill2, .ansmark').forEach(x => x.remove());
+    }
+    let t = c.textContent;
+    t = t.replace(/[（）()]/g, ' ')
+         .replace(/[／]/g, ' , ')
+         .replace(/[～〜]/g, ' ')
+         .replace(/[‘’]/g, "'")
+         .replace(/[^\x20-\x7E]/g, ' ')       // 日本語は読まない
+         .replace(/\s*,\s*,+/g, ' , ')
+         .replace(/\s+/g, ' ')
+         .trim();
+    return t;
+  }
+
+  document.addEventListener('click', e => {
+    const el = e.target.closest('.sp');
+    if(!el) return;
+    const t = textOf(el);
+    if(!t || !/[A-Za-z]/.test(t)) return;
+    try{ speechSynthesis.cancel(); }catch(err){}
+    if(SPEECH.el) SPEECH.el.classList.remove('playing');
+    SPEECH.el = el;
+    el.classList.add('playing');
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = (SPEECH.voice && SPEECH.voice.lang) || 'en-US';
+    if(SPEECH.voice) u.voice = SPEECH.voice;
+    u.rate = SPEECH.slow ? 0.6 : 0.9;
+    u.pitch = 1;
+    u.onend = u.onerror = () => { el.classList.remove('playing'); };
+    try{ speechSynthesis.speak(u); }
+    catch(err){ el.classList.remove('playing'); }
+  });
+})();
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
