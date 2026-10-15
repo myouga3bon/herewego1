@@ -538,6 +538,15 @@
   .spbtn.on{background:var(--key);border-color:var(--key);color:#fff;}
   @media print{.spnote,.spbtn{display:none;} .sp{cursor:auto;}}
 
+
+  /* ===== v6: 2列の問題は縦順（左に1〜、右に続き） ===== */
+  .grid2.vcol{display:block;column-count:2;column-gap:20px;}
+  .grid2.vcol > div{width:auto;display:block;
+    break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;}
+  /* ===== v6: 選択肢つきの長い問題は1問1行 ===== */
+  .grid2.one{display:block;}
+  .grid2.one > div{width:auto;display:block;padding:3px 0;}
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -759,7 +768,7 @@
   <div class="qsec">
   <h3 class="sec sec2" style="border-left-color:#D98400;">B　<span class="en">is</span>？ それとも <span class="en">do you</span>？<em>（　）に入るものを書こう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint">ここが<b>いちばん大事</b>。<b>動作のことばがあるか</b>だけを見ましょう。</div>
-  <div class="grid2">
+  <div class="grid2 vcol">
     <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span></div>
     <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）play soccer?</span></div>
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）your school?</span></div>
@@ -777,7 +786,7 @@
 
   <div class="qsec">
   <h3 class="sec sec2" style="border-left-color:#D98400;">C　正しい文には ○、まちがっている文には ✕ を書こう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-  <div class="grid2">
+  <div class="grid2 vcol">
     <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Where is my bag?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Where my bag is?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Where do you live?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
@@ -794,7 +803,7 @@
   <div class="qsec">
   <h3 class="sec sec2">D　答え方　正しいほうを選ぼう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint"><span class="en">Where</span> なら<b>場所</b>。<span class="en">Is</span>・<span class="en">Do</span> なら <span class="en">Yes / No</span>。</div>
-  <div class="grid2">
+  <div class="grid2 one">
     <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Where is my bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Is this your bag?</span>　—（ア <span class="en">It&#39;s on the desk.</span> ／イ <span class="en">Yes, it is.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Where do you live?</span>　—（ア <span class="en">Yes, I do.</span> ／イ <span class="en">I live in Nagano.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
