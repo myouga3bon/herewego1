@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 3 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.78〜79</div>
@@ -657,7 +676,7 @@
     <p class="talk"><span class="en">after school</span>（放課後）、<span class="en">after dinner</span>（夕食のあと）のように、<span class="en">after</span> を使う言い方もよく出ます。</p>
   </div>
 
-  <div class="blk-sec">
+  <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>かなり大事｜4つのたずねことばの整理<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　ここまでに<b>4つのたずねことば</b>を習いました。<br>　答え方はぜんぶ同じで、<b>中身で答える</b>です。</p>
     <table class="kind">
@@ -685,7 +704,7 @@
     <p class="talk"><span class="en">What・Who・Where・When</span> はぜんぶ <span class="en">W</span> で始まります。<br>　<b>「<span class="en">W</span> なら中身」</b>とおぼえておけば迷いません。</p>
   </div>
 
-  <div class="blk-sec">
+  <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">5</span><span class="en">When</span> と <span class="en">Where</span> を混ぜない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">形がにていて、スペルも1字しかちがわないので、混ぜる人がとても多いところです。</p>
     <div class="eqbox" style="border-left-color:#D98400;background:rgba(217,132,0,.07);">
@@ -695,6 +714,7 @@
     <p class="talk"><span class="en">When</span> に <b><span class="en">n</span></b>、<span class="en">Where</span> に <b><span class="en">r</span></b>。<br>　日本語の「<b>いつ</b>」「<b>どこ</b>」と結びつけて声に出しておぼえましょう。</p>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1285,6 +1305,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');

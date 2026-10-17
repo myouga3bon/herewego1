@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 1 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.74〜75</div>
@@ -644,7 +663,24 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>「～しないで」は <span class="en">Don&#39;t</span> を前に置く<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">命令文は <b>主語を書かずに、もとの形で始めます</b>。<br>　<span class="en">You</span> を前に置かないのがポイントです。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Look</span></td><td class="k">見て（もとの形で始める）</td><td class="e"><u>Look</u> at this.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Don&#39;t</span></td><td class="k">～しないで</td><td class="e"><u>Don&#39;t</u> run here.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Let&#39;s</span></td><td class="k">～しましょう</td><td class="e"><u>Let&#39;s</u> go.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">Look</span> ・ <span class="en">Don&#39;t</span> ・ <span class="en">Let&#39;s</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>「～しないで」は <span class="en">Don&#39;t</span> を前に置く<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">やめてほしいことを言うときは、<b>文の前に <span class="en">Don&#39;t</span> を置く</b>だけ。<br>　うしろは そのままです。</p>
     <table class="kind">
       <thead><tr><th>意味</th><th>たのむ文</th><th>やめてもらう文</th></tr></thead>
@@ -657,8 +693,8 @@
     <p class="talk">1-2 で習った <span class="en">don&#39;t</span> と同じことばですが、<b>命令文では文のいちばん前</b>に来ます。<br>　<span class="en">I don&#39;t ～.</span> のときは <span class="en">I</span> のうしろでしたね。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>「～しましょう」は <span class="en">Let&#39;s</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span>「～しましょう」は <span class="en">Let&#39;s</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">相手をさそうときは <b><span class="en">Let&#39;s</span></b> を前に置きます。<br>　「いっしょに～しよう」という意味になります。</p>
     <div class="eqbox" style="border-left-color:#7A4FBF;background:rgba(122,79,191,.07);">
       <span class="eq" style="color:#7A4FBF;">Let&#39;s go.</span>（行きましょう）　<span class="eq" style="color:#7A4FBF;">Let&#39;s play soccer.</span>（サッカーをしましょう）<br>
@@ -667,8 +703,8 @@
     <p class="talk">答えるときは <span class="en">Yes, let&#39;s.</span>（そうしましょう）や <span class="en">OK.</span>、<span class="en">Sure.</span> などを使います。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span>3つの形をくらべる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span>3つの形をくらべる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">どれも<b>主語をつけず、うしろは もとの形</b>。<br>　ちがうのは<b>先頭のことば</b>だけです。</p>
     <div class="judge">
       <div class="col yes">
@@ -699,23 +735,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">命令文は <b>主語を書かずに、もとの形で始めます</b>。<br>　<span class="en">You</span> を前に置かないのがポイントです。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Look</span></td><td class="k">見て（もとの形で始める）</td><td class="e"><u>Look</u> at this.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Don&#39;t</span></td><td class="k">～しないで</td><td class="e"><u>Don&#39;t</u> run here.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Let&#39;s</span></td><td class="k">～しましょう</td><td class="e"><u>Let&#39;s</u> go.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">Look</span> ・ <span class="en">Don&#39;t</span> ・ <span class="en">Let&#39;s</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1306,6 +1328,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
