@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 1 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.28〜29</div>
@@ -642,63 +661,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>うしろには、この5つが入る<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「うしろに何を書けばいいか分からない」という人へ。<br>　入るものは、だいたい<b>次の5種類だけ</b>です。<br>　作文で手が止まったら、上から順にためしてみましょう。</p>
-    <table class="kind">
-      <thead><tr><th>なにを言う？</th><th>れい文</th><th>意味</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="ic"><use href="#i-tag"/></svg>名前</td><td class="e">I&#39;m <u>Eri</u>.</td><td class="j">わたしはエリです。</td></tr>
-        <tr><td class="k"><svg class="ic"><use href="#i-bag"/></svg>しごと・身分</td><td class="e">I&#39;m <u>a student</u>.</td><td class="j">わたしは生徒です。</td></tr>
-        <tr><td class="k"><svg class="ic"><use href="#i-globe"/></svg>出身<span style="font-weight:400;color:var(--mut);font-size:9.5pt;">（from ～）</span></td><td class="e">I&#39;m <u>from Japan</u>.</td><td class="j">わたしは日本出身です。</td></tr>
-        <tr><td class="k"><svg class="ic"><use href="#i-cake"/></svg>年れい</td><td class="e">I&#39;m <u>thirteen</u>.</td><td class="j">わたしは13歳です。</td></tr>
-        <tr><td class="k"><svg class="ic"><use href="#i-smile"/></svg>気もち・ようす</td><td class="e">I&#39;m <u>happy</u>.</td><td class="j">わたしはうれしいです。</td></tr>
-      </tbody>
-    </table>
-    <p class="talk">「名前は？ しごとは？ 出身は？ 年れいは？ 今の気もちは？」と<b>自分に聞いていく</b>と、書くことがかならず見つかります。</p>
-  </div>
-
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>書くときの3つのルール<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><b>① <span class="en">I</span> はいつでも大文字。</b>文のとちゅうにあっても、かならず大文字で書きます。<br>　英語でこんな決まりがあるのは <span class="en">I</span> だけです。</p>
-    <p class="talk"><b>② <span class="en">I am</span> は <span class="en">I&#39;m</span> と短くできる。</b><span class="en">a</span> が消えて、かわりに <b>&#39;（アポストロフィ）</b>が入ります。<br>　教科書の会話ではほとんどこちらが使われます。<br>　<span class="en">Im</span> と書くとバツになるので、点の位置に注意。</p>
-    <p class="talk"><b>③ 「1人・1つ」には <span class="en">a</span> をつける。</b><span class="en">student</span>（生徒）や <span class="en">fan</span>（ファン）のように、数えられるものが1つのときは前に <span class="en">a</span> が必要です。<br>　日本語にはないルールなので、いちばん忘れやすいところ。<br>　ただし<b>名前・地名・気もち</b>にはつけません（<span class="en">a Eri</span> や <span class="en">a happy</span> とは言いません）。</p>
-  </div>
-
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span>かなり大事｜am を使う文・使わない文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">英語の文には<b>2つのタイプ</b>があって、<span class="en">am</span> を使うのは<b>片方だけ</b>です。</p>
-    <div class="judge">
-      <div class="col yes">
-        <div class="ttl"><svg class="ic-l"><use href="#i-person"/></svg>
-          <span>◯ am を使う<small>「わたしは <u>どんな人か</u>」を言うとき</small></span></div>
-        <div class="in"><div class="ex">I am Eri.<br>I am a student.<br>I am happy.</div>
-          <div class="memo">立ち止まって、じぶんを<b>しょうかい</b>している感じ。</div></div>
-      </div>
-      <div class="col no">
-        <div class="ttl"><svg class="ic-l"><use href="#i-run"/></svg>
-          <span>✕ am を使わない<small>「わたしは <u>なにをするか</u>」を言うとき</small></span></div>
-        <div class="in"><div class="ex">I play soccer.<br>I like dogs.<br>I have a dog.</div>
-          <div class="memo">体や心が<b>うごいている</b>感じ。<span class="en">play・like・have</span>＝動作のことば。</div></div>
-      </div>
-    </div>
-    <div class="heart">
-      <div class="hearts">
-        <svg class="hb beat"><use href="#i-heart"/></svg>
-        <span class="or">か</span>
-        <svg class="hp beat"><use href="#i-heart"/></svg>
-      </div>
-      <div class="txt">
-        <div class="h">合言葉：心臓（動詞）は 青かピンクの どちらか1つ</div>
-        <p><b class="cb">青＝<span class="en">am</span></b>　<b class="cp">ピンク＝<span class="en">play・like・have</span></b>　
-        青を使ったらピンクは使いません。<b>1つの文に心臓は1つだけ。</b><br>
-        <span class="xm">✕ I am play soccer ✕</span>　<span class="xm">✕ I am like dogs ✕</span></p>
-      </div>
-    </div>
-  </div>
-
-<!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">この3つが書ければ、<span class="en">I am ～.</span> の文はつくれます。<br>　とくに <span class="en">a</span> を忘れる人がとても多いです。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -714,6 +677,7 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -752,7 +716,63 @@
   <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 1-1　I am ～.</span><span>1 / 4　文法わかる</span></div>
-</section>
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>うしろには、この5つが入る<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">「うしろに何を書けばいいか分からない」という人へ。<br>　入るものは、だいたい<b>次の5種類だけ</b>です。<br>　作文で手が止まったら、上から順にためしてみましょう。</p>
+    <table class="kind">
+      <thead><tr><th>なにを言う？</th><th>れい文</th><th>意味</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="ic"><use href="#i-tag"/></svg>名前</td><td class="e">I&#39;m <u>Eri</u>.</td><td class="j">わたしはエリです。</td></tr>
+        <tr><td class="k"><svg class="ic"><use href="#i-bag"/></svg>しごと・身分</td><td class="e">I&#39;m <u>a student</u>.</td><td class="j">わたしは生徒です。</td></tr>
+        <tr><td class="k"><svg class="ic"><use href="#i-globe"/></svg>出身<span style="font-weight:400;color:var(--mut);font-size:9.5pt;">（from ～）</span></td><td class="e">I&#39;m <u>from Japan</u>.</td><td class="j">わたしは日本出身です。</td></tr>
+        <tr><td class="k"><svg class="ic"><use href="#i-cake"/></svg>年れい</td><td class="e">I&#39;m <u>thirteen</u>.</td><td class="j">わたしは13歳です。</td></tr>
+        <tr><td class="k"><svg class="ic"><use href="#i-smile"/></svg>気もち・ようす</td><td class="e">I&#39;m <u>happy</u>.</td><td class="j">わたしはうれしいです。</td></tr>
+      </tbody>
+    </table>
+    <p class="talk">「名前は？ しごとは？ 出身は？ 年れいは？ 今の気もちは？」と<b>自分に聞いていく</b>と、書くことがかならず見つかります。</p>
+  </div>
+
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span>書くときの3つのルール<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><b>① <span class="en">I</span> はいつでも大文字。</b>文のとちゅうにあっても、かならず大文字で書きます。<br>　英語でこんな決まりがあるのは <span class="en">I</span> だけです。</p>
+    <p class="talk"><b>② <span class="en">I am</span> は <span class="en">I&#39;m</span> と短くできる。</b><span class="en">a</span> が消えて、かわりに <b>&#39;（アポストロフィ）</b>が入ります。<br>　教科書の会話ではほとんどこちらが使われます。<br>　<span class="en">Im</span> と書くとバツになるので、点の位置に注意。</p>
+    <p class="talk"><b>③ 「1人・1つ」には <span class="en">a</span> をつける。</b><span class="en">student</span>（生徒）や <span class="en">fan</span>（ファン）のように、数えられるものが1つのときは前に <span class="en">a</span> が必要です。<br>　日本語にはないルールなので、いちばん忘れやすいところ。<br>　ただし<b>名前・地名・気もち</b>にはつけません（<span class="en">a Eri</span> や <span class="en">a happy</span> とは言いません）。</p>
+  </div>
+
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span>かなり大事｜am を使う文・使わない文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">英語の文には<b>2つのタイプ</b>があって、<span class="en">am</span> を使うのは<b>片方だけ</b>です。</p>
+    <div class="judge">
+      <div class="col yes">
+        <div class="ttl"><svg class="ic-l"><use href="#i-person"/></svg>
+          <span>◯ am を使う<small>「わたしは <u>どんな人か</u>」を言うとき</small></span></div>
+        <div class="in"><div class="ex">I am Eri.<br>I am a student.<br>I am happy.</div>
+          <div class="memo">立ち止まって、じぶんを<b>しょうかい</b>している感じ。</div></div>
+      </div>
+      <div class="col no">
+        <div class="ttl"><svg class="ic-l"><use href="#i-run"/></svg>
+          <span>✕ am を使わない<small>「わたしは <u>なにをするか</u>」を言うとき</small></span></div>
+        <div class="in"><div class="ex">I play soccer.<br>I like dogs.<br>I have a dog.</div>
+          <div class="memo">体や心が<b>うごいている</b>感じ。<span class="en">play・like・have</span>＝動作のことば。</div></div>
+      </div>
+    </div>
+    <div class="heart">
+      <div class="hearts">
+        <svg class="hb beat"><use href="#i-heart"/></svg>
+        <span class="or">か</span>
+        <svg class="hp beat"><use href="#i-heart"/></svg>
+      </div>
+      <div class="txt">
+        <div class="h">合言葉：心臓（動詞）は 青かピンクの どちらか1つ</div>
+        <p><b class="cb">青＝<span class="en">am</span></b>　<b class="cp">ピンク＝<span class="en">play・like・have</span></b>　
+        青を使ったらピンクは使いません。<b>1つの文に心臓は1つだけ。</b><br>
+        <span class="xm">✕ I am play soccer ✕</span>　<span class="xm">✕ I am like dogs ✕</span></p>
+      </div>
+    </div>
+  </div>
+
+<!-- v8: 必須のことば -->
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
@@ -1303,6 +1323,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
