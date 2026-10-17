@@ -551,7 +551,7 @@
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
 
-  /* ===== v9: くわしく（④以降の折りたたみ） ===== */
+  /* ===== v10: シンプルに（基本ブロックだけ表示） ===== */
   .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
     border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
     background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
@@ -560,13 +560,13 @@
   .mbtn.on{background:var(--key);color:#fff;}
   .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
   .mbtn.on .cv{transform:rotate(180deg);}
-  .blk-sec.more{display:none;}
-  .showmore .blk-sec.more{display:block;}
-  .morehint{display:flex;align-items:center;gap:8px;margin:0 0 9px;
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
     border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
     background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
   .morehint b{color:var(--key);}
-  .showmore .morehint{display:none;}
+  .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
@@ -614,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">くわしく <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -663,7 +663,26 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かなり大事｜答えは場所。<span class="en">Yes / No</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>場所を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">答えるときは、<b>場所を表すことば</b>を使います。<br>　よく使う4つをおぼえましょう。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">in</span></td><td class="k">～の中に</td><td class="e">It&#39;s <u>in</u> my bag.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">on</span></td><td class="k">～の上に</td><td class="e">It&#39;s <u>on</u> the desk.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">under</span></td><td class="k">～の下に</td><td class="e">It&#39;s <u>under</u> the table.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">near</span></td><td class="k">～の近くに</td><td class="e">It&#39;s <u>near</u> the station.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>場所のことば <span class="en">in / on / under / near</span> を3回ずつ書き写そう！</div>
+    </div>
+    <p class="talk">答えの主語は <b><span class="en">it</span></b>（それ）。<br>　<span class="en">Where is my bag?</span> → <span class="en">It&#39;s on the desk.</span> のように言います。</p>
+  </div>
+
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>かなり大事｜答えは場所。<span class="en">Yes / No</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">Where</span> は「どこ？」と聞いているので、<b>場所を答えます</b>。<br>　<span class="en">What</span>・<span class="en">Who</span> と同じ考え方です。</p>
     <div class="judge">
       <div class="col yes">
@@ -693,25 +712,6 @@
   </div>
 
   <div class="blk-sec more">
-    <h3 class="st"><span class="stepnum">4</span>場所を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">答えるときは、<b>場所を表すことば</b>を使います。<br>　よく使う4つをおぼえましょう。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">in</span></td><td class="k">～の中に</td><td class="e">It&#39;s <u>in</u> my bag.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">on</span></td><td class="k">～の上に</td><td class="e">It&#39;s <u>on</u> the desk.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">under</span></td><td class="k">～の下に</td><td class="e">It&#39;s <u>under</u> the table.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">near</span></td><td class="k">～の近くに</td><td class="e">It&#39;s <u>near</u> the station.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div>場所のことば <span class="en">in / on / under / near</span> を3回ずつ書き写そう！</div>
-    </div>
-    <p class="talk">答えの主語は <b><span class="en">it</span></b>（それ）。<br>　<span class="en">Where is my bag?</span> → <span class="en">It&#39;s on the desk.</span> のように言います。</p>
-  </div>
-
-  <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">5</span><span class="en">Where do you ～?</span> の答え方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「どこで するのか」を聞かれたときは、<b>ふつうの文で答えます</b>。<br>　場所のことばを文の最後に置きます。</p>
     <div class="eqbox" style="border-left-color:var(--gv);background:rgba(194,24,91,.06);">
@@ -721,7 +721,7 @@
     <p class="talk">短く <span class="en">In the park.</span> だけでも答えになります。<br>　どちらでもよいです。</p>
   </div>
 
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>もっと知りたい人は、上の <b>「くわしく」</b> を押すとつづきが出ます。</div></div>
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1315,10 +1315,10 @@ function toggleSlow(btn){
 
 function toggleMore(btn){
   const s = btn.closest('.sheet');
-  const on = s.classList.toggle('showmore');
-  btn.firstChild.nodeValue = on ? 'かんたんに ' : 'くわしく ';
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
   btn.classList.toggle('on', on);
-  if(!on) s.scrollIntoView({behavior:'smooth', block:'start'});
+  s.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){
