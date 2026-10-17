@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v9: くわしく（④以降の折りたたみ） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:none;}
+  .showmore .blk-sec.more{display:block;}
+  .morehint{display:flex;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .showmore .morehint{display:none;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">くわしく <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -644,7 +663,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜答えは場所。<span class="en">Yes / No</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かなり大事｜答えは場所。<span class="en">Yes / No</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">Where</span> は「どこ？」と聞いているので、<b>場所を答えます</b>。<br>　<span class="en">What</span>・<span class="en">Who</span> と同じ考え方です。</p>
     <div class="judge">
       <div class="col yes">
@@ -673,7 +692,7 @@
     </div>
   </div>
 
-  <div class="blk-sec">
+  <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>場所を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">答えるときは、<b>場所を表すことば</b>を使います。<br>　よく使う4つをおぼえましょう。</p>
     <table class="kind kw">
@@ -692,7 +711,7 @@
     <p class="talk">答えの主語は <b><span class="en">it</span></b>（それ）。<br>　<span class="en">Where is my bag?</span> → <span class="en">It&#39;s on the desk.</span> のように言います。</p>
   </div>
 
-  <div class="blk-sec">
+  <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">5</span><span class="en">Where do you ～?</span> の答え方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「どこで するのか」を聞かれたときは、<b>ふつうの文で答えます</b>。<br>　場所のことばを文の最後に置きます。</p>
     <div class="eqbox" style="border-left-color:var(--gv);background:rgba(194,24,91,.06);">
@@ -702,6 +721,7 @@
     <p class="talk">短く <span class="en">In the park.</span> だけでも答えになります。<br>　どちらでもよいです。</p>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>もっと知りたい人は、上の <b>「くわしく」</b> を押すとつづきが出ます。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -770,7 +790,7 @@
 
   <div class="qsec">
   <h3 class="sec sec2" style="border-left-color:#D98400;">B　<span class="en">is</span>？ それとも <span class="en">do you</span>？<em>（　）に入るものを書こう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-  <div class="hint">ここが<b>いちばん大事</b>。<b>動作のことばがあるか</b>だけを見ましょう。</div>
+  <div class="hint">ここが<b>かなり大事</b>。<b>動作のことばがあるか</b>だけを見ましょう。</div>
   <div class="grid2 vcol">
     <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Where（<span class="bl s"><span class="ansfill">is</span></span>）my bag?</span></div>
     <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Where（<span class="bl"><span class="ansfill">do you</span></span>）play soccer?</span></div>
@@ -1292,6 +1312,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showmore');
+  btn.firstChild.nodeValue = on ? 'かんたんに ' : 'くわしく ';
+  btn.classList.toggle('on', on);
+  if(!on) s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
