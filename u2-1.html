@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 1 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.38〜39</div>
@@ -640,7 +659,25 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かなり大事｜たずねる文は be動詞を<b>前に出す</b><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">たずねる文は <b><span class="en">Are</span> を前に出す</b>だけです。<br>　答え方もセットでおぼえましょう。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">You are</span></td><td class="k">あなたは ～ です</td><td class="e"><u>You are</u> a student.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Are you</span></td><td class="k">あなたは ～ ですか</td><td class="e"><u>Are you</u> a student?</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Yes, I am.</span></td><td class="k">はい、そうです</td><td class="e">Are you Ken? — <u>Yes, I am.</u></td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">No, I&#39;m not.</span></td><td class="k">いいえ、ちがいます</td><td class="e">Are you Ken? — <u>No, I&#39;m not.</u></td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">Are you</span> ・ <span class="en">Yes, I am.</span> ・ <span class="en">No, I&#39;m not.</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>かなり大事｜たずねる文は be動詞を<b>前に出す</b><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「あなたは～ですか」とたずねるときは、<b><span class="en">are</span> を文のいちばん前に動かす</b>だけ。<br>　ことばを足したりはしません。</p>
     <div class="eqbox">
       <span class="eq">You are Ken.</span>　→　<span class="eq">Are you Ken?</span><br>
@@ -658,8 +695,8 @@
     </div>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>答え方は <span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span>答え方は <span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">Are you ～?</span> と聞かれたら、<b>答えるのは自分のこと</b>です。<br>　だから <span class="en">you</span> ではなく <span class="en">I</span> を使います。</p>
     <div class="judge">
       <div class="col yes">
@@ -676,8 +713,8 @@
     <p class="talk">聞かれたのは「<b>あなた</b>は～ですか」。<br>　それに答えるのは「<b>わたし</b>は～です」なので、<span class="en">Yes, you are.</span> ではありません。<br>　ここをまちがえる人がとても多いところです。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span><span class="en">Are you ～?</span> に <span class="en">do</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span><span class="en">Are you ～?</span> に <span class="en">do</span> は使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「どんな人か」をたずねるときは <span class="en">Are you ～?</span>、「なにをするか」をたずねるときは次の 2-2 で習う形を使います。<br>　今回は<b>be動詞の文だけ</b>です。</p>
     <div class="heart">
       <div class="hearts">
@@ -695,24 +732,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">たずねる文は <b><span class="en">Are</span> を前に出す</b>だけです。<br>　答え方もセットでおぼえましょう。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">You are</span></td><td class="k">あなたは ～ です</td><td class="e"><u>You are</u> a student.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Are you</span></td><td class="k">あなたは ～ ですか</td><td class="e"><u>Are you</u> a student?</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Yes, I am.</span></td><td class="k">はい、そうです</td><td class="e">Are you Ken? — <u>Yes, I am.</u></td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">No, I&#39;m not.</span></td><td class="k">いいえ、ちがいます</td><td class="e">Are you Ken? — <u>No, I&#39;m not.</u></td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">Are you</span> ・ <span class="en">Yes, I am.</span> ・ <span class="en">No, I&#39;m not.</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1303,6 +1325,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');

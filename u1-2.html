@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.30〜31</div>
@@ -643,7 +662,24 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>「～ない」は <span class="en">don&#39;t</span> を 動詞の前に置くだけ<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">「する・好き」をあらわすことばが <b>動作のことば</b>です。<br>　打ち消すときは、その前に <span class="en">don&#39;t</span> を置きます。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">like</span></td><td class="k">好きです</td><td class="e">I <u>like</u> dogs.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">play</span></td><td class="k">します（スポーツなど）</td><td class="e">I <u>play</u> soccer.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">don&#39;t</span></td><td class="k">～しません（打ち消し）</td><td class="e">I <u>don&#39;t</u> like natto.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">like</span> ・ <span class="en">play</span> ・ <span class="en">don&#39;t</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>「～ない」は <span class="en">don&#39;t</span> を 動詞の前に置くだけ<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「好きでは<b>ない</b>」と打ち消したいときは、<b>動作のことばのすぐ前に <span class="en">don&#39;t</span> を置く</b>だけ。<br>　ほかはなにも変えません。</p>
     <div class="blocks">
       <div class="blk fill" style="background:var(--gv);"><div class="w en">I</div><div class="r">だれが</div></div>
@@ -665,14 +701,14 @@
     <p class="talk"><b><span class="en">don&#39;t</span> のうしろの動詞は、形を変えません。</b><span class="en">like</span> は <span class="en">like</span> のまま。<br>　ここはラクなところです。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>書くときの2つのルール<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span>書くときの2つのルール<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><b>① <span class="en">don&#39;t</span> には &#39;（アポストロフィ）が必要。</b><span class="en">don&#39;t</span> は <span class="en">do not</span> を短くした形で、<span class="en">o</span> が消えたしるしが &#39; です。<br>　点を忘れた <span class="en">dont</span> はバツになります。</p>
     <p class="talk"><b>② 「～というもの全部が好き」のときは <span class="en">s</span> をつける。</b><span class="en">I like dogs.</span>（犬が好き）、<span class="en">I like cats.</span>（ねこが好き）のように、数えられるものは <b><span class="en">s</span> のついた形</b>で言うのがふつうです。<br>　<span class="en">music</span>（音楽）や <span class="en">soccer</span>（サッカー）のように数えられないものには、<span class="en">s</span> はつけません。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span>かなり大事｜<span class="en">am</span> と <span class="en">like</span> は いっしょに使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span>かなり大事｜<span class="en">am</span> と <span class="en">like</span> は いっしょに使わない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">英語の文は<b>2つのタイプ</b>に分かれます。<br>　どちらのタイプかで、<span class="en">am</span> を使うかどうかが決まります。</p>
     <div class="judge">
       <div class="col yes">
@@ -702,23 +738,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「する・好き」をあらわすことばが <b>動作のことば</b>です。<br>　打ち消すときは、その前に <span class="en">don&#39;t</span> を置きます。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">like</span></td><td class="k">好きです</td><td class="e">I <u>like</u> dogs.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">play</span></td><td class="k">します（スポーツなど）</td><td class="e">I <u>play</u> soccer.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">don&#39;t</span></td><td class="k">～しません（打ち消し）</td><td class="e">I <u>don&#39;t</u> like natto.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">like</span> ・ <span class="en">play</span> ・ <span class="en">don&#39;t</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1314,6 +1336,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
