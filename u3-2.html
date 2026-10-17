@@ -381,23 +381,175 @@
   ruby.rb rt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
     font-size:0;line-height:0;visibility:hidden;color:#8A5A0B;
     -webkit-text-fill-color:#8A5A0B;letter-spacing:0;text-align:center;}
-  .sheet.showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
+  .showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
   /* カタカナが長い語（student→ステューデント など）でも隣とぶつからないよう、
      カタカナ表示中だけ単語のまわりに少し余白を取る */
-  .sheet.showkana ruby.rb{margin:0 2.5px;}
+  .showkana ruby.rb{margin:0 2.5px;}
   /* カタカナを出すときは、上の行と重ならないよう行間を広げる */
-  .sheet.showkana .talk, .sheet.showkana .hint, .sheet.showkana .qnote,
-  .sheet.showkana .goal, .sheet.showkana .goal li, .sheet.showkana .flow ol,
-  .sheet.showkana .flow li, .sheet.showkana .warn .row, .sheet.showkana .copy,
-  .sheet.showkana .cond, .sheet.showkana .cond li, .sheet.showkana .checklist,
-  .sheet.showkana ol.q > li, .sheet.showkana .grid2 > div,
-  .sheet.showkana table.kind td, .sheet.showkana .exline, .sheet.showkana .exline .s,
-  .sheet.showkana .judge .ex, .sheet.showkana .judge .memo, .sheet.showkana .eqbox,
-  .sheet.showkana .hero .big, .sheet.showkana .hero .jp, .sheet.showkana .lines div,
-  .sheet.showkana .model, .sheet.showkana .model .ex, .sheet.showkana .expbox,
-  .sheet.showkana .faint, .sheet.showkana .ribbon, .sheet.showkana .heart p,
-  .sheet.showkana .keychips, .sheet.showkana .blk .w, .sheet.showkana .sec em{
+  .showkana .talk, .showkana .hint, .showkana .qnote,
+  .showkana .goal, .showkana .goal li, .showkana .flow ol,
+  .showkana .flow li, .showkana .warn .row, .showkana .copy,
+  .showkana .cond, .showkana .cond li, .showkana .checklist,
+  .showkana ol.q > li, .showkana .grid2 > div,
+  .showkana table.kind td, .showkana .exline, .showkana .exline .s,
+  .showkana .judge .ex, .showkana .judge .memo, .showkana .eqbox,
+  .showkana .hero .big, .showkana .hero .jp, .showkana .lines div,
+  .showkana .model, .showkana .model .ex, .showkana .expbox,
+  .showkana .faint, .showkana .ribbon, .showkana .heart p,
+  .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+
+  /* ===== v2: 濃い背景の上のカタカナは白く ===== */
+  .hero ruby.rb rt,
+  .heart ruby.rb rt,
+  .blocks .blk.fill ruby.rb rt,
+  .judge .ttl ruby.rb rt,
+  .chip ruby.rb rt,
+  .exlab ruby.rb rt,
+  .abtn ruby.rb rt,
+  .sbtn.on ruby.rb rt,
+  .qzb.on ruby.rb rt{
+    color:#FFFFFF; -webkit-text-fill-color:#FFFFFF;
+    text-shadow:0 0 2px rgba(0,0,0,.45);}
+  /* 色つきの枠の中（判定ボックスのタイトル）は少し濃いめの影で読みやすく */
+  .judge .ttl ruby.rb rt{text-shadow:0 0 3px rgba(0,0,0,.6);}
+
+  /* ===== v2: 表のことばの鉛筆マーク ===== */
+  table.kind td.k .pn{width:13px;height:13px;color:#C88A16;
+    vertical-align:-2px;margin-right:5px;flex:none;}
+
+  /* ===== v2: エネルギーゲージ（乾電池） ===== */
+  .gauge{position:fixed;left:7px;top:50%;transform:translateY(-50%);z-index:60;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    pointer-events:none;user-select:none;}
+  .gauge .cap{width:9px;height:4px;background:#C2185B;border-radius:2px 2px 0 0;}
+  .gauge .body{width:19px;height:72px;border:2px solid #C2185B;border-radius:4px;
+    background:#fff;padding:2px;display:flex;flex-direction:column-reverse;
+    overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14);}
+  .gauge .fill{width:100%;height:0%;border-radius:2px;
+    background:repeating-linear-gradient(to top,
+      #FF6B8A 0, #FF6B8A 5.4px, #E0447A 5.4px, #E0447A 6.8px);
+    transition:height .3s ease;}
+  .gauge .pct{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:#C2185B;line-height:1;}
+  @media print{.gauge{display:none;}}
+  @media (max-width:560px){
+    .gauge{left:1px;} .gauge .body{width:14px;height:54px;}
+    .gauge .cap{width:7px;} .gauge .pct{font-size:8px;}
+  }
+
+  /* ===== v2: アナログタイマー（30分で一周／セット全体の時間） ===== */
+  .clock{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:9px;}
+  .clock .cl{width:34px;height:34px;display:block;}
+  .clock .cf{fill:#fff;stroke:var(--key);stroke-width:2.4;}
+  .clock .cp{fill:rgba(31,78,156,.22);}
+  .clock .ct{stroke:var(--key);stroke-width:1.5;opacity:.55;}
+  .clock .ch{stroke:var(--key);stroke-width:2;stroke-linecap:round;}
+  .clock .cc{fill:var(--key);}
+  .clock .cm{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:var(--key);line-height:1;}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:rgba(181,39,63,.22);}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+  @media (max-width:560px){ .clock .cl{width:26px;height:26px;} .clock .cm{font-size:8px;} }
+
+
+  /* ===== v3: 小さなカタカナボタン（ブロックごと） ===== */
+  .kbtn{font-size:9pt !important;padding:3px 11px !important;border-width:1.5px !important;}
+  .ksm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #D8C49A;border-radius:6px;padding:1px 8px;cursor:pointer;
+    background:#FFFBF2;color:#A8884A;margin-left:auto;flex:none;line-height:1.5;}
+  .ksm:hover{border-color:#C88A16;color:#8A5A0B;}
+  .ksm.on{background:#C88A16;border-color:#C88A16;color:#fff;}
+  h3.sec{display:flex;align-items:center;flex-wrap:wrap;gap:0 4px;}
+  h3.sec em{flex:0 1 auto;}
+  h3.sec .ksm{order:9;}
+  h3.st .ksm{margin-left:auto;}
+  @media print{.ksm{display:none;}}
+
+  /* ===== v3: 時計（本体は青／扇形だけ明るいオレンジ／20分で赤） ===== */
+  .clock .cf{stroke:var(--key);}
+  .clock .cp{fill:#FFA726;fill-opacity:.78;}
+  .clock .ct{stroke:var(--key);}
+  .clock .ch{stroke:var(--key);}
+  .clock .cc{fill:var(--key);}
+  .clock .cm{color:var(--key);}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:#E8485F;fill-opacity:.70;}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+
+  /* ===== v3: 問題番号を押してチェック ===== */
+  .qn{display:inline-flex;align-items:center;justify-content:center;flex:none;
+    width:22px;height:22px;padding:0;border-radius:50%;
+    border:2px solid #9FC2E8;background:#F2F8FF;color:#4A7FB5;
+    font-family:"Lexend",sans-serif;font-weight:700;font-size:10pt;line-height:1;
+    cursor:pointer;margin-right:6px;vertical-align:-5px;transition:.12s;}
+  .qn:hover{border-color:#5E9BE0;background:#E3F0FF;}
+  .qn.on{background:var(--ng);border-color:var(--ng);color:#fff;}
+  .qn.qnst{cursor:default;}
+  .qn.qnst:hover{border-color:#9FC2E8;background:#F2F8FF;}
+  ol.q.numq{list-style:none;padding-left:2.25em;}
+  ol.q.numq > li{position:relative;}
+  ol.q.numq > li > .qn{position:absolute;left:-2.25em;top:1px;margin-right:0;
+    vertical-align:baseline;}
+  .cknote{font-size:9pt;color:#7E93A8;margin-right:auto;
+    display:inline-flex;align-items:center;gap:5px;}
+  .cknote i{display:inline-block;width:15px;height:15px;border:2px solid #9FC2E8;
+    border-radius:50%;background:#F2F8FF;}
+  .toolbar{align-items:center;gap:8px;}
+  @media print{.cknote{display:none;}
+    .qn{border-color:#BBB;background:#fff;color:#333;}
+    .qn.on{background:#fff;border-color:#333;color:#333;}}
+
+  /* ===== v3: 解き直しボタン ===== */
+  .retrybar{display:flex;align-items:center;justify-content:flex-end;gap:10px;
+    flex-wrap:wrap;margin:14px 0 0;padding-top:12px;border-top:2px dashed var(--rule);}
+  .retrybar .msg{font-size:10pt;color:var(--mut);margin-right:auto;}
+  .retrybar .rcount{font-family:"Lexend",sans-serif;font-weight:700;font-size:11pt;
+    color:var(--ng);}
+  .rbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13pt;
+    border:none;border-radius:10px;padding:10px 24px;cursor:pointer;
+    background:var(--ng);color:#fff;box-shadow:0 3px 0 #8A1B2E;}
+  .rbtn:active{transform:translateY(3px);box-shadow:none;}
+  .rbtn[disabled]{background:#C9C2B6;box-shadow:0 3px 0 #ADA69A;cursor:default;}
+  .rmsg{font-size:10pt;color:var(--ng);flex-basis:100%;text-align:right;}
+  @media print{.retrybar{display:none;}}
+
+
+  /* ===== v5: 英語を押すと読み上げ ===== */
+  .sp{cursor:pointer;border-radius:3px;transition:background .12s;}
+  .sp:hover{background:#E6F0FF;box-shadow:0 0 0 2px #E6F0FF;}
+  .sp.playing{background:#FFE9A8 !important;box-shadow:0 0 0 2px #FFE9A8;}
+  .hero .sp:hover, .heart .sp:hover, .judge .ttl .sp:hover,
+  .blocks .blk.fill .sp:hover{background:rgba(255,255,255,.26);
+    box-shadow:0 0 0 2px rgba(255,255,255,.26);}
+  .hero .sp.playing, .heart .sp.playing, .judge .ttl .sp.playing,
+  .blocks .blk.fill .sp.playing{background:rgba(255,220,120,.45) !important;
+    box-shadow:0 0 0 2px rgba(255,220,120,.45);}
+  .spnote{font-size:9pt;color:#5A7FA8;display:inline-flex;align-items:center;gap:4px;}
+  .spnote svg{width:13px;height:13px;color:#5A7FA8;}
+  .spbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #AEC4DE;border-radius:6px;padding:1px 9px;cursor:pointer;
+    background:#F4F8FD;color:#4A7FB5;line-height:1.5;flex:none;}
+  .spbtn:hover{border-color:#5E9BE0;}
+  .spbtn.on{background:var(--key);border-color:var(--key);color:#fff;}
+  @media print{.spnote,.spbtn{display:none;} .sp{cursor:auto;}}
+
+
+  /* ===== v6: 2列の問題は縦順（左に1〜、右に続き） ===== */
+  .grid2.vcol{display:block;column-count:2;column-gap:20px;}
+  .grid2.vcol > div{width:auto;display:block;
+    break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;}
+  /* ===== v6: 選択肢つきの長い問題は1問1行 ===== */
+  .grid2.one{display:block;}
+  .grid2.one > div{width:auto;display:block;padding:3px 0;}
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -415,12 +567,35 @@
     <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor"/><circle cx="15" cy="10" r="1.3" fill="currentColor"/><path d="M8 14.5c1 1.4 2.3 2.1 4 2.1s3-.7 4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.3l3.4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.5v13L7.4 14.5H4z" fill="currentColor"/><path d="M15.4 9.2a4 4 0 0 1 0 5.6M18 6.6a7.6 7.6 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
 
+<div class="gauge" aria-hidden="true">
+  <div class="cap"></div>
+  <div class="body"><div class="fill" id="gfill"></div></div>
+  <div class="pct" id="gpct">0%</div>
+  <div class="clock" id="clock">
+    <svg class="cl" viewBox="0 0 40 40">
+      <circle class="cf" cx="20" cy="20" r="17"/>
+      <path class="cp" id="cpie" d=""/>
+      <g class="ct">
+        <line x1="20" y1="4.4" x2="20" y2="7.4"/>
+        <line x1="35.6" y1="20" x2="32.6" y2="20"/>
+        <line x1="20" y1="35.6" x2="20" y2="32.6"/>
+        <line x1="4.4" y1="20" x2="7.4" y2="20"/>
+      </g>
+      <line class="ch" id="chand" x1="20" y1="20" x2="20" y2="6.5"/>
+      <circle class="cc" cx="20" cy="20" r="2.1"/>
+    </svg>
+    <div class="cm" id="cmin">0分</div>
+  </div>
+</div>
+
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.50〜51</div>
@@ -436,7 +611,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">1</span>きほんの文</h3>
+    <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「<b>おどること</b>が好きです」のように、<b>動作そのものを「～すること」にして言う</b>やり方を習います。<br>　動詞のうしろに <span class="en">ing</span> をつけます。</p>
     <div class="exbox">
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I like dancing.</span><span class="t">わたしは おどることが 好きです。</span></div>
@@ -451,7 +626,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">2</span><span class="en">ing</span> のつけ方は3パターン</h3>
+    <h3 class="st"><span class="stepnum">2</span><span class="en">ing</span> のつけ方は3パターン<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ほとんどは<b>そのまま <span class="en">ing</span> をつける</b>だけ。<br>　ただし2つだけ例外があります。</p>
     <table class="kind">
       <thead><tr><th>パターン</th><th>やり方</th><th>れい</th></tr></thead>
@@ -465,7 +640,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜<span class="en">can</span> のうしろは <span class="en">ing</span> をつけない</h3>
+    <h3 class="st"><span class="stepnum">3</span>いちばん大事｜<span class="en">can</span> のうしろは <span class="en">ing</span> をつけない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">ing</span> を習ったとたんに、<b><span class="en">can</span> のうしろにも <span class="en">ing</span> をつけてしまう人</b>がとても多くなります。</p>
     <div class="judge">
       <div class="col yes">
@@ -498,13 +673,32 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span><span class="en">ing</span> が使えるのはこんなとき</h3>
+    <h3 class="st"><span class="stepnum">4</span><span class="en">ing</span> が使えるのはこんなとき<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">ing</span> の形は「～すること」という<b>名前のことば</b>なので、<span class="en">music</span> や <span class="en">soccer</span> と同じ場所に入れられます。</p>
     <div class="eqbox">
       <span class="eq">I like music.</span>（音楽が好き）　→　<span class="eq">I like singing.</span>（歌うことが好き）<br>
       <span class="en">music</span> の場所に <span class="en">singing</span> を入れただけ。<b>場所は同じ</b>です。
     </div>
     <p class="talk"><span class="en">I&#39;m good at ～.</span>（～が得意です）のうしろにも入ります。<br>　<span class="en">I&#39;m good at soccer.</span> / <span class="en">I&#39;m good at cooking.</span> のように使えます。</p>
+  </div>
+
+<!-- v8: 必須のことば -->
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">5</span>つづりが変わることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">-ing</span> のつけ方は3パターンあります。<br>　<b>そのままつける・字をかさねる・<span class="en">e</span> をとる</b> の3つです。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">playing</span></td><td class="k">そのまま ing をつける</td><td class="e">I like <u>playing</u> tennis.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">swimming</span></td><td class="k">m をかさねて ing</td><td class="e">I like <u>swimming</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">running</span></td><td class="k">n をかさねて ing</td><td class="e">I like <u>running</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">dancing</span></td><td class="k">e をとって ing</td><td class="e">I like <u>dancing</u>.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">playing</span> ・ <span class="en">swimming</span> ・ <span class="en">running</span> ・ <span class="en">dancing</span> を3回ずつ書き写そう！</div>
+    </div>
   </div>
 
   <div class="quiz">
@@ -552,20 +746,20 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 2 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+    <div class="sub"><b>② 文法たしかめページ</b></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em></h3>
-  <ol class="q">
-    <li>動詞に（<span class="bl s"><span class="ansfill">ing</span></span>）をつけると「～すること」という意味になる。</li>
-    <li><span class="en">dance</span> のように <span class="en">e</span> で終わる語は、<span class="en">e</span> を（<span class="bl s"><span class="ansfill">消</span></span>）して <span class="en">ing</span> をつける。</li>
-    <li><span class="en">swim</span> のように短い語は、最後の字を（<span class="bl s"><span class="ansfill">重ね</span></span>）て <span class="en">ing</span> をつける。</li>
-    <li><span class="en">like</span> や <span class="en">good at</span> のうしろは（<span class="bl s"><span class="ansfill">ing</span></span>）の形。</li>
-    <li>（<span class="bl s"><span class="ansfill">can</span></span>）のうしろは（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。<span class="en">ing</span> はつけない。</li>
+  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <ol class="q numq">
+    <li><button class="qn" onclick="toggleQn(this)">1</button>動詞に（<span class="bl s"><span class="ansfill">ing</span></span>）をつけると「～すること」という意味になる。</li>
+    <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">dance</span> のように <span class="en">e</span> で終わる語は、<span class="en">e</span> を（<span class="bl s"><span class="ansfill">消</span></span>）して <span class="en">ing</span> をつける。</li>
+    <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">swim</span> のように短い語は、最後の字を（<span class="bl s"><span class="ansfill">重ね</span></span>）て <span class="en">ing</span> をつける。</li>
+    <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">like</span> や <span class="en">good at</span> のうしろは（<span class="bl s"><span class="ansfill">ing</span></span>）の形。</li>
+    <li><button class="qn" onclick="toggleQn(this)">5</button>（<span class="bl s"><span class="ansfill">can</span></span>）のうしろは（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。<span class="en">ing</span> はつけない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">ing</span> ／ <span class="en">can</span> ／ もとの形 ／ 消 ／ 重ね</div></div>
@@ -574,50 +768,50 @@
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2" style="border-left-color:var(--gv);">B　<span class="en">ing</span> をつける？ つけない？<em>（　）に正しい形を書こう</em></h3>
+  <h3 class="sec sec2" style="border-left-color:var(--gv);">B　<span class="en">ing</span> をつける？ つけない？<em>（　）に正しい形を書こう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint">ここが<b>いちばん大事</b>。（　）の<b>前にあることば</b>を見ましょう。<span class="en">can</span> なら もとの形、<span class="en">like</span> なら <span class="en">ing</span>。</div>
-  <div class="grid2">
-    <div>1. <span class="en">I like（<span class="bl"><span class="ansfill">swimming</span></span>）.</span>（swim）</div>
-    <div>2. <span class="en">I can（<span class="bl s"><span class="ansfill">swim</span></span>）.</span>（swim）</div>
-    <div>3. <span class="en">I like（<span class="bl"><span class="ansfill">dancing</span></span>）.</span>（dance）</div>
-    <div>4. <span class="en">I can（<span class="bl s"><span class="ansfill">cook</span></span>）.</span>（cook）</div>
-    <div>5. <span class="en">I&#39;m good at（<span class="bl"><span class="ansfill">singing</span></span>）.</span>（sing）</div>
-    <div>6. <span class="en">I can（<span class="bl s"><span class="ansfill">run</span></span>）fast.</span>（run）</div>
-    <div>7. <span class="en">I like（<span class="bl"><span class="ansfill">reading</span></span>）.</span>（read）</div>
-    <div>8. <span class="en">I can（<span class="bl s"><span class="ansfill">play</span></span>）the piano.</span>（play）</div>
-    <div>9. <span class="en">I like（<span class="bl"><span class="ansfill">playing</span></span>）soccer.</span>（play）</div>
-    <div>10. <span class="en">I can&#39;t（<span class="bl s"><span class="ansfill">dance</span></span>）.</span>（dance）</div>
+  <div class="grid2 vcol">
+    <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">I like（<span class="bl"><span class="ansfill">swimming</span></span>）.</span>（swim）</div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">I can（<span class="bl s"><span class="ansfill">swim</span></span>）.</span>（swim）</div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">I like（<span class="bl"><span class="ansfill">dancing</span></span>）.</span>（dance）</div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">I can（<span class="bl s"><span class="ansfill">cook</span></span>）.</span>（cook）</div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">I&#39;m good at（<span class="bl"><span class="ansfill">singing</span></span>）.</span>（sing）</div>
+    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I can（<span class="bl s"><span class="ansfill">run</span></span>）fast.</span>（run）</div>
+    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I like（<span class="bl"><span class="ansfill">reading</span></span>）.</span>（read）</div>
+    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I can（<span class="bl s"><span class="ansfill">play</span></span>）the piano.</span>（play）</div>
+    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">I like（<span class="bl"><span class="ansfill">playing</span></span>）soccer.</span>（play）</div>
+    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I can&#39;t（<span class="bl s"><span class="ansfill">dance</span></span>）.</span>（dance）</div>
   </div>
   <div class="expbox"><b>見つけ方</b>　（　）のすぐ前を見るだけ。<br><span class="en">like</span>・<span class="en">good at</span> → <b><span class="en">ing</span></b>（1・3・5・7・9）　<span class="en">can</span>・<span class="en">can&#39;t</span> → <b>もとの形</b>（2・4・6・8・10）<br>1は <span class="en">m</span> を重ねて <span class="en">swimming</span>、3は <span class="en">e</span> を消して <span class="en">dancing</span>。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2" style="border-left-color:var(--gv);">C　正しい文には ○、まちがっている文には ✕ を書こう</h3>
-  <div class="grid2">
-    <div><span class="en">1. I like swimming.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">2. I can swimming.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">3. I like dancing.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">4. I like danceing.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">5. I can swim.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">6. I like swim.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><span class="en">7. I&#39;m good at cooking.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><span class="en">8. I like swiming.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+  <h3 class="sec sec2" style="border-left-color:var(--gv);">C　正しい文には ○、まちがっている文には ✕ を書こう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="grid2 vcol">
+    <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">I like swimming.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">I can swimming.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">I like dancing.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">I like danceing.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">I can swim.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I like swim.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I&#39;m good at cooking.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I like swiming.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I can swim.</span>（ing を取る）　4 → <span class="en">I like dancing.</span>（e を消す）<br>6 → <span class="en">I like swimming.</span>（ing をつける）　8 → <span class="en">I like swimming.</span>（m を重ねる）<br>2と6は<b>つけるか つけないか</b>のまちがい。4と8は<b>つけ方</b>のまちがいです。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="qsec">
-  <h3 class="sec sec2">D　<span class="en">ing</span> のつけ方　正しいほうを選ぼう</h3>
+  <h3 class="sec sec2">D　<span class="en">ing</span> のつけ方　正しいほうを選ぼう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <div class="hint">つけ方は3パターン。そのまま／<span class="en">e</span> を消す／最後を重ねる。</div>
-  <div class="grid2">
-    <div>1. <span class="en">sing →（ア singing ／イ singging）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div>2. <span class="en">dance →（ア danceing ／イ dancing）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div>3. <span class="en">swim →（ア swiming ／イ swimming）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div>4. <span class="en">play →（ア playing ／イ plaing）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div>5. <span class="en">run →（ア running ／イ runing）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div>6. <span class="en">read →（ア readding ／イ reading）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+  <div class="grid2 vcol">
+    <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">sing →（ア singing ／イ singging）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">dance →（ア danceing ／イ dancing）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">swim →（ア swiming ／イ swimming）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">play →（ア playing ／イ plaing）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">run →（ア running ／イ runing）</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">read →（ア readding ／イ reading）</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　ふつうはそのまま（1・4・6）。<span class="en">e</span> で終わる語は <span class="en">e</span> を消す（2）。短くて最後が1字の語は重ねる（3・5）。<br><span class="en">read</span> は <span class="en">ea</span> と母音が2つ並んでいるので、重ねません。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -633,41 +827,41 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 2 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
   </div>
 
   <div class="half qsec">
-    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em></h3>
+    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　（　）の<b>前</b>を見る。<span class="en">like</span>・<span class="en">good at</span> なら <span class="en">ing</span>、<span class="en">can</span> なら もとの形。</div>
-    <ol class="q sp">
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">dancing</span></span>）.</span></div><div class="qnote"><span class="en">dance</span> の <span class="en">e</span> を消して <b><span class="en">dancing</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">swimming</span></span>）.</span></div><div class="qnote"><span class="en">m</span> を重ねて <b><span class="en">swimming</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">swim</span></span>）.</span></div><div class="qnote"><span class="en">can</span> のうしろは <b>もとの形</b>。2番とくらべよう。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌うことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">singing</span></span>）.</span></div><div class="qnote">そのまま <span class="en">ing</span> をつけて <b><span class="en">singing</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることが得意です。</span>　<span class="en">I&#39;m good at（<span class="bl"><span class="ansfill">cooking</span></span>）.</span></div><div class="qnote"><span class="en">good at</span> のうしろも <b><span class="en">ing</span></b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">cook</span></span>）.</span></div><div class="qnote">5番とくらべよう。<span class="en">can</span> なら <b>もとの形</b>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは本を読むことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">reading</span></span>）books.</span></div><div class="qnote">そのまま <span class="en">ing</span>。<span class="en">books</span> は そのうしろ。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをすることが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">playing</span></span>）soccer.</span></div><div class="qnote"><b><span class="en">playing soccer</span></b> で「サッカーをすること」。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは速く走ることができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">run</span></span>）fast.</span></div><div class="qnote"><span class="en">can</span> のうしろ。<span class="en">running</span> にしない。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることができません。</span>　<span class="en">I can&#39;t（<span class="bl s"><span class="ansfill">dance</span></span>）.</span></div><div class="qnote"><span class="en">can&#39;t</span> のうしろも <b>もとの形</b>。</div></div></li>
+    <ol class="q sp numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">dancing</span></span>）.</span></div><div class="qnote"><span class="en">dance</span> の <span class="en">e</span> を消して <b><span class="en">dancing</span></b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">swimming</span></span>）.</span></div><div class="qnote"><span class="en">m</span> を重ねて <b><span class="en">swimming</span></b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">swim</span></span>）.</span></div><div class="qnote"><span class="en">can</span> のうしろは <b>もとの形</b>。2番とくらべよう。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌うことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">singing</span></span>）.</span></div><div class="qnote">そのまま <span class="en">ing</span> をつけて <b><span class="en">singing</span></b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることが得意です。</span>　<span class="en">I&#39;m good at（<span class="bl"><span class="ansfill">cooking</span></span>）.</span></div><div class="qnote"><span class="en">good at</span> のうしろも <b><span class="en">ing</span></b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">cook</span></span>）.</span></div><div class="qnote">5番とくらべよう。<span class="en">can</span> なら <b>もとの形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは本を読むことが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">reading</span></span>）books.</span></div><div class="qnote">そのまま <span class="en">ing</span>。<span class="en">books</span> は そのうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをすることが好きです。</span>　<span class="en">I like（<span class="bl"><span class="ansfill">playing</span></span>）soccer.</span></div><div class="qnote"><b><span class="en">playing soccer</span></b> で「サッカーをすること」。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは速く走ることができます。</span>　<span class="en">I can（<span class="bl s"><span class="ansfill">run</span></span>）fast.</span></div><div class="qnote"><span class="en">can</span> のうしろ。<span class="en">running</span> にしない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることができません。</span>　<span class="en">I can&#39;t（<span class="bl s"><span class="ansfill">dance</span></span>）.</span></div><div class="qnote"><span class="en">can&#39;t</span> のうしろも <b>もとの形</b>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="half bottom qsec">
-    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em></h3>
+    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群にある形をよく見る。<span class="en">ing</span> がついた形が入っていれば、それを使います。</div>
-    <ol class="q">
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることが好きです。</span>　<span class="paren en">（ dancing / I / like ）</span><div class="lines tight"><div><span class="fill2">I like dancing.</span></div></div></div><div class="qnote">語群が <span class="en">dancing</span>。<b>形はもう決まっています。</b></div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ swim / can / I ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">語群が <span class="en">swim</span>（もとの形）。<span class="en">can</span> とセット。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌うことが好きです。</span>　<span class="paren en">（ singing / like / I ）</span><div class="lines tight"><div><span class="fill2">I like singing.</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることが得意です。</span>　<span class="paren en">（ cooking / good at / I&#39;m ）</span><div class="lines tight"><div><span class="fill2">I&#39;m good at cooking.</span></div></div></div><div class="qnote"><span class="en">good at</span> でひとかたまり。そのうしろに <span class="en">ing</span>。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをすることが好きです。</span>　<span class="paren en">（ soccer / I / playing / like ）</span><div class="lines tight"><div><span class="fill2">I like playing soccer.</span></div></div></div><div class="qnote"><span class="en">playing</span> → <span class="en">soccer</span> の順。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができません。</span>　<span class="paren en">（ cook / can&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t cook.</span></div></div></div><div class="qnote">語群が <span class="en">cook</span>。<span class="en">can&#39;t</span> とセット。</div></div></li>
-      <li><div class="row"><div class="qmain"><span class="jp-cue">わたしは本を読むことが好きです。</span>　<span class="paren en">（ books / reading / I / like ）</span><div class="lines tight"><div><span class="fill2">I like reading books.</span></div></div></div><div class="qnote"><span class="en">reading books</span> で「本を読むこと」。</div></div></li>
+    <ol class="q numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることが好きです。</span>　<span class="paren en">（ dancing / I / like ）</span><div class="lines tight"><div><span class="fill2">I like dancing.</span></div></div></div><div class="qnote">語群が <span class="en">dancing</span>。<b>形はもう決まっています。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ swim / can / I ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">語群が <span class="en">swim</span>（もとの形）。<span class="en">can</span> とセット。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌うことが好きです。</span>　<span class="paren en">（ singing / like / I ）</span><div class="lines tight"><div><span class="fill2">I like singing.</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることが得意です。</span>　<span class="paren en">（ cooking / good at / I&#39;m ）</span><div class="lines tight"><div><span class="fill2">I&#39;m good at cooking.</span></div></div></div><div class="qnote"><span class="en">good at</span> でひとかたまり。そのうしろに <span class="en">ing</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをすることが好きです。</span>　<span class="paren en">（ soccer / I / playing / like ）</span><div class="lines tight"><div><span class="fill2">I like playing soccer.</span></div></div></div><div class="qnote"><span class="en">playing</span> → <span class="en">soccer</span> の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができません。</span>　<span class="paren en">（ cook / can&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t cook.</span></div></div></div><div class="qnote">語群が <span class="en">cook</span>。<span class="en">can&#39;t</span> とセット。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは本を読むことが好きです。</span>　<span class="paren en">（ books / reading / I / like ）</span><div class="lines tight"><div><span class="fill2">I like reading books.</span></div></div></div><div class="qnote"><span class="en">reading books</span> で「本を読むこと」。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -678,21 +872,21 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="kbtn" onclick="toggleKana(this)">カタカナ</button></div>
+  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 2 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b><br><span class="name">名前　　　　　　　　　　　</span></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
   </div>
 
   <div class="half qsec">
-    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em></h3>
-    <ol class="q">
-      <li><div class="row"><div class="qmain">わたしはおどることが好きです。<div class="lines"><div><span class="fill2">I like dancing.</span></div></div></div><div class="qnote"><span class="en">e</span> を消して <span class="en">dancing</span>。</div></div></li>
-      <li><div class="row"><div class="qmain">わたしは泳ぐことが好きです。<div class="lines"><div><span class="fill2">I like swimming.</span></div></div></div><div class="qnote"><span class="en">m</span> を重ねて <span class="en">swimming</span>。</div></div></li>
-      <li><div class="row"><div class="qmain">わたしは泳ぐことができます。<div class="lines"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote"><span class="en">can</span> のうしろは もとの形。2番とまちがえないこと。</div></div></li>
-      <li><div class="row"><div class="qmain">わたしは料理をすることが得意です。<div class="lines"><div><span class="fill2">I&#39;m good at cooking.</span></div></div></div><div class="qnote"><span class="en">I am good at cooking.</span> でも正解。</div></div></li>
-      <li><div class="row"><div class="qmain">わたしは歌うことが好きです。<div class="lines"><div><span class="fill2">I like singing.</span></div></div></div><div class="qnote">そのまま <span class="en">ing</span>。</div></div></li>
-      <li><div class="row"><div class="qmain">わたしはサッカーをすることが好きです。<div class="lines"><div><span class="fill2">I like playing soccer.</span></div></div></div><div class="qnote"><span class="en">I like soccer.</span> も通じますが、ここは「すること」なので <span class="en">playing</span>。</div></div></li>
+    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <ol class="q numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain">わたしはおどることが好きです。<div class="lines"><div><span class="fill2">I like dancing.</span></div></div></div><div class="qnote"><span class="en">e</span> を消して <span class="en">dancing</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain">わたしは泳ぐことが好きです。<div class="lines"><div><span class="fill2">I like swimming.</span></div></div></div><div class="qnote"><span class="en">m</span> を重ねて <span class="en">swimming</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">わたしは泳ぐことができます。<div class="lines"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote"><span class="en">can</span> のうしろは もとの形。2番とまちがえないこと。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは料理をすることが得意です。<div class="lines"><div><span class="fill2">I&#39;m good at cooking.</span></div></div></div><div class="qnote"><span class="en">I am good at cooking.</span> でも正解。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしは歌うことが好きです。<div class="lines"><div><span class="fill2">I like singing.</span></div></div></div><div class="qnote">そのまま <span class="en">ing</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしはサッカーをすることが好きです。<div class="lines"><div><span class="fill2">I like playing soccer.</span></div></div></div><div class="qnote"><span class="en">I like soccer.</span> も通じますが、ここは「すること」なので <span class="en">playing</span>。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">dancing ／ swimming ／ swim ／ cooking ／ singing ／ playing soccer</span></div></div>
@@ -700,7 +894,7 @@
   </div>
 
   <div class="half bottom qsec">
-    <h3 class="sec">レベル4チェック　自由英作文<em>じぶんの「好きなこと・得意なこと」を書こう</em></h3>
+    <h3 class="sec">レベル4チェック　自由英作文<em>じぶんの「好きなこと・得意なこと」を書こう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="cond">
       <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
       <ul>
@@ -729,7 +923,14 @@
     </div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+    <div class="retrybar">
+    <span class="msg">まちがえた問題の<b>番号</b>を押してから、このボタンを押そう</span>
+    <span class="rcount" id="rcount">0問</span>
+    <button class="rbtn" id="rbtn" onclick="makeRetry()" disabled>まちがったものを解き直し</button>
+    <span class="rmsg" id="rmsg"></span>
+  </div>
+
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 3-2　動詞の -ing 形</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -749,12 +950,52 @@ const KANA = {
   "fast":"ファスト","well":"ウェル","not":"ノット","do":"ドゥー","don't":"ドウント",
   "dancing":"ダンスィング","dance":"ダンス","singing":"スィンギング","sing":"スィング","swimming":"スウィミング","swim":"スウィム","running":"ラニング","cooking":"クッキング","cook":"クック","reading":"リーディング","read":"リード","playing":"プレイイング","watching":"ウォッチング","studying":"スタディイング","study":"スタディ","eating":"イーティング","eat":"イート","good":"グッド","at":"アット","enjoy":"エンジョイ",
   "spring":"スプリング","natto":"ナットウ","fish":"フィッシュ","milk":"ミルク",
-  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ"
+  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ",
+  // ===== v2: 共通語の追加 =====
+  "you":"ユー","your":"ユア","yes":"イエス","no":"ノウ","what":"ワット",
+  "who":"フー","where":"ウェア","when":"ウェン","how":"ハウ","why":"ワイ",
+  "where's":"ウェアズ","when's":"ウェンズ","who's":"フーズ","what's":"ワッツ",
+  "it's":"イッツ","he's":"ヒーズ","she's":"シーズ","you're":"ユア","that's":"ザッツ",
+  "let's":"レッツ","isn't":"イズント","aren't":"アーント","wasn't":"ワズント",
+  "weren't":"ワーント","doesn't":"ダズント","didn't":"ディドゥント","can't":"キャント",
+  "cannot":"キャナット","does":"ダズ","did":"ディッド","was":"ワズ","were":"ワー",
+  "he":"ヒー","she":"シー","it":"イット","we":"ウィー","they":"ゼイ","this":"ズィス",
+  "that":"ザット","these":"ズィーズ","those":"ゾウズ","there":"ゼア","here":"ヒア",
+  "in":"イン","on":"オン","at":"アット","to":"トゥ","of":"オヴ","and":"アンド",
+  "or":"オア","but":"バット","under":"アンダー","near":"ニア","by":"バイ","with":"ウィズ",
+  "for":"フォー","after":"アフター","before":"ビフォー","every":"エヴリィ","day":"デイ",
+  "now":"ナウ","then":"ゼン","yesterday":"イエスタデイ","tomorrow":"トゥモロウ",
+  "last":"ラスト","next":"ネクスト","week":"ウィーク","night":"ナイト","morning":"モーニング",
+  "eat":"イート","ate":"エイト","go":"ゴウ","went":"ウェント","see":"スィー","saw":"ソー",
+  "get":"ゲット","got":"ガット","make":"メイク","made":"メイド","had":"ハッド","has":"ハズ",
+  "study":"スタディ","studies":"スタディーズ","studied":"スタディド","live":"リヴ","lives":"リヴズ",
+  "cook":"クック","sing":"スィング","swim":"スウィム","dance":"ダンス","read":"リード",
+  "write":"ライト","speak":"スピーク","want":"ウォント","help":"ヘルプ","open":"オウプン",
+  "close":"クロウズ","look":"ルック","listen":"リスン","come":"カム","take":"テイク",
+  "jump":"ジャンプ","walk":"ウォーク","talk":"トーク","practice":"プラクティス",
+  "visit":"ヴィズィット","enjoy":"エンジョイ","stop":"スタップ","sit":"シット","stand":"スタンド",
+  "bag":"バッグ","desk":"デスク","table":"テイブル","room":"ルーム","school":"スクール",
+  "library":"ライブラリィ","park":"パーク","station":"ステイション","home":"ホウム",
+  "book":"ブック","books":"ブックス","pen":"ペン","cap":"キャップ","bike":"バイク",
+  "lunch":"ランチ","dinner":"ディナー","breakfast":"ブレックファスト","rice":"ライス",
+  "sushi":"スーシ","water":"ウォーター","picture":"ピクチャ","guitar":"ギター",
+  "piano":"ピアノ","math":"マス","science":"サイエンス","subject":"サブジェクト",
+  "color":"カラー","sport":"スポート","sports":"スポーツ","food":"フード",
+  "friend":"フレンド","brother":"ブラザー","sister":"スィスター","father":"ファーザー",
+  "mother":"マザー","teacher":"ティーチャー","doctor":"ダクター","singer":"スィンガー",
+  "girl":"ガール","boy":"ボイ","man":"マン","woman":"ウーマン","birthday":"バースデイ",
+  "kind":"カインド","tall":"トール","nice":"ナイス","cute":"キュート","busy":"ビズィ",
+  "tired":"タイアド","free":"フリー","sick":"スィック","sleepy":"スリーピィ","fun":"ファン",
+  "good":"グッド","well":"ウェル","high":"ハイ","please":"プリーズ","together":"トゥゲザー",
+  "monday":"マンデイ","sunday":"サンデイ","saturday":"サタデイ","summer":"サマー",
+  "winter":"ウィンター","august":"オーガスト","july":"ジュライ","america":"アメリカ",
+  "paris":"パリス","tokyo":"トウキョウ","kyoto":"キョウト","mike":"マイク","emma":"エマ",
+  "saki":"サキ","six":"スィックス","seven":"セヴン","five":"ファイヴ","ten":"テン"
 };
 
 // ===== 英単語にカタカナを付ける =====
 (function attachKana(){
-  const SEL = '.en, .exline .s, .judge .ex, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
   document.querySelectorAll(SEL).forEach(el=>{
     if(el.dataset.kanaDone) return;
     if(el.closest('.bad, .xm, .x, s')) return;   // ✕ の誤答例にはカタカナを付けない
@@ -789,8 +1030,14 @@ const KANA = {
 function toggleKana(btn){
   const s = btn.closest('.sheet');
   const on = s.classList.toggle('showkana');
-  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.textContent = on ? 'ぜんぶ消す' : 'ぜんぶカタカナ';
   btn.classList.toggle('on', on);
+  s.querySelectorAll('.blk-sec, .qsec').forEach(b => {
+    b.classList.toggle('showkana', on);
+    const x = b.querySelector('.ksm');
+    if(x){ x.textContent = on ? 'カタカナを消す' : 'カタカナ';
+           x.classList.toggle('on', on); }
+  });
 }
 
 function toggleSheet(btn){
@@ -817,6 +1064,234 @@ function toggleQz(btn){
   btn.textContent = on ? 'とじる' : '答え';
   btn.classList.toggle('on', on);
 }
+// ===== v2: エネルギーゲージ（進んだ量を乾電池で表す） =====
+(function energyGauge(){
+  const fill = document.getElementById('gfill');
+  const pct  = document.getElementById('gpct');
+  if(!fill) return;
+  let shown = -1;
+  function update(){
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const r = max > 0 ? window.scrollY / max : 0;
+    const p = Math.max(0, Math.min(100, Math.round(r * 10) * 10));
+    if(p === shown) return;
+    shown = p;
+    fill.style.height = p + '%';
+    pct.textContent = p + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// ===== v2: アナログタイマー（30分で一周。セット全体の時間を計る） =====
+(function setTimer(){
+  const box  = document.getElementById('clock');
+  const pie  = document.getElementById('cpie');
+  const hand = document.getElementById('chand');
+  const lab  = document.getElementById('cmin');
+  if(!box) return;
+  const FULL = 30 * 60;           // 30分で一周
+  const WARN = 20 * 60;           // 20分を越えたら赤く
+  const KEY  = 'hwg_timer_' + location.pathname;
+  let sec = 0;
+  try{ sec = parseInt(sessionStorage.getItem(KEY) || '0', 10) || 0; }catch(e){}
+
+  function sector(a){             // 12時から時計回りに a 度ぶんの扇形
+    if(a <= 0) return '';
+    if(a >= 359.9) a = 359.9;
+    const r = 17, c = 20, rad = a * Math.PI / 180;
+    const x = c + r * Math.sin(rad), y = c - r * Math.cos(rad);
+    return 'M' + c + ',' + c + ' L' + c + ',' + (c - r) +
+           ' A' + r + ',' + r + ' 0 ' + (a > 180 ? 1 : 0) + ',1 ' +
+           x.toFixed(2) + ',' + y.toFixed(2) + ' Z';
+  }
+  function draw(){
+    const t = Math.min(sec, FULL);
+    const a = t / FULL * 360;
+    pie.setAttribute('d', sector(a));
+    hand.setAttribute('transform', 'rotate(' + (sec / FULL * 360) % 360 + ',20,20)');
+    lab.textContent = Math.floor(sec / 60) + '分';
+    box.classList.toggle('over', sec >= WARN);
+  }
+  draw();
+  setInterval(() => {
+    if(document.hidden) return;
+    sec++;
+    try{ sessionStorage.setItem(KEY, String(sec)); }catch(e){}
+    draw();
+  }, 1000);
+})();
+
+// ===== v3: ブロックごとのカタカナ =====
+function toggleKanaBlock(btn){
+  const b = btn.closest('.blk-sec, .qsec');
+  if(!b) return;
+  const on = b.classList.toggle('showkana');
+  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.classList.toggle('on', on);
+}
+
+// ===== v3: 問題番号を押してチェック =====
+function toggleQn(btn){
+  btn.classList.toggle('on');
+  ckCount();
+}
+function ckCount(){
+  const n = document.querySelectorAll('.qn.on').length;
+  const c = document.getElementById('rcount');
+  const b = document.getElementById('rbtn');
+  if(c) c.textContent = n + '問';
+  if(b) b.disabled = (n === 0);
+}
+
+// ===== v3: まちがえた問題だけの解き直しページを作る =====
+function makeRetry(){
+  const picked = [...document.querySelectorAll('.qn.on')];
+  const msg = document.getElementById('rmsg');
+  if(msg) msg.textContent = '';
+  if(!picked.length) return;
+
+  const groups = [];
+  picked.forEach(cb => {
+    const item = cb.closest('li') || cb.closest('.grid2 > div');
+    if(!item) return;
+    const sec = cb.closest('.qsec');
+    const h = sec && sec.querySelector('h3');
+    const head = h ? h.cloneNode(true) : null;
+    if(head) head.querySelectorAll('.ksm').forEach(x => x.remove());
+    const kind = item.tagName === 'LI' ? 'ol' : 'grid2';
+    const key = (head ? head.textContent.trim() : '') + '|' + kind;
+    let g = groups.find(x => x.key === key);
+    if(!g){ g = {key, head: head ? head.outerHTML : '', kind, items: []}; groups.push(g); }
+    const c = item.cloneNode(true);
+    c.querySelectorAll('.qn').forEach(x => {
+      x.classList.remove('on'); x.classList.add('qnst'); x.removeAttribute('onclick');
+    });
+    g.items.push(c.outerHTML);
+  });
+
+  let body = '';
+  groups.forEach(g => {
+    body += g.head;
+    body += (g.kind === 'ol')
+      ? '<ol class="q sp numq">' + g.items.join('\n') + '</ol>'
+      : '<div class="grid2">' + g.items.join('\n') + '</div>';
+  });
+
+  const styles = [...document.querySelectorAll('style')].map(s => s.outerHTML).join('\n');
+  const fonts  = [...document.querySelectorAll('link[rel="stylesheet"]')].map(l => l.outerHTML).join('\n');
+  const defs   = (document.querySelector('svg[width="0"]') || {outerHTML:''}).outerHTML;
+  const tagEl  = document.querySelector('.head .tag');
+  const title  = tagEl ? (tagEl.firstChild.textContent || '').trim() : '';
+
+  const html = '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    + '<title>解き直し｜' + title + '</title>' + fonts + styles
+    + '<style>.gauge{display:none;}.sheet{min-height:0;}</style></head><body>'
+    + defs
+    + '<section class="sheet showans-host">'
+    + '<div class="toolbar">'
+    + '<span class="cknote">まちがえた問題だけを集めました</span>'
+    + '<button class="kbtn" onclick="tk(this)">カタカナ</button></div>'
+    + '<div class="head"><div class="tag">' + title + ' <small>解き直し</small></div>'
+    + '<div class="sub"><b>まちがえた問題</b></div></div>'
+    + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
+    + body
+    + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<div class="foot"><span>' + title + '　解き直し</span>'
+    + '<span>まちがえた ' + picked.length + ' 問</span></div>'
+    + '</section>'
+    + '<script>'
+    + 'var SV=null;function pv(){var vs=speechSynthesis.getVoices();SV=vs.filter(function(v){return /^en/i.test(v.lang);})[0]||null;}if(window.speechSynthesis){pv();speechSynthesis.addEventListener("voiceschanged",pv);document.addEventListener("click",function(e){var el=e.target.closest(".sp");if(!el)return;var c=el.cloneNode(true);c.querySelectorAll("rt").forEach(function(x){x.remove();});if(!el.closest(".showans"))c.querySelectorAll(".ansfill,.fill2,.ansmark").forEach(function(x){x.remove();});var t=c.textContent.replace(/[()（）]/g," ").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim();if(!t||!/[A-Za-z]/.test(t))return;speechSynthesis.cancel();el.classList.add("playing");var u=new SpeechSynthesisUtterance(t);u.lang=(SV&&SV.lang)||"en-US";if(SV)u.voice=SV;u.rate=0.9;u.onend=u.onerror=function(){el.classList.remove("playing");};speechSynthesis.speak(u);});}'
+    + 'function tk(b){var s=b.closest(".sheet");var on=s.classList.toggle("showkana");'
+    + 'b.textContent=on?"カタカナを消す":"カタカナ";b.classList.toggle("on",on);}'
+    + 'function ta(b){var s=b.closest(".sheet");var on=s.classList.toggle("showans");'
+    + 'b.textContent=on?"答えをかくす":"答えを見る";b.classList.toggle("on",on);'
+    + 's.querySelectorAll(".qsec").forEach(function(q){q.classList.toggle("showans",on);});}'
+    + '<\/script></body></html>';
+
+  const w = window.open('', '_blank');
+  if(!w){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
+  w.document.open(); w.document.write(html); w.document.close();
+}
+
+// ===== v5: 英語を押すと読み上げる（Web Speech API） =====
+const SPEECH = {slow:false, voice:null, el:null};
+
+function toggleSlow(btn){
+  SPEECH.slow = !SPEECH.slow;
+  document.querySelectorAll('.spbtn').forEach(b => {
+    b.classList.toggle('on', SPEECH.slow);
+    b.textContent = SPEECH.slow ? 'ふつうの速さ' : 'ゆっくり';
+  });
+}
+
+(function initSpeech(){
+  if(!('speechSynthesis' in window)){
+    document.querySelectorAll('.spnote, .spbtn').forEach(e => e.remove());
+    return;
+  }
+  function pickVoice(){
+    const vs = speechSynthesis.getVoices();
+    SPEECH.voice = vs.find(v => /^en[-_]US/i.test(v.lang))
+                || vs.find(v => /^en[-_]GB/i.test(v.lang))
+                || vs.find(v => /^en/i.test(v.lang)) || null;
+  }
+  pickVoice();
+  speechSynthesis.addEventListener('voiceschanged', pickVoice);
+
+  // 読み上げ対象に .sp を付ける（まちがいの例ははずす）
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, '
+            + '.hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el => {
+    if(el.closest('.bad, .xm, .x, s, .qzq')) return;
+    if(el.closest('.hbtn, .kbtn, .ksm, .abtn, .sbtn, .qzb, .rbtn, .spbtn')) return;
+    el.classList.add('sp');
+  });
+
+  function textOf(el){
+    const c = el.cloneNode(true);
+    c.querySelectorAll('rt').forEach(x => x.remove());          // カタカナは読まない
+    c.querySelectorAll('br').forEach(b => b.replaceWith(document.createTextNode('. ')));
+    // 答えが隠れているときは、答えを読み上げない
+    if(!el.closest('.showans')){
+      c.querySelectorAll('.ansfill, .fill2, .ansmark').forEach(x => x.remove());
+    }
+    let t = c.textContent;
+    t = t.replace(/[（）()]/g, ' ')
+         .replace(/[／]/g, ' , ')
+         .replace(/[～〜]/g, ' ')
+         .replace(/[‘’]/g, "'")
+         .replace(/[^\x20-\x7E]/g, ' ')       // 日本語は読まない
+         .replace(/\s*,\s*,+/g, ' , ')
+         .replace(/\s+/g, ' ')
+         .trim();
+    return t;
+  }
+
+  document.addEventListener('click', e => {
+    const el = e.target.closest('.sp');
+    if(!el) return;
+    const t = textOf(el);
+    if(!t || !/[A-Za-z]/.test(t)) return;
+    try{ speechSynthesis.cancel(); }catch(err){}
+    if(SPEECH.el) SPEECH.el.classList.remove('playing');
+    SPEECH.el = el;
+    el.classList.add('playing');
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = (SPEECH.voice && SPEECH.voice.lang) || 'en-US';
+    if(SPEECH.voice) u.voice = SPEECH.voice;
+    u.rate = SPEECH.slow ? 0.6 : 0.9;
+    u.pitch = 1;
+    u.onend = u.onerror = () => { el.classList.remove('playing'); };
+    try{ speechSynthesis.speak(u); }
+    catch(err){ el.classList.remove('playing'); }
+  });
+})();
+
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
   const on = w.classList.toggle('open');
