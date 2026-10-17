@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 1 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.62〜63</div>
@@ -641,7 +660,25 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>人の名前も <span class="en">is</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">he</span>・<span class="en">she</span> の文の be動詞は <b>かならず <span class="en">is</span></b>。<br>　<span class="en">am</span> も <span class="en">are</span> も使いません。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">He is</span></td><td class="k">彼は ～ です</td><td class="e"><u>He is</u> my friend.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">She is</span></td><td class="k">彼女は ～ です</td><td class="e"><u>She is</u> my sister.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">He&#39;s</span></td><td class="k">He is を短くした形</td><td class="e"><u>He&#39;s</u> kind.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">She&#39;s</span></td><td class="k">She is を短くした形</td><td class="e"><u>She&#39;s</u> my sister.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">He is</span> ・ <span class="en">She is</span> ・ <span class="en">He&#39;s</span> ・ <span class="en">She&#39;s</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>人の名前も <span class="en">is</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">he・she</span> のかわりに<b>人の名前</b>が来ても、同じく <span class="en">is</span> です。<br>　「わたし」でも「あなた」でもないからです。</p>
     <div class="eqbox">
       <span class="eq">Mike is my friend.</span>（マイクは わたしの友だちです）<br>
@@ -650,8 +687,8 @@
     <p class="talk">一度その人のことを言ったあとは、<b><span class="en">he</span> や <span class="en">she</span> に言いかえる</b>のがふつうです。<br>　<span class="en">Mike is my friend. He is kind.</span> のように使います。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span><span class="en">He is</span> → <span class="en">He&#39;s</span> と短くできる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span><span class="en">He is</span> → <span class="en">He&#39;s</span> と短くできる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">I am → I&#39;m</span>、<span class="en">You are → You&#39;re</span> と同じしくみで、短い形があります。</p>
     <table class="kind">
       <thead><tr><th>もとの形</th><th>短い形</th><th>れい文</th></tr></thead>
@@ -663,8 +700,8 @@
     <p class="talk"><b>&#39;（アポストロフィ）を忘れない</b>のは今までと同じです。<br>　<span class="en">Hes</span> や <span class="en">Shes</span> と書くとバツになります。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span>be動詞の文に 動作のことばは入らない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span>be動詞の文に 動作のことばは入らない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">これまでと同じルールです。<br>　<b><span class="en">is</span> と動作のことばは いっしょに使いません</b>。</p>
     <div class="heart">
       <div class="hearts">
@@ -682,24 +719,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">he</span>・<span class="en">she</span> の文の be動詞は <b>かならず <span class="en">is</span></b>。<br>　<span class="en">am</span> も <span class="en">are</span> も使いません。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">He is</span></td><td class="k">彼は ～ です</td><td class="e"><u>He is</u> my friend.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">She is</span></td><td class="k">彼女は ～ です</td><td class="e"><u>She is</u> my sister.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">He&#39;s</span></td><td class="k">He is を短くした形</td><td class="e"><u>He&#39;s</u> kind.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">She&#39;s</span></td><td class="k">She is を短くした形</td><td class="e"><u>She&#39;s</u> my sister.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">He is</span> ・ <span class="en">She is</span> ・ <span class="en">He&#39;s</span> ・ <span class="en">She&#39;s</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1290,6 +1312,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');

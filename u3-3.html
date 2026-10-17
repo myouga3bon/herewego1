@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 3 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.52〜53</div>
@@ -641,7 +660,24 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かなり大事｜<span class="en">to</span> をつけるか つけないか<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">to</span> のうしろは、かならず <b>もとの形</b>です。<br>　「～になる」は <span class="en">am・is・are</span> のもとの形 <span class="en">be</span> を使います。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">want to</span></td><td class="k">～したいです</td><td class="e">I <u>want to</u> swim.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">to be</span></td><td class="k">～になりたい</td><td class="e">I want <u>to be</u> a doctor.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">to go to</span></td><td class="k">～へ行きたい</td><td class="e">I want <u>to go to</u> America.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">want to</span> ・ <span class="en">to be</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>かなり大事｜<span class="en">to</span> をつけるか つけないか<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　1-3 の <span class="en">can</span> と、今回の <span class="en">want to</span> で、<b>まったく逆</b>になります。</p>
     <div class="judge">
       <div class="col yes">
@@ -673,8 +709,8 @@
     <p class="talk">おぼえ方は<b>「<span class="en">to</span> がつくのは <span class="en">want</span> だけ」</b>。<br>　うしろが もとの形になるのは、どちらも同じです。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span><span class="en">ing</span> との区別<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span><span class="en">ing</span> との区別<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">3-2 で習った <span class="en">ing</span> とも混ざりやすいところです。<br>　<b>前にあることばで決まります</b>。</p>
     <table class="kind">
       <thead><tr><th>前にあることば</th><th>うしろの形</th><th>れい文</th></tr></thead>
@@ -687,8 +723,8 @@
     <p class="talk"><b><span class="en">ing</span> になるのは <span class="en">like</span> のうしろだけ</b>と考えておけば、しばらくは困りません。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span><span class="en">want to be</span> で「～になりたい」<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span><span class="en">want to be</span> で「～になりたい」<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「医者に<b>なりたい</b>」のように、しょうらいの夢を言うときは <span class="en">want to be</span> を使います。</p>
     <div class="eqbox" style="border-left-color:#D98400;background:rgba(217,132,0,.07);">
       <span class="eq" style="color:#D98400;">I want to be a doctor.</span>　わたしは 医者に なりたいです。<br>
@@ -698,23 +734,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">6</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">to</span> のうしろは、かならず <b>もとの形</b>です。<br>　「～になる」は <span class="en">am・is・are</span> のもとの形 <span class="en">be</span> を使います。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">want to</span></td><td class="k">～したいです</td><td class="e">I <u>want to</u> swim.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">to be</span></td><td class="k">～になりたい</td><td class="e">I want <u>to be</u> a doctor.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">to go to</span></td><td class="k">～へ行きたい</td><td class="e">I want <u>to go to</u> America.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">want to</span> ・ <span class="en">to be</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1305,6 +1327,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');

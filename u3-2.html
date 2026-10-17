@@ -550,6 +550,25 @@
   .grid2.one{display:block;}
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
+    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
+    align-items:center;gap:5px;line-height:1.5;}
+  .mbtn:active{transform:translateY(1px);}
+  .mbtn.on{background:var(--key);color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:var(--key);}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -595,7 +614,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.50〜51</div>
@@ -640,7 +659,25 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かなり大事｜<span class="en">can</span> のうしろは <span class="en">ing</span> をつけない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>つづりが変わることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">-ing</span> のつけ方は3パターンあります。<br>　<b>そのままつける・字をかさねる・<span class="en">e</span> をとる</b> の3つです。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">playing</span></td><td class="k">そのまま ing をつける</td><td class="e">I like <u>playing</u> tennis.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">swimming</span></td><td class="k">m をかさねて ing</td><td class="e">I like <u>swimming</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">running</span></td><td class="k">n をかさねて ing</td><td class="e">I like <u>running</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">dancing</span></td><td class="k">e をとって ing</td><td class="e">I like <u>dancing</u>.</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div><span class="en">playing</span> ・ <span class="en">swimming</span> ・ <span class="en">running</span> ・ <span class="en">dancing</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
+<div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>かなり大事｜<span class="en">can</span> のうしろは <span class="en">ing</span> をつけない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">ing</span> を習ったとたんに、<b><span class="en">can</span> のうしろにも <span class="en">ing</span> をつけてしまう人</b>がとても多くなります。</p>
     <div class="judge">
       <div class="col yes">
@@ -672,8 +709,8 @@
     <p class="talk">見分け方は<b>前にあることば</b>を見るだけ。<br>　<span class="en">can</span> なら もとの形、<span class="en">like・good at</span> なら <span class="en">ing</span> です。</p>
   </div>
 
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span><span class="en">ing</span> が使えるのはこんなとき<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">5</span><span class="en">ing</span> が使えるのはこんなとき<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">ing</span> の形は「～すること」という<b>名前のことば</b>なので、<span class="en">music</span> や <span class="en">soccer</span> と同じ場所に入れられます。</p>
     <div class="eqbox">
       <span class="eq">I like music.</span>（音楽が好き）　→　<span class="eq">I like singing.</span>（歌うことが好き）<br>
@@ -683,24 +720,9 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">5</span>つづりが変わることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">-ing</span> のつけ方は3パターンあります。<br>　<b>そのままつける・字をかさねる・<span class="en">e</span> をとる</b> の3つです。</p>
-    <table class="kind kw">
-      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
-      <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">playing</span></td><td class="k">そのまま ing をつける</td><td class="e">I like <u>playing</u> tennis.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">swimming</span></td><td class="k">m をかさねて ing</td><td class="e">I like <u>swimming</u>.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">running</span></td><td class="k">n をかさねて ing</td><td class="e">I like <u>running</u>.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">dancing</span></td><td class="k">e をとって ing</td><td class="e">I like <u>dancing</u>.</td></tr>
-      </tbody>
-    </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div><span class="en">playing</span> ・ <span class="en">swimming</span> ・ <span class="en">running</span> ・ <span class="en">dancing</span> を3回ずつ書き写そう！</div>
-    </div>
-  </div>
+  
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -1291,6 +1313,14 @@ function toggleSlow(btn){
     catch(err){ el.classList.remove('playing'); }
   });
 })();
+
+function toggleMore(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('simple');
+  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+  btn.classList.toggle('on', on);
+  s.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function toggleHint(btn){
   const w = btn.closest('.hintwrap');
