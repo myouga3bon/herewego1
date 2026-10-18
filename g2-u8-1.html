@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,7 +660,10 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">2-2 でならった <span class="en">want to ～</span>（～したい）に、<b>人</b>をはさんだ形です。<br>　「<b>だれに</b>してほしいか」を言えます。</p>
+    <p class="talk">「あなたに <b>手伝って ほしい</b>」のように、<b>だれかにしてほしいこと</b>を言う形です。</p>
+    <p class="talk">2-2 の <span class="en">want to ～</span>（～したい）に、<b>人をはさむ</b>だけで作れます。</p>
+    <div class="gmap solo"><span class="j"><b>あなたに</b> 手伝って ほしい</span><span class="ar">→</span><span class="e en">want <b>you</b> to help me</span></div>
+    <div class="gnote"><b>want</b> のすぐうしろに「だれに」を入れます。その人は <span class="en">me・you・him</span> の形。</div>
     <div class="exbox">
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I want you to help me.</span><span class="t">わたしは あなたに 手伝って ほしいです。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I want to help you.</span><span class="t">わたしは あなたを 手伝いたいです。</span></div>
@@ -754,12 +784,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 1 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -767,7 +798,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">to</span> のうしろの動作をするのは、主語ではなく（<span class="bl s"><span class="ansfill">人</span></span>）である。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>はさむ人は、<span class="en">he</span> ではなく（<span class="bl s"><span class="ansfill">him</span></span>）の形を使う。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">to</span> のうしろは動詞の（<span class="bl s"><span class="ansfill">もと</span></span>）の形にする。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button><span class="en">tell</span> や（<span class="bl s"><span class="ansfill">ask</span></span>）も、同じ形をとる。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button><span class="en">tell</span> や（<span class="bl s"><span class="ansfill">ask</span></span>）も、同じ形をとる。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">to</span> ／ 人 ／ <span class="en">him</span> ／ もと ／ <span class="en">ask</span></div></div>
@@ -787,8 +818,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">He wants（<span class="bl s"><span class="ansfill">us</span></span>）to help him.</span>（わたしたちに）</div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I told（<span class="bl s"><span class="ansfill">him</span></span>）to wait.</span>（彼に）</div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I asked（<span class="bl s"><span class="ansfill">her</span></span>）to help me.</span>（彼女に）</div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">She（<span class="bl s"><span class="ansfill">wants</span></span>）me to clean my room.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I want you to（<span class="bl s"><span class="ansfill">clean</span></span>）your room.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">She（<span class="bl s"><span class="ansfill">wants</span></span>）me to clean my room.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I want you to（<span class="bl s"><span class="ansfill">clean</span></span>）your room.</span></div>
   </div>
   <div class="expbox"><b>かくにん</b>　主語とちがう形になるのは <span class="en">I→me、he→him、she→her、we→us、they→them</span>。<br>9 は主語が <span class="en">She</span> なので <span class="en">wants</span>。10 は <span class="en">to</span> のうしろなので<b>原形（もとの形）</b>です。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -803,8 +834,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">I want he to come.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">She wants me to study.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">She want me to study.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I told him to wait.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I want you to helping me.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I told him to wait.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I want you to helping me.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">to</span> を入れる　4 → <span class="en">him</span><br>6 → <span class="en">wants</span>　8 → <span class="en">to help</span></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -819,7 +850,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">I want （ア he ／イ him） to come.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">She （ア wants ／イ want） me to study.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button>あなたに来てほしい。<span class="en">I want （ア to come ／イ you to come）.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I want you to （ア clean ／イ cleans） your room.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I want you to （ア clean ／イ cleans） your room.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2 は<b>人がはさまっているか</b>で、する人が変わります。<br>5 は「あなたに」とあるので、人をはさむ形です。3・4・6 は形のルールです。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -835,12 +866,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 1 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　「だれに」を <span class="en">want</span> のすぐうしろに置き、そのあと <span class="en">to</span>。</div>
@@ -853,8 +885,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼女に手伝うようたのみました。</span>　<span class="en">I（<span class="bl"><span class="ansfill">asked</span></span>）her to help me.</span></div><div class="qnote">「たのんだ」は <span class="en">asked</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに部屋をそうじしてほしいです。</span>　<span class="en">I want you to（<span class="bl s"><span class="ansfill">clean</span></span>）your room.</span></div><div class="qnote"><span class="en">cleans</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼らに来てほしいです。</span>　<span class="en">I want（<span class="bl s"><span class="ansfill">them</span></span>）（<span class="bl s"><span class="ansfill">to</span></span>）come.</span></div><div class="qnote">（　）が2つ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたを手伝いたいです。</span>　<span class="en">I want（<span class="bl s"><span class="ansfill">to</span></span>）help you.</span></div><div class="qnote">人をはさまない形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="en">He wants（<span class="bl s"><span class="ansfill">us</span></span>）to help him.</span></div><div class="qnote"><span class="en">we</span> にしない。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたを手伝いたいです。</span>　<span class="en">I want（<span class="bl s"><span class="ansfill">to</span></span>）help you.</span></div><div class="qnote">人をはさまない形。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="en">He wants（<span class="bl s"><span class="ansfill">us</span></span>）to help him.</span></div><div class="qnote"><span class="en">we</span> にしない。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -869,7 +901,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼に待つように言いました。</span>　<span class="paren en">（ to wait / I told / him ）</span><div class="lines tight"><div><span class="fill2">I told him to wait.</span></div></div></div><div class="qnote"><span class="en">tell</span> も同じ作り。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに部屋をそうじしてほしいです。</span>　<span class="paren en">（ to clean your room / you / I want ）</span><div class="lines tight"><div><span class="fill2">I want you to clean your room.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたを手伝いたいです。</span>　<span class="paren en">（ you / to help / I want ）</span><div class="lines tight"><div><span class="fill2">I want to help you.</span></div></div></div><div class="qnote">人をはさまない形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="paren en">（ to help him / us / He wants ）</span><div class="lines tight"><div><span class="fill2">He wants us to help him.</span></div></div></div><div class="qnote"><span class="en">us</span> の形。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="paren en">（ to help him / us / He wants ）</span><div class="lines tight"><div><span class="fill2">He wants us to help him.</span></div></div></div><div class="qnote"><span class="en">us</span> の形。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -880,12 +912,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 1 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -894,7 +927,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">彼女はわたしに勉強してほしいです。<div class="lines"><div><span class="fill2">She wants me to study.</span></div></div></div><div class="qnote"><span class="en">wants</span> の <span class="en">s</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは彼に待つように言いました。<div class="lines"><div><span class="fill2">I told him to wait.</span></div></div></div><div class="qnote"><span class="en">told</span> は過去形。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしはあなたに部屋をそうじしてほしいです。<div class="lines"><div><span class="fill2">I want you to clean your room.</span></div></div></div><div class="qnote"><span class="en">cleans</span> にしない。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしはあなたを手伝いたいです。<div class="lines"><div><span class="fill2">I want to help you.</span></div></div></div><div class="qnote">人をはさまない。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしはあなたを手伝いたいです。<div class="lines"><div><span class="fill2">I want to help you.</span></div></div></div><div class="qnote">人をはさまない。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">want you to help ／ want him to come ／ wants me to study ／ told him to wait ／ clean your room ／ want to help</span></div></div>
@@ -1301,11 +1334,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){

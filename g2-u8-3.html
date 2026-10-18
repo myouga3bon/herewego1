@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,12 +660,23 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「<b>～される</b>」「<b>～された</b>」と言いたいときの形です。<br>　<span class="en">be</span>動詞と<b>過去分詞</b>をセットで使います。</p>
-    <div class="exbox">
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This pen is used by Ken.</span><span class="t">このペンは ケンに 使われています。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This cake is made in Japan.</span><span class="t">このケーキは 日本で 作られています。</span></div>
+    <p class="talk">「このペンは ケンに <b>使われている</b>」のように、<b>される側</b>を主語にして言う形です。<br>　これを<b>受け身</b>といいます。</p>
+    <p class="talk">作りは <b><span class="en">be</span>動詞 ＋ 過去分詞</b> の<b>2語セット</b>。<br>　そこに「だれに」を足すこともできます。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span>「～される・～された」と言う<small>be動詞 ＋ 過去分詞</small></div>
+      <div class="gmap"><span class="j">使われて いる</span><span class="ar">→</span><span class="e en">is used</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This pen is used by Ken.</span><span class="t">このペンは ケンに 使われて います。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This cake is made in Japan.</span><span class="t">このケーキは 日本で 作られて います。</span></div>
+      <div class="gnote"><b><span class="en">be</span>動詞を忘れない</b>こと。これがないと受け身になりません。「いま」なら <span class="en">is・are</span>、「むかし」なら <span class="en">was・were</span>。</div>
     </div>
-    <p class="talk">どちらも <b><span class="en">is</span> ＋ 動詞のかたち</b> がならんでいます。<br>　これが受け身です。</p>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span>「だれに されたか」を足す<small>by ～</small></div>
+      <div class="gmap"><span class="j">ケンに（使われた）</span><span class="ar">→</span><span class="e en">by Ken</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This pen was used by Ken.</span><span class="t">このペンは ケンに 使われました。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">It is loved by many people.</span><span class="t">それは 多くの人に 愛されて います。</span></div>
+      <div class="gnote"><b><span class="en">by</span> ＋ する人</b> をうしろに足します。言わなくてよいときは<b>はぶけます</b>。</div>
+    </div>
+    <p class="talk"><span class="en">use → used</span>、<span class="en">write → written</span> のように、<b>過去分詞</b>の形はおぼえておきましょう。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -754,12 +792,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -767,7 +806,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">be</span>動詞のうしろにくるのは、動詞の（<span class="bl"><span class="ansfill">過去分詞</span></span>）である。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>「だれによって」を言いたいときは（<span class="bl s"><span class="ansfill">by</span></span>）～ を足す。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button>「いま」のことなら <span class="en">is</span>、「むかし」なら（<span class="bl s"><span class="ansfill">was</span></span>）を使う。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button><span class="en">be</span>動詞を変えても、過去分詞は（<span class="bl"><span class="ansfill">変わらない</span></span>）。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button><span class="en">be</span>動詞を変えても、過去分詞は（<span class="bl"><span class="ansfill">変わらない</span></span>）。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">be</span> ／ 過去分詞 ／ <span class="en">by</span> ／ <span class="en">was</span> ／ 変わらない</div></div>
@@ -787,8 +826,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">It（<span class="bl s"><span class="ansfill">is</span></span>）made in Japan.</span>（いま）</div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">They（<span class="bl s"><span class="ansfill">are</span></span>）loved by everyone.</span>（いま）</div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">It is used（<span class="bl s"><span class="ansfill">by</span></span>）many people.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">It was（<span class="bl s"><span class="ansfill">built</span></span>）in 1950.</span>（build）</div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">It is（<span class="bl s"><span class="ansfill">loved</span></span>）by everyone.</span>（love）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">It was（<span class="bl s"><span class="ansfill">built</span></span>）in 1950.</span>（build）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">It is（<span class="bl s"><span class="ansfill">loved</span></span>）by everyone.</span>（love）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　6・7 は「いま」なので <span class="en">is・are</span>。主語が <span class="en">They</span> なら <span class="en">are</span>。<br>3・4・9 は形が大きく変わる過去分詞です。<span class="en">written・spoken・built</span>。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -803,8 +842,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">It was wrote in English.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">English is spoken here.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">English is speak here.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">It is made of chocolate.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">It is make of chocolate.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">It is made of chocolate.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">It is make of chocolate.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">is used</span>　4 → <span class="en">written</span><br>6 → <span class="en">spoken</span>　8 → <span class="en">made</span></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -819,7 +858,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">English is （ア speak ／イ spoken） here.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">It （ア is ／イ was） made in Japan.</span>（むかし）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">They （ア are ／イ is） loved by everyone.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">It is used （ア by ／イ of） many people.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">It is used （ア by ／イ of） many people.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　4 は「むかし」なので <span class="en">was</span>。5 は主語が <span class="en">They</span> なので <span class="en">are</span>。<br>6 は「人によって」なので <span class="en">by</span>。材料のときだけ <span class="en">of</span> を使います。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -835,12 +874,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　まず <span class="en">be</span>動詞を置き、そのうしろに過去分詞。</div>
@@ -853,8 +893,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">それは日本で作られています。</span>　<span class="en">It（<span class="bl s"><span class="ansfill">is</span></span>）made in Japan.</span></div><div class="qnote">いまの <span class="en">be</span>動詞。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">それらはみんなに愛されています。</span>　<span class="en">They（<span class="bl s"><span class="ansfill">are</span></span>）loved by everyone.</span></div><div class="qnote">主語は <span class="en">They</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">それは多くの人に使われています。</span>　<span class="en">It（<span class="bl s"><span class="ansfill">is</span></span>）（<span class="bl s"><span class="ansfill">used</span></span>）by many people.</span></div><div class="qnote">（　）が2つ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">それは1950年に建てられました。</span>　<span class="en">It was（<span class="bl s"><span class="ansfill">built</span></span>）in 1950.</span></div><div class="qnote"><span class="en">build</span> の過去分詞。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">それはみんなに愛されています。</span>　<span class="en">It is loved（<span class="bl s"><span class="ansfill">by</span></span>）everyone.</span></div><div class="qnote">「だれに」を表す語。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">それは1950年に建てられました。</span>　<span class="en">It was（<span class="bl s"><span class="ansfill">built</span></span>）in 1950.</span></div><div class="qnote"><span class="en">build</span> の過去分詞。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">それはみんなに愛されています。</span>　<span class="en">It is loved（<span class="bl s"><span class="ansfill">by</span></span>）everyone.</span></div><div class="qnote">「だれに」を表す語。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -869,7 +909,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">ここでは英語が話されます。</span>　<span class="paren en">（ here / English is / spoken ）</span><div class="lines tight"><div><span class="fill2">English is spoken here.</span></div></div></div><div class="qnote">主語は <span class="en">English</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">それはみんなに受け入れられました。</span>　<span class="paren en">（ by everyone / It was / received ）</span><div class="lines tight"><div><span class="fill2">It was received by everyone.</span></div></div></div><div class="qnote"><span class="en">by</span> はうしろ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">それらはみんなに愛されています。</span>　<span class="paren en">（ loved / by everyone / They are ）</span><div class="lines tight"><div><span class="fill2">They are loved by everyone.</span></div></div></div><div class="qnote"><span class="en">are</span> を使う。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">それは1950年に建てられました。</span>　<span class="paren en">（ in 1950 / It was / built ）</span><div class="lines tight"><div><span class="fill2">It was built in 1950.</span></div></div></div><div class="qnote"><span class="en">built</span> の形。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">それは1950年に建てられました。</span>　<span class="paren en">（ in 1950 / It was / built ）</span><div class="lines tight"><div><span class="fill2">It was built in 1950.</span></div></div></div><div class="qnote"><span class="en">built</span> の形。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -880,12 +920,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -894,7 +935,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">それは英語で書かれました。<div class="lines"><div><span class="fill2">It was written in English.</span></div></div></div><div class="qnote"><span class="en">wrote</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">ここでは英語が話されます。<div class="lines"><div><span class="fill2">English is spoken here.</span></div></div></div><div class="qnote"><span class="en">spoken</span> の形。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">それはみんなに受け入れられました。<div class="lines"><div><span class="fill2">It was received by everyone.</span></div></div></div><div class="qnote">過去は <span class="en">was</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">それらはみんなに愛されています。<div class="lines"><div><span class="fill2">They are loved by everyone.</span></div></div></div><div class="qnote">主語は <span class="en">They</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">それらはみんなに愛されています。<div class="lines"><div><span class="fill2">They are loved by everyone.</span></div></div></div><div class="qnote">主語は <span class="en">They</span>。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">is used ／ is made of ／ was written ／ is spoken ／ was received ／ are loved ／ by everyone ／ by many people</span></div></div>
@@ -1301,11 +1342,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){

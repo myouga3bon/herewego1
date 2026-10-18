@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,13 +660,23 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">7-1・7-2 は「どちらかが上」でしたが、今回は<b>同じくらい</b>だと言う形です。</p>
-    <div class="exbox">
+    <p class="talk">7-1・7-2 は「どちらかが<b>上</b>」でした。<br>　今回は「<b>～と同じくらい 背が高い</b>」のように、<b>差がない</b>ことを言う形です。</p>
+    <p class="talk">打ち消すと「<b>～ほど 背が高くない</b>」になります。<br>　この2つをならいます。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span>「～と 同じくらい …」<small>差がない</small></div>
+      <div class="gmap"><span class="j">～と 同じくらい 背が高い</span><span class="ar">→</span><span class="e en">as tall as ～</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Ken is as tall as Tom.</span><span class="t">ケンは トムと 同じくらい 背が 高いです。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Ken is not as tall as Tom.</span><span class="t">ケンは トムほど 背が 高く ありません。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Ken runs as fast as Tom.</span><span class="t">ケンは トムと 同じくらい 速く 走ります。</span></div>
+      <div class="gnote">ようすのことばを <b>as</b> と <b>as</b> で<b>はさみます</b>。ことばの形は<b>変えません</b>。</div>
     </div>
-    <p class="talk"><span class="en">as</span> ではさむ形です。<br>　<b><span class="en">as</span> ＋ ようすのことば ＋ <span class="en">as</span></b> と覚えましょう。</p>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span>「～ほど …ない」<small>打ち消すとき</small></div>
+      <div class="gmap"><span class="j">～ほど 背が高く ない</span><span class="ar">→</span><span class="e en">not as tall as ～</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Ken is not as tall as Tom.</span><span class="t">ケンは トムほど 背が 高く ありません。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I am not as busy as you.</span><span class="t">わたしは あなたほど いそがしく ありません。</span></div>
+      <div class="gnote">前に <b>not</b> を置くだけ。「同じくらいではない」＝「<b>～ほど…ない</b>」という意味になります。</div>
+    </div>
+    <p class="talk"><span class="en">as</span> ではさむ形は、<b><span class="en">as</span> ＋ ようすのことば ＋ <span class="en">as</span></b> と覚えましょう。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -763,12 +800,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -776,7 +814,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button>あいだのことばは（<span class="bl s"><span class="ansfill">もと</span></span>）の形にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>だから <span class="en">-er</span> も（<span class="bl s"><span class="ansfill">more</span></span>）もつけない。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button>打ち消すと「…（<span class="bl s"><span class="ansfill">ほど</span></span>）～ない」という意味になる。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button>うしろの <span class="en">as</span> を（<span class="bl s"><span class="ansfill">than</span></span>）に変えてはいけない。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>うしろの <span class="en">as</span> を（<span class="bl s"><span class="ansfill">than</span></span>）に変えてはいけない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">as</span> ／ もと ／ <span class="en">more</span> ／ ほど ／ <span class="en">than</span></div></div>
@@ -796,8 +834,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">She is as（<span class="bl s"><span class="ansfill">busy</span></span>）as me.</span>（忙しい）</div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">He is（<span class="bl s"><span class="ansfill">not</span></span>）as tall as me.</span>（～ほど…ない）</div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">This is as（<span class="bl s"><span class="ansfill">big</span></span>）as that.</span>（大きい）</div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">We try as（<span class="bl s"><span class="ansfill">hard</span></span>）as Tom.</span>（熱心に）</div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">He is as tall as（<span class="bl s"><span class="ansfill">her</span></span>）.</span>（彼女）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">We try as（<span class="bl s"><span class="ansfill">hard</span></span>）as Tom.</span>（熱心に）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">He is as tall as（<span class="bl s"><span class="ansfill">her</span></span>）.</span>（彼女）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　あいだはすべて<b>原形（もとの形）</b>（1・2・5・6・8・9）。<span class="en">taller・more tired</span> にしません。<br><span class="en">as</span> は2つとも必要（3・4）。うしろは <span class="en">me・him・her</span> の形（10）。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -812,8 +850,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">He is not as tall than me.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">I run as fast as him.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I run as fast him.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">We&#39;re as tired as Tom.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">We&#39;re as more tired as Tom.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">We&#39;re as tired as Tom.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">We&#39;re as more tired as Tom.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">as tall as</span>　4 → うしろも <span class="en">as</span><br>6 → <span class="en">as fast as him</span>　8 → <span class="en">as tired as</span>（<span class="en">more</span> をとる）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -828,7 +866,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">He is as （ア tall ／イ taller） as me.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">He is as tall （ア than ／イ as） me.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">I run as fast as （ア he ／イ him）.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button>彼はわたしほど忙しくない。<span class="en">He is （ア as ／イ not as） busy as me.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button>彼はわたしほど忙しくない。<span class="en">He is （ア as ／イ not as） busy as me.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2・6 は<b>意味</b>の問題です。<span class="en">not</span> がつくと「～ほど…ない」になり、<b>相手のほうが上</b>になります。<br>3・4・5 は形のルールです。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -844,12 +882,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">as</span> ではさむ。中は原形（もとの形）。うしろの <span class="en">as</span> を忘れない。</div>
@@ -862,8 +901,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしと同じくらい忙しいです。</span>　<span class="en">She is as busy as（<span class="bl s"><span class="ansfill">me</span></span>）.</span></div><div class="qnote"><span class="en">I</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">これはあれと同じくらい大きいです。</span>　<span class="en">This is（<span class="bl s"><span class="ansfill">as</span></span>）big（<span class="bl s"><span class="ansfill">as</span></span>）that.</span></div><div class="qnote">（　）が2つ。<span class="en">as ～ as</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしほど忙しくありません。</span>　<span class="en">He is not as（<span class="bl s"><span class="ansfill">busy</span></span>）as me.</span></div><div class="qnote">中は原形（もとの形）。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">この本はあの本と同じくらいおもしろいです。</span>　<span class="en">This book is as（<span class="bl"><span class="ansfill">interesting</span></span>）as that one.</span></div><div class="qnote">長いことばでも、中は原形（もとの形）。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼と同じくらいじょうずに歌えます。</span>　<span class="en">I can sing as（<span class="bl s"><span class="ansfill">well</span></span>）as him.</span></div><div class="qnote">「じょうずに」は <span class="en">well</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">この本はあの本と同じくらいおもしろいです。</span>　<span class="en">This book is as（<span class="bl"><span class="ansfill">interesting</span></span>）as that one.</span></div><div class="qnote">長いことばでも、中は原形（もとの形）。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼と同じくらいじょうずに歌えます。</span>　<span class="en">I can sing as（<span class="bl s"><span class="ansfill">well</span></span>）as him.</span></div><div class="qnote">「じょうずに」は <span class="en">well</span>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -878,7 +917,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼と同じくらい速く走ります。</span>　<span class="paren en">（ as him / I run / as fast ）</span><div class="lines tight"><div><span class="fill2">I run as fast as him.</span></div></div></div><div class="qnote">動作のようすにも使える。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしたちはトムと同じくらいがんばっています。</span>　<span class="paren en">（ as hard / We&#39;re trying / as Tom ）</span><div class="lines tight"><div><span class="fill2">We&#39;re trying as hard as Tom.</span></div></div></div><div class="qnote">進行形にも足せる。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしほど忙しくありません。</span>　<span class="paren en">（ as me / He is / not as busy ）</span><div class="lines tight"><div><span class="fill2">He is not as busy as me.</span></div></div></div><div class="qnote">相手のほうが忙しい。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">この本はあの本と同じくらいおもしろいです。</span>　<span class="paren en">（ as that one / This book is / as interesting ）</span><div class="lines tight"><div><span class="fill2">This book is as interesting as that one.</span></div></div></div><div class="qnote">長い語でも中はそのまま。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">この本はあの本と同じくらいおもしろいです。</span>　<span class="paren en">（ as that one / This book is / as interesting ）</span><div class="lines tight"><div><span class="fill2">This book is as interesting as that one.</span></div></div></div><div class="qnote">長い語でも中はそのまま。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -889,12 +928,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -903,7 +943,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">彼はわたしと同じくらい背が高いです。<div class="lines"><div><span class="fill2">He is as tall as me.</span></div></div></div><div class="qnote"><span class="en">as taller as</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは彼と同じくらい速く走ります。<div class="lines"><div><span class="fill2">I run as fast as him.</span></div></div></div><div class="qnote"><span class="en">he</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">彼はわたしほど忙しくありません。<div class="lines"><div><span class="fill2">He is not as busy as me.</span></div></div></div><div class="qnote"><span class="en">than</span> にしない。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">この本はあの本と同じくらいおもしろいです。<div class="lines"><div><span class="fill2">This book is as interesting as that one.</span></div></div></div><div class="qnote">中は原形（もとの形）。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">この本はあの本と同じくらいおもしろいです。<div class="lines"><div><span class="fill2">This book is as interesting as that one.</span></div></div></div><div class="qnote">中は原形（もとの形）。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">as tired as ／ not as tired as ／ as tall as me ／ as fast as him ／ not as busy as ／ as interesting as</span></div></div>
@@ -1310,11 +1350,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){
