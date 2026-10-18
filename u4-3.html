@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,13 +660,23 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">今回は<b>「もの」をさす文</b>と、be動詞の<b>打ち消しの文</b>を習います。<br>　近いものは <span class="en">this</span>（これ）、遠いものは <span class="en">that</span>（あれ）です。</p>
-    <div class="exbox">
+    <p class="talk">「<b>これは わたしの かばんです</b>」のように、<b>もの</b>をさして言う文です。<br>　近いものは <span class="en">this</span>（これ）、遠いものは <span class="en">that</span>（あれ）。</p>
+    <p class="talk">あわせて、<b>たずねる形</b>と<b>打ち消す形</b>をならいます。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span>「これは ～ ですか」<small>たずねる文</small></div>
+      <div class="gmap"><span class="j">これは あなたの かばん ですか</span><span class="ar">→</span><span class="e en">Is this your bag?</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This is my bag.</span><span class="t">これは わたしの かばん です。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Is this your bag?</span><span class="t">これは あなたの かばん ですか。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This is not my bag.</span><span class="t">これは わたしの かばん ではありません。</span></div>
+      <div class="gnote"><b>is を前に出して</b>、終わりを <b>?</b> にします。</div>
     </div>
-    <p class="talk">「ですか」は <span class="en">is</span> を前に出す。<br>　「ではありません」は <span class="en">is</span> のうしろに <span class="en">not</span>。<br>　<b>どちらも <span class="en">is</span> が中心</b>です。</p>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span>「これは ～ では ありません」<small>打ち消す文</small></div>
+      <div class="gmap"><span class="j">これは わたしの かばん では ありません</span><span class="ar">→</span><span class="e en">This is not my bag.</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This is not my bag.</span><span class="t">これは わたしの かばん ではありません。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This isn&#39;t my bag.</span><span class="t">これは わたしの かばん ではありません。</span></div>
+      <div class="gnote"><b>is のうしろに not</b> を置くだけ。短くすると <b>isn&#39;t</b> になります。</div>
+    </div>
+    <p class="talk">どちらも <b><span class="en">is</span> が中心</b>。<br>　前に出せば「ですか」、うしろに <span class="en">not</span> をつければ「ではありません」。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -773,12 +810,13 @@
   </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -786,7 +824,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button>「これは～ですか」は（<span class="bl s"><span class="ansfill">is</span></span>）を文の前に出して、終わりを（<span class="bl s"><span class="ansfill">?</span></span>）にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>答えの主語は（<span class="bl s"><span class="ansfill">it</span></span>）を使う。<span class="en">Yes, （<span class="bl s"><span class="ansfill">it</span></span>） is.</span> ／ <span class="en">No, it isn&#39;t.</span></li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">is not</span> の短い形は（<span class="bl s"><span class="ansfill">isn't</span></span>）、<span class="en">are not</span> は（<span class="bl s"><span class="ansfill">aren't</span></span>）。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button>動作のことばを打ち消すときは（<span class="bl s"><span class="ansfill">don't</span></span>）を使う。be動詞の文には使わない。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>動作のことばを打ち消すときは（<span class="bl s"><span class="ansfill">don't</span></span>）を使う。be動詞の文には使わない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">is</span> ／ <span class="en">not</span> ／ <span class="en">it</span> ／ <span class="en">isn&#39;t</span> ／ <span class="en">aren&#39;t</span> ／ <span class="en">don&#39;t</span> ／ うしろ ／ ?</div></div>
@@ -806,8 +844,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I（<span class="bl s"><span class="ansfill">don't</span></span>）have a dog.</span></div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">He is（<span class="bl s"><span class="ansfill">not</span></span>）my friend.</span></div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I（<span class="bl s"><span class="ansfill">don't</span></span>）study math.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">That is（<span class="bl s"><span class="ansfill">not</span></span>）a pen.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She is（<span class="bl s"><span class="ansfill">not</span></span>）kind.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">That is（<span class="bl s"><span class="ansfill">not</span></span>）a pen.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She is（<span class="bl s"><span class="ansfill">not</span></span>）kind.</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　文の中に be動詞があるかだけを見ます。<br><b>be動詞がある</b>（<span class="en">is・am・are</span>）→ <span class="en">not</span>（1・3・5・7・9・10）<br><b>動作のことばだけ</b>（<span class="en">like・play・have・study</span>）→ <span class="en">don&#39;t</span>（2・4・6・8）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -822,8 +860,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">This is your bag?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">This isn&#39;t my bag.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">This not is my bag.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">No, it isn&#39;t.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I amn&#39;t a student.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">No, it isn&#39;t.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I amn&#39;t a student.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">This is not my bag.</span>（be動詞の文は <span class="en">not</span>）<br>4 → <span class="en">Is this your bag?</span>（<span class="en">is</span> を前に出す）　6 → <span class="en">This is not my bag.</span>（<span class="en">not</span> をうしろへ）<br>8 → <span class="en">I&#39;m not a student.</span>（<span class="en">amn&#39;t</span> はない）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -838,7 +876,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Are you a student?</span>　—（ア <span class="en">No, it isn&#39;t.</span> ／イ <span class="en">No, I&#39;m not.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">Is that your bike?</span>　—（ア <span class="en">Yes, it is.</span> ／イ <span class="en">Yes, that is.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">Do you like natto?</span>　—（ア <span class="en">No, I&#39;m not.</span> ／イ <span class="en">No, I don&#39;t.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Is this a pen?</span>　—（ア <span class="en">Yes, it is.</span> ／イ <span class="en">Yes, I am.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Is this a pen?</span>　—（ア <span class="en">Yes, it is.</span> ／イ <span class="en">Yes, I am.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Is this ～?</span> と聞かれたら、答えの主語は <b><span class="en">it</span></b>（1・2・4・6）。<br><span class="en">Are you ～?</span> なら <span class="en">I</span>（3）、<span class="en">Do you ～?</span> なら <span class="en">I ＋ don&#39;t</span>（5）。<b>先頭を見て決める</b>のは今までと同じです。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -854,12 +892,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　be動詞があれば <span class="en">not</span>、動作のことばだけなら <span class="en">don&#39;t</span>。たずねる文は be動詞が前。</div>
@@ -872,8 +911,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒ではありません。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">am</span></span>）（<span class="bl s"><span class="ansfill">not</span></span>）a student.</span></div><div class="qnote">（　）が2つ。<b><span class="en">am</span> → <span class="en">not</span></b> の順。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あれはわたしの自転車ではありません。</span>　<span class="en">That（<span class="bl s"><span class="ansfill">is</span></span>）not my bike.</span></div><div class="qnote"><span class="en">that</span> も be動詞は <b><span class="en">is</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">短い形にしよう。</span>　<span class="en">This is not my bag.</span> →　<span class="en">This（<span class="bl"><span class="ansfill">isn't</span></span>）my bag.</span></div><div class="qnote"><b><span class="en">is not</span> ＝ <span class="en">isn&#39;t</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちではありません。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">is</span></span>）（<span class="bl s"><span class="ansfill">not</span></span>）my friend.</span></div><div class="qnote">6番と同じ形。主語が <span class="en">he</span> なので <span class="en">is</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたのペンですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Is</span></span>）（<span class="bl s"><span class="ansfill">that</span></span>）your pen?</span></div><div class="qnote">「あれ」は <b><span class="en">that</span></b>。<span class="en">Is</span> が前。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちではありません。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">is</span></span>）（<span class="bl s"><span class="ansfill">not</span></span>）my friend.</span></div><div class="qnote">6番と同じ形。主語が <span class="en">he</span> なので <span class="en">is</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたのペンですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Is</span></span>）（<span class="bl s"><span class="ansfill">that</span></span>）your pen?</span></div><div class="qnote">「あれ」は <b><span class="en">that</span></b>。<span class="en">Is</span> が前。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -888,7 +927,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒ではありません。</span>　<span class="paren en">（ a student / am / I / not ）</span><div class="lines tight"><div><span class="fill2">I am not a student.</span></div></div></div><div class="qnote"><span class="en">am</span> → <span class="en">not</span> の順。<span class="en">a student</span> でひとかたまり。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆が好きではありません。</span>　<span class="paren en">（ natto / like / don&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote">語群に <span class="en">don&#39;t</span> がある。<b>動作の文</b>です。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしのペンではありません。</span>　<span class="paren en">（ my pen / isn&#39;t / This ）</span><div class="lines tight"><div><span class="fill2">This isn&#39;t my pen.</span></div></div></div><div class="qnote">語群が <span class="en">isn&#39;t</span>。短い形で書きます。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたの自転車ですか。</span>　<span class="paren en">（ your bike / that / Is ）</span><div class="lines tight"><div><span class="fill2">Is that your bike?</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">this</span> が <span class="en">that</span> になっただけ。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたの自転車ですか。</span>　<span class="paren en">（ your bike / that / Is ）</span><div class="lines tight"><div><span class="fill2">Is that your bike?</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">this</span> が <span class="en">that</span> になっただけ。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -899,12 +938,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -913,7 +953,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">はい、そうです。<div class="lines"><div><span class="fill2">Yes, it is.</span></div></div></div><div class="qnote"><span class="en">Yes, this is.</span> ではありません。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは生徒ではありません。<div class="lines"><div><span class="fill2">I am not a student.</span></div></div></div><div class="qnote"><span class="en">I&#39;m not a student.</span> でも正解。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしは納豆が好きではありません。<div class="lines"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote">動作のことばなので <span class="en">don&#39;t</span>。1番とまちがえないこと。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">あれはわたしの自転車ではありません。<div class="lines"><div><span class="fill2">That is not my bike.</span></div></div></div><div class="qnote"><span class="en">That isn&#39;t my bike.</span> でも正解。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">あれはわたしの自転車ではありません。<div class="lines"><div><span class="fill2">That is not my bike.</span></div></div></div><div class="qnote"><span class="en">That isn&#39;t my bike.</span> でも正解。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">my bag ／ your bag ／ it is ／ a student ／ natto ／ my bike</span></div></div>
@@ -1320,11 +1360,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){
