@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,12 +660,23 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">1-2 でならった <span class="en">when</span> の仲間です。<br>　今回は<b>「もし～なら」</b>と、条件を言うときの <span class="en">if</span> です。</p>
-    <div class="exbox">
+    <p class="talk">「<b>もし 晴れたら</b>、テニスをします」のように、<b>条件</b>を言って2つの文をくっつける形です。</p>
+    <p class="talk">1-2 の <span class="en">when</span> と作りは同じ。<br>　<span class="en">if</span> も<b>前でも うしろでも</b>置けます。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span><span class="en">if</span> のまとまりを<b>前</b>に置く<small>コンマで区切る</small></div>
+      <div class="gmap"><span class="j">もし 晴れたら、テニスをします</span><span class="ar">→</span><span class="e en">If it is sunny, I will play tennis.</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">If it is sunny, I will play tennis.</span><span class="t">もし 晴れたら、わたしは テニスを します。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I will play tennis if it is sunny.</span><span class="t">晴れたら わたしは テニスを します。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">If you are tired, you can go home.</span><span class="t">もし つかれているなら、家に 帰って いいですよ。</span></div>
+      <div class="gnote">前に置いたときは <b>コンマ（, ）</b>を入れます。</div>
     </div>
-    <p class="talk">使い方は <span class="en">when</span> とまったく同じです。<br>　<b>前にも うしろにも</b>置けます。</p>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span><span class="en">if</span> のまとまりを<b>うしろ</b>に置く<small>コンマはいらない</small></div>
+      <div class="gmap"><span class="j">テニスをします、もし晴れたら</span><span class="ar">→</span><span class="e en">I will play tennis if it is sunny.</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I will play tennis if it is sunny.</span><span class="t">晴れたら わたしは テニスを します。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">You can go home if you are tired.</span><span class="t">つかれているなら 家に 帰って いいですよ。</span></div>
+      <div class="gnote">うしろに置いたときは <b>コンマはいりません</b>。意味は ❶ と同じです。</div>
+    </div>
+    <p class="talk">ここが大事。<br>　<span class="en">if</span> のうしろは、これからのことでも <b><span class="en">will</span> を使わず いまの形</b>で書きます。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -754,12 +792,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -767,7 +806,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">if</span> のまとまりを前に置いたら、うしろに（<span class="bl s"><span class="ansfill">コンマ</span></span>）を打つ。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">if</span> のうしろは、未来のことでも（<span class="bl s"><span class="ansfill">今</span></span>）の形で書く。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button>だから <span class="en">if</span> のうしろに（<span class="bl s"><span class="ansfill">will</span></span>）は入れない。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button><span class="en">will</span> や <span class="en">can</span> は、<span class="en">if</span> の（<span class="bl s"><span class="ansfill">外側</span></span>）の文で使う。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button><span class="en">will</span> や <span class="en">can</span> は、<span class="en">if</span> の（<span class="bl s"><span class="ansfill">外側</span></span>）の文で使う。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">if</span> ／ コンマ ／ 今 ／ <span class="en">will</span> ／ 外側</div></div>
@@ -787,8 +826,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">If you（<span class="bl s"><span class="ansfill">are</span></span>）hungry, eat this.</span></div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">If they（<span class="bl s"><span class="ansfill">have</span></span>）time, they&#39;ll come.</span></div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">If she（<span class="bl s"><span class="ansfill">plays</span></span>）soccer, she&#39;ll be happy.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">If it（<span class="bl s"><span class="ansfill">is</span></span>）cold, stay home.</span></div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">If we（<span class="bl s"><span class="ansfill">leave</span></span>）early, we can walk.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">If it（<span class="bl s"><span class="ansfill">is</span></span>）cold, stay home.</span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">If we（<span class="bl s"><span class="ansfill">leave</span></span>）early, we can walk.</span></div>
   </div>
   <div class="expbox"><b>かくにん</b>　どれも<b>今の形</b>です。<span class="en">will rain・will be</span> とは書きません。<br>主語が <span class="en">it・he・she</span> のときは、三単現の <span class="en">s</span> がつきます（1・8）。<br>外側の文のほうには <span class="en">&#39;ll</span>（＝<span class="en">will</span>）や <span class="en">can</span> が入っていることを確かめよう。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -803,8 +842,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">If you&#39;re tired we can go home.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">We can go home if you&#39;re tired.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">We can go home, if you&#39;re tired.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">If it rains tomorrow, I&#39;ll stay home.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">If it rain tomorrow, I&#39;ll stay home.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">If it rains tomorrow, I&#39;ll stay home.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">If it rain tomorrow, I&#39;ll stay home.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">If it rains,</span>（<span class="en">will</span> をとる）　4 → コンマを入れる<br>6 → コンマをとる　8 → <span class="en">rains</span>（主語が <span class="en">it</span>）</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -819,7 +858,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">（ア If you&#39;re tired, we ／イ If you&#39;re tired we） can go home.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">We can go home （ア , if ／イ if） you&#39;re tired.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">If he （ア is ／イ will be） busy, he won&#39;t come.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">If it rains, we （ア can&#39;t ／イ don&#39;t can） go out.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">If it rains, we （ア can&#39;t ／イ don&#39;t can） go out.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・5 は <span class="en">if</span> の内側なので <span class="en">will</span> を入れません。<br>2 は外側なので <span class="en">will</span> が必要です。3・4 はコンマ、6 は <span class="en">can</span> の打ち消しの形です。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -835,12 +874,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">if</span> のまとまりの中に <span class="en">will</span> を入れないこと。</div>
@@ -853,8 +893,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">もし彼が忙しいなら、彼は来ないでしょう。</span>　<span class="en">If he is busy, he（<span class="bl s"><span class="ansfill">won't</span></span>）come.</span></div><div class="qnote">外側は <span class="en">won&#39;t</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">もし晴れたら、出かけましょう。</span>　<span class="en">If it（<span class="bl s"><span class="ansfill">is</span></span>）sunny, let&#39;s go out.</span></div><div class="qnote"><span class="en">it is sunny</span> のまま。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">もしおなかがすいているなら、これを食べて。</span>　<span class="en">If you（<span class="bl s"><span class="ansfill">are</span></span>）hungry, eat this.</span></div><div class="qnote"><span class="en">you</span> なので <span class="en">are</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">もし時間があれば、彼らは来るでしょう。</span>　<span class="en">If they（<span class="bl s"><span class="ansfill">have</span></span>）time, they&#39;ll come.</span></div><div class="qnote"><span class="en">They</span> なので <span class="en">have</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">もし雨なら、わたしたちは出かけられません。</span>　<span class="en">If it rains, we（<span class="bl s"><span class="ansfill">can't</span></span>）go out.</span></div><div class="qnote">外側は <span class="en">can&#39;t</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">もし時間があれば、彼らは来るでしょう。</span>　<span class="en">If they（<span class="bl s"><span class="ansfill">have</span></span>）time, they&#39;ll come.</span></div><div class="qnote"><span class="en">They</span> なので <span class="en">have</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">もし雨なら、わたしたちは出かけられません。</span>　<span class="en">If it rains, we（<span class="bl s"><span class="ansfill">can't</span></span>）go out.</span></div><div class="qnote">外側は <span class="en">can&#39;t</span>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -869,7 +909,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">もしひまなら、手伝います。</span>　<span class="paren en">（ I&#39;ll help you / I&#39;m free / If ）</span><div class="lines tight"><div><span class="fill2">If I&#39;m free, I&#39;ll help you.</span></div></div></div><div class="qnote">外側だけ <span class="en">&#39;ll</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">もし彼が忙しいなら、彼は来ないでしょう。</span>　<span class="paren en">（ he won&#39;t come / he is busy / If ）</span><div class="lines tight"><div><span class="fill2">If he is busy, he won&#39;t come.</span></div></div></div><div class="qnote">打ち消しは外側の文。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">もし晴れたら、わたしたちは出かけます。</span>　<span class="paren en">（ we&#39;ll go out / it is sunny / If ）</span><div class="lines tight"><div><span class="fill2">If it is sunny, we&#39;ll go out.</span></div></div></div><div class="qnote"><span class="en">it is</span> のまま。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">もし雨なら、わたしたちは出かけられません。</span>　<span class="paren en">（ we can&#39;t go out / it rains / If ）</span><div class="lines tight"><div><span class="fill2">If it rains, we can&#39;t go out.</span></div></div></div><div class="qnote"><span class="en">rains</span> の <span class="en">s</span> に注意。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">もし雨なら、わたしたちは出かけられません。</span>　<span class="paren en">（ we can&#39;t go out / it rains / If ）</span><div class="lines tight"><div><span class="fill2">If it rains, we can&#39;t go out.</span></div></div></div><div class="qnote"><span class="en">rains</span> の <span class="en">s</span> に注意。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -880,12 +920,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 3 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -894,7 +935,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">もしひまなら、手伝います。<div class="lines"><div><span class="fill2">If I&#39;m free, I will help you.</span></div></div></div><div class="qnote"><span class="en">I am free</span> でも正解。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">もし彼が忙しいなら、彼は来ないでしょう。<div class="lines"><div><span class="fill2">If he is busy, he won&#39;t come.</span></div></div></div><div class="qnote">外側だけ打ち消す。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">あなたがつかれているなら、家に帰れます。<div class="lines"><div><span class="fill2">We can go home if you&#39;re tired.</span></div></div></div><div class="qnote">うしろに置くのでコンマなし。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">もし雨なら、わたしたちは出かけられません。<div class="lines"><div><span class="fill2">If it rains, we can&#39;t go out.</span></div></div></div><div class="qnote"><span class="en">rains</span> の <span class="en">s</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">もし雨なら、わたしたちは出かけられません。<div class="lines"><div><span class="fill2">If it rains, we can&#39;t go out.</span></div></div></div><div class="qnote"><span class="en">rains</span> の <span class="en">s</span>。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">If you&#39;re tired ／ If it rains tomorrow ／ If I&#39;m free ／ If he is busy ／ if you&#39;re tired ／ can&#39;t go out</span></div></div>
@@ -1301,11 +1342,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){
