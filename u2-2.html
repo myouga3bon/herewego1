@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Do you ～?</div>
-      <div class="jp">あなたは ～ しますか ／ ～ が好きですか</div>
+      <div class="big">Do you like soccer?</div>
+      <div class="jp">あなたは サッカーが 好きですか</div>
     </div>
   </div>
 
@@ -664,7 +666,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">動作のことばをたずねるときは <b><span class="en">Do you</span></b> で始めます。<br>　答えも <span class="en">do</span> を使います。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -680,6 +682,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ You like soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="gjp">あなたは サッカーが 好きですか。</span><span class="qzp"><b>ポイント</b>　たずねる文には <b><span class="en">Do</span></b> が必要。文の前に置きます。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Are you like soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="gjp">あなたは サッカーが 好きですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">like</span> は動作のことば。<b>動作の文は <span class="en">Do</span></b>。<span class="en">Are</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Do you a student? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you a student?</span><span class="gjp">あなたは 学生 ですか。</span><span class="qzp"><b>ポイント</b>　「どんな人か」なので <b><span class="en">Are</span></b>。動作のことばがないときは <span class="en">Do</span> を使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Do you likes soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="gjp">あなたは サッカーが 好きですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">Do</span> のうしろは <b>原形（もとの形）</b>。<span class="en">s</span> はつけません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Do you like soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="gjp">あなたは サッカーが 好きですか。</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>になっています。たずねる文の終わりは <b>?</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Do you like soccer? — Yes, I am. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, I do.</span><span class="gjp">はい、します。</span><span class="qzp"><b>ポイント</b>　<span class="en">Do</span> で聞かれたら <b><span class="en">do</span> で答える</b>。<span class="en">am</span> は <span class="en">Are</span> の答えです。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「あなたは～しますか」は <b><span class="en">Do you ～?</span></b>　<span class="en">Do</span> を<b>いちばん前</b>に置くだけ。</li>
+        <li>答えは <b><span class="en">Yes, I do.</span> ／ <span class="en">No, I don&#39;t.</span></b></li>
+        <li><b>動作のことばがあれば <span class="en">Do</span>、なければ <span class="en">Are</span>。</b>これが見分け方。</li>
+        <li><b><span class="en">Do</span> のうしろの動詞は 原形（もとの形）。</b><span class="en">s</span> も <span class="en">ing</span> もつけない。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 2-2　Do you ～?</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>答え方は <span class="en">Yes, I do.</span> ／ <span class="en">No, I don&#39;t.</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><b>聞かれたことばで答える</b>のがルールです。<br>　<span class="en">Do</span> で聞かれたら <span class="en">do</span> で答えます。</p>
@@ -726,7 +771,7 @@
 
   <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">6</span><span class="en">Do</span> のうしろの動詞は形を変えない<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">Do you likes ～?</span> とはしません。<br>　<b><span class="en">Do</span> のうしろは もとの形</b>のままです。</p>
+    <p class="talk"><span class="en">Do you likes ～?</span> とはしません。<br>　<b><span class="en">Do</span> のうしろは 原形（もとの形）</b>のままです。</p>
     <div class="eqbox" style="border-left-color:var(--ng);background:rgba(181,39,63,.06);">
       ○ <span class="eq" style="color:var(--vb);">Do you like soccer?</span>　／　<span class="xm">✕ Do you likes soccer ✕</span><br>
       <span class="en">can</span> のうしろと同じ。<b>助っ人がついた動詞は すっぴん</b>です。
@@ -734,71 +779,26 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ You like soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="qzp"><b>ポイント</b>　たずねる文には <b><span class="en">Do</span></b> が必要。文の前に置きます。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Are you like soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">like</span> は動作のことば。<b>動作の文は <span class="en">Do</span></b>。<span class="en">Are</span> は使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Do you a student? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you a student?</span><span class="qzp"><b>ポイント</b>　「どんな人か」なので <b><span class="en">Are</span></b>。動作のことばがないときは <span class="en">Do</span> を使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Do you likes soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">Do</span> のうしろは <b>もとの形</b>。<span class="en">s</span> はつけません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Do you like soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Do you like soccer?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>になっています。たずねる文の終わりは <b>?</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Do you like soccer? — Yes, I am. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, I do.</span><span class="qzp"><b>ポイント</b>　<span class="en">Do</span> で聞かれたら <b><span class="en">do</span> で答える</b>。<span class="en">am</span> は <span class="en">Are</span> の答えです。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>「あなたは～しますか」は <b><span class="en">Do you ～?</span></b>　<span class="en">Do</span> を<b>いちばん前</b>に置くだけ。</li>
-        <li>答えは <b><span class="en">Yes, I do.</span> ／ <span class="en">No, I don&#39;t.</span></b></li>
-        <li><b>動作のことばがあれば <span class="en">Do</span>、なければ <span class="en">Are</span>。</b>これが見分け方。</li>
-        <li><b><span class="en">Do</span> のうしろの動詞は もとの形。</b><span class="en">s</span> も <span class="en">ing</span> もつけない。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 2-2　Do you ～?</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 2 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>「あなたは～しますか」は、文の前に（<span class="bl s"><span class="ansfill">Do</span></span>）を置いて、終わりを（<span class="bl s"><span class="ansfill">?</span></span>）にする。</li>
-    <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Do</span> のうしろの動詞は（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。<span class="en">s</span> は（<span class="bl s"><span class="ansfill">つけない</span></span>）。</li>
+    <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Do</span> のうしろの動詞は（<span class="bl"><span class="ansfill">原形</span></span>）にする。<span class="en">s</span> は（<span class="bl s"><span class="ansfill">つけない</span></span>）。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>答えは <span class="en">Yes, I（<span class="bl s"><span class="ansfill">do</span></span>）.</span> ／ <span class="en">No, I（<span class="bl s"><span class="ansfill">don't</span></span>）.</span></li>
     <li><button class="qn" onclick="toggleQn(this)">4</button>「どんな人か」をたずねるときは（<span class="bl s"><span class="ansfill">Are</span></span>）、「なにをするか」をたずねるときは（<span class="bl s"><span class="ansfill">Do</span></span>）を使う。</li>
     <li><button class="qn" onclick="toggleQn(this)">5</button>1つの文に心臓（動詞）は（<span class="bl s"><span class="ansfill">1</span></span>）つだけ。だから <span class="en">Are</span> と <span class="en">like</span> はいっしょに使わない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
-    <div class="faint">語群：<span class="en">Do</span> ／ <span class="en">Are</span> ／ <span class="en">do</span> ／ <span class="en">don&#39;t</span> ／ もとの形 ／ つけない ／ 1 ／ ?</div></div>
+    <div class="faint">語群：<span class="en">Do</span> ／ <span class="en">Are</span> ／ <span class="en">do</span> ／ <span class="en">don&#39;t</span> ／ 原形 ／ つけない ／ 1 ／ ?</div></div>
   <div class="expbox"><b>なぜ？</b>　<span class="en">Do</span> は「たずねますよ」という合図です。合図が前に立つので、<b>うしろの文はそのまま</b>でよいのです。<br>be動詞の文には合図がもともとある（<span class="en">are</span> を前に出す）ので、<span class="en">Do</span> はいりません。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -866,12 +866,12 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 2 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <div class="hint"><b>コツ</b>　動作のことばがあれば <span class="en">Do</span>、なければ <span class="en">Are</span>。うしろの動詞は<b>もとの形</b>。</div>
+    <div class="hint"><b>コツ</b>　動作のことばがあれば <span class="en">Do</span>、なければ <span class="en">Are</span>。うしろの動詞は<b>原形（もとの形）</b>。</div>
     <ol class="q sp numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーが好きですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Do</span></span>）you like soccer?</span></div><div class="qnote"><span class="en">like</span> があるので <b><span class="en">Do</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Are</span></span>）you a student?</span></div><div class="qnote">動作のことばがないので <b><span class="en">Are</span></b>。</div></div></li>
@@ -911,7 +911,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 2 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -922,7 +922,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">あなたは犬を飼っていますか。<div class="lines"><div><span class="fill2">Do you have a dog?</span></div></div></div><div class="qnote">「1ぴき」なので <span class="en">a</span> が必要。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">いいえ、飼っていません。<div class="lines"><div><span class="fill2">No, I don&#39;t.</span></div></div></div><div class="qnote"><span class="en">don&#39;t</span> の &#39;（アポストロフィ）を忘れない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">あなたは生徒ですか。<div class="lines"><div><span class="fill2">Are you a student?</span></div></div></div><div class="qnote">動作のことばがないので <b><span class="en">Are</span></b>。<span class="en">Do</span> ではありません。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">あなたは数学を勉強しますか。<div class="lines"><div><span class="fill2">Do you study math?</span></div></div></div><div class="qnote"><span class="en">study</span> はもとの形のまま。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">あなたは数学を勉強しますか。<div class="lines"><div><span class="fill2">Do you study math?</span></div></div></div><div class="qnote"><span class="en">study</span> は原形（もとの形）のまま。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">like soccer ／ have a dog ／ a student ／ study math ／ Yes ／ No</span></div></div>
@@ -949,7 +949,7 @@
     <div class="modelnote">これは例です。同じでなくてかまいません。「すきなもの・やっていること・どんな人か」の3つを聞いてみよう。</div>
     <div class="checklist">
       <span class="key">動作の文は Do、be動詞の文は Are</span>
-      <span>Do のうしろは もとの形</span>
+      <span>Do のうしろは 原形（もとの形）</span>
       <span>終わりは ?</span>
       <span>答えは do か am でそろえる</span>
     </div>

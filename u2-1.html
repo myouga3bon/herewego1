@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">You are ～. ／ Are you ～?</div>
-      <div class="jp">あなたは ～ です ／ あなたは ～ ですか</div>
+      <div class="big">You are Ken. ／ Are you Ken?</div>
+      <div class="jp">あなたは ケン です ／ あなたは ケン ですか</div>
     </div>
   </div>
 
@@ -659,7 +661,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">たずねる文は <b><span class="en">Are</span> を前に出す</b>だけです。<br>　答え方もセットでおぼえましょう。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -676,6 +678,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ You am Ken. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ You are Ken.</span><span class="gjp">あなたは ケン です。</span><span class="qzp"><b>ポイント</b>　<span class="en">you</span> のときの be動詞は <b><span class="en">are</span></b>。<span class="en">am</span> は <span class="en">I</span> 専用です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You are Ken? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you Ken?</span><span class="gjp">あなたは ケン ですか。</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">are</span> を前に出す</b>。順番を変えないとたずねる文になりません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Are you a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you a student?</span><span class="gjp">あなたは 学生 ですか。</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>になっています。たずねる文の終わりは <b>?</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ are you Ken? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you Ken?</span><span class="gjp">あなたは ケン ですか。</span><span class="qzp"><b>ポイント</b>　文のはじめは<b>大文字</b>。前に出した <span class="en">Are</span> も大文字にします。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Yes, you are. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, I am.</span><span class="gjp">はい、そうです。</span><span class="qzp"><b>ポイント</b>　聞かれたのは「あなたは～ですか」。答えるのは<b>自分のこと</b>なので <span class="en">I am</span>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ No, I amn&#39;t. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ No, I&#39;m not.</span><span class="gjp">いいえ、ちがいます。</span><span class="qzp"><b>ポイント</b>　<span class="en">amn&#39;t</span> という形は<b>ありません</b>。<span class="en">I&#39;m not</span> と言います。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「あなたは～です」は <b><span class="en">You are ～.</span></b>　<span class="en">I</span> なら <span class="en">am</span>、<span class="en">you</span> なら <span class="en">are</span>。</li>
+        <li>たずねる文は <b><span class="en">are</span> を前に出して、終わりを ? にする</b>だけ。</li>
+        <li>答えは <b><span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span></b>　<span class="en">you</span> ではなく <span class="en">I</span>。</li>
+        <li>be動詞の文に <b><span class="en">do</span> は使わない。</b>心臓（動詞）は1つだけ。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 2-1　You are ～. / Are you ～?</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>かなり大事｜たずねる文は be動詞を<b>前に出す</b><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「あなたは～ですか」とたずねるときは、<b><span class="en">are</span> を文のいちばん前に動かす</b>だけ。<br>　ことばを足したりはしません。</p>
@@ -732,58 +777,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ You am Ken. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ You are Ken.</span><span class="qzp"><b>ポイント</b>　<span class="en">you</span> のときの be動詞は <b><span class="en">are</span></b>。<span class="en">am</span> は <span class="en">I</span> 専用です。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You are Ken? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you Ken?</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">are</span> を前に出す</b>。順番を変えないとたずねる文になりません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Are you a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you a student?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>になっています。たずねる文の終わりは <b>?</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ are you Ken? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you Ken?</span><span class="qzp"><b>ポイント</b>　文のはじめは<b>大文字</b>。前に出した <span class="en">Are</span> も大文字にします。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Yes, you are. ✕</span><span class="qzt"><span class="en">Are you Ken?</span> に <b>はい</b> と答えたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, I am.</span><span class="qzp"><b>ポイント</b>　聞かれたのは「あなたは～ですか」。答えるのは<b>自分のこと</b>なので <span class="en">I am</span>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ No, I amn&#39;t. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ No, I&#39;m not.</span><span class="qzp"><b>ポイント</b>　<span class="en">amn&#39;t</span> という形は<b>ありません</b>。<span class="en">I&#39;m not</span> と言います。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>「あなたは～です」は <b><span class="en">You are ～.</span></b>　<span class="en">I</span> なら <span class="en">am</span>、<span class="en">you</span> なら <span class="en">are</span>。</li>
-        <li>たずねる文は <b><span class="en">are</span> を前に出して、終わりを ? にする</b>だけ。</li>
-        <li>答えは <b><span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span></b>　<span class="en">you</span> ではなく <span class="en">I</span>。</li>
-        <li>be動詞の文に <b><span class="en">do</span> は使わない。</b>心臓（動詞）は1つだけ。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 2-1　You are ～. / Are you ～?</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 1 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -864,7 +864,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 1 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -909,7 +909,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 1 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

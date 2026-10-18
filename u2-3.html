@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Can you ～?</div>
-      <div class="jp">あなたは ～ できますか</div>
+      <div class="big">Can you swim?</div>
+      <div class="jp">あなたは 泳ぐことが できますか</div>
     </div>
   </div>
 
@@ -649,14 +651,14 @@
     <p class="talk"><b>① <span class="en">can</span> を文のいちばん前に出す　② 終わりを <b>?</b> にする</b>。<br>　これだけです。</p>
     <div class="eqbox">
       <span class="eq">You can swim.</span>　→　<span class="eq">Can you swim?</span><br>
-      <span class="en">Can</span> は文のはじめなので<b>大文字</b>。うしろの <span class="en">swim</span> は<b>もとの形のまま</b>です。
+      <span class="en">Can</span> は文のはじめなので<b>大文字</b>。うしろの <span class="en">swim</span> は<b>原形（もとの形）のまま</b>です。
     </div>
     <div class="blocks">
       <div class="blk fill" style="background:#7A4FBF;"><div class="w en">Can</div><div class="r">前に出す</div></div>
       <div class="plus">＋</div>
       <div class="blk fill" style="background:var(--gv);"><div class="w en">you</div><div class="r">だれが</div></div>
       <div class="plus">＋</div>
-      <div class="blk fill" style="background:var(--gv);"><div class="w en">swim</div><div class="r">もとの形</div></div>
+      <div class="blk fill" style="background:var(--gv);"><div class="w en">swim</div><div class="r">原形（もとの形）</div></div>
       <div class="plus">＋</div>
       <div class="blk fill" style="background:var(--ng);"><div class="w">?</div><div class="r">わすれない</div></div>
     </div>
@@ -664,7 +666,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">Can you ～?</span> で聞かれたら、答えにも <span class="en">can</span> を使います。<br>　<span class="en">do</span> は使いません。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -680,6 +682,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do you can swim? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Can you swim?</span><span class="gjp">あなたは 泳ぐことが できますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> が<b>自分で前に出る</b>ので、<span class="en">Do</span> はいりません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You can swim? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Can you swim?</span><span class="gjp">あなたは 泳ぐことが できますか。</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">can</span> を前に出す</b>。順番を変えます。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Can you swimming? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Can you swim?</span><span class="gjp">あなたは 泳ぐことが できますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> のうしろは <b>原形（もとの形）</b>。<span class="en">ing</span> はつけません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Can you swim. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Can you swim?</span><span class="gjp">あなたは 泳ぐことが できますか。</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Can you swim? — Yes, I do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, I can.</span><span class="gjp">はい、できます。</span><span class="qzp"><b>ポイント</b>　<span class="en">Can</span> で聞かれたら <b><span class="en">can</span> で答える</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Can you swim? — No, I cant. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ No, I can&#39;t.</span><span class="gjp">いいえ、できません。</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「あなたは～できますか」は <b><span class="en">Can you ～?</span></b>　<span class="en">can</span> を前に出すだけ。</li>
+        <li>答えは <b><span class="en">Yes, I can.</span> ／ <span class="en">No, I can&#39;t.</span></b></li>
+        <li><b><span class="en">Can</span> の文に <span class="en">Do</span> はいらない。</b>うしろの動詞は 原形（もとの形）。</li>
+        <li><b>先頭と答えをそろえる。</b><span class="en">Are</span>→<span class="en">am</span>、<span class="en">Do</span>→<span class="en">do</span>、<span class="en">Can</span>→<span class="en">can</span>。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 2-3　Can you ～?</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>かなり大事｜<span class="en">Are</span>・<span class="en">Do</span>・<span class="en">Can</span> の使い分け<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここまでに3つのたずね方を習いました。<br>　<b>何をたずねたいか</b>で決まります。</p>
@@ -718,71 +763,26 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do you can swim? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Can you swim?</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> が<b>自分で前に出る</b>ので、<span class="en">Do</span> はいりません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You can swim? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Can you swim?</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">can</span> を前に出す</b>。順番を変えます。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Can you swimming? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Can you swim?</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> のうしろは <b>もとの形</b>。<span class="en">ing</span> はつけません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Can you swim. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Can you swim?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Can you swim? — Yes, I do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, I can.</span><span class="qzp"><b>ポイント</b>　<span class="en">Can</span> で聞かれたら <b><span class="en">can</span> で答える</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Can you swim? — No, I cant. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ No, I can&#39;t.</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>「あなたは～できますか」は <b><span class="en">Can you ～?</span></b>　<span class="en">can</span> を前に出すだけ。</li>
-        <li>答えは <b><span class="en">Yes, I can.</span> ／ <span class="en">No, I can&#39;t.</span></b></li>
-        <li><b><span class="en">Can</span> の文に <span class="en">Do</span> はいらない。</b>うしろの動詞は もとの形。</li>
-        <li><b>先頭と答えをそろえる。</b><span class="en">Are</span>→<span class="en">am</span>、<span class="en">Do</span>→<span class="en">do</span>、<span class="en">Can</span>→<span class="en">can</span>。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 2-3　Can you ～?</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>「あなたは～できますか」は、（<span class="bl s"><span class="ansfill">can</span></span>）を文の前に出して、終わりを（<span class="bl s"><span class="ansfill">?</span></span>）にする。</li>
-    <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Can</span> のうしろの動詞は（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。</li>
+    <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Can</span> のうしろの動詞は（<span class="bl"><span class="ansfill">原形</span></span>）にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>答えは <span class="en">Yes, I（<span class="bl s"><span class="ansfill">can</span></span>）.</span> ／ <span class="en">No, I（<span class="bl s"><span class="ansfill">can't</span></span>）.</span></li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">Can</span> の文に（<span class="bl s"><span class="ansfill">Do</span></span>）は使わない。<span class="en">can</span> が自分で前に出るから。</li>
     <li><button class="qn" onclick="toggleQn(this)">5</button><span class="en">Are</span> で聞かれたら（<span class="bl s"><span class="ansfill">am</span></span>）、<span class="en">Do</span> で聞かれたら（<span class="bl s"><span class="ansfill">do</span></span>）で答える。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
-    <div class="faint">語群：<span class="en">can</span> ／ <span class="en">can&#39;t</span> ／ <span class="en">Do</span> ／ <span class="en">am</span> ／ <span class="en">do</span> ／ もとの形 ／ ?</div></div>
+    <div class="faint">語群：<span class="en">can</span> ／ <span class="en">can&#39;t</span> ／ <span class="en">Do</span> ／ <span class="en">am</span> ／ <span class="en">do</span> ／ 原形 ／ ?</div></div>
   <div class="expbox"><b>なぜ？</b>　<span class="en">can</span> はもともと「助っ人」のことばなので、<b>自分で前に出る力</b>を持っています。<br>だから <span class="en">Do</span> という別の合図はいりません。be動詞（<span class="en">are</span>）とおなじ仲間です。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -839,7 +839,7 @@
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
-    <b>合言葉</b><span class="s"><span class="en">Are</span>・<span class="en">Do</span>・<span class="en">Can</span> は<b>聞かれたことばで答える</b>。<span class="en">Can</span> のうしろは もとの形。</span>
+    <b>合言葉</b><span class="s"><span class="en">Are</span>・<span class="en">Do</span>・<span class="en">Can</span> は<b>聞かれたことばで答える</b>。<span class="en">Can</span> のうしろは 原形（もとの形）。</span>
   </div>
   <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
@@ -850,7 +850,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -860,12 +860,12 @@
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは泳ぐことができますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Can</span></span>）you swim?</span></div><div class="qnote">「できますか」なので <b><span class="en">Can</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">はい、できます。</span>　<span class="en">Yes, I（<span class="bl s"><span class="ansfill">can</span></span>）.</span></div><div class="qnote">聞かれたことばで答える。<b><span class="en">can</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、できません。</span>　<span class="en">No, I（<span class="bl s"><span class="ansfill">can't</span></span>）.</span></div><div class="qnote"><b><span class="en">can&#39;t</span></b>。&#39;（アポストロフィ）を忘れずに。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはピアノをひくことができますか。</span>　<span class="en">Can you（<span class="bl s"><span class="ansfill">play</span></span>）the piano?</span></div><div class="qnote"><span class="en">Can</span> のうしろは<b>もとの形</b>の <span class="en">play</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはピアノをひくことができますか。</span>　<span class="en">Can you（<span class="bl s"><span class="ansfill">play</span></span>）the piano?</span></div><div class="qnote"><span class="en">Can</span> のうしろは<b>原形（もとの形）</b>の <span class="en">play</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーが好きですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Do</span></span>）you like soccer?</span></div><div class="qnote">「好きですか」なので <b><span class="en">Do</span></b>。<span class="en">Can</span> ではありません。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Are</span></span>）you a student?</span></div><div class="qnote">動作のことばがないので <b><span class="en">Are</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは料理をすることができますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Can</span></span>）you（<span class="bl s"><span class="ansfill">cook</span></span>）?</span></div><div class="qnote">（　）が2つ。<b><span class="en">Can</span> → <span class="en">cook</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">はい、します。</span>（<span class="en">Do you ～?</span> の答え）　<span class="en">Yes, I（<span class="bl s"><span class="ansfill">do</span></span>）.</span></div><div class="qnote">2番とくらべよう。<span class="en">Do</span> なら <b><span class="en">do</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは上手に歌うことができますか。</span>　<span class="en">Can you（<span class="bl s"><span class="ansfill">sing</span></span>）well?</span></div><div class="qnote"><span class="en">sings</span> にはしない。<b>もとの形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは上手に歌うことができますか。</span>　<span class="en">Can you（<span class="bl s"><span class="ansfill">sing</span></span>）well?</span></div><div class="qnote"><span class="en">sings</span> にはしない。<b>原形（もとの形）</b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">はい、そうです。</span>（<span class="en">Are you ～?</span> の答え）　<span class="en">Yes, I（<span class="bl s"><span class="ansfill">am</span></span>）.</span></div><div class="qnote">3つの答え方がそろいました。先頭とそろえるだけ。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -895,7 +895,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -933,7 +933,7 @@
     <div class="modelnote">これは例です。同じでなくてかまいません。スポーツ・楽器・料理・外国語 から選ぶと書きやすいです。</div>
     <div class="checklist">
       <span class="key">Can の文に Do を入れていない</span>
-      <span>Can のうしろは もとの形</span>
+      <span>Can のうしろは 原形（もとの形）</span>
       <span>終わりは ?</span>
       <span>答えを先頭のことばとそろえた</span>
     </div>
