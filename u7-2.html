@@ -75,6 +75,24 @@
   .blk.line{border:2px dashed var(--key);color:var(--key);}
   .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
 
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
   .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
     padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
   .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
@@ -571,6 +589,15 @@
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
+    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:var(--key);}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -633,13 +660,23 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">過去の文を<b>たずねる・打ち消す</b>やり方です。<br>　使うのは <span class="en">Did</span> と <span class="en">didn&#39;t</span> の2つだけ。<br>　主語がだれでも同じです。</p>
-    <div class="exbox">
+    <p class="talk">「<b>サッカーを しましたか</b>」「<b>サッカーを しませんでした</b>」のように、<b>過去の文を たずねる・打ち消す</b>やり方です。</p>
+    <p class="talk">使うのは <span class="en">Did</span> と <span class="en">didn&#39;t</span> の2つだけ。<br>　主語がだれでも同じです。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span>「～しましたか」とたずねる<small>過去の疑問文</small></div>
+      <div class="gmap"><span class="j">サッカーを しましたか</span><span class="ar">→</span><span class="e en">Did you play soccer?</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Did you play soccer?</span><span class="t">あなたは サッカーを しましたか。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Yes, I did. / No, I didn&#39;t.</span><span class="t">はい、しました。／ いいえ、しませんでした。</span></div>
-      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I didn&#39;t play soccer.</span><span class="t">わたしは サッカーを しませんでした。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">— Yes, I did. ／ No, I didn&#39;t.</span><span class="t">— はい、しました。／ いいえ、しませんでした。</span></div>
+      <div class="gnote">前に <b>Did</b> を置きます。そのかわり、動詞は <b>played → play</b> と原形（もとの形）にもどします。</div>
     </div>
-    <p class="talk"><span class="en">I played soccer.</span> だったのに、<b><span class="en">play</span> にもどっています</b>。<br>　6-2 の <span class="en">Does</span> とまったく同じしくみです。</p>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span>「～しませんでした」と打ち消す<small>過去の否定文</small></div>
+      <div class="gmap"><span class="j">サッカーを しませんでした</span><span class="ar">→</span><span class="e en">I didn&#39;t play soccer.</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I didn&#39;t play soccer.</span><span class="t">わたしは サッカーを しませんでした。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">He didn&#39;t go to the park.</span><span class="t">彼は 公園へ 行きませんでした。</span></div>
+      <div class="gnote">動詞の前に <b>didn&#39;t</b> を置きます。ここでも動詞は <b>原形（もとの形）</b>にもどします。</div>
+    </div>
+    <p class="talk"><span class="en">Did</span> や <span class="en">didn&#39;t</span> が<b>過去を引きうけている</b>ので、動詞はもどすのです。<br>　6-2 の <span class="en">Does</span> と同じしくみです。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -784,12 +821,13 @@
   </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -797,7 +835,7 @@
     <li><button class="qn" onclick="toggleQn(this)">2</button>過去の打ち消しの文は（<span class="bl s"><span class="ansfill">didn't</span></span>）を動詞の前に置く。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Did</span> や <span class="en">didn&#39;t</span> のうしろの動詞は（<span class="bl"><span class="ansfill">原形</span></span>）にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">went</span> のように形ごと変わる動詞も（<span class="bl"><span class="ansfill">原形</span></span>）にもどす。</li>
-    <li><button class="qn" onclick="toggleQn(this)">5</button>答えは <span class="en">Yes, I（<span class="bl s"><span class="ansfill">did</span></span>）.</span> ／ <span class="en">No, I（<span class="bl s"><span class="ansfill">didn't</span></span>）.</span></li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>答えは <span class="en">Yes, I（<span class="bl s"><span class="ansfill">did</span></span>）.</span> ／ <span class="en">No, I（<span class="bl s"><span class="ansfill">didn't</span></span>）.</span></li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Did</span> ／ <span class="en">did</span> ／ <span class="en">didn&#39;t</span> ／ 原形</div></div>
@@ -817,8 +855,8 @@
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Did she（<span class="bl s"><span class="ansfill">have</span></span>）a dog?</span>（had）</div>
     <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I didn&#39;t（<span class="bl s"><span class="ansfill">cook</span></span>）lunch.</span>（cooked）</div>
     <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Did you（<span class="bl s"><span class="ansfill">see</span></span>）a dog?</span>（saw）</div>
-    <div><button class="qn" onclick="toggleQn(this)">9</button><span class="en">He didn&#39;t（<span class="bl s"><span class="ansfill">visit</span></span>）Kyoto.</span>（visited）</div>
-    <div><button class="qn" onclick="toggleQn(this)">10</button><span class="en">Did you（<span class="bl s"><span class="ansfill">do</span></span>）yesterday?</span>（did）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">He didn&#39;t（<span class="bl s"><span class="ansfill">visit</span></span>）Kyoto.</span>（visited）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">Did you（<span class="bl s"><span class="ansfill">do</span></span>）yesterday?</span>（did）</div>
   </div>
   <div class="expbox"><b>見つけ方</b>　考えることは1つだけ。<b>（　）の前に <span class="en">Did</span> か <span class="en">didn&#39;t</span> があるか</b>。<br>あれば、かっこの中の形を<b>原形（もとの形）にもどす</b>だけです。<span class="en">went→go</span>、<span class="en">ate→eat</span>、<span class="en">had→have</span>、<span class="en">saw→see</span>。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -833,8 +871,8 @@
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">I didn&#39;t went to the park.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">Yes, I did.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Yes, I do.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">Did he play soccer?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
-    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Did he plays soccer?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">Did he play soccer?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Did he plays soccer?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Did you play soccer?</span>（ed を取る）　4 → <span class="en">I didn&#39;t go to the park.</span>（<span class="en">go</span> にもどす）<br>6 → <span class="en">Yes, I did.</span>（<span class="en">did</span> で答える）　8 → <span class="en">Did he play soccer?</span>（s も取る）<br>8のように、<span class="en">Did</span> のうしろは <b>s も ed もつきません</b>。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -849,7 +887,7 @@
     <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">（　）he play soccer every day?</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">（　）he go to the park last week?</span>（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">（　）she like music?</span>（今のこと）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
-    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">（　）you eat natto yesterday?</span>（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">（　）you eat natto yesterday?</span>（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　まず<b>いつのことか</b>を見ます。<span class="en">yesterday・last week</span> があれば <span class="en">Did</span>（1・4・6）。<br>今のことなら、主語で <span class="en">Do</span>（2）と <span class="en">Does</span>（3・5）を使い分けます。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -865,12 +903,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">Did</span>・<span class="en">didn&#39;t</span> を見たら、動詞はかならず<b>原形（もとの形）</b>。</div>
@@ -883,8 +922,8 @@
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼はきのうテレビを見ましたか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Did</span></span>）he（<span class="bl s"><span class="ansfill">watch</span></span>）TV yesterday?</span></div><div class="qnote">（　）が2つ。主語が <span class="en">he</span> でも <b><span class="en">Did</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆を食べませんでした。</span>　<span class="en">I didn&#39;t（<span class="bl s"><span class="ansfill">eat</span></span>）natto.</span></div><div class="qnote"><span class="en">ate</span> ではなく <b><span class="en">eat</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはきのうなにをしましたか。</span>　<span class="en">What（<span class="bl s"><span class="ansfill">did</span></span>）you do yesterday?</span></div><div class="qnote"><span class="en">What</span> のうしろは <b><span class="en">did you</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをしました。</span>　<span class="en">I（<span class="bl"><span class="ansfill">played</span></span>）soccer.</span></div><div class="qnote">8番の答え。<b>ふつうの文にもどると <span class="en">ed</span> が返ってくる</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は数学を勉強しませんでした。</span>　<span class="en">She（<span class="bl s"><span class="ansfill">didn't</span></span>）（<span class="bl s"><span class="ansfill">study</span></span>）math.</span></div><div class="qnote">主語が <span class="en">she</span> でも <b><span class="en">didn&#39;t</span></b>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをしました。</span>　<span class="en">I（<span class="bl"><span class="ansfill">played</span></span>）soccer.</span></div><div class="qnote">8番の答え。<b>ふつうの文にもどると <span class="en">ed</span> が返ってくる</b>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は数学を勉強しませんでした。</span>　<span class="en">She（<span class="bl s"><span class="ansfill">didn't</span></span>）（<span class="bl s"><span class="ansfill">study</span></span>）math.</span></div><div class="qnote">主語が <span class="en">she</span> でも <b><span class="en">didn&#39;t</span></b>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -899,7 +938,7 @@
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは公園へ行きましたか。</span>　<span class="paren en">（ to the park / go / Did / you ）</span><div class="lines tight"><div><span class="fill2">Did you go to the park?</span></div></div></div><div class="qnote">語群が <span class="en">go</span>（原形（もとの形））。<b>語群を見れば形が分かる。</b></div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">彼はきのうテレビを見ましたか。</span>　<span class="paren en">（ TV / he / yesterday / Did / watch ）</span><div class="lines tight"><div><span class="fill2">Did he watch TV yesterday?</span></div></div></div><div class="qnote"><span class="en">yesterday</span> はいちばん後ろ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆を食べませんでした。</span>　<span class="paren en">（ natto / eat / I / didn&#39;t ）</span><div class="lines tight"><div><span class="fill2">I didn&#39;t eat natto.</span></div></div></div><div class="qnote">語群が <span class="en">eat</span>。<span class="en">ate</span> ではありません。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはきのうサッカーをしました。</span>　<span class="paren en">（ soccer / played / yesterday / I ）</span><div class="lines tight"><div><span class="fill2">I played soccer yesterday.</span></div></div></div><div class="qnote">語群が <span class="en">played</span>。<b>ふつうの文</b>です。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはきのうサッカーをしました。</span>　<span class="paren en">（ soccer / played / yesterday / I ）</span><div class="lines tight"><div><span class="fill2">I played soccer yesterday.</span></div></div></div><div class="qnote">語群が <span class="en">played</span>。<b>ふつうの文</b>です。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -910,12 +949,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -924,7 +964,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">わたしはサッカーをしませんでした。<div class="lines"><div><span class="fill2">I didn&#39;t play soccer.</span></div></div></div><div class="qnote"><span class="en">did not</span> と書いても正解。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">あなたは公園へ行きましたか。<div class="lines"><div><span class="fill2">Did you go to the park?</span></div></div></div><div class="qnote"><span class="en">went</span> を <span class="en">go</span> にもどす。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしは納豆を食べませんでした。<div class="lines"><div><span class="fill2">I didn&#39;t eat natto.</span></div></div></div><div class="qnote"><span class="en">ate</span> を <span class="en">eat</span> にもどす。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">彼はきのうテレビを見ましたか。<div class="lines"><div><span class="fill2">Did he watch TV yesterday?</span></div></div></div><div class="qnote">主語が <span class="en">he</span> でも <span class="en">Did</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">彼はきのうテレビを見ましたか。<div class="lines"><div><span class="fill2">Did he watch TV yesterday?</span></div></div></div><div class="qnote">主語が <span class="en">he</span> でも <span class="en">Did</span>。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">play soccer ／ go to the park ／ eat natto ／ watch TV ／ Yes ／ No</span></div></div>
@@ -1331,11 +1371,15 @@ function toggleSlow(btn){
 })();
 
 function toggleMore(btn){
-  const s = btn.closest('.sheet');
-  const on = s.classList.toggle('simple');
-  btn.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
-  btn.classList.toggle('on', on);
-  s.scrollIntoView({behavior:'smooth', block:'start'});
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function toggleHint(btn){
