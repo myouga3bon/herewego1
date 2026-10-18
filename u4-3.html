@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Is this ～? ／ This is not ～.</div>
-      <div class="jp">これは ～ ですか ／ これは ～ ではありません</div>
+      <div class="big">Is this your bag? ／ This is not my bag.</div>
+      <div class="jp">これは あなたの かばん ですか ／ これは わたしの かばん では ありません</div>
     </div>
   </div>
 
@@ -655,7 +657,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">たずねる文は <b><span class="en">Is</span> を前に出す</b>。<br>　打ち消しは <span class="en">is</span> のうしろに <span class="en">not</span> を置きます。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -672,6 +674,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ This don&#39;t my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ This is not my bag.</span><span class="gjp">これは わたしの かばんでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の打ち消しは <b><span class="en">is not</span></b>。<span class="en">don&#39;t</span> は動作のことば専用です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ This not is my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ This is not my bag.</span><span class="gjp">これは わたしの かばんでは ありません。</span><span class="qzp"><b>ポイント</b>　<span class="en">not</span> は be動詞の<b>すぐうしろ</b>。前ではありません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ This is your bag? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Is this your bag?</span><span class="gjp">これは あなたの かばん ですか。</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">is</span> を前に出す</b>。順番を変えます。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Is this your bag? — Yes, this is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, it is.</span><span class="gjp">はい、そうです。</span><span class="qzp"><b>ポイント</b>　答えの主語は <b><span class="en">it</span></b>。<span class="en">this</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ This isnt my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ This isn&#39;t my bag.</span><span class="gjp">これは わたしの かばんでは ありません。</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。<span class="en">is not</span> → <span class="en">isn&#39;t</span>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I amn&#39;t a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I&#39;m not a student.</span><span class="gjp">わたしは 学生では ありません。</span><span class="qzp"><b>ポイント</b>　<span class="en">amn&#39;t</span> という形は<b>ありません</b>。<span class="en">I&#39;m not</span> と言います。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>「これは～ですか」は <b><span class="en">Is this ～?</span></b>　<span class="en">is</span> を前に出して、終わりを ? にする。</li>
+        <li>答えは <b><span class="en">Yes, it is.</span> ／ <span class="en">No, it isn&#39;t.</span></b>　主語は <span class="en">it</span>。</li>
+        <li><b>打ち消しは be動詞のすぐうしろに <span class="en">not</span>。</b><span class="en">don&#39;t</span> は使わない。</li>
+        <li>短い形は <b><span class="en">isn&#39;t</span> ／ <span class="en">aren&#39;t</span></b>。<span class="en">amn&#39;t</span> はないので <span class="en">I&#39;m not</span>。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 4-3　Is this ～? / be動詞の否定文</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>かなり大事｜打ち消しは be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　be動詞の文を打ち消すときは、<b>be動詞のすぐうしろに <span class="en">not</span> を置く</b>だけ。</p>
@@ -725,58 +770,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ This don&#39;t my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ This is not my bag.</span><span class="qzp"><b>ポイント</b>　be動詞の打ち消しは <b><span class="en">is not</span></b>。<span class="en">don&#39;t</span> は動作のことば専用です。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ This not is my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ This is not my bag.</span><span class="qzp"><b>ポイント</b>　<span class="en">not</span> は be動詞の<b>すぐうしろ</b>。前ではありません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ This is your bag? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Is this your bag?</span><span class="qzp"><b>ポイント</b>　たずねる文は <b><span class="en">is</span> を前に出す</b>。順番を変えます。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Is this your bag? — Yes, this is. ✕</span><span class="qzt"><b>「はい、そうです」</b>と 答えたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, it is.</span><span class="qzp"><b>ポイント</b>　答えの主語は <b><span class="en">it</span></b>。<span class="en">this</span> は使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ This isnt my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ This isn&#39;t my bag.</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。<span class="en">is not</span> → <span class="en">isn&#39;t</span>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I amn&#39;t a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I&#39;m not a student.</span><span class="qzp"><b>ポイント</b>　<span class="en">amn&#39;t</span> という形は<b>ありません</b>。<span class="en">I&#39;m not</span> と言います。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>「これは～ですか」は <b><span class="en">Is this ～?</span></b>　<span class="en">is</span> を前に出して、終わりを ? にする。</li>
-        <li>答えは <b><span class="en">Yes, it is.</span> ／ <span class="en">No, it isn&#39;t.</span></b>　主語は <span class="en">it</span>。</li>
-        <li><b>打ち消しは be動詞のすぐうしろに <span class="en">not</span>。</b><span class="en">don&#39;t</span> は使わない。</li>
-        <li>短い形は <b><span class="en">isn&#39;t</span> ／ <span class="en">aren&#39;t</span></b>。<span class="en">amn&#39;t</span> はないので <span class="en">I&#39;m not</span>。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 4-3　Is this ～? / be動詞の否定文</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -857,7 +857,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -902,7 +902,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 4 − 3 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

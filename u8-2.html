@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Are you ～ing? ／ What are you doing?</div>
-      <div class="jp">あなたは ～ しているところですか ／ なにを しているところですか</div>
+      <div class="big">Are you playing? ／ What are you doing?</div>
+      <div class="jp">あなたは しているところですか ／ なにを しているところですか</div>
     </div>
   </div>
 
@@ -680,7 +682,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">たずねる文は <b>be動詞を前に出す</b>だけ。<br>　<span class="en">Do</span> は使いません。答えも be動詞で返します。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -697,6 +699,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do you playing soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b>be動詞の文</b>。<span class="en">Do</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Are you play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<b><span class="en">ing</span> が抜けています</b>。be動詞だけでは進行形になりません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Are you playing soccer? — Yes, I do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, I am.</span><span class="gjp">はい、そうです。</span><span class="qzp"><b>ポイント</b>　<span class="en">Are</span> で聞かれたら <b><span class="en">am</span></b> で答える。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ What are you do? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ What are you doing?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">do</span> も <b><span class="en">ing</span> の形</b>にします。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ What do you doing? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ What are you doing?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b><span class="en">are</span></b>。<span class="en">do</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I don&#39;t playing soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I am not playing soccer.</span><span class="gjp">わたしは サッカーを しているところでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の文の打ち消しは <b><span class="en">not</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>進行形のたずねる文は <b>be動詞を前に出す</b>。<span class="en">Are you playing ～?</span></li>
+        <li><b><span class="en">Do</span> は使わない。</b><span class="en">ing</span> があれば be動詞の文。</li>
+        <li>答えは <b><span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span></b></li>
+        <li>打ち消しは <b>be動詞のうしろに <span class="en">not</span></b>。「なにしてるの？」は <span class="en">What are you doing?</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 8-2　現在進行形の疑問文 / What are you doing?</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>打ち消しは be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">4-3 で習ったとおりです。<br>　<b>be動詞のすぐうしろに <span class="en">not</span></b> を置きます。</p>
@@ -738,58 +783,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do you playing soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b>be動詞の文</b>。<span class="en">Do</span> は使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Are you play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="qzp"><b>ポイント</b>　<b><span class="en">ing</span> が抜けています</b>。be動詞だけでは進行形になりません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Are you playing soccer? — Yes, I do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, I am.</span><span class="qzp"><b>ポイント</b>　<span class="en">Are</span> で聞かれたら <b><span class="en">am</span></b> で答える。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ What are you do? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ What are you doing?</span><span class="qzp"><b>ポイント</b>　<span class="en">do</span> も <b><span class="en">ing</span> の形</b>にします。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ What do you doing? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ What are you doing?</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b><span class="en">are</span></b>。<span class="en">do</span> は使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I don&#39;t playing soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I am not playing soccer.</span><span class="qzp"><b>ポイント</b>　be動詞の文の打ち消しは <b><span class="en">not</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>進行形のたずねる文は <b>be動詞を前に出す</b>。<span class="en">Are you playing ～?</span></li>
-        <li><b><span class="en">Do</span> は使わない。</b><span class="en">ing</span> があれば be動詞の文。</li>
-        <li>答えは <b><span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span></b></li>
-        <li>打ち消しは <b>be動詞のうしろに <span class="en">not</span></b>。「なにしてるの？」は <span class="en">What are you doing?</span></li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 8-2　現在進行形の疑問文 / What are you doing?</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 2 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -870,7 +870,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 2 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -915,7 +915,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 8 − 2 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -415,7 +417,7 @@
   .judge .ttl ruby.rb rt{text-shadow:0 0 3px rgba(0,0,0,.6);}
 
   /* ===== v2: 表のことばの鉛筆マーク ===== */
-  table.kind td.k .pn{width:13px;height:13px;color:#35B44B;
+  table.kind td.k .pn{width:13px;height:13px;color:#C88A16;
     vertical-align:-2px;margin-right:5px;flex:none;}
 
   /* ===== v2: エネルギーゲージ（乾電池） ===== */
@@ -551,7 +553,7 @@
   .grid2.one > div{width:auto;display:block;padding:3px 0;}
 
 
-  /* ===== v10: シンプルに（基本ブロックだけ表示） ===== */
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
   .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
     border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
     background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Where is ～? ／ Where do you ～?</div>
-      <div class="jp">～は どこ ですか ／ どこで ～ しますか</div>
+      <div class="big">Where is my bag? ／ Where do you play?</div>
+      <div class="jp">わたしの かばんは どこ ですか ／ あなたは どこで しますか</div>
     </div>
   </div>
 
@@ -726,27 +728,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ Where my bag is? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Where is my bag?</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。順番を入れかえます。</span></div>
+      <div class="qza"><span class="good en">○ Where is my bag?</span><span class="gjp">わたしの かばんは どこ ですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。順番を入れかえます。</span></div>
     </div>
     <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Where is my bag? — Yes, it is. ✕</span><span class="qzt"><b>「机の上にある」</b>と 答えたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s on the desk.</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> で聞かれたら <b>場所で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Where is my bag? — Yes, it is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ It&#39;s on the desk.</span><span class="gjp">それは 机の 上に あります。</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> で聞かれたら <b>場所で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ Where you do play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Where do you play soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
+      <div class="qza"><span class="good en">○ Where do you play soccer?</span><span class="gjp">あなたは どこで サッカーを しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">Where</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ Where is you play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Where do you play soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">play</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ Where do you play soccer?</span><span class="gjp">あなたは どこで サッカーを しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">play</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ Where is my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Where is my bag?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
+      <div class="qza"><span class="good en">○ Where is my bag?</span><span class="gjp">わたしの かばんは どこ ですか。</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ Its on the desk. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s on the desk.</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。<span class="en">It is</span> → <span class="en">It&#39;s</span>。</span></div>
+      <div class="qza"><span class="good en">○ It&#39;s on the desk.</span><span class="gjp">それは 机の 上に あります。</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。<span class="en">It is</span> → <span class="en">It&#39;s</span>。</span></div>
     </div>
   </div>
 
@@ -770,7 +772,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -851,7 +853,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -896,7 +898,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 2 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

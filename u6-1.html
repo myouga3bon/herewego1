@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">He plays ～. ／ She likes ～.</div>
-      <div class="jp">彼は ～ します ／ 彼女は ～ が好きです</div>
+      <div class="big">He plays soccer. ／ She likes music.</div>
+      <div class="jp">彼は サッカーを します ／ 彼女は 音楽が 好きです</div>
     </div>
   </div>
 
@@ -661,7 +663,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk"><span class="en">he</span>・<span class="en">she</span> の文は、動作のことばに <b><span class="en">s</span></b> がつきます。<br>　ただし、つけ方が変わるものがあります。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -678,6 +680,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ He play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He plays soccer.</span><span class="gjp">彼は サッカーを します。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">s</span> が必要</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ He is play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He plays soccer.</span><span class="gjp">彼は サッカーを します。</span><span class="qzp"><b>ポイント</b>　心臓（動詞）が2つ。<b><span class="en">is</span> はいりません</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He haves a dog. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He has a dog.</span><span class="gjp">彼は 犬を 飼って います。</span><span class="qzp"><b>ポイント</b>　<span class="en">have</span> は特別で <b><span class="en">has</span></b> に変わります。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ He studys math. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He studies math.</span><span class="gjp">彼は 数学を 勉強します。</span><span class="qzp"><b>ポイント</b>　子音＋<span class="en">y</span> なので、<b><span class="en">y</span> を <span class="en">i</span> にして <span class="en">es</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ He watchs TV. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He watches TV.</span><span class="gjp">彼は テレビを 見ます。</span><span class="qzp"><b>ポイント</b>　<span class="en">ch</span> で終わるので <b><span class="en">es</span></b> をつけます。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I likes music. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I like music.</span><span class="gjp">わたしは 音楽が 好きです。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">s</span> はつけません</b>。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・人の名前</b> のとき、一般動詞に <span class="en">s</span> をつける。</li>
+        <li><b><span class="en">I</span> と <span class="en">you</span> にはつけない。</b>「わたしとあなた以外は <span class="en">s</span>」。</li>
+        <li><span class="en">o・s・x・ch・sh</span> で終わる語は <b><span class="en">es</span></b>、子音＋<span class="en">y</span> は <b><span class="en">ies</span></b>。</li>
+        <li><b><span class="en">have → has</span></b> は特別な形。<span class="en">haves</span> とは書かない。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 6-1　三単現の肯定文</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span><span class="en">s</span> のつけ方は4パターン<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ほとんどは<b>そのまま <span class="en">s</span></b> です。<br>　例外は3つだけおぼえましょう。</p>
@@ -738,58 +783,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ He play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He plays soccer.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">s</span> が必要</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ He is play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He plays soccer.</span><span class="qzp"><b>ポイント</b>　心臓（動詞）が2つ。<b><span class="en">is</span> はいりません</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He haves a dog. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He has a dog.</span><span class="qzp"><b>ポイント</b>　<span class="en">have</span> は特別で <b><span class="en">has</span></b> に変わります。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ He studys math. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He studies math.</span><span class="qzp"><b>ポイント</b>　子音＋<span class="en">y</span> なので、<b><span class="en">y</span> を <span class="en">i</span> にして <span class="en">es</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ He watchs TV. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He watches TV.</span><span class="qzp"><b>ポイント</b>　<span class="en">ch</span> で終わるので <b><span class="en">es</span></b> をつけます。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ I likes music. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I like music.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">s</span> はつけません</b>。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・人の名前</b> のとき、一般動詞に <span class="en">s</span> をつける。</li>
-        <li><b><span class="en">I</span> と <span class="en">you</span> にはつけない。</b>「わたしとあなた以外は <span class="en">s</span>」。</li>
-        <li><span class="en">o・s・x・ch・sh</span> で終わる語は <b><span class="en">es</span></b>、子音＋<span class="en">y</span> は <b><span class="en">ies</span></b>。</li>
-        <li><b><span class="en">have → has</span></b> は特別な形。<span class="en">haves</span> とは書かない。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 6-1　三単現の肯定文</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 1 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -870,7 +870,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 1 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -915,7 +915,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 1 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">He doesn&#39;t ～.</div>
-      <div class="jp">彼は ～ しません</div>
+      <div class="big">He doesn&#39;t play soccer.</div>
+      <div class="jp">彼は サッカーを しません</div>
     </div>
   </div>
 
@@ -646,17 +648,17 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">2</span>かなり大事｜<span class="en">s</span> は <span class="en">doesn&#39;t</span> に引っこす<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">ここが今回のヤマです。<br>　6-2 とまったく同じしくみ。<br>　<b><span class="en">s</span> は1つの文に1回だけ</b>なので、動詞は もとの形にもどります。</p>
+    <p class="talk">ここが今回のヤマです。<br>　6-2 とまったく同じしくみ。<br>　<b><span class="en">s</span> は1つの文に1回だけ</b>なので、動詞は 原形（もとの形）にもどります。</p>
     <div class="eqbox">
       <span class="eq">He play<b style="color:var(--ng);">s</b> soccer.</span>　→　<span class="eq">He doe<b style="color:var(--ng);">s</b>n&#39;t play soccer.</span><br>
-      <b><span class="en">s</span> が <span class="en">doesn&#39;t</span> に引っこして、動詞は もとの形にもどる</b>。
+      <b><span class="en">s</span> が <span class="en">doesn&#39;t</span> に引っこして、動詞は 原形（もとの形）にもどる</b>。
     </div>
     <div class="blocks">
       <div class="blk fill" style="background:var(--gv);"><div class="w en">He</div><div class="r">だれが</div></div>
       <div class="plus">＋</div>
       <div class="blk fill" style="background:var(--ng);"><div class="w en">doesn&#39;t</div><div class="r">～しない</div></div>
       <div class="plus">＋</div>
-      <div class="blk fill" style="background:var(--gv);"><div class="w en">play</div><div class="r">もとの形</div></div>
+      <div class="blk fill" style="background:var(--gv);"><div class="w en">play</div><div class="r">原形（もとの形）</div></div>
       <div class="plus">＋</div>
       <div class="blk line" style="border-color:var(--gv);color:var(--gv);"><div class="w">なにを</div><div class="r">soccer …</div></div>
     </div>
@@ -664,8 +666,8 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">doesn&#39;t</span> のうしろは <b>もとの形</b>。<br>　<span class="en">s</span> はもうつけません。</p>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">doesn&#39;t</span> のうしろは <b>原形（もとの形）</b>。<br>　<span class="en">s</span> はもうつけません。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
       <tbody>
@@ -680,6 +682,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ He don&#39;t play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="gjp">彼は サッカーを しません。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">doesn&#39;t</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ He doesn&#39;t plays soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="gjp">彼は サッカーを しません。</span><span class="qzp"><b>ポイント</b>　<span class="en">s</span> が2つになっています。動詞は <b>原形（もとの形）</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He doesnt play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="gjp">彼は サッカーを しません。</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ He isn&#39;t play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="gjp">彼は サッカーを しません。</span><span class="qzp"><b>ポイント</b>　動作のことばがあるので <b><span class="en">doesn&#39;t</span></b>。<span class="en">isn&#39;t</span> は be動詞用です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ I doesn&#39;t like natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I don&#39;t like natto.</span><span class="gjp">わたしは 納豆が 好きでは ありません。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">don&#39;t</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ He doesn&#39;t has a dog. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t have a dog.</span><span class="gjp">彼は 犬を 飼って いません。</span><span class="qzp"><b>ポイント</b>　<span class="en">doesn&#39;t</span> のうしろは <b>原形（もとの形）</b>。<span class="en">has</span> にしません。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・名前</b> の打ち消しは <span class="en">doesn&#39;t</span>。</li>
+        <li><b><span class="en">doesn&#39;t</span> のあとの動詞は 原形（もとの形）。</b><span class="en">has</span> も <span class="en">have</span> にもどす。</li>
+        <li>主語が <span class="en">I</span>・<span class="en">you</span> なら <b><span class="en">don&#39;t</span></b>。</li>
+        <li>be動詞の文の打ち消しは <b><span class="en">isn&#39;t</span></b>。<span class="en">doesn&#39;t</span> は使わない。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 6-3　三単現の否定文（doesn't）</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span><span class="en">don&#39;t</span> と <span class="en">doesn&#39;t</span> の使い分け<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここまでの3つ（<span class="en">s</span>・<span class="en">Does</span>・<span class="en">doesn&#39;t</span>）は、<b>ぜんぶ主語で決まります</b>。<br>　表で一度に整理しましょう。</p>
@@ -690,7 +735,7 @@
         <tr><td class="k"><span class="en">he / she</span>・名前</td><td class="e">He play<u>s</u> ～.</td><td class="e" style="color:var(--ng);">He <u>doesn&#39;t</u> play ～.</td><td class="e">Does he play ～?</td></tr>
       </tbody>
     </table>
-    <p class="talk"><b>打ち消しとたずねる文では、動詞は どちらも もとの形</b>。<br>　<span class="en">s</span> がつくのは「ふつうの文」のときだけです。</p>
+    <p class="talk"><b>打ち消しとたずねる文では、動詞は どちらも 原形（もとの形）</b>。<br>　<span class="en">s</span> がつくのは「ふつうの文」のときだけです。</p>
   </div>
 
   <div class="blk-sec more">
@@ -725,67 +770,22 @@
 
   <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">6</span><span class="en">have</span> は <span class="en">have</span> にもどる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">6-1 で <span class="en">have → has</span> と習いました。<br>　でも <span class="en">doesn&#39;t</span> のうしろでは、<b>もとの形の <span class="en">have</span> にもどります</b>。</p>
+    <p class="talk">6-1 で <span class="en">have → has</span> と習いました。<br>　でも <span class="en">doesn&#39;t</span> のうしろでは、<b>原形（もとの形）の <span class="en">have</span> にもどります</b>。</p>
     <div class="eqbox" style="border-left-color:var(--ng);background:rgba(181,39,63,.06);">
       ○ <span class="eq" style="color:var(--vb);">He doesn&#39;t have a dog.</span>　／　<span class="xm">✕ He doesn&#39;t has a dog ✕</span><br>
-      <span class="en">has</span> は「<span class="en">s</span> がついた形」。<b><span class="en">doesn&#39;t</span> が <span class="en">s</span> を持っている</b>ので、こちらは もとの形です。
+      <span class="en">has</span> は「<span class="en">s</span> がついた形」。<b><span class="en">doesn&#39;t</span> が <span class="en">s</span> を持っている</b>ので、こちらは 原形（もとの形）です。
     </div>
-    <p class="talk"><span class="en">studies → study</span>、<span class="en">goes → go</span>、<span class="en">watches → watch</span> も同じ。<br>　<b>ぜんぶ もとの形にもどす</b>と考えれば迷いません。</p>
+    <p class="talk"><span class="en">studies → study</span>、<span class="en">goes → go</span>、<span class="en">watches → watch</span> も同じ。<br>　<b>ぜんぶ 原形（もとの形）にもどす</b>と考えれば迷いません。</p>
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ He don&#39;t play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">doesn&#39;t</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ He doesn&#39;t plays soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="qzp"><b>ポイント</b>　<span class="en">s</span> が2つになっています。動詞は <b>もとの形</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He doesnt play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="qzp"><b>ポイント</b>　<b>&#39;（アポストロフィ）</b>を忘れています。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ He isn&#39;t play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t play soccer.</span><span class="qzp"><b>ポイント</b>　動作のことばがあるので <b><span class="en">doesn&#39;t</span></b>。<span class="en">isn&#39;t</span> は be動詞用です。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ I doesn&#39;t like natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I don&#39;t like natto.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">don&#39;t</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ He doesn&#39;t has a dog. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t have a dog.</span><span class="qzp"><b>ポイント</b>　<span class="en">doesn&#39;t</span> のうしろは <b>もとの形</b>。<span class="en">has</span> にしません。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・名前</b> の打ち消しは <span class="en">doesn&#39;t</span>。</li>
-        <li><b><span class="en">doesn&#39;t</span> のあとの動詞は もとの形。</b><span class="en">has</span> も <span class="en">have</span> にもどす。</li>
-        <li>主語が <span class="en">I</span>・<span class="en">you</span> なら <b><span class="en">don&#39;t</span></b>。</li>
-        <li>be動詞の文の打ち消しは <b><span class="en">isn&#39;t</span></b>。<span class="en">doesn&#39;t</span> は使わない。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 6-3　三単現の否定文（doesn't）</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -793,13 +793,13 @@
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>主語が <span class="en">he</span>・<span class="en">she</span>・名前のときの打ち消しは（<span class="bl s"><span class="ansfill">doesn't</span></span>）を使う。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button>主語が <span class="en">I</span> や <span class="en">you</span> のときは（<span class="bl s"><span class="ansfill">don't</span></span>）を使う。</li>
-    <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">doesn&#39;t</span> のあとの動詞は（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。</li>
+    <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">doesn&#39;t</span> のあとの動詞は（<span class="bl"><span class="ansfill">原形</span></span>）にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">has</span> は（<span class="bl s"><span class="ansfill">have</span></span>）にもどす。</li>
     <li><button class="qn" onclick="toggleQn(this)">5</button>be動詞の文の打ち消しは（<span class="bl s"><span class="ansfill">isn't</span></span>）を使う。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
-    <div class="faint">語群：<span class="en">don&#39;t</span> ／ <span class="en">doesn&#39;t</span> ／ <span class="en">isn&#39;t</span> ／ <span class="en">have</span> ／ もとの形</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">doesn&#39;t</span> の中には <span class="en">does</span> が入っていて、そこが <span class="en">s</span> のしるしを持っています。<br>だから動詞のほうは もとの形でよいのです。<b><span class="en">s</span> は1つの文に1回だけ</b>、と覚えましょう。</div>
+    <div class="faint">語群：<span class="en">don&#39;t</span> ／ <span class="en">doesn&#39;t</span> ／ <span class="en">isn&#39;t</span> ／ <span class="en">have</span> ／ 原形</div></div>
+  <div class="expbox"><b>なぜ？</b>　<span class="en">doesn&#39;t</span> の中には <span class="en">does</span> が入っていて、そこが <span class="en">s</span> のしるしを持っています。<br>だから動詞のほうは 原形（もとの形）でよいのです。<b><span class="en">s</span> は1つの文に1回だけ</b>、と覚えましょう。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -840,7 +840,7 @@
 
   <div class="qsec">
   <h3 class="sec sec2">D　<span class="en">doesn&#39;t</span> のうしろの形　正しいほうを選ぼう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-  <div class="hint"><span class="en">doesn&#39;t</span> のうしろは、ぜんぶ<b>もとの形</b>です。</div>
+  <div class="hint"><span class="en">doesn&#39;t</span> のうしろは、ぜんぶ<b>原形（もとの形）</b>です。</div>
   <div class="grid2 one">
     <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">He doesn&#39;t（ア play ／イ plays）soccer.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">She doesn&#39;t（ア likes ／イ like）music.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
@@ -849,13 +849,13 @@
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">He doesn&#39;t（ア watch ／イ watches）TV.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">She doesn&#39;t（ア goes ／イ go）to school.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
-  <div class="expbox"><b>ここが大事</b>　答えはぜんぶ<b>もとの形</b>です。<span class="en">s</span> や <span class="en">es</span> がついた形は使いません。<br>3の <span class="en">has</span> も「<span class="en">s</span> がついた形」なので、<span class="en">have</span> にもどします。</div>
+  <div class="expbox"><b>ここが大事</b>　答えはぜんぶ<b>原形（もとの形）</b>です。<span class="en">s</span> や <span class="en">es</span> がついた形は使いません。<br>3の <span class="en">has</span> も「<span class="en">s</span> がついた形」なので、<span class="en">have</span> にもどします。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
-    <b>合言葉</b><span class="s">主語が <span class="en">he・she</span>・名前なら <span class="en">doesn&#39;t</span>。<b>そのあとの動詞は もとの形</b>。</span>
+    <b>合言葉</b><span class="s">主語が <span class="en">he・she</span>・名前なら <span class="en">doesn&#39;t</span>。<b>そのあとの動詞は 原形（もとの形）</b>。</span>
   </div>
   <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
@@ -866,22 +866,22 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <div class="hint"><b>コツ</b>　主語が <span class="en">he</span>・<span class="en">she</span>・名前なら <span class="en">doesn&#39;t</span>。そのあとは<b>もとの形</b>。</div>
+    <div class="hint"><b>コツ</b>　主語が <span class="en">he</span>・<span class="en">she</span>・名前なら <span class="en">doesn&#39;t</span>。そのあとは<b>原形（もとの形）</b>。</div>
     <ol class="q sp numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">彼はサッカーをしません。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">doesn't</span></span>）play soccer.</span></div><div class="qnote">主語が <span class="en">he</span> なので <b><span class="en">doesn&#39;t</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをしません。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">don't</span></span>）play soccer.</span></div><div class="qnote">主語が <span class="en">I</span> なので <b><span class="en">don&#39;t</span></b>。1番とくらべよう。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は納豆が好きではありません。</span>　<span class="en">She doesn&#39;t（<span class="bl s"><span class="ansfill">like</span></span>）natto.</span></div><div class="qnote"><span class="en">doesn&#39;t</span> のうしろは <b>もとの形</b>。<span class="en">likes</span> にしない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は納豆が好きではありません。</span>　<span class="en">She doesn&#39;t（<span class="bl s"><span class="ansfill">like</span></span>）natto.</span></div><div class="qnote"><span class="en">doesn&#39;t</span> のうしろは <b>原形（もとの形）</b>。<span class="en">likes</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は犬を飼っていません。</span>　<span class="en">He doesn&#39;t（<span class="bl s"><span class="ansfill">have</span></span>）a dog.</span></div><div class="qnote"><span class="en">has</span> ではなく <b><span class="en">have</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">彼は生徒ではありません。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">isn't</span></span>）a student.</span></div><div class="qnote">動作のことばがないので <b><span class="en">isn&#39;t</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は数学を勉強しません。</span>　<span class="en">She（<span class="bl s"><span class="ansfill">doesn't</span></span>）（<span class="bl s"><span class="ansfill">study</span></span>）math.</span></div><div class="qnote">（　）が2つ。<b><span class="en">doesn&#39;t</span> → <span class="en">study</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はテレビを見ません。</span>　<span class="en">He doesn&#39;t（<span class="bl s"><span class="ansfill">watch</span></span>）TV.</span></div><div class="qnote"><span class="en">watches</span> にしない。<b>もとの形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はテレビを見ません。</span>　<span class="en">He doesn&#39;t（<span class="bl s"><span class="ansfill">watch</span></span>）TV.</span></div><div class="qnote"><span class="en">watches</span> にしない。<b>原形（もとの形）</b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは納豆が好きではありません。</span>　<span class="en">You（<span class="bl s"><span class="ansfill">don't</span></span>）like natto.</span></div><div class="qnote">主語が <span class="en">you</span> なので <b><span class="en">don&#39;t</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">マイクは学校へ行きません。</span>　<span class="en">Mike doesn&#39;t（<span class="bl s"><span class="ansfill">go</span></span>）to school.</span></div><div class="qnote"><span class="en">goes</span> にしない。<b>もとの形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">マイクは学校へ行きません。</span>　<span class="en">Mike doesn&#39;t（<span class="bl s"><span class="ansfill">go</span></span>）to school.</span></div><div class="qnote"><span class="en">goes</span> にしない。<b>原形（もとの形）</b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は親切ではありません。</span>　<span class="en">She（<span class="bl s"><span class="ansfill">isn't</span></span>）kind.</span></div><div class="qnote">5番と同じ。be動詞の文の打ち消し。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -889,7 +889,7 @@
 
   <div class="half bottom qsec">
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <div class="hint"><b>コツ</b>　語群の打ち消しのことばを先に見る。<span class="en">doesn&#39;t</span> があれば、動詞は もとの形のはずです。</div>
+    <div class="hint"><b>コツ</b>　語群の打ち消しのことばを先に見る。<span class="en">doesn&#39;t</span> があれば、動詞は 原形（もとの形）のはずです。</div>
     <ol class="q numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">彼はサッカーをしません。</span>　<span class="paren en">（ soccer / doesn&#39;t / He / play ）</span><div class="lines tight"><div><span class="fill2">He doesn&#39;t play soccer.</span></div></div></div><div class="qnote"><span class="en">He</span> → <span class="en">doesn&#39;t</span> → 動詞 → なにを の順。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は納豆が好きではありません。</span>　<span class="paren en">（ natto / like / She / doesn&#39;t ）</span><div class="lines tight"><div><span class="fill2">She doesn&#39;t like natto.</span></div></div></div><div class="qnote">語群が <span class="en">like</span>（s なし）。<b>語群を見れば形が分かる。</b></div></div></li>
@@ -911,7 +911,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -949,7 +949,7 @@
     <div class="modelnote">これは例です。同じでなくてかまいません。きらいな食べ物・やっていないスポーツ・飼っていないペット を書くと作りやすいです。</div>
     <div class="checklist">
       <span class="key">he / she には doesn&#39;t</span>
-      <span>doesn&#39;t のあとは もとの形</span>
+      <span>doesn&#39;t のあとは 原形（もとの形）</span>
       <span>I・you には don&#39;t</span>
       <span>be動詞の文には isn&#39;t</span>
     </div>

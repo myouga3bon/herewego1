@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">When is ～? ／ When do you ～?</div>
-      <div class="jp">～は いつ ですか ／ いつ ～ しますか</div>
+      <div class="big">When is your birthday? ／ When do you study?</div>
+      <div class="jp">あなたの 誕生日は いつ ですか ／ あなたは いつ 勉強しますか</div>
     </div>
   </div>
 
@@ -663,15 +665,11 @@
     <table class="kind">
       <thead><tr><th>ことば</th><th>つくもの</th><th>れい</th></tr></thead>
       <tbody>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">on</span></td><td class="k">曜日・日づけ</td><td class="e">It&#39;s <u>on</u> Monday.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">in</span></td><td class="k">月・季節</td><td class="e">It&#39;s <u>in</u> August.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">at</span></td><td class="k">時こく</td><td class="e">I study <u>at</u> seven.</td></tr>
+        <tr><td class="k"><span class="en">on</span></td><td class="k">曜日・日づけ</td><td class="e">It&#39;s <u>on</u> Monday.</td></tr>
+        <tr><td class="k"><span class="en">in</span></td><td class="k">月・季節</td><td class="e">It&#39;s <u>in</u> August.</td></tr>
+        <tr><td class="k"><span class="en">at</span></td><td class="k">時こく</td><td class="e">I study <u>at</u> seven.</td></tr>
       </tbody>
     </table>
-    <div class="copy">
-      <svg><use href="#i-pen"/></svg>
-      <div>時のことば <span class="en">on / in / at</span> を3回ずつ書き写そう！</div>
-    </div>
     <p class="talk">おぼえ方は<b>「せまいほど <span class="en">at</span>、広いほど <span class="en">in</span>」</b>。<br>　曜日はそのまん中で <span class="en">on</span> です。</p>
     <p class="talk"><span class="en">after school</span>（放課後）、<span class="en">after dinner</span>（夕食のあと）のように、<span class="en">after</span> を使う言い方もよく出ます。</p>
   </div>
@@ -714,32 +712,51 @@
     <p class="talk"><span class="en">When</span> に <b><span class="en">n</span></b>、<span class="en">Where</span> に <b><span class="en">r</span></b>。<br>　日本語の「<b>いつ</b>」「<b>どこ</b>」と結びつけて声に出しておぼえましょう。</p>
   </div>
 
+<!-- v8: 必須のことば -->
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">6</span>時を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">答えるときは、<b>時を表すことば</b>を使います。<br>　<span class="en">in</span>・<span class="en">on</span>・<span class="en">at</span> の使い分けをおぼえましょう。</p>
+    <table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">in</span></td><td class="k">～月に・季節に</td><td class="e">It&#39;s <u>in</u> August.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">on</span></td><td class="k">～日に・曜日に</td><td class="e">It&#39;s <u>on</u> May 5.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">at</span></td><td class="k">～時に</td><td class="e">I study <u>at</u> seven.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">When</span></td><td class="k">いつ</td><td class="e"><u>When</u> is your birthday?</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>時のことば <span class="en">in / on / at</span> を3回ずつ書き写そう！</div>
+    </div>
+  </div>
+
   <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ When your birthday is? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。</span></div>
+      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。</span></div>
     </div>
     <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ When is your birthday? — Yes, it is. ✕</span><span class="qzt"><b>「8月です」</b>と 答えたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> で聞かれたら <b>時で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ When is your birthday? — Yes, it is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> で聞かれたら <b>時で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ When you do study? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When do you study?</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
+      <div class="qza"><span class="good en">○ When do you study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ When is you study? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When do you study?</span><span class="qzp"><b>ポイント</b>　<span class="en">study</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ When do you study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">study</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ It&#39;s on August. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="qzp"><b>ポイント</b>　月には <b><span class="en">in</span></b> をつけます。<span class="en">on</span> は曜日や日づけ用です。</span></div>
+      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　月には <b><span class="en">in</span></b> をつけます。<span class="en">on</span> は曜日や日づけ用です。</span></div>
     </div>
     <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Where is your birthday? ✕</span><span class="qzt"><b>「いつ」</b>を たずねたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="qzp"><b>ポイント</b>　誕生日は<b>時</b>なので <span class="en">When</span>。<span class="en">Where</span> は場所用です。</span></div>
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Where is your birthday? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　誕生日は<b>時</b>なので <span class="en">When</span>。<span class="en">Where</span> は場所用です。</span></div>
     </div>
   </div>
 
@@ -763,7 +780,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 3 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -844,7 +861,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 3 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -889,7 +906,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 3 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

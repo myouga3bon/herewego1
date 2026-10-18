@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">I was ～. ／ You were ～.</div>
-      <div class="jp">わたしは ～ でした ／ あなたは ～ でした</div>
+      <div class="big">I was busy. ／ You were busy.</div>
+      <div class="jp">わたしは いそがしかったです ／ あなたは いそがしかったです</div>
     </div>
   </div>
 
@@ -660,7 +662,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">be動詞の過去形は <span class="en">was</span> と <span class="en">were</span> の2つだけ。<br>　<b>主語で決まります</b>。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
@@ -677,6 +679,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ I were happy. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I was happy.</span><span class="gjp">わたしは うれしかったです。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">was</span></b>。<span class="en">were</span> は <span class="en">you</span> 用です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You was happy. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ You were happy.</span><span class="gjp">あなたは うれしかったです。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">were</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He were a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ He was a student.</span><span class="gjp">彼は 学生 でした。</span><span class="qzp"><b>ポイント</b>　<span class="en">he</span> は <span class="en">is</span> の仲間なので、過去形は <b><span class="en">was</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ I was played soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I played soccer.</span><span class="gjp">わたしは サッカーを しました。</span><span class="qzp"><b>ポイント</b>　心臓（動詞）が2つ。動作の文に <b><span class="en">was</span> はいりません</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ I didn&#39;t busy yesterday. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ I wasn&#39;t busy yesterday.</span><span class="gjp">わたしは きのう いそがしく ありませんでした。</span><span class="qzp"><b>ポイント</b>　be動詞の文の打ち消しは <b><span class="en">wasn&#39;t</span></b>。<span class="en">didn&#39;t</span> は動作用です。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Was you busy? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Were you busy?</span><span class="gjp">あなたは いそがしかったですか。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">Were</span></b>。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li><b><span class="en">am</span>・<span class="en">is</span> → <span class="en">was</span>、<span class="en">are</span> → <span class="en">were</span>。</b>過去形は2つだけ。</li>
+        <li>打ち消しは <b><span class="en">wasn&#39;t</span>／<span class="en">weren&#39;t</span></b>、たずねる文は <b>前に出す</b>。</li>
+        <li>答えは <b><span class="en">Yes, I was.</span> ／ <span class="en">No, I wasn&#39;t.</span></b></li>
+        <li><b>動作の文には使わない。</b>青は <span class="en">wasn&#39;t</span>、ピンクは <span class="en">didn&#39;t</span>。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 7-4　be動詞の過去形（was / were）</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>打ち消しとたずねる文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">やり方は 2-1・4-3 とまったく同じ。<br>　<b>打ち消しは うしろに <span class="en">not</span>、たずねる文は 前に出す</b>だけです。</p>
@@ -735,58 +780,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ I were happy. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I was happy.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">I</span> なので <b><span class="en">was</span></b>。<span class="en">were</span> は <span class="en">you</span> 用です。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ You was happy. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ You were happy.</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">were</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ He were a student. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He was a student.</span><span class="qzp"><b>ポイント</b>　<span class="en">he</span> は <span class="en">is</span> の仲間なので、過去形は <b><span class="en">was</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ I was played soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I played soccer.</span><span class="qzp"><b>ポイント</b>　心臓（動詞）が2つ。動作の文に <b><span class="en">was</span> はいりません</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ I didn&#39;t busy yesterday. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I wasn&#39;t busy yesterday.</span><span class="qzp"><b>ポイント</b>　be動詞の文の打ち消しは <b><span class="en">wasn&#39;t</span></b>。<span class="en">didn&#39;t</span> は動作用です。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Was you busy? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Were you busy?</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">Were</span></b>。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li><b><span class="en">am</span>・<span class="en">is</span> → <span class="en">was</span>、<span class="en">are</span> → <span class="en">were</span>。</b>過去形は2つだけ。</li>
-        <li>打ち消しは <b><span class="en">wasn&#39;t</span>／<span class="en">weren&#39;t</span></b>、たずねる文は <b>前に出す</b>。</li>
-        <li>答えは <b><span class="en">Yes, I was.</span> ／ <span class="en">No, I wasn&#39;t.</span></b></li>
-        <li><b>動作の文には使わない。</b>青は <span class="en">wasn&#39;t</span>、ピンクは <span class="en">didn&#39;t</span>。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 7-4　be動詞の過去形（was / were）</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 4 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -867,7 +867,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 4 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -912,7 +912,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 7 − 4 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">

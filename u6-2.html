@@ -347,6 +347,8 @@
   .qzq .qzt b{color:var(--ng);font-weight:700;}
   .qzi.open .qza{display:block;}
   .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
   .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
   .qza .qzp b{color:var(--vb);}
 
@@ -624,8 +626,8 @@
     <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
     <div class="mid">
       <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
-      <div class="big">Does he ～?</div>
-      <div class="jp">彼は ～ しますか</div>
+      <div class="big">Does he play soccer?</div>
+      <div class="jp">彼は サッカーを しますか</div>
     </div>
   </div>
 
@@ -649,23 +651,23 @@
     <p class="talk">ここが今回のヤマです。<br>　<b><span class="en">s</span> は1つの文に1回だけ</b>。<br>　たずねる文では、その <span class="en">s</span> が先頭の <span class="en">Does</span> に移動します。</p>
     <div class="eqbox">
       <span class="eq">He play<b style="color:var(--ng);">s</b> soccer.</span>　→　<span class="eq">Doe<b style="color:var(--ng);">s</b> he play soccer?</span><br>
-      <b><span class="en">s</span> が先頭に引っこして、動詞は もとの形にもどる</b>。2か所に <span class="en">s</span> は置けません。
+      <b><span class="en">s</span> が先頭に引っこして、動詞は 原形（もとの形）にもどる</b>。2か所に <span class="en">s</span> は置けません。
     </div>
     <div class="blocks">
       <div class="blk fill" style="background:#7A4FBF;"><div class="w en">Does</div><div class="r">s はここ</div></div>
       <div class="plus">＋</div>
       <div class="blk fill" style="background:var(--gv);"><div class="w en">he</div><div class="r">だれが</div></div>
       <div class="plus">＋</div>
-      <div class="blk fill" style="background:var(--gv);"><div class="w en">play</div><div class="r">もとの形</div></div>
+      <div class="blk fill" style="background:var(--gv);"><div class="w en">play</div><div class="r">原形（もとの形）</div></div>
       <div class="plus">＋</div>
       <div class="blk fill" style="background:var(--ng);"><div class="w">?</div><div class="r">わすれない</div></div>
     </div>
-    <p class="talk">おぼえ方は<b>「<span class="en">Does</span> が <span class="en">s</span> を持っていく」</b>。<br>　<span class="en">can</span> や <span class="en">Do</span> のうしろが もとの形になるのと、まったく同じしくみです。</p>
+    <p class="talk">おぼえ方は<b>「<span class="en">Does</span> が <span class="en">s</span> を持っていく」</b>。<br>　<span class="en">can</span> や <span class="en">Do</span> のうしろが 原形（もとの形）になるのと、まったく同じしくみです。</p>
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">3</span>かならず書けることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk"><span class="en">Does</span> を前に出したら、うしろの動詞は <b>もとの形</b>にもどします。<br>　答えにも <span class="en">does</span> を使います。</p>
+    <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk"><span class="en">Does</span> を前に出したら、うしろの動詞は <b>原形（もとの形）</b>にもどします。<br>　答えにも <span class="en">does</span> を使います。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
       <tbody>
@@ -680,6 +682,49 @@
     </div>
   </div>
 
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="quiz">
+    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do he play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="gjp">彼は サッカーを しますか。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">Does</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Does he plays soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="gjp">彼は サッカーを しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">Does</span> が <span class="en">s</span> を持っているので、動詞は <b>原形（もとの形）</b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Does he play soccer? — Yes, he do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Yes, he does.</span><span class="gjp">はい、します。</span><span class="qzp"><b>ポイント</b>　<span class="en">Does</span> で聞かれたら <b><span class="en">does</span></b> で答える。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Does you like music? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Do you like music?</span><span class="gjp">あなたは 音楽が 好きですか。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">Do</span></b>。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Does he a student? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Is he a student?</span><span class="gjp">彼は 学生 ですか。</span><span class="qzp"><b>ポイント</b>　動作のことばがないので <b><span class="en">Is</span></b>。<span class="en">Does</span> は使いません。</span></div>
+    </div>
+    <div class="qzi">
+      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Does he play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
+      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="gjp">彼は サッカーを しますか。</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
+    </div>
+  </div>
+
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・名前</b> のたずねる文は <span class="en">Does</span> で始める。</li>
+        <li><b><span class="en">Does</span> のあとの動詞は 原形（もとの形）。</b><span class="en">s</span> は <span class="en">Does</span> に引っこす。</li>
+        <li>答えは <b><span class="en">Yes, he does.</span> ／ <span class="en">No, he doesn&#39;t.</span></b></li>
+        <li>動作のことばがない文は <b><span class="en">Is he ～?</span></b>。<span class="en">Does</span> は使わない。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 1 ／ Unit 6-2　Does ～?</span><span>1 / 4　文法わかる</span></div>
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span><span class="en">Do</span> と <span class="en">Does</span> の使い分け<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">どちらを使うかは、<b>主語だけ</b>で決まります。<br>　6-1 の <span class="en">s</span> と同じ分け方です。</p>
@@ -734,58 +779,13 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  
-
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
-  <div class="quiz">
-    <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do he play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">Does</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">2.</span><span class="xm">✕ Does he plays soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="qzp"><b>ポイント</b>　<span class="en">Does</span> が <span class="en">s</span> を持っているので、動詞は <b>もとの形</b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">3.</span><span class="xm">✕ Does he play soccer? — Yes, he do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, he does.</span><span class="qzp"><b>ポイント</b>　<span class="en">Does</span> で聞かれたら <b><span class="en">does</span></b> で答える。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">4.</span><span class="xm">✕ Does you like music? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Do you like music?</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">you</span> なので <b><span class="en">Do</span></b>。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">5.</span><span class="xm">✕ Does he a student? ✕</span><span class="qzt"><b>「彼は生徒ですか」</b>と たずねたい場合</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Is he a student?</span><span class="qzp"><b>ポイント</b>　動作のことばがないので <b><span class="en">Is</span></b>。<span class="en">Does</span> は使いません。</span></div>
-    </div>
-    <div class="qzi">
-      <div class="qzq"><span class="no">6.</span><span class="xm">✕ Does he play soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Does he play soccer?</span><span class="qzp"><b>ポイント</b>　終わりが<b>ピリオド</b>です。たずねる文の終わりは <b>?</b>。</span></div>
-    </div>
-  </div>
-
-  <div class="copy sum">
-    <svg><use href="#i-pen"/></svg>
-    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
-      <ul class="sumlist">
-        <li>主語が <b><span class="en">he</span>・<span class="en">she</span>・名前</b> のたずねる文は <span class="en">Does</span> で始める。</li>
-        <li><b><span class="en">Does</span> のあとの動詞は もとの形。</b><span class="en">s</span> は <span class="en">Does</span> に引っこす。</li>
-        <li>答えは <b><span class="en">Yes, he does.</span> ／ <span class="en">No, he doesn&#39;t.</span></b></li>
-        <li>動作のことばがない文は <b><span class="en">Is he ～?</span></b>。<span class="en">Does</span> は使わない。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="cheer">読み終わったら、②文法たしかめページへ！</div>
-
-  <div class="foot"><span>Here We Go! 1 ／ Unit 6-2　Does ～?</span><span>1 / 4　文法わかる</span></div>
-</section>
+  </section>
 
 <section class="sheet">
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 2 <small>基本事項チェック</small></div>
-    <div class="sub"><b>② 文法たしかめページ</b></div>
+    <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
   <div class="qsec">
@@ -793,13 +793,13 @@
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>主語が <span class="en">he</span>・<span class="en">she</span>・名前のときのたずねる文は（<span class="bl s"><span class="ansfill">Does</span></span>）で始める。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button>主語が <span class="en">I</span> や <span class="en">you</span> のときは（<span class="bl s"><span class="ansfill">Do</span></span>）で始める。</li>
-    <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Does</span> のあとの動詞は（<span class="bl"><span class="ansfill">もとの形</span></span>）にする。<span class="en">s</span> は（<span class="bl s"><span class="ansfill">つけない</span></span>）。</li>
+    <li><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Does</span> のあとの動詞は（<span class="bl"><span class="ansfill">原形</span></span>）にする。<span class="en">s</span> は（<span class="bl s"><span class="ansfill">つけない</span></span>）。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button>答えは <span class="en">Yes, he（<span class="bl s"><span class="ansfill">does</span></span>）.</span> ／ <span class="en">No, he（<span class="bl s"><span class="ansfill">doesn't</span></span>）.</span></li>
     <li><button class="qn" onclick="toggleQn(this)">5</button>動作のことばがない文をたずねるときは（<span class="bl s"><span class="ansfill">Is</span></span>）を使う。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
-    <div class="faint">語群：<span class="en">Do</span> ／ <span class="en">Does</span> ／ <span class="en">does</span> ／ <span class="en">doesn&#39;t</span> ／ <span class="en">Is</span> ／ もとの形 ／ つけない</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">s</span> は「主語が3人目で1人」というしるし。<b>1つの文に1回あればじゅうぶん</b>です。<br>たずねる文では先頭の <span class="en">Does</span> がそのしるしを持つので、動詞のほうは もとの形にもどります。</div>
+    <div class="faint">語群：<span class="en">Do</span> ／ <span class="en">Does</span> ／ <span class="en">does</span> ／ <span class="en">doesn&#39;t</span> ／ <span class="en">Is</span> ／ 原形 ／ つけない</div></div>
+  <div class="expbox"><b>なぜ？</b>　<span class="en">s</span> は「主語が3人目で1人」というしるし。<b>1つの文に1回あればじゅうぶん</b>です。<br>たずねる文では先頭の <span class="en">Does</span> がそのしるしを持つので、動詞のほうは 原形（もとの形）にもどります。</div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -855,7 +855,7 @@
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
-    <b>合言葉</b><span class="s">主語が <span class="en">he・she</span>・名前なら <span class="en">Does</span>。<b><span class="en">Does</span> のあとの動詞は もとの形</b>（<span class="en">s</span> を取る）。</span>
+    <b>合言葉</b><span class="s">主語が <span class="en">he・she</span>・名前なら <span class="en">Does</span>。<b><span class="en">Does</span> のあとの動詞は 原形（もとの形）</b>（<span class="en">s</span> を取る）。</span>
   </div>
   <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
 
@@ -866,21 +866,21 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 2 <small>レベル 1・2</small></div>
-    <div class="sub"><b>③ 文法かるく使えるページ</b></div>
+    <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <div class="hint"><b>コツ</b>　主語が <span class="en">he</span>・<span class="en">she</span>・名前なら <span class="en">Does</span>。そのあとの動詞は<b>もとの形</b>。</div>
+    <div class="hint"><b>コツ</b>　主語が <span class="en">he</span>・<span class="en">she</span>・名前なら <span class="en">Does</span>。そのあとの動詞は<b>原形（もとの形）</b>。</div>
     <ol class="q sp numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">彼はサッカーをしますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Does</span></span>）he play soccer?</span></div><div class="qnote">主語が <span class="en">he</span> なので <b><span class="en">Does</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">はい、します。</span>　<span class="en">Yes, he（<span class="bl s"><span class="ansfill">does</span></span>）.</span></div><div class="qnote"><span class="en">Does</span> で聞かれたから <b><span class="en">does</span></b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、しません。</span>　<span class="en">No, he（<span class="bl s"><span class="ansfill">doesn't</span></span>）.</span></div><div class="qnote"><b><span class="en">doesn&#39;t</span></b>。&#39;（アポストロフィ）を忘れずに。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は音楽が好きですか。</span>　<span class="en">Does she（<span class="bl s"><span class="ansfill">like</span></span>）music?</span></div><div class="qnote"><span class="en">Does</span> のあとは <b>もとの形</b>。<span class="en">likes</span> にしない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は音楽が好きですか。</span>　<span class="en">Does she（<span class="bl s"><span class="ansfill">like</span></span>）music?</span></div><div class="qnote"><span class="en">Does</span> のあとは <b>原形（もとの形）</b>。<span class="en">likes</span> にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーをしますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Do</span></span>）you play soccer?</span></div><div class="qnote">主語が <span class="en">you</span> なので <b><span class="en">Do</span></b>。1番とくらべよう。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">マイクは犬を飼っていますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Does</span></span>）Mike（<span class="bl s"><span class="ansfill">have</span></span>）a dog?</span></div><div class="qnote">（　）が2つ。<b><span class="en">Does</span> → <span class="en">have</span></b>（<span class="en">has</span> にしない）。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼は生徒ですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Is</span></span>）he a student?</span></div><div class="qnote">動作のことばがないので <b><span class="en">Is</span></b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は数学を勉強しますか。</span>　<span class="en">Does she（<span class="bl s"><span class="ansfill">study</span></span>）math?</span></div><div class="qnote"><span class="en">studies</span> にしない。<b>もとの形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は数学を勉強しますか。</span>　<span class="en">Does she（<span class="bl s"><span class="ansfill">study</span></span>）math?</span></div><div class="qnote"><span class="en">studies</span> にしない。<b>原形（もとの形）</b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">彼はなにが好きですか。</span>　<span class="en">What（<span class="bl s"><span class="ansfill">does</span></span>）he like?</span></div><div class="qnote"><span class="en">What</span> のうしろは <b><span class="en">does he</span></b> の順。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">彼は音楽が好きです。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">likes</span></span>）music.</span></div><div class="qnote">9番の答え。<b>ふつうの文にもどると <span class="en">s</span> が返ってくる</b>。</div></div></li>
     </ol>
@@ -911,7 +911,7 @@
   <div class="toolbar"><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 2 <small>レベル 3・4</small></div>
-    <div class="sub"><b>④ 文法しっかり使えるページ</b></div>
+    <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
   <div class="half qsec">
@@ -948,7 +948,7 @@
     </div>
     <div class="modelnote">これは例です。同じでなくてかまいません。部活・すきな教科・ペット・住んでいる場所 を聞いてみよう。</div>
     <div class="checklist">
-      <span class="key">Does のあとは もとの形</span>
+      <span class="key">Does のあとは 原形（もとの形）</span>
       <span>主語が you なら Do</span>
       <span>答えを先頭のことばとそろえた</span>
       <span>終わりは ?</span>
