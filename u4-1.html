@@ -511,7 +511,16 @@
     font-family:"Lexend",sans-serif;font-weight:700;font-size:10pt;line-height:1;
     cursor:pointer;margin-right:6px;vertical-align:-5px;transition:.12s;}
   .qn:hover{border-color:#5E9BE0;background:#E3F0FF;}
-  .qn.on{background:var(--ng);border-color:var(--ng);color:#fff;}
+  .qn{position:relative;}
+  /* v13: チェックした番号は赤くなり、大きな赤い✓が重なる */
+  .qn.on{background:#FFF1F3;border-color:var(--ng);color:var(--ng);}
+  .qn.on::after{
+    content:"\2713";
+    position:absolute;left:62%;top:38%;
+    transform:translate(-50%,-50%);
+    font-size:27pt;line-height:1;color:var(--ng);font-weight:400;
+    pointer-events:none;
+  }
   .qn.qnst{cursor:default;}
   .qn.qnst:hover{border-color:#9FC2E8;background:#F2F8FF;}
   ol.q.numq{list-style:none;padding-left:2.25em;}
@@ -525,7 +534,8 @@
   .toolbar{align-items:center;gap:8px;}
   @media print{.cknote{display:none;}
     .qn{border-color:#BBB;background:#fff;color:#333;}
-    .qn.on{background:#fff;border-color:#333;color:#333;}}
+    .qn.on{background:#fff;border-color:#333;color:#333;}
+    .qn.on::after{color:#333;}}
 
   /* ===== v3: 解き直しボタン ===== */
   .retrybar{display:flex;align-items:center;justify-content:flex-end;gap:10px;
@@ -572,20 +582,20 @@
 
 
   /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
-  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
-    border:2px solid var(--key);border-radius:999px;padding:2px 15px 3px;cursor:pointer;
-    background:#fff;color:var(--key);margin-right:auto;display:inline-flex;
-    align-items:center;gap:5px;line-height:1.5;}
-  .mbtn:active{transform:translateY(1px);}
-  .mbtn.on{background:var(--key);color:#fff;}
-  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:8pt;transition:transform .15s;}
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12.5pt;
+    border:2.5px solid #4F8C1F;border-radius:999px;padding:5px 24px 6px;cursor:pointer;
+    background:#EDF8DD;color:#3C7A14;margin-right:auto;display:inline-flex;
+    align-items:center;gap:8px;line-height:1.5;box-shadow:0 2.5px 0 rgba(79,140,31,.35);}
+  .mbtn:active{transform:translateY(2px);box-shadow:0 0 0 rgba(0,0,0,0);}
+  .mbtn.on{background:#7CB342;border-color:#4F8C1F;color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:9.5pt;transition:transform .15s;}
   .mbtn.on .cv{transform:rotate(180deg);}
   .blk-sec.more{display:block;}
   .simple .blk-sec.more{display:none;}
   .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
-    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
-    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
-  .morehint b{color:var(--key);}
+    border:1.5px dashed #A9CE7E;border-radius:8px;padding:5px 12px;
+    background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:#3C7A14;}
   .simple .morehint{display:flex;}
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
@@ -593,9 +603,9 @@
   .opt{}
   .simple .opt{display:none !important;}
   .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
-    border:1.5px dashed #B9C4D2;border-radius:8px;padding:5px 12px;
-    background:#F6F9FD;color:var(--mut);font-size:9.5pt;}
-  .qhint b{color:var(--key);}
+    border:1.5px dashed #A9CE7E;border-radius:8px;padding:5px 12px;
+    background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }

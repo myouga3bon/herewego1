@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Here We Go! 1年　文法ページ</title>
+<title>Here We Go! 中学英文法ページ</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -124,16 +124,17 @@ a.pt .pj{display:block;font-size:11px;color:var(--sub);line-height:1.45;margin-t
 .u8 a.pt:hover{border-color:var(--u8);} .u8 a.pt .pe{color:var(--u8);}
 
 /* ===== 学年タブ ===== */
-.gtabs{display:flex;gap:9px;justify-content:center;margin:0 0 13px;}
+.gtabs{display:flex;gap:11px;justify-content:center;margin:0 0 15px;}
 .gt{
-  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14.5px;
-  padding:6px 26px;border-radius:999px;cursor:pointer;
-  background:var(--card);border:2px solid var(--rule);color:var(--sub);
-  box-shadow:0 2px 0 rgba(0,0,0,.05);transition:transform .12s,border-color .12s;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:17px;
+  padding:9px 38px;border-radius:999px;cursor:pointer;
+  background:#EDF8DD;border:2.5px solid #4F8C1F;color:#3C7A14;
+  box-shadow:0 3px 0 rgba(79,140,31,.35);transition:transform .12s;
 }
 .gt:hover{transform:translateY(-1px);}
-.gt.on{background:var(--be);border-color:var(--be);color:#fff;}
-@media (max-width:480px){.gt{padding:6px 20px;font-size:13.5px;}}
+.gt:active{transform:translateY(2px);box-shadow:0 0 0 rgba(0,0,0,0);}
+.gt.on{background:#7CB342;border-color:#4F8C1F;color:#fff;}
+@media (max-width:480px){.gt{padding:8px 26px;font-size:15px;}}
 
 /* ===== 合言葉 ===== */
 .motto{
@@ -189,7 +190,7 @@ footer .lg{
     <summary><svg><use href="#i-pen"/></svg>つかいかた<span class="tip">（押すと とじられるよ）</span></summary>
     <ul class="steps">
       <li><span class="n">1</span><div>1ページ目をよく読んで、<svg class="pen"><use href="#i-pen"/></svg><b>えんぴつマーク</b>のところを<b>音読してから</b>ノートに写す。</div></li>
-      <li><span class="n">2</span><div>2〜4ページの問題を<b>ノートに解く</b>。まちがえたら、その<b>問題番号を押して赤く</b>変えよう。</div></li>
+      <li><span class="n">2</span><div>2〜4ページの問題を<b>ノートに解く</b>。まちがえたら、その<b>問題番号を押して ✓</b> を付けよう。</div></li>
       <li><span class="n">3</span><div>とけたら、その問題の右下の <span class="pill">答えを見る</span> を押す。ページ全体の <span class="pill">全体の答えを見る</span> でもOK。</div></li>
       <li><span class="n">4</span><div><b>読み方がわからない時</b>は、英語を押して<b>発音を聞こう</b>。<span class="pill k">カタカナ</span> ボタンでカタカナも確認できるよ。</div></li>
       <li><span class="n">5</span><div>最後に <span class="pill r">まちがえた問題を解き直し</span> を押して、<b>もう一度解こう</b>。</div></li>
@@ -199,6 +200,7 @@ footer .lg{
   <div class="gtabs">
     <button class="gt on" onclick="switchGrade(1,this)">1年</button>
     <button class="gt" onclick="switchGrade(2,this)">2年</button>
+    <button class="gt" onclick="switchGrade(3,this)">3年</button>
   </div>
 
   <div id="g1">
@@ -262,6 +264,7 @@ footer .lg{
       <div class="parts">
         <a class="pt" href="u7-1.html"><span class="pn">7-1</span><span class="pe">I played ～.</span><span class="pj">一般動詞の過去形　～しました</span></a>
         <a class="pt" href="u7-2.html"><span class="pn">7-2</span><span class="pe">Did you ～? / I didn't ～.</span><span class="pj">過去の疑問文・否定文</span></a>
+        <a class="pt" href="u7-3.html"><span class="pn">7-3</span><span class="pe">What a big lantern!</span><span class="pj">なんて 大きな ちょうちん</span></a>
         <a class="pt" href="u7-4.html"><span class="pn">7-4</span><span class="pe">I was ～. / You were ～.</span><span class="pj">be動詞の過去形　～でした</span></a>
       </div>
     </section>
@@ -351,6 +354,71 @@ footer .lg{
     </section>
   </div>
 
+  <div id="g3" hidden>
+    <section class="unit u1">
+      <div class="uhead"><div class="unum">1</div>
+        <div class="utxt"><div class="ut">Unit 1</div><div class="us">受け身・させる・伝える<span class="pg">p.8〜15</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u1-1.html"><span class="pn">1-1</span><span class="pe">This room is cleaned every day.</span><span class="pj">毎日 そうじされます</span></a>
+        <a class="pt" href="g3-u1-2.html"><span class="pn">1-2</span><span class="pe">Let me show you my bag.</span><span class="pj">わたしに 見せ させて ください</span></a>
+        <a class="pt" href="g3-u1-3.html"><span class="pn">1-3</span><span class="pe">He told me that you were busy.</span><span class="pj">いそがしいと 言いました</span></a>
+      </div>
+    </section>
+    <section class="unit u2">
+      <div class="uhead"><div class="unum">2</div>
+        <div class="utxt"><div class="ut">Unit 2</div><div class="us">現在完了〈完了・経験〉<span class="pg">p.19〜25</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u2-1.html"><span class="pn">2-1</span><span class="pe">I have just finished my homework.</span><span class="pj">ちょうど 終えた ところです</span></a>
+        <a class="pt" href="g3-u2-2.html"><span class="pn">2-2</span><span class="pe">Have you finished it yet?</span><span class="pj">もう 終えましたか</span></a>
+        <a class="pt" href="g3-u2-3.html"><span class="pn">2-3</span><span class="pe">I have never seen a panda.</span><span class="pj">一度も 見た ことが ありません</span></a>
+      </div>
+    </section>
+    <section class="unit u3">
+      <div class="uhead"><div class="unum">3</div>
+        <div class="utxt"><div class="ut">Unit 3</div><div class="us">現在完了〈継続〉・疑問詞＋to<span class="pg">p.29〜35</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u3-1.html"><span class="pn">3-1</span><span class="pe">I have lived here for ten years.</span><span class="pj">10年間 住んで います</span></a>
+        <a class="pt" href="g3-u3-2.html"><span class="pn">3-2</span><span class="pe">I have been studying for two hours.</span><span class="pj">2時間 ずっと 勉強して います</span></a>
+        <a class="pt" href="g3-u3-3.html"><span class="pn">3-3</span><span class="pe">I don&#39;t know what to do.</span><span class="pj">何を すればよいか 分かりません</span></a>
+      </div>
+    </section>
+    <section class="unit u4">
+      <div class="uhead"><div class="unum">4</div>
+        <div class="utxt"><div class="ut">Unit 4</div><div class="us">関係代名詞（主語）<span class="pg">p.47〜53</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u4-1.html"><span class="pn">4-1</span><span class="pe">This is a bus which goes to the station.</span><span class="pj">駅へ 行く バスです</span></a>
+        <a class="pt" href="g3-u4-2.html"><span class="pn">4-2</span><span class="pe">I have a friend who plays the piano.</span><span class="pj">ピアノを ひく 友だち</span></a>
+        <a class="pt" href="g3-u4-3.html"><span class="pn">4-3</span><span class="pe">This is the book that made me happy.</span><span class="pj">うれしく させた 本です</span></a>
+      </div>
+    </section>
+    <section class="unit u5">
+      <div class="uhead"><div class="unum">5</div>
+        <div class="utxt"><div class="ut">Unit 5</div><div class="us">関係代名詞（目的語）<span class="pg">p.61〜67</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u5-1.html"><span class="pn">5-1</span><span class="pe">This is the book which I read yesterday.</span><span class="pj">わたしが 読んだ 本です</span></a>
+        <a class="pt" href="g3-u5-2.html"><span class="pn">5-2</span><span class="pe">This is the book that I read yesterday.</span><span class="pj">わたしが 読んだ 本です</span></a>
+        <a class="pt" href="g3-u5-3.html"><span class="pn">5-3</span><span class="pe">This is the book I read yesterday.</span><span class="pj">（はぶいた形）</span></a>
+      </div>
+    </section>
+    <section class="unit u6">
+      <div class="uhead"><div class="unum">6</div>
+        <div class="utxt"><div class="ut">Unit 6</div><div class="us">分詞・間接疑問<span class="pg">p.71〜77</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u6-1.html"><span class="pn">6-1</span><span class="pe">The boy playing soccer is my brother.</span><span class="pj">サッカーを している 男の子</span></a>
+        <a class="pt" href="g3-u6-2.html"><span class="pn">6-2</span><span class="pe">This is a book written in English.</span><span class="pj">英語で 書かれた 本です</span></a>
+        <a class="pt" href="g3-u6-3.html"><span class="pn">6-3</span><span class="pe">I know what he wants.</span><span class="pj">何を ほしいか 知って います</span></a>
+      </div>
+    </section>
+    <section class="unit u7">
+      <div class="uhead"><div class="unum">7</div>
+        <div class="utxt"><div class="ut">Unit 7</div><div class="us">仮定法（もし～なら）<span class="pg">p.86〜89</span></div></div></div>
+      <div class="parts">
+        <a class="pt" href="g3-u7-1.html"><span class="pn">7-1</span><span class="pe">If I were you, I would study harder.</span><span class="pj">もし わたしが あなたなら</span></a>
+        <a class="pt" href="g3-u7-2.html"><span class="pn">7-2</span><span class="pe">I wish I could fly.</span><span class="pj">空を 飛べたら いいのに</span></a>
+      </div>
+    </section>
+  </div>
+
   <div class="motto" id="m1">
     <div class="h"><svg><use href="#i-heart"/></svg>ずっと使う合言葉</div>
     <p>
@@ -372,6 +440,17 @@ footer .lg{
     </p>
   </div>
 
+  <div class="motto" id="m3" hidden>
+    <div class="h"><svg><use href="#i-heart"/></svg>ずっと使う合言葉</div>
+    <p>
+      1つの文に <b>心臓（動詞）は 1つだけ</b>。説明が長くなっても これは変わらない。<br>
+      受け身は <b><span class="en">be</span>動詞 ＋ 過去分詞</b>、現在完了は <b><span class="en">have</span> ＋ 過去分詞</b> の<b>2語セット</b>。<br>
+      名前を<b>うしろから説明</b>する：<span class="cb"><span class="en">who</span>・<span class="en">which</span>・<span class="en">that</span>・動詞<span class="en">ing</span>・過去分詞</span>。<br>
+      <span class="en">which</span>・<span class="en">that</span> のうしろが <b>動詞</b>なら主語のはたらき、<b>主語</b>なら目的語のはたらき（はぶける）。<br>
+      疑問文を文の中に入れたら、<b>ふつうの文の順</b>にもどす（<span class="en">do・does</span> は消える）。
+    </p>
+  </div>
+
   <footer>
     <div class="lg">学習空間 稲里教室</div><br>
     光村図書『<span id="bk">Here We Go! ENGLISH COURSE 1</span>』準拠
@@ -387,8 +466,10 @@ function switchGrade(n, btn){
   document.querySelector('h1').innerHTML =
     '<span class="en">Here We Go!</span> ' + n + '年　文法ページ';
   document.title = 'Here We Go! ' + n + '年　文法ページ';
+  document.getElementById('g3').hidden = (n !== 3);
   document.getElementById('m1').hidden = (n !== 1);
   document.getElementById('m2').hidden = (n !== 2);
+  document.getElementById('m3').hidden = (n !== 3);
   document.getElementById('bk').textContent = 'Here We Go! ENGLISH COURSE ' + n;
 }
 </script>
