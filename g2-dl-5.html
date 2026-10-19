@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Life 5｜オンライン版（4ページ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --key:#1F4E9C; --vb:#0E7A54; --ng:#B5273F;
+    --ink:#16202B; --mut:#55616D; --rule:#D7DDE3; --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#E9ECEF;color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .en{font-family:"Lexend","Segoe UI",Verdana,sans-serif;}
+
+  .sheet{width:210mm;min-height:297mm;margin:8mm auto;padding:7mm 8mm 8mm;
+    background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.13);
+    page-break-after:always;position:relative;display:flex;flex-direction:column;}
+  .sheet:last-of-type{page-break-after:auto;}
+
+  .head{display:flex;align-items:flex-end;justify-content:space-between;
+    border-bottom:2.5px solid var(--key);padding-bottom:3px;margin-bottom:7px;flex:none;}
+  .head .tag{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:19pt;color:var(--key);}
+  .head .tag small{font-size:11pt;font-weight:700;color:var(--mut);margin-left:8px;}
+  .head .sub{font-size:9.5pt;color:var(--mut);text-align:right;line-height:1.4;}
+  .head .sub b{color:var(--ink);}
+  .name{display:inline-block;border:1px solid var(--rule);font-size:9.5pt;color:var(--mut);
+    padding:2px 10px;border-radius:3px;white-space:nowrap;margin-top:3px;}
+
+  .hint{background:#F5F8FB;border-left:4px solid #9AB4D6;border-radius:3px;
+    padding:2px 11px;margin:0 0 3px;font-size:9pt;line-height:1.4;color:#2A3742;}
+  .hint b{color:var(--key);}
+  .hero{display:flex;align-items:center;gap:11px;margin:0 0 6px;
+    background:linear-gradient(100deg,#1F4E9C 0%,#2E68C4 62%,#3C7BDC 100%);
+    border-radius:7px;padding:4px 14px;color:#fff;}
+  .hero .star{position:relative;flex:none;width:60px;height:60px;
+    display:flex;align-items:center;justify-content:center;}
+  .hero .star svg{width:60px;height:60px;color:#FFD34D;}
+  .hero .star span{position:absolute;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;font-size:13pt;color:#1F4E9C;line-height:1;}
+  .hero .mid{flex:1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .hero .lbl{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFD34D;color:#1F4E9C;border-radius:11px;padding:0 9px;flex-basis:100%;
+    align-self:flex-start;width:max-content;}
+  .hero .big{font-family:"Lexend",sans-serif;font-weight:700;font-size:20pt;line-height:1.15;}
+  .hero .jp{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;}
+
+  .stepnum{display:inline-flex;align-items:center;justify-content:center;
+    width:19px;height:19px;border-radius:50%;background:var(--key);color:#fff;
+    font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
+  h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
+    color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
+  .blk-sec{margin-bottom:8px;}
+  .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
+  .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
+  .talk b{background:linear-gradient(transparent 60%, rgba(255,215,0,.6) 60%);}
+  .talk .en{font-weight:600;}
+
+  .exbox{border:2px solid var(--key);border-radius:5px;padding:3px 13px;margin:2px 0;}
+  .exline{display:flex;align-items:baseline;gap:12px;padding:0;}
+  .exline .s{font-size:13pt;font-weight:600;}
+  .exline .t{font-size:10.5pt;color:var(--mut);}
+
+  .blocks{display:flex;align-items:stretch;gap:6px;margin:2px 0;flex-wrap:wrap;}
+  .blk{border-radius:6px;padding:2px 12px;text-align:center;min-width:72px;}
+  .blk .w{font-size:13pt;font-weight:700;line-height:1.15;}
+  .blk .r{font-size:8pt;margin-top:0;opacity:.88;}
+  .blk.fill{background:var(--key);color:#fff;}
+  .blk.line{border:2px dashed var(--key);color:var(--key);}
+  .plus{align-self:center;font-size:13pt;color:var(--mut);font-weight:700;}
+
+  /* 文法項目カード（1パートに複数項目があるとき） */
+  .gitem{border:2px solid var(--key);border-radius:6px;padding:4px 12px 6px;margin:4px 0;}
+  .gitem.b2{border-color:var(--gv);}
+  .gitem .gh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:11pt;
+    color:var(--key);margin-bottom:3px;}
+  .gitem.b2 .gh{color:var(--gv);}
+  .gitem .gh .gn{font-size:13pt;line-height:1;}
+  .gitem .gh small{font-weight:500;font-size:9.5pt;color:var(--mut);margin-left:2px;}
+  .gmap{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    background:rgba(31,78,156,.07);border-radius:5px;padding:3px 10px;margin:2px 0 4px;}
+  .gitem.b2 .gmap{background:rgba(194,24,91,.07);}
+  .gmap .j{font-size:11pt;font-weight:700;color:var(--ink);}
+  .gmap .ar{font-size:12pt;color:var(--mut);font-weight:700;}
+  .gmap .e{font-family:"Lexend",sans-serif;font-size:12pt;font-weight:700;color:var(--key);}
+  .gitem.b2 .gmap .e{color:var(--gv);}
+  .gmap.solo{margin:4px 0 5px;padding:5px 12px;}
+  .gnote{font-size:9.5pt;color:var(--mut);line-height:1.6;margin-top:2px;}
+  .gnote b{color:var(--ng);}
+  .eqbox{background:rgba(31,78,156,.07);border-left:5px solid var(--key);
+    padding:3px 14px;margin:2px 0;font-size:10.5pt;line-height:1.45;}
+  .eqbox .eq{font-family:"Lexend",sans-serif;font-size:12.5pt;font-weight:600;}
+
+  table.kind{width:100%;border-collapse:collapse;font-size:9pt;margin:3px 0;}
+  table.kind th,table.kind td{border:1px solid var(--rule);padding:0.5px 10px;text-align:left;}
+  table.kind thead th{background:#EEF2F8;color:var(--key);font-size:9.5pt;font-weight:700;}
+  table.kind td.k{width:26%;font-weight:700;}
+  table.kind td.k svg{margin-right:5px;color:var(--key);}
+  table.kind td.e{font-family:"Lexend",sans-serif;font-weight:600;font-size:10.5pt;}
+  table.kind td.e u{text-decoration-color:var(--key);text-decoration-thickness:2px;text-underline-offset:2px;}
+  table.kind td.j{width:27%;color:var(--mut);font-size:10pt;}
+
+  .judge{display:flex;gap:9px;margin:3px 0;}
+  .judge .col{flex:1;border-radius:5px;overflow:hidden;border:2px solid;}
+  .judge .col.yes{border-color:var(--key);}
+  .judge .col.no{border-color:var(--vb);}
+  .judge .ttl{padding:2px 11px;font-weight:700;font-size:10pt;color:#fff;display:flex;align-items:center;gap:8px;}
+  .judge .yes .ttl{background:var(--key);}
+  .judge .no .ttl{background:var(--vb);}
+  .judge .ttl small{display:block;font-weight:500;font-size:9pt;opacity:.93;}
+  .judge .in{padding:3px 11px;font-size:9pt;}
+  .judge .ex{font-family:"Lexend",sans-serif;font-size:10.5pt;font-weight:600;line-height:1.3;}
+  .judge .yes .ex{color:var(--key);} .judge .no .ex{color:var(--vb);}
+  .judge .memo{font-size:9.5pt;color:var(--mut);margin-top:3px;border-top:1px dotted var(--rule);padding-top:2px;}
+
+  .heart{background:var(--ink);color:#fff;border-radius:5px;padding:4px 14px;margin:2px 0;
+    display:flex;gap:13px;align-items:center;}
+  .heart .txt{flex:1;}
+  .heart .h{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:900;margin-bottom:1px;}
+  .heart p{margin:0;font-size:9pt;line-height:1.4;}
+  .heart .xm{color:#FF9BA8;font-weight:600;}
+  @keyframes beat{0%,100%{transform:scale(1);}12%{transform:scale(1.14);}24%{transform:scale(1);}36%{transform:scale(1.09);}}
+  .beat{animation:beat 1.6s ease-in-out infinite;transform-origin:center;}
+  @media print{.beat{animation:none;}}
+
+  .warn{border:1.5px solid var(--ng);border-radius:5px;padding:4px 13px;margin:4px 0;}
+  .warn .h{font-size:10pt;font-weight:700;color:var(--ng);margin-bottom:0;}
+  .warn .row{font-size:10pt;padding:0;line-height:1.35;}
+  .warn .why{font-size:9pt;color:var(--mut);}
+  .bad{color:var(--ng);font-weight:600;} .bad s{text-decoration-thickness:1px;}
+  .good{color:var(--vb);font-weight:600;}
+
+  h3.sec{font-family:"Zen Maru Gothic",sans-serif;font-size:12pt;font-weight:700;
+    margin:0 0 4px;padding:1px 0 1px 10px;border-left:5px solid var(--key);}
+  h3.sec em{font-style:normal;font-size:9.5pt;font-weight:500;color:var(--mut);margin-left:8px;}
+  h3.sec.sec2{margin-top:14px;padding-top:10px;border-top:2px dashed var(--rule);}
+  .half{flex:0 0 auto;}
+  .half.bottom{margin-top:auto;padding-top:7px;border-top:2px dashed var(--rule);}
+
+  .faint{margin-top:4px;font-size:8.5pt;color:#A8B0B8;line-height:1.4;}
+  .faint .en{font-weight:500;}
+  .wordbank{border:1.5px dashed var(--mut);border-radius:4px;padding:4px 12px;margin:0 0 6px;
+    font-size:11.5pt;background:#FAFBFC;}
+  .wordbank b{font-size:9.5pt;color:var(--mut);margin-right:9px;}
+  .wordbank .w{display:inline-block;margin:0 12px 0 0;font-weight:600;}
+
+  ol.q{margin:0;padding-left:1.6em;}
+  ol.q > li{font-size:11.5pt;padding:2px 0;}
+  ol.q.sp > li{padding:2.5px 0;}
+  .bl{display:inline-block;border-bottom:1.4px solid var(--ink);min-width:60px;height:1.15em;vertical-align:-3px;margin:0 2px;}
+  .bl.s{min-width:42px;} .bl.l{min-width:125px;}
+  .jp-cue{color:var(--mut);font-size:10.5pt;}
+  .paren{color:var(--mut);}
+
+  .grid2{display:flex;flex-wrap:wrap;gap:3px 14px;}
+  .grid2 > div{width:calc(50% - 8px);font-size:11.5pt;padding:2px 0;}
+  .tfbox{display:inline-block;border:1.3px solid var(--ink);width:21px;height:17px;
+    vertical-align:-3px;margin-left:7px;border-radius:2px;}
+
+  .keychips{font-size:10.5pt;margin-bottom:4px;line-height:1.8;}
+  .chip{display:inline-block;padding:1px 9px;border-radius:11px;background:var(--key);color:#fff;
+    font-weight:700;margin-right:4px;font-size:10pt;}
+
+  .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
+  .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
+
+  .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
+  .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
+  .cond ul{margin:0;padding-left:1.2em;} .cond li{padding:0;}
+
+  .checklist{margin-top:5px;font-size:10pt;color:var(--mut);display:flex;flex-wrap:wrap;gap:3px 16px;}
+  .checklist span::before{content:"□ ";font-size:11pt;color:var(--ink);}
+  .checklist span.key{color:var(--ng);font-weight:700;}
+
+  .ribbon{margin-top:6px;border:1.5px solid var(--ink);border-radius:4px;
+    padding:3px 13px;font-size:10.5pt;display:flex;align-items:center;gap:10px;}
+  .ribbon b{font-family:"Zen Maru Gothic",sans-serif;font-size:11pt;white-space:nowrap;}
+  .ribbon .s{color:var(--mut);}
+  .ribbon svg{color:var(--ng);}
+
+  .foot{border-top:1px solid var(--rule);padding-top:3px;margin-top:6px;
+    font-size:8.5pt;color:var(--mut);display:flex;justify-content:space-between;flex:none;}
+
+  .ans{font-size:12pt;line-height:1.45;}
+  .ans h4{font-family:"Zen Maru Gothic",sans-serif;font-size:13pt;font-weight:900;
+    margin:7px 0 2px;color:#fff;background:var(--key);padding:2px 13px;border-radius:4px;}
+  .ans h4:first-of-type{margin-top:3px;}
+  .ans ol{margin:0;padding-left:1.7em;} .ans li{padding:1px 0;}
+  .ans .a{font-weight:700;color:var(--vb);font-size:13.5pt;}
+  .ans .row{font-size:13.5pt;font-weight:700;letter-spacing:.04em;margin:2px 0;}
+  .ans .cm{color:var(--mut);font-size:11pt;font-weight:400;letter-spacing:0;}
+  .ans .exp{background:#F4F7FA;border-left:4px solid var(--key);padding:3px 13px;
+    font-size:10pt;color:#2A3742;margin:2px 0;line-height:1.4;}
+  .ans .exp b{color:var(--key);}
+  .teacher{background:#FFF4E5;border:1.5px solid #C1611A;border-radius:4px;
+    padding:5px 13px;font-size:10pt;margin-top:auto;line-height:1.45;}
+  .teacher .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:11.5pt;color:#8A4310;margin-bottom:1px;}
+
+  .ic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none;}
+  .ic-l{width:26px;height:26px;vertical-align:-6px;}
+  .ic-xl{width:36px;height:36px;flex:none;}
+
+  .bar-ui{max-width:210mm;margin:14px auto 0;display:flex;gap:10px;align-items:center;}
+  .bar-ui button{font-family:inherit;font-size:11pt;padding:8px 18px;border:none;border-radius:4px;
+    background:var(--ink);color:#fff;cursor:pointer;}
+  .bar-ui span{font-size:9.5pt;color:#55616D;}
+  @media print{
+    body{background:#fff;}
+    /* 用紙の余白・ヘッダー/フッターの設定に関係なく1枚に収まるよう、
+       印刷時だけ全体をわずかに縮小する */
+    .sheet{margin:0;box-shadow:none;width:auto;height:266mm;min-height:266mm;
+      padding:4mm 6mm;overflow:hidden;zoom:0.93;}
+    .bar-ui{display:none;}
+    @page{size:A4 portrait;margin:8mm;}
+  }
+</style>
+
+<style>
+  /* ===== オンライン版 ===== */
+  body{background:#EEF1F4;padding-bottom:40px;}
+  .sheet{width:100%;max-width:230mm;min-height:0;margin:14px auto;
+         padding:9mm 17mm 8mm;box-shadow:0 2px 10px rgba(0,0,0,.12);
+         page-break-after:auto;height:auto;overflow:visible;}
+  @media (max-width:560px){
+    .sheet{padding:5mm 9mm;margin:8px auto;border-radius:0;}
+    .head .tag{font-size:16pt;}
+  }
+  /* 問題行：左＝問題／右＝ひとこと解説 */
+  .row{display:flex;gap:12px;align-items:flex-start;}
+  .qmain{flex:1 1 auto;min-width:0;}
+  .qnote{flex:0 0 34%;max-width:34%;font-size:9pt;line-height:1.5;color:#245C45;
+    background:#F2F8F4;border-left:3px solid var(--vb);border-radius:4px;
+    padding:3px 9px;opacity:0;transition:opacity .18s;}
+  .qnote b{color:var(--vb);}
+  .qnote .x{color:var(--ng);font-weight:600;}
+  @media (max-width:620px){
+    .row{flex-direction:column;gap:4px;}
+    .qnote{flex:none;max-width:100%;width:100%;}
+  }
+  /* 答えの表示 */
+  .bl{position:relative;}
+  .bl .ansfill{position:absolute;left:0;right:0;bottom:1px;text-align:center;
+    color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:11pt;white-space:nowrap;opacity:0;transition:opacity .18s;}
+  .lines .fill2{color:var(--vb);font-weight:700;font-family:"Lexend",sans-serif;
+    font-size:12.5pt;padding-left:4px;opacity:0;transition:opacity .18s;}
+  .tfbox{position:relative;}
+  .tfbox .ansmark{position:absolute;left:0;right:0;top:-3px;text-align:center;
+    color:var(--vb);font-weight:700;font-size:13pt;opacity:0;transition:opacity .18s;}
+  .expbox{margin-top:7px;background:#F2F8F4;border-left:5px solid var(--vb);
+    border-radius:5px;padding:6px 12px;font-size:9.5pt;line-height:1.6;
+    color:#245C45;display:none;}
+  .expbox b{color:var(--vb);}
+  .expbox .x{color:var(--ng);font-weight:600;}
+  .model{display:none;margin-top:7px;background:#F2F8F4;border:2px solid var(--vb);
+    border-radius:6px;padding:8px 12px;font-size:10.5pt;line-height:1.6;}
+  .model .h{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;color:var(--vb);
+    font-size:11pt;margin-bottom:2px;}
+  .model .ex{font-family:"Lexend",sans-serif;font-size:13pt;font-weight:700;color:var(--vb);}
+
+  .sheet.showans .bl .ansfill{opacity:1;}
+  .sheet.showans .lines .fill2{opacity:1;}
+  .sheet.showans .tfbox .ansmark{opacity:1;}
+  .sheet.showans .qnote{opacity:1;}
+  .sheet.showans .expbox{display:block;}
+  .sheet.showans .model{display:block;}
+
+  /* 各ページ右下の答えボタン */
+  .ansbar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:12px;}
+  .ansbar .msg{font-size:9.5pt;color:var(--mut);}
+  .abtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14pt;
+    border:none;border-radius:10px;padding:10px 26px;cursor:pointer;
+    background:var(--vb);color:#fff;box-shadow:0 3px 0 #085C3E;}
+  .abtn:active{transform:translateY(3px);box-shadow:none;}
+  .abtn.on{background:var(--ng);box-shadow:0 3px 0 #8A1B2E;}
+  .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
+    padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#35B44B;}
+  .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
+  .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
+    color:#6B4E0B;margin-top:3px;line-height:1.7;}
+  .copy .cpx.jp{font-family:"Zen Kaku Gothic New",sans-serif;font-size:11pt;}
+  .copy .min{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9pt;color:#9A7C3A;margin-left:8px;}
+  /* 一般動詞はピンクをテーマカラーにする（be動詞は青のまま） */
+  :root{--gv:#C2185B;}
+  .judge .col.no{border-color:var(--gv);}
+  .judge .no .ttl{background:var(--gv);}
+  .judge .no .ex{color:var(--gv);}
+  .judge .no .memo b{color:var(--gv);}
+  .hero .lblpen{width:13px;height:13px;vertical-align:-2px;margin-right:5px;color:#1F4E9C;}
+  .heart .hearts{display:flex;align-items:center;gap:6px;flex:none;}
+  .heart .hearts svg{width:30px;height:30px;}
+  .heart .hb{color:#6FA8FF;} .heart .hp{color:#FF6B8A;}
+  .heart .or{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10pt;opacity:.9;}
+  .heart .cb{color:#9CC4FF;} .heart .cp{color:#FFA7BC;}
+  .copy.sum{align-items:flex-start;margin-top:10px;}
+  .copy.sum svg{margin-top:2px;}
+  ul.sumlist{margin:4px 0 0;padding-left:1.2em;font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:500;font-size:11pt;line-height:1.8;color:#5F4A12;}
+  ul.sumlist li{padding:1px 0;}
+  ul.sumlist b{color:#8A5A0B;}
+
+  /* ブロック間を半行ずつ空ける */
+  .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
+  /* きほんの文（書き写す3文）の鉛筆マーク */
+  .exline .pn{width:14px;height:14px;flex:none;color:#35B44B;align-self:center;margin-right:-5px;}
+
+  /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
+  .talk{text-indent:1em;}
+
+  /* ===== 設問ごと／ページ全体の答え表示 ===== */
+  .showans .bl .ansfill{opacity:1;}
+  .showans .lines .fill2{opacity:1;}
+  .showans .tfbox .ansmark{opacity:1;}
+  .showans .qnote{opacity:1;}
+  .showans .expbox{display:block;}
+  .showans .model{display:block;}
+  .showans .modelnote{display:block;}
+
+  .qsec{position:relative;}
+  .secbar{display:flex;justify-content:flex-end;margin-top:7px;}
+  .sbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:10.5pt;
+    border:2px solid var(--vb);border-radius:8px;padding:4px 18px;cursor:pointer;
+    background:#fff;color:var(--vb);}
+  .sbtn:active{transform:translateY(2px);}
+  .sbtn.on{background:var(--vb);color:#fff;}
+
+  /* ===== ヒント（語群）ボタン ===== */
+  .hintwrap{margin:5px 0 0;}
+  .hbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9.5pt;
+    border:1.5px dashed #A49C90;border-radius:7px;padding:3px 14px;cursor:pointer;
+    background:#F7F5F0;color:#7A736A;}
+  .hbtn.on{background:#EDE8DE;color:#5F594F;}
+  .hintwrap .faint{display:none;margin-top:4px;}
+  .hintwrap.open .faint{display:block;}
+
+  /* ===== よくある間違いさがしクイズ ===== */
+  .quiz{border:2px solid var(--ng);border-radius:8px;padding:8px 12px 9px;margin:9px 0 0;}
+  .quiz .qzh{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12pt;
+    color:var(--ng);}
+  .quiz .qzh .qzs{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:var(--mut);margin-left:9px;}
+  .qzi{border-top:1px dotted #E6BDC4;padding:5px 0 4px;}
+  .qzi:first-of-type{border-top:none;padding-top:4px;}
+  .qzq{display:flex;align-items:center;gap:10px;}
+  .qzq .no{font-family:"Lexend",sans-serif;font-weight:600;font-size:10pt;
+    color:var(--mut);flex:none;}
+  .qzq .xm{color:var(--ng);font-weight:700;font-family:"Lexend",sans-serif;font-size:12.5pt;}
+  .qzb{margin-left:auto;flex:none;font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;font-size:10pt;border:2px solid var(--ng);border-radius:7px;
+    padding:3px 16px;cursor:pointer;background:#fff;color:var(--ng);}
+  .qzb:active{transform:translateY(2px);}
+  .qzb.on{background:var(--ng);color:#fff;}
+  .qza{display:none;margin:4px 0 1px 52px;}
+  .qzq .qzt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9pt;color:var(--mut);margin-left:8px;}
+  .qzq .qzt b{color:var(--ng);font-weight:700;}
+  .qzi.open .qza{display:block;}
+  .qza .good{font-family:"Lexend",sans-serif;font-weight:700;font-size:12.5pt;color:var(--vb);}
+  .qza .gjp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#4A4A4A;margin-left:9px;}
+  .qza .qzp{display:block;color:#245C45;font-size:9.5pt;line-height:1.6;margin-top:1px;}
+  .qza .qzp b{color:var(--vb);}
+
+  /* ===== レベル4 書き方の例を解答欄に ===== */
+  .lines .fill2 .exlab{display:inline-block;background:var(--vb);color:#fff;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-size:8.5pt;font-weight:700;
+    border-radius:4px;padding:0 7px;margin-right:8px;vertical-align:2px;}
+  .modelnote{display:none;font-size:9.5pt;line-height:1.6;color:var(--mut);
+    margin-top:3px;text-indent:1em;}
+
+
+  /* ①②③…のブロックを細い濃いめの灰色の枠で囲う */
+  .blk-sec{border:1px solid #8A8A8A;border-radius:8px;
+    padding:8px 11px 7px;margin:0 0 9px;}
+  .blk-sec + .blk-sec{border-top:1px solid #8A8A8A;margin-top:0;padding-top:8px;}
+  .blk-sec > h3.st:first-child{margin-top:0;}
+
+
+
+  .guide{background:#FFF3DA;border:2px dashed #C88A16;border-radius:8px;
+    padding:7px 13px;margin:0 0 9px;font-size:10.5pt;line-height:1.6;color:#7A5A10;}
+  .guide b{color:#8A5A0B;}
+  /* カタカナ表示 */
+  .toolbar{display:flex;justify-content:flex-end;margin:0 0 6px;}
+  .kbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11pt;
+    border:2px solid #C88A16;border-radius:8px;padding:5px 16px;cursor:pointer;
+    background:#FFF8E8;color:#8A5A0B;}
+  .kbtn.on{background:#C88A16;color:#fff;}
+  ruby.rb{ruby-position:over;-webkit-ruby-position:before;}
+  /* rt の display は変えない（Safari が ruby-text を解さないため）。
+     ふだんは文字サイズ0で場所を取らせず、表示時にサイズを与える。 */
+  ruby.rb rt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:0;line-height:0;visibility:hidden;color:#8A5A0B;
+    -webkit-text-fill-color:#8A5A0B;letter-spacing:0;text-align:center;}
+  .showkana ruby.rb rt{font-size:7pt;line-height:1.2;visibility:visible;}
+  /* カタカナが長い語（student→ステューデント など）でも隣とぶつからないよう、
+     カタカナ表示中だけ単語のまわりに少し余白を取る */
+  .showkana ruby.rb{margin:0 2.5px;}
+  /* カタカナを出すときは、上の行と重ならないよう行間を広げる */
+  .showkana .talk, .showkana .hint, .showkana .qnote,
+  .showkana .goal, .showkana .goal li, .showkana .flow ol,
+  .showkana .flow li, .showkana .warn .row, .showkana .copy,
+  .showkana .cond, .showkana .cond li, .showkana .checklist,
+  .showkana ol.q > li, .showkana .grid2 > div,
+  .showkana table.kind td, .showkana .exline, .showkana .exline .s,
+  .showkana .judge .ex, .showkana .judge .memo, .showkana .eqbox,
+  .showkana .hero .big, .showkana .hero .jp, .showkana .lines div,
+  .showkana .model, .showkana .model .ex, .showkana .expbox,
+  .showkana .faint, .showkana .ribbon, .showkana .heart p,
+  .showkana .keychips, .showkana .blk .w, .showkana .sec em{
+    line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
+
+  /* ===== v2: 濃い背景の上のカタカナは白く ===== */
+  .hero ruby.rb rt,
+  .heart ruby.rb rt,
+  .blocks .blk.fill ruby.rb rt,
+  .judge .ttl ruby.rb rt,
+  .chip ruby.rb rt,
+  .exlab ruby.rb rt,
+  .abtn ruby.rb rt,
+  .sbtn.on ruby.rb rt,
+  .qzb.on ruby.rb rt{
+    color:#FFFFFF; -webkit-text-fill-color:#FFFFFF;
+    text-shadow:0 0 2px rgba(0,0,0,.45);}
+  /* 色つきの枠の中（判定ボックスのタイトル）は少し濃いめの影で読みやすく */
+  .judge .ttl ruby.rb rt{text-shadow:0 0 3px rgba(0,0,0,.6);}
+
+  /* ===== v2: 表のことばの鉛筆マーク ===== */
+  table.kind td.k .pn{width:13px;height:13px;color:#C88A16;
+    vertical-align:-2px;margin-right:5px;flex:none;}
+
+  /* ===== v2: エネルギーゲージ（乾電池） ===== */
+  .gauge{position:fixed;left:7px;top:50%;transform:translateY(-50%);z-index:60;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    pointer-events:none;user-select:none;}
+  .gauge .cap{width:9px;height:4px;background:#C2185B;border-radius:2px 2px 0 0;}
+  .gauge .body{width:19px;height:72px;border:2px solid #C2185B;border-radius:4px;
+    background:#fff;padding:2px;display:flex;flex-direction:column-reverse;
+    overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14);}
+  .gauge .fill{width:100%;height:0%;border-radius:2px;
+    background:repeating-linear-gradient(to top,
+      #FF6B8A 0, #FF6B8A 5.4px, #E0447A 5.4px, #E0447A 6.8px);
+    transition:height .3s ease;}
+  .gauge .pct{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:#C2185B;line-height:1;}
+  @media print{.gauge{display:none;}}
+  @media (max-width:560px){
+    .gauge{left:1px;} .gauge .body{width:14px;height:54px;}
+    .gauge .cap{width:7px;} .gauge .pct{font-size:8px;}
+  }
+
+  /* ===== v2: アナログタイマー（30分で一周／セット全体の時間） ===== */
+  .clock{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:9px;}
+  .clock .cl{width:34px;height:34px;display:block;}
+  .clock .cf{fill:#fff;stroke:var(--key);stroke-width:2.4;}
+  .clock .cp{fill:rgba(31,78,156,.22);}
+  .clock .ct{stroke:var(--key);stroke-width:1.5;opacity:.55;}
+  .clock .ch{stroke:var(--key);stroke-width:2;stroke-linecap:round;}
+  .clock .cc{fill:var(--key);}
+  .clock .cm{font-family:"Lexend",sans-serif;font-weight:700;font-size:9px;
+    color:var(--key);line-height:1;}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:rgba(181,39,63,.22);}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+  @media (max-width:560px){ .clock .cl{width:26px;height:26px;} .clock .cm{font-size:8px;} }
+
+
+  /* ===== v3: 小さなカタカナボタン（ブロックごと） ===== */
+  .kbtn{font-size:9pt !important;padding:3px 11px !important;border-width:1.5px !important;}
+  .ksm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #D8C49A;border-radius:6px;padding:1px 8px;cursor:pointer;
+    background:#FFFBF2;color:#A8884A;margin-left:auto;flex:none;line-height:1.5;}
+  .ksm:hover{border-color:#C88A16;color:#8A5A0B;}
+  .ksm.on{background:#C88A16;border-color:#C88A16;color:#fff;}
+  h3.sec{display:flex;align-items:center;flex-wrap:wrap;gap:0 4px;}
+  h3.sec em{flex:0 1 auto;}
+  h3.sec .ksm{order:9;}
+  h3.st .ksm{margin-left:auto;}
+  @media print{.ksm{display:none;}}
+
+  /* ===== v3: 時計（本体は青／扇形だけ明るいオレンジ／20分で赤） ===== */
+  .clock .cf{stroke:var(--key);}
+  .clock .cp{fill:#FFA726;fill-opacity:.78;}
+  .clock .ct{stroke:var(--key);}
+  .clock .ch{stroke:var(--key);}
+  .clock .cc{fill:var(--key);}
+  .clock .cm{color:var(--key);}
+  .clock.over .cf{stroke:var(--ng);}
+  .clock.over .cp{fill:#E8485F;fill-opacity:.70;}
+  .clock.over .ct{stroke:var(--ng);}
+  .clock.over .ch{stroke:var(--ng);}
+  .clock.over .cc{fill:var(--ng);}
+  .clock.over .cm{color:var(--ng);}
+
+  /* ===== v3: 問題番号を押してチェック ===== */
+  .qn{display:inline-flex;align-items:center;justify-content:center;flex:none;
+    width:22px;height:22px;padding:0;border-radius:50%;
+    border:2px solid #9FC2E8;background:#F2F8FF;color:#4A7FB5;
+    font-family:"Lexend",sans-serif;font-weight:700;font-size:10pt;line-height:1;
+    cursor:pointer;margin-right:6px;vertical-align:-5px;transition:.12s;}
+  .qn:hover{border-color:#5E9BE0;background:#E3F0FF;}
+  .qn{position:relative;}
+  /* v13: チェックした番号は赤くなり、大きな赤い✓が重なる */
+  .qn.on{background:#FFF1F3;border-color:var(--ng);color:var(--ng);}
+  .qn.on::after{
+    content:"\2713";
+    position:absolute;left:62%;top:38%;
+    transform:translate(-50%,-50%);
+    font-size:27pt;line-height:1;color:var(--ng);font-weight:400;
+    pointer-events:none;
+  }
+  .qn.qnst{cursor:default;}
+  .qn.qnst:hover{border-color:#9FC2E8;background:#F2F8FF;}
+  ol.q.numq{list-style:none;padding-left:2.25em;}
+  ol.q.numq > li{position:relative;}
+  ol.q.numq > li > .qn{position:absolute;left:-2.25em;top:1px;margin-right:0;
+    vertical-align:baseline;}
+  .cknote{font-size:9pt;color:#7E93A8;margin-right:auto;
+    display:inline-flex;align-items:center;gap:5px;}
+  .cknote i{display:inline-block;width:15px;height:15px;border:2px solid #9FC2E8;
+    border-radius:50%;background:#F2F8FF;}
+  .toolbar{align-items:center;gap:8px;}
+  @media print{.cknote{display:none;}
+    .qn{border-color:#BBB;background:#fff;color:#333;}
+    .qn.on{background:#fff;border-color:#333;color:#333;}
+    .qn.on::after{color:#333;}}
+
+  /* ===== v3: 解き直しボタン ===== */
+  .retrybar{display:flex;align-items:center;justify-content:flex-end;gap:10px;
+    flex-wrap:wrap;margin:14px 0 0;padding-top:12px;border-top:2px dashed var(--rule);}
+  .retrybar .msg{font-size:10pt;color:var(--mut);margin-right:auto;}
+  .retrybar .rcount{font-family:"Lexend",sans-serif;font-weight:700;font-size:11pt;
+    color:var(--ng);}
+  .rbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13pt;
+    border:none;border-radius:10px;padding:10px 24px;cursor:pointer;
+    background:var(--ng);color:#fff;box-shadow:0 3px 0 #8A1B2E;}
+  .rbtn:active{transform:translateY(3px);box-shadow:none;}
+  .rbtn[disabled]{background:#C9C2B6;box-shadow:0 3px 0 #ADA69A;cursor:default;}
+  .rmsg{font-size:10pt;color:var(--ng);flex-basis:100%;text-align:right;}
+  @media print{.retrybar{display:none;}}
+
+
+  /* ===== v5: 英語を押すと読み上げ ===== */
+  .sp{cursor:pointer;border-radius:3px;transition:background .12s;}
+  .sp:hover{background:#E6F0FF;box-shadow:0 0 0 2px #E6F0FF;}
+  .sp.playing{background:#FFE9A8 !important;box-shadow:0 0 0 2px #FFE9A8;}
+  .hero .sp:hover, .heart .sp:hover, .judge .ttl .sp:hover,
+  .blocks .blk.fill .sp:hover{background:rgba(255,255,255,.26);
+    box-shadow:0 0 0 2px rgba(255,255,255,.26);}
+  .hero .sp.playing, .heart .sp.playing, .judge .ttl .sp.playing,
+  .blocks .blk.fill .sp.playing{background:rgba(255,220,120,.45) !important;
+    box-shadow:0 0 0 2px rgba(255,220,120,.45);}
+  .spnote{font-size:9pt;color:#5A7FA8;display:inline-flex;align-items:center;gap:4px;}
+  .spnote svg{width:13px;height:13px;color:#5A7FA8;}
+  .spbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:8.5pt;
+    border:1.5px solid #AEC4DE;border-radius:6px;padding:1px 9px;cursor:pointer;
+    background:#F4F8FD;color:#4A7FB5;line-height:1.5;flex:none;}
+  .spbtn:hover{border-color:#5E9BE0;}
+  .spbtn.on{background:var(--key);border-color:var(--key);color:#fff;}
+  @media print{.spnote,.spbtn{display:none;} .sp{cursor:auto;}}
+
+
+  /* ===== v6: 2列の問題は縦順（左に1〜、右に続き） ===== */
+  .grid2.vcol{display:block;column-count:2;column-gap:20px;}
+  .grid2.vcol > div{width:auto;display:block;
+    break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;}
+  /* ===== v6: 選択肢つきの長い問題は1問1行 ===== */
+  .grid2.one{display:block;}
+  .grid2.one > div{width:auto;display:block;padding:3px 0;}
+
+
+  /* ===== v11: シンプルに（基本ブロックだけ表示） ===== */
+  .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12.5pt;
+    border:2.5px solid #4F8C1F;border-radius:999px;padding:5px 24px 6px;cursor:pointer;
+    background:#EDF8DD;color:#3C7A14;margin-right:auto;display:inline-flex;
+    align-items:center;gap:8px;line-height:1.5;box-shadow:0 2.5px 0 rgba(79,140,31,.35);}
+  .mbtn:active{transform:translateY(2px);box-shadow:0 0 0 rgba(0,0,0,0);}
+  .mbtn.on{background:#7CB342;border-color:#4F8C1F;color:#fff;}
+  .mbtn .cv{font-family:"Lexend",sans-serif;font-size:9.5pt;transition:transform .15s;}
+  .mbtn.on .cv{transform:rotate(180deg);}
+  .blk-sec.more{display:block;}
+  .simple .blk-sec.more{display:none;}
+  .morehint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #A9CE7E;border-radius:8px;padding:5px 12px;
+    background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
+  .morehint b{color:#3C7A14;}
+  .simple .morehint{display:flex;}
+  @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
+
+  /* ===== v12: シンプル時は問題も約2割へらす ===== */
+  .opt{}
+  .simple .opt{display:none !important;}
+  .qhint{display:none;align-items:center;gap:8px;margin:0 0 9px;
+    border:1.5px dashed #A9CE7E;border-radius:8px;padding:5px 12px;
+    background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
+  .qhint b{color:#3C7A14;}
+  .simple .qhint{display:flex;}
+  @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
+  @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.8-9.3-9C1.2 8.4 3.1 4.8 6.6 4.4c2-.2 3.7.8 4.6 2.3l.8 1.3.8-1.3c.9-1.5 2.6-2.5 4.6-2.3 3.5.4 5.4 4 3.9 7.6-1.8 4.2-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="6.5" r="3.3" fill="currentColor"/><path d="M12 11c-3.6 0-6.2 2.4-6.2 5.6V21h12.4v-4.4C18.2 13.4 15.6 11 12 11z" fill="currentColor"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4.4" r="2.4" fill="currentColor"/><path d="M13.7 8.1 9.6 10c-.7.3-1.1 1-1.1 1.8v3.4h2.4v-2.6l2-.9-1 4.1 3.4 3.5.6 3.1h2.4l-.8-4.2-2.7-2.8 1.1-4.4 1.7 2.3 3.1.6.4-2.3-2.3-.5-2.2-2.9c-.6-.8-1.7-1.1-2.6-.7z" fill="currentColor"/><path d="M8.2 17.6 4 19.1l.8 2.2 4.2-1.5z" fill="currentColor"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 4.5h6v2H9z" fill="currentColor"/><path d="M7 11h10M7 14.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7.5V6a1.7 1.7 0 0 1 1.7-1.7h2.6A1.7 1.7 0 0 1 15 6v1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 13h19" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 2.5c.9 1.2 1.4 2 1.4 2.6a1.4 1.4 0 1 1-2.8 0c0-.6.5-1.4 1.4-2.6z" fill="currentColor"/><rect x="4" y="12" width="16" height="8" rx="1.8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12M4 15.5c1.6 0 1.6 1.6 3.2 1.6s1.6-1.6 3.2-1.6 1.6 1.6 3.2 1.6 1.6-1.6 3.2-1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor"/><circle cx="15" cy="10" r="1.3" fill="currentColor"/><path d="M8 14.5c1 1.4 2.3 2.1 4 2.1s3-.7 4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 17.97l-6.18 3.25L7 14.35l-5-4.87 6.91-1z" fill="currentColor"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M16.6 3.4a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9.2 19.8l-4.9 1.3 1.3-4.9z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.3l3.4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.5v13L7.4 14.5H4z" fill="currentColor"/><path d="M15.4 9.2a4 4 0 0 1 0 5.6M18 6.6a7.6 7.6 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+
+<div class="gauge">
+  <div class="cap"></div>
+  <div class="body"><div class="fill" id="gfill"></div></div>
+  <div class="pct" id="gpct">0%</div>
+  <div class="clock" id="clock">
+    <svg class="cl" viewBox="0 0 40 40">
+      <circle class="cf" cx="20" cy="20" r="17"/>
+      <path class="cp" id="cpie" d=""/>
+      <g class="ct">
+        <line x1="20" y1="4.4" x2="20" y2="7.4"/>
+        <line x1="35.6" y1="20" x2="32.6" y2="20"/>
+        <line x1="20" y1="35.6" x2="20" y2="32.6"/>
+        <line x1="4.4" y1="20" x2="7.4" y2="20"/>
+      </g>
+      <line class="ch" id="chand" x1="20" y1="20" x2="20" y2="6.5"/>
+      <circle class="cc" cx="20" cy="20" r="2.1"/>
+    </svg>
+    <div class="cm" id="cmin">0分</div>
+  </div>
+</div>
+
+<section class="sheet">
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="head">
+    <div class="tag">Daily Life 5 <small>Here We Go!</small></div>
+    <div class="sub"><b>① 会話わかるページ</b><br>教科書 p.68</div>
+  </div>
+
+  <div class="hero">
+    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="mid">
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の会話！</div>
+      <div class="big">Could you tell me the way to ～?</div>
+      <div class="jp">～への 行き方を 教えて いただけますか</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">1</span>大切な会話表現｜行き方を たずねる<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">道や 乗り換えを たずねるときの <b>決まった 言い方</b>です。</p>
+    <div class="gitem">
+      <div class="gh"><span class="gn">❶</span><span class="en">Could you tell me the way to ～?</span><small>～への行き方を 教えていただけますか</small></div>
+      <div class="gmap"><span class="j"><b>動物園への 行き方を 教えて いただけますか</b></span><span class="ar">→</span><span class="e en"><b>Could you tell me the way to</b> the zoo?</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Could you tell me the way to Sapporo Maruyama Zoo?</span><span class="t">札幌市円山動物園までの 行き方を 教えて いただけますか。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Could you tell me the way to the station?</span><span class="t">駅までの 行き方を 教えて いただけますか。</span></div>
+      <div class="gnote"><span class="en">Could you ～?</span> は <span class="en">Can you ～?</span> より <b>ていねい</b>。<span class="en">the way to ～</span>＝「～への 行き方」。</div>
+    </div>
+    <div class="gitem b2">
+      <div class="gh"><span class="gn">❷</span><span class="en">how to ～</span><small>～のしかた・～する方法</small></div>
+      <div class="gmap"><span class="j"><b>切符の 買い方</b>を 知っていますか</span><span class="ar">→</span><span class="e en">Do you know <b>how to</b> buy a ticket?</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">Do you know how to buy a subway ticket?</span><span class="t">地下鉄の 切符の 買い方を 知っていますか。</span></div>
+      <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I know how to use it.</span><span class="t">私は それの 使い方を 知っています。</span></div>
+      <div class="gnote"><span class="en">how to</span> の うしろは <b>原形</b>。「どうやって～するか」の かたまりです。</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">2</span>今回の会話｜駅で 乗り換えを 案内する<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">札幌の 駅で、外国から 来た 旅行者に <b>行き方を たずねられました</b>。</p>
+    <table class="kind">
+      <thead><tr><th>だれ</th><th>英語</th><th>日本語</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Tourist<br><span class="role">（声を かける）</span></td><td class="e"><span class="en">Excuse me. <span class="kf">May I ask you something?</span></span></td><td class="k">すみません。おたずねしても いいですか。</td></tr>
+        <tr><td class="k">Yuma<br><span class="role">（応じる）</span></td><td class="e"><span class="en"><span class="kf">Sure.</span></span></td><td class="k">もちろんです。</td></tr>
+        <tr><td class="k">Tourist<br><span class="role">（行き方を たずねる）</span></td><td class="e"><span class="en"><span class="kf">Could you tell me the way to</span> Sapporo Maruyama Zoo?</span></td><td class="k">札幌市円山動物園までの 行き方を 教えて いただけますか。</td></tr>
+        <tr><td class="k">Yuma<br><span class="role">（行き方を 答える）</span></td><td class="e"><span class="en"><span class="kf">Take</span> the subway and <span class="kf">get off at</span> Odori Station.</span></td><td class="k">地下鉄に 乗って 大通駅で 降りてください。</td></tr>
+        <tr><td class="k">Yuma<br><span class="role">（乗り換えを 伝える）</span></td><td class="e"><span class="en">Then, <span class="kf">change to</span> the Tozai Line and get off at Maruyama Koen Station.</span></td><td class="k">それから 東西線に 乗り換えて 円山公園駅で 降りてください。</td></tr>
+        <tr><td class="k">Tourist<br><span class="role">（お礼を 言う）</span></td><td class="e"><span class="en"><span class="kf">I see. Thank you.</span></span></td><td class="k">わかりました。ありがとうございます。</td></tr>
+        <tr><td class="k">Yuma<br><span class="role">（できるか たずねる）</span></td><td class="e"><span class="en">Do you know <span class="kf">how to</span> buy a subway ticket?</span></td><td class="k">地下鉄の 切符の 買い方を 知っていますか。</td></tr>
+        <tr><td class="k">Tourist<br><span class="role">（たのむ）</span></td><td class="e"><span class="en">No. <span class="kf">Could you tell me how?</span></span></td><td class="k">いいえ。どうするか 教えて いただけますか。</td></tr>
+        <tr><td class="k">Yuma<br><span class="role">（申し出る）</span></td><td class="e"><span class="en">Sure. <span class="kf">I&#39;ll show you. Follow me, please.</span></span></td><td class="k">もちろんです。お教えします。ついて 来てください。</td></tr>
+      </tbody>
+    </table>
+    <div class="copy">
+      <svg><use href="#i-pen"/></svg>
+      <div>この会話を<b>3回音読</b>して、<b>2回書き写そう</b>！　テストには この文が そのまま出やすいです。</div>
+    </div>
+  </div>
+
+  <div class="blk-sec">
+    <h3 class="st"><span class="stepnum">3</span>道案内の 動作のことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">電車や バスの 案内で 使う <b>動作のことば</b>です。</p>
+    <table class="kind">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><span class="en">take ～</span></td><td class="k">～に 乗る</td><td class="e"><u>Take</u> the subway.</td></tr>
+        <tr><td class="k"><span class="en">get off at ～</span></td><td class="k">～で 降りる</td><td class="e"><u>Get off at</u> Odori Station.</td></tr>
+        <tr><td class="k"><span class="en">change to ～</span></td><td class="k">～に 乗り換える</td><td class="e"><u>Change to</u> the Tozai Line.</td></tr>
+        <tr><td class="k"><span class="en">Follow me.</span></td><td class="k">ついて 来てください</td><td class="e"><u>Follow me</u>, please.</td></tr>
+      </tbody>
+    </table>
+    <p class="talk">案内の 文は <b>動詞で 始まります</b>。<br>　<span class="en">Take ～. Get off ～. Change to ～.</span> の 順に ならべます。</p>
+  </div>
+
+  <div class="blk-sec more">
+    <h3 class="st"><span class="stepnum">4</span>ていねいに たのむ言い方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">知らない人に 話しかけるときは <b>ていねいな 形</b>を 使います。</p>
+    <table class="kind">
+      <thead><tr><th>言い方</th><th>意味</th><th>ていねいさ</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><span class="en">Can you ～?</span></td><td class="k">～してくれますか</td><td class="e">ふつう</td></tr>
+        <tr><td class="k"><span class="en">Could you ～?</span></td><td class="k">～していただけますか</td><td class="e"><b>ていねい</b></td></tr>
+        <tr><td class="k"><span class="en">Can I ～?</span></td><td class="k">～してもいいですか</td><td class="e">ふつう</td></tr>
+        <tr><td class="k"><span class="en">May I ～?</span></td><td class="k">～してもよろしいですか</td><td class="e"><b>ていねい</b></td></tr>
+      </tbody>
+    </table>
+    <div class="eqbox">
+      <span class="eq" style="color:var(--key);">Could you</span> tell me ～?　… <b>相手に</b> してもらう<br>
+      <span class="eq" style="color:var(--gv);">May I</span> ask you ～?　… <b>自分が</b> させてもらう
+    </div>
+    <p class="talk">うしろは どれも <b>原形</b>。<br>　<span class="en">Excuse me.</span>（すみません）で 話しかけてから 使います。</p>
+  </div>
+
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="copy sum">
+    <svg><use href="#i-pen"/></svg>
+    <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
+      <ul class="sumlist">
+        <li><b><span class="en">Could you tell me the way to ～?</span></b>＝「～への 行き方を 教えて いただけますか」。</li>
+        <li><b><span class="en">May I ～?</span></b>＝「～しても よろしいですか」。うしろは <b>原形</b>。</li>
+        <li><b><span class="en">how to ～</span></b>＝「～のしかた」。うしろは <b>原形</b>。</li>
+        <li><span class="en">take</span>＝乗る、<span class="en">get off at</span>＝～で降りる、<span class="en">change to</span>＝～に乗り換える。</li>
+        <li>案内の 文は <b>動詞で 始める</b>。<span class="en">Follow me, please.</span>＝ついて来てください。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cheer">読み終わったら、②たしかめページへ！</div>
+
+  <div class="foot"><span>Here We Go! 2 ／ Daily Life 5　電車の乗り換え（Could you tell me ～? ／ how to ～）</span><span>1 / 4　会話わかる</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="head">
+    <div class="tag">Daily Life 5 <small>基本事項チェック</small></div>
+    <div class="sub"><b>② 会話たしかめページ</b><br></div>
+  </div>
+
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="qsec">
+  <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <ol class="q numq">
+    <li><button class="qn" onclick="toggleQn(this)">1</button>「～への 行き方」は <span class="en">the（<span class="bl s"><span class="ansfill">way</span></span>）to ～</span> と言う。</li>
+    <li><button class="qn" onclick="toggleQn(this)">2</button>「～していただけますか」は <span class="en">（<span class="bl s"><span class="ansfill">Could</span></span>）you ～?</span> と言う。</li>
+    <li><button class="qn" onclick="toggleQn(this)">3</button>「～のしかた」は <span class="en">how（<span class="bl s"><span class="ansfill">to</span></span>）～</span> と言う。</li>
+    <li><button class="qn" onclick="toggleQn(this)">4</button>「～で 降りる」は <span class="en">get（<span class="bl s"><span class="ansfill">off</span></span>）at ～</span> と言う。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>「～に 乗り換える」は <span class="en">（<span class="bl s"><span class="ansfill">change</span></span>）to ～</span> と言う。</li>
+  </ol>
+  <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint">語群：<span class="en">way ／ Could ／ to ／ off ／ change</span></div></div>
+  <div class="expbox"><b>おぼえ方</b>　<span class="en">Could you ～?</span> も <span class="en">May I ～?</span> も うしろは <b>原形</b>。<br><span class="en">how to ～</span> は「どうやって～するか」の かたまりです。</div>
+
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#D98400;">B　（　）に1語ずつ書こう<em>本文の会話です</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="hint">ここが<b>かなり大事</b>。本文は そのまま テストに出ます。</div>
+  <div class="grid2 one">
+    <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Excuse me.（<span class="bl s"><span class="ansfill">May</span></span>）I ask you something?</span>（おたずねしてもいいですか）</div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">（<span class="bl s"><span class="ansfill">Could</span></span>）you tell me the way to the zoo?</span>（行き方を教えていただけますか）</div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Could you tell me the（<span class="bl s"><span class="ansfill">way</span></span>）to the zoo?</span>（～への行き方）</div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">（<span class="bl s"><span class="ansfill">Take</span></span>）the subway.</span>（地下鉄に乗ってください）</div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">Get（<span class="bl s"><span class="ansfill">off</span></span>）at Odori Station.</span>（大通駅で降りてください）</div>
+    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">（<span class="bl s"><span class="ansfill">Change</span></span>）to the Tozai Line.</span>（東西線に乗り換えてください）</div>
+    <div><button class="qn" onclick="toggleQn(this)">7</button><span class="en">I（<span class="bl s"><span class="ansfill">see</span></span>）. Thank you.</span>（わかりました）</div>
+    <div><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Do you know how（<span class="bl s"><span class="ansfill">to</span></span>）buy a ticket?</span>（買い方を知っていますか）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">I&#39;ll（<span class="bl s"><span class="ansfill">show</span></span>）you.</span>（お教えします）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">（<span class="bl s"><span class="ansfill">Follow</span></span>）me, please.</span>（ついて来てください）</div>
+  </div>
+  <div class="expbox"><b>かくにん</b>　4・5・6・10 は <b>動詞で 始まる</b> 案内の文です。<br>8 の <span class="en">how to</span> の うしろは 原形の <span class="en">buy</span> です。</div>
+
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2" style="border-left-color:#D98400;">C　正しい文には ○、まちがっている文には ✕ を書こう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="grid2 vcol">
+    <div><button class="qn" onclick="toggleQn(this)">1</button><span class="en">Could you tell me the way to the zoo?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button><span class="en">Could you tell me the way the zoo?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">May I ask you something?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">May I asking you something?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">Do you know how to buy a ticket?</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Do you know how buy a ticket?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">Get off at Odori Station.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Get off Odori Station at.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
+  </div>
+  <div class="expbox"><b>直し方</b>　2 → <span class="en">the way to</span>　4 → <span class="en">ask</span><br>6 → <span class="en">how to buy</span>　8 → <span class="en">Get off at ～</span></div>
+
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="qsec">
+  <h3 class="sec sec2">D　正しいほうを選ぼう<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+  <div class="hint"><b>自分</b>がするのか <b>相手</b>にしてもらうのかで えらぶ。</div>
+  <div class="grid2 one">
+    <div><button class="qn" onclick="toggleQn(this)">1</button>〔相手に たのむ〕<span class="en">（ア Could you ／イ May I） tell me the way?</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">2</button>〔自分が させてもらう〕<span class="en">（ア Could you ／イ May I） ask you something?</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">3</button><span class="en">Do you know how （ア to buy ／イ buying） a ticket?</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">4</button><span class="en">（ア Get off ／イ Get on） at Odori Station.</span>（降りる）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
+    <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">（ア Take ／イ Change） to the Tozai Line.</span>（乗り換える）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+    <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Could you （ア telling ／イ tell） me the way?</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
+  </div>
+  <div class="expbox"><b>ここが大事</b>　<span class="en">Could you</span>＝相手に してもらう。<span class="en">May I</span>＝自分が させてもらう。<br><span class="en">Could you</span> の うしろは <b>原形</b> です。</div>
+
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ribbon">
+    <svg class="ic-l beat"><use href="#i-heart"/></svg>
+    <b>合言葉</b><span class="s">Daily Life は <b>本文が そのまま出る</b>。会話を <b>まるごと</b> おぼえる。</span>
+  </div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
+
+  <div class="foot"><span>Here We Go! 2 ／ Daily Life 5　電車の乗り換え（Could you tell me ～? ／ how to ～）</span><span>2 / 4　会話たしかめ</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="head">
+    <div class="tag">Daily Life 5 <small>レベル 1・2</small></div>
+    <div class="sub"><b>③ 会話かるく使えるページ</b><br></div>
+  </div>
+
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="half qsec">
+    <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <div class="hint"><b>コツ</b>　本文を思い出しながら うめよう。</div>
+    <ol class="q sp numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">すみません。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Excuse</span></span>）me.</span></div><div class="qnote">話しかける。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">おたずねしてもいいですか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">May</span></span>）I ask you something?</span></div><div class="qnote">自分が させてもらう。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">行き方を教えていただけますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Could</span></span>）you tell me the way?</span></div><div class="qnote">相手に してもらう。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">地下鉄に乗ってください。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Take</span></span>）the subway.</span></div><div class="qnote">動詞で始める。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">大通駅で降りてください。</span>　<span class="en">Get（<span class="bl s"><span class="ansfill">off</span></span>）at Odori Station.</span></div><div class="qnote">「降りる」。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">東西線に乗り換えてください。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Change</span></span>）to the Tozai Line.</span></div><div class="qnote">「乗り換える」。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わかりました。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">see</span></span>）.</span></div><div class="qnote">返事のことば。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">切符の買い方を知っていますか。</span>　<span class="en">Do you know how（<span class="bl s"><span class="ansfill">to</span></span>）buy a ticket?</span></div><div class="qnote">「～のしかた」。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">お教えします。</span>　<span class="en">I&#39;ll（<span class="bl s"><span class="ansfill">show</span></span>）you.</span></div><div class="qnote">申し出る。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">ついて来てください。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Follow</span></span>）me, please.</span></div><div class="qnote">動詞で始める。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="half bottom qsec">
+    <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <div class="hint"><b>コツ</b>　文の最初は大文字。さいごに <b>.</b> か <b>?</b> をつける。</div>
+    <ol class="q numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">すみません。おたずねしてもいいですか。</span>　<span class="paren en">（ you / me. / Excuse / May I / ask / something ）</span><div class="lines tight"><div><span class="fill2">Excuse me. May I ask you something?</span></div></div></div><div class="qnote">2文に分ける。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">動物園までの行き方を教えていただけますか。</span>　<span class="paren en">（ the zoo / the way / to / me / you / tell / Could ）</span><div class="lines tight"><div><span class="fill2">Could you tell me the way to the zoo?</span></div></div></div><div class="qnote"><span class="en">the way to</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">地下鉄に乗って大通駅で降りてください。</span>　<span class="paren en">（ Odori Station / the subway / get / Take / at / off / and ）</span><div class="lines tight"><div><span class="fill2">Take the subway and get off at Odori Station.</span></div></div></div><div class="qnote"><span class="en">and</span> でつなぐ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">それから東西線に乗り換えてください。</span>　<span class="paren en">（ the Tozai Line / Then, / to / change ）</span><div class="lines tight"><div><span class="fill2">Then, change to the Tozai Line.</span></div></div></div><div class="qnote"><span class="en">change to</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">地下鉄の切符の買い方を知っていますか。</span>　<span class="paren en">（ know / buy / how / Do / to / you / a subway ticket ）</span><div class="lines tight"><div><span class="fill2">Do you know how to buy a subway ticket?</span></div></div></div><div class="qnote"><span class="en">how to</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">もちろんです。お教えします。</span>　<span class="paren en">（ I&#39;ll / Sure. / show / you ）</span><div class="lines tight"><div><span class="fill2">Sure. I&#39;ll show you.</span></div></div></div><div class="qnote">2文に分ける。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">ついて来てください。</span>　<span class="paren en">（ please / me, / Follow ）</span><div class="lines tight"><div><span class="fill2">Follow me, please.</span></div></div></div><div class="qnote">動詞で 始める。</div></div></li>
+    </ol>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
+
+  <div class="foot"><span>Here We Go! 2 ／ Daily Life 5　電車の乗り換え（Could you tell me ～? ／ how to ～）</span><span>3 / 4　会話かるく使える</span></div>
+</section>
+
+<section class="sheet">
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="head">
+    <div class="tag">Daily Life 5 <small>レベル 3</small></div>
+    <div class="sub"><b>④ 会話しっかり使えるページ</b><br></div>
+  </div>
+
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="qsec">
+    <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <div class="hint"><b>コツ</b>　本文の会話です。声に出して言ってから書こう。</div>
+    <ol class="q numq">
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain">すみません。おたずねしてもいいですか。<div class="lines"><div><span class="fill2">Excuse me. May I ask you something?</span></div></div></div><div class="qnote">2文。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain">もちろんです。<div class="lines"><div><span class="fill2">Sure.</span></div></div></div><div class="qnote">応じる返事。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">札幌市円山動物園までの行き方を教えていただけますか。<div class="lines"><div class="gl"><i style="flex:28"></i><span class="given">Sapporo Maruyama Zoo</span><i style="flex:1"></i><span class="fill2">Could you tell me the way to Sapporo Maruyama Zoo?</span></div></div></div><div class="qnote"><span class="en">the way to</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">地下鉄に乗って大通駅で降りてください。<div class="lines"><div class="gl"><i style="flex:4"></i><span class="given">the subway</span><i style="flex:14"></i><span class="given">Odori Station</span><i style="flex:1"></i><span class="fill2">Take the subway and get off at Odori Station.</span></div></div></div><div class="qnote">動詞で始める。<br>地下鉄＝<span class="en">subway</span></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">それから東西線に乗り換えてください。<div class="lines"><div class="gl"><i style="flex:15"></i><span class="given">the Tozai Line</span><i style="flex:1"></i><span class="fill2">Then, change to the Tozai Line.</span></div></div></div><div class="qnote">「乗り換える」。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">円山公園駅で降りてください。<div class="lines"><div class="gl"><i style="flex:10"></i><span class="given">Maruyama Koen Station</span><i style="flex:1"></i><span class="fill2">Get off at Maruyama Koen Station.</span></div></div></div><div class="qnote">「降りる」。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain">わかりました。ありがとうございます。<div class="lines"><div><span class="fill2">I see. Thank you.</span></div></div></div><div class="qnote">2文。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain">地下鉄の切符の買い方を知っていますか。<div class="lines"><div class="gl"><i style="flex:22"></i><span class="given">a subway ticket</span><i style="flex:1"></i><span class="fill2">Do you know how to buy a subway ticket?</span></div></div></div><div class="qnote">「～のしかた」。<br>切符＝<span class="en">ticket</span></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain">いいえ。どうするか教えていただけますか。<div class="lines"><div><span class="fill2">No. Could you tell me how?</span></div></div></div><div class="qnote">2文。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain">もちろんです。お教えします。<div class="lines"><div><span class="fill2">Sure. I&#39;ll show you.</span></div></div></div><div class="qnote">申し出る。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">11</button><div class="row"><div class="qmain">ついて来てください。<div class="lines"><div><span class="fill2">Follow me, please.</span></div></div></div><div class="qnote">動詞で始める。<br>ついて行く＝<span class="en">follow</span></div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">12</button><div class="row"><div class="qmain">中央卸売市場までの行き方を教えていただけますか。<div class="lines"><div class="gl"><i style="flex:28"></i><span class="given">Chuo Fish Market</span><i style="flex:1"></i><span class="fill2">Could you tell me the way to Chuo Fish Market?</span></div></div></div><div class="qnote">同じ作り。<br>市場＝<span class="en">market</span></div></div></li>
+    </ol>
+  <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
+    <div class="faint"><span class="en">Excuse me ／ May I ／ Could you tell me the way to ／ take ／ get off at ／ change to ／ how to ／ Follow me</span><br>地下鉄＝<span class="en">subway</span>　切符＝<span class="en">ticket</span>　市場＝<span class="en">market</span>　線・路線＝<span class="en">line</span></div></div>
+    <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
+  </div>
+    <div class="retrybar">
+    <span class="msg">まちがえた問題の<b>番号</b>を押してから、このボタンを押そう</span>
+    <span class="rcount" id="rcount">0問</span>
+    <button class="rbtn" id="rbtn" onclick="makeRetry()" disabled>まちがったものを解き直し</button>
+    <span class="rmsg" id="rmsg"></span>
+  </div>
+
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
+
+  <div class="foot"><span>Here We Go! 2 ／ Daily Life 5　電車の乗り換え（Could you tell me ～? ／ how to ～）</span><span>4 / 4　会話しっかり使える</span></div>
+</section>
+
+<script>
+// ===== カタカナ辞書 =====
+const KANA = {
+  "a":"ア","am":"アム","i":"アイ","i'm":"アイム","is":"イズ",
+  "australia":"オーストレイリア","japan":"ジャパン","nagano":"ナガノ",
+  "eri":"エリ","ken":"ケン","tina":"ティナ","yumi":"ユミ","yuta":"ユウタ",
+  "student":"ステューデント","fan":"ファン","soccer":"サッカー","baseball":"ベイスボール",
+  "tennis":"テニス","dog":"ドッグ","dogs":"ドッグズ","cat":"キャット","cats":"キャッツ",
+  "music":"ミューズィック","tv":"ティーヴィー",
+  "from":"フロム","happy":"ハピィ","hungry":"ハングリィ","today":"トゥデイ",
+  "twelve":"トゥエルヴ","thirteen":"サーティーン",
+  "like":"ライク","play":"プレイ","have":"ハヴ","run":"ラン","watch":"ウォッチ",
+  "fast":"ファスト","well":"ウェル","not":"ノット","do":"ドゥー","don't":"ドウント",
+  "Excuse":"エクスキューズ","something":"サムシング","Could":"クド","way":"ウェイ","subway":"サブウェイ","off":"オフ","station":"ステイション","change":"チェインジ","line":"ライン","ticket":"ティケット","follow":"フォロウ","show":"ショウ","buy":"バイ","market":"マーケット","tower":"タワー","zoo":"ズー","Odori":"オオドオリ","Tozai":"トウザイ","Maruyama":"マルヤマ","Sapporo":"サッポロ","Koen":"コウエン",
+  "spring":"スプリング","natto":"ナットウ","fish":"フィッシュ","milk":"ミルク",
+  "english":"イングリッシュ","soccer":"サッカー","sports":"スポーツ",
+  // ===== v2: 共通語の追加 =====
+  "you":"ユー","your":"ユア","yes":"イエス","no":"ノウ","what":"ワット",
+  "who":"フー","where":"ウェア","when":"ウェン","how":"ハウ","why":"ワイ",
+  "where's":"ウェアズ","when's":"ウェンズ","who's":"フーズ","what's":"ワッツ",
+  "it's":"イッツ","he's":"ヒーズ","she's":"シーズ","you're":"ユア","that's":"ザッツ",
+  "let's":"レッツ","isn't":"イズント","aren't":"アーント","wasn't":"ワズント",
+  "weren't":"ワーント","doesn't":"ダズント","didn't":"ディドゥント","can't":"キャント",
+  "cannot":"キャナット","does":"ダズ","did":"ディッド","was":"ワズ","were":"ワー",
+  "he":"ヒー","she":"シー","it":"イット","we":"ウィー","they":"ゼイ","this":"ズィス",
+  "that":"ザット","these":"ズィーズ","those":"ゾウズ","there":"ゼア","here":"ヒア",
+  "in":"イン","on":"オン","at":"アット","to":"トゥ","of":"オヴ","and":"アンド",
+  "or":"オア","but":"バット","under":"アンダー","near":"ニア","by":"バイ","with":"ウィズ",
+  "for":"フォー","after":"アフター","before":"ビフォー","every":"エヴリィ","day":"デイ",
+  "now":"ナウ","then":"ゼン","yesterday":"イエスタデイ","tomorrow":"トゥモロウ",
+  "last":"ラスト","next":"ネクスト","week":"ウィーク","night":"ナイト","morning":"モーニング",
+  "eat":"イート","ate":"エイト","go":"ゴウ","went":"ウェント","see":"スィー","saw":"ソー",
+  "get":"ゲット","got":"ガット","make":"メイク","made":"メイド","had":"ハッド","has":"ハズ",
+  "study":"スタディ","studies":"スタディーズ","studied":"スタディド","live":"リヴ","lives":"リヴズ",
+  "cook":"クック","sing":"スィング","swim":"スウィム","dance":"ダンス","read":"リード",
+  "write":"ライト","speak":"スピーク","want":"ウォント","help":"ヘルプ","open":"オウプン",
+  "close":"クロウズ","look":"ルック","listen":"リスン","come":"カム","take":"テイク",
+  "jump":"ジャンプ","walk":"ウォーク","talk":"トーク","practice":"プラクティス",
+  "visit":"ヴィズィット","enjoy":"エンジョイ","stop":"スタップ","sit":"シット","stand":"スタンド",
+  "bag":"バッグ","desk":"デスク","table":"テイブル","room":"ルーム","school":"スクール",
+  "library":"ライブラリィ","park":"パーク","station":"ステイション","home":"ホウム",
+  "book":"ブック","books":"ブックス","pen":"ペン","cap":"キャップ","bike":"バイク",
+  "lunch":"ランチ","dinner":"ディナー","breakfast":"ブレックファスト","rice":"ライス",
+  "sushi":"スーシ","water":"ウォーター","picture":"ピクチャ","guitar":"ギター",
+  "piano":"ピアノ","math":"マス","science":"サイエンス","subject":"サブジェクト",
+  "color":"カラー","sport":"スポート","sports":"スポーツ","food":"フード",
+  "friend":"フレンド","brother":"ブラザー","sister":"スィスター","father":"ファーザー",
+  "mother":"マザー","teacher":"ティーチャー","doctor":"ダクター","singer":"スィンガー",
+  "girl":"ガール","boy":"ボイ","man":"マン","woman":"ウーマン","birthday":"バースデイ",
+  "kind":"カインド","tall":"トール","nice":"ナイス","cute":"キュート","busy":"ビズィ",
+  "tired":"タイアド","free":"フリー","sick":"スィック","sleepy":"スリーピィ","fun":"ファン",
+  "good":"グッド","well":"ウェル","high":"ハイ","please":"プリーズ","together":"トゥゲザー",
+  "monday":"マンデイ","sunday":"サンデイ","saturday":"サタデイ","summer":"サマー",
+  "winter":"ウィンター","august":"オーガスト","july":"ジュライ","america":"アメリカ",
+  "paris":"パリス","tokyo":"トウキョウ","kyoto":"キョウト","mike":"マイク","emma":"エマ",
+  "saki":"サキ","six":"スィックス","seven":"セヴン","five":"ファイヴ","ten":"テン"
+};
+
+// ===== 英単語にカタカナを付ける =====
+(function attachKana(){
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, .hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el=>{
+    if(el.dataset.kanaDone) return;
+    if(el.closest('.bad, .xm, .x, s')) return;   // ✕ の誤答例にはカタカナを付けない
+    el.dataset.kanaDone = '1';
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    const nodes = []; let n;
+    while(n = walker.nextNode()) nodes.push(n);
+    nodes.forEach(node=>{
+      if(!/[A-Za-z]/.test(node.nodeValue)) return;
+      if(node.parentElement.classList.contains('rb')) return;
+      if(node.parentElement.closest('.bad, .xm, .x, s')) return;
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(/([A-Za-z][A-Za-z']*)/).forEach(part=>{
+        const key = part.toLowerCase().replace(/[’]/g,"'");
+        if(KANA[key]){
+          const ru = document.createElement('ruby');
+          ru.className = 'rb';
+          ru.appendChild(document.createTextNode(part));
+          const rt = document.createElement('rt');
+          rt.textContent = KANA[key];
+          ru.appendChild(rt);
+          frag.appendChild(ru);
+        } else {
+          frag.appendChild(document.createTextNode(part));
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+})();
+
+function toggleKana(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showkana');
+  btn.textContent = on ? 'ぜんぶ消す' : 'ぜんぶカタカナ';
+  btn.classList.toggle('on', on);
+  s.querySelectorAll('.blk-sec, .qsec').forEach(b => {
+    b.classList.toggle('showkana', on);
+    const x = b.querySelector('.ksm');
+    if(x){ x.textContent = on ? 'カタカナを消す' : 'カタカナ';
+           x.classList.toggle('on', on); }
+  });
+}
+
+function toggleSheet(btn){
+  const s = btn.closest('.sheet');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '全体の答えをかくす' : '全体の答えを見る';
+  btn.classList.toggle('on', on);
+  s.querySelectorAll('.qsec').forEach(q=>{
+    q.classList.toggle('showans', on);
+    const b = q.querySelector('.sbtn');
+    if(b){ b.textContent = on ? '答えをかくす' : '答えを見る'; b.classList.toggle('on', on); }
+  });
+  if(on) btn.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function toggleSec(btn){
+  const s = btn.closest('.qsec');
+  const on = s.classList.toggle('showans');
+  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.classList.toggle('on', on);
+}
+function toggleQz(btn){
+  const i = btn.closest('.qzi');
+  const on = i.classList.toggle('open');
+  btn.textContent = on ? 'とじる' : '答え';
+  btn.classList.toggle('on', on);
+}
+// ===== v2: エネルギーゲージ（進んだ量を乾電池で表す） =====
+(function energyGauge(){
+  const fill = document.getElementById('gfill');
+  const pct  = document.getElementById('gpct');
+  if(!fill) return;
+  let shown = -1;
+  function update(){
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const r = max > 0 ? window.scrollY / max : 0;
+    const p = Math.max(0, Math.min(100, Math.round(r * 10) * 10));
+    if(p === shown) return;
+    shown = p;
+    fill.style.height = p + '%';
+    pct.textContent = p + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// ===== v2: アナログタイマー（30分で一周。セット全体の時間を計る） =====
+(function setTimer(){
+  const box  = document.getElementById('clock');
+  const pie  = document.getElementById('cpie');
+  const hand = document.getElementById('chand');
+  const lab  = document.getElementById('cmin');
+  if(!box) return;
+  const FULL = 30 * 60;           // 30分で一周
+  const WARN = 20 * 60;           // 20分を越えたら赤く
+  const KEY  = 'hwg_timer_' + location.pathname;
+  let sec = 0;
+  try{ sec = parseInt(sessionStorage.getItem(KEY) || '0', 10) || 0; }catch(e){}
+
+  function sector(a){             // 12時から時計回りに a 度ぶんの扇形
+    if(a <= 0) return '';
+    if(a >= 359.9) a = 359.9;
+    const r = 17, c = 20, rad = a * Math.PI / 180;
+    const x = c + r * Math.sin(rad), y = c - r * Math.cos(rad);
+    return 'M' + c + ',' + c + ' L' + c + ',' + (c - r) +
+           ' A' + r + ',' + r + ' 0 ' + (a > 180 ? 1 : 0) + ',1 ' +
+           x.toFixed(2) + ',' + y.toFixed(2) + ' Z';
+  }
+  function draw(){
+    const t = Math.min(sec, FULL);
+    const a = t / FULL * 360;
+    pie.setAttribute('d', sector(a));
+    hand.setAttribute('transform', 'rotate(' + (sec / FULL * 360) % 360 + ',20,20)');
+    lab.textContent = Math.floor(sec / 60) + '分';
+    box.classList.toggle('over', sec >= WARN);
+  }
+  draw();
+  setInterval(() => {
+    if(document.hidden) return;
+    sec++;
+    try{ sessionStorage.setItem(KEY, String(sec)); }catch(e){}
+    draw();
+  }, 1000);
+})();
+
+// ===== v3: ブロックごとのカタカナ =====
+function toggleKanaBlock(btn){
+  const b = btn.closest('.blk-sec, .qsec');
+  if(!b) return;
+  const on = b.classList.toggle('showkana');
+  btn.textContent = on ? 'カタカナを消す' : 'カタカナ';
+  btn.classList.toggle('on', on);
+}
+
+// ===== v3: 問題番号を押してチェック =====
+function toggleQn(btn){
+  btn.classList.toggle('on');
+  ckCount();
+}
+function ckCount(){
+  const n = document.querySelectorAll('.qn.on').length;
+  const c = document.getElementById('rcount');
+  const b = document.getElementById('rbtn');
+  if(c) c.textContent = n + '問';
+  if(b) b.disabled = (n === 0);
+}
+
+// ===== v3: まちがえた問題だけの解き直しページを作る =====
+function makeRetry(){
+  const picked = [...document.querySelectorAll('.qn.on')];
+  const msg = document.getElementById('rmsg');
+  if(msg) msg.textContent = '';
+  if(!picked.length) return;
+
+  const groups = [];
+  picked.forEach(cb => {
+    const item = cb.closest('li') || cb.closest('.grid2 > div');
+    if(!item) return;
+    const sec = cb.closest('.qsec');
+    const h = sec && sec.querySelector('h3');
+    const head = h ? h.cloneNode(true) : null;
+    if(head) head.querySelectorAll('.ksm').forEach(x => x.remove());
+    const kind = item.tagName === 'LI' ? 'ol' : 'grid2';
+    const key = (head ? head.textContent.trim() : '') + '|' + kind;
+    let g = groups.find(x => x.key === key);
+    if(!g){ g = {key, head: head ? head.outerHTML : '', kind, items: []}; groups.push(g); }
+    const c = item.cloneNode(true);
+    c.querySelectorAll('.qn').forEach(x => {
+      x.classList.remove('on'); x.classList.add('qnst'); x.removeAttribute('onclick');
+    });
+    g.items.push(c.outerHTML);
+  });
+
+  let body = '';
+  groups.forEach(g => {
+    body += g.head;
+    body += (g.kind === 'ol')
+      ? '<ol class="q sp numq">' + g.items.join('\n') + '</ol>'
+      : '<div class="grid2">' + g.items.join('\n') + '</div>';
+  });
+
+  const styles = [...document.querySelectorAll('style')].map(s => s.outerHTML).join('\n');
+  const fonts  = [...document.querySelectorAll('link[rel="stylesheet"]')].map(l => l.outerHTML).join('\n');
+  const defs   = (document.querySelector('svg[width="0"]') || {outerHTML:''}).outerHTML;
+  const tagEl  = document.querySelector('.head .tag');
+  const title  = tagEl ? (tagEl.firstChild.textContent || '').trim() : '';
+
+  const html = '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    + '<title>解き直し｜' + title + '</title>' + fonts + styles
+    + '<style>.gauge{display:none;}.sheet{min-height:0;}</style></head><body>'
+    + defs
+    + '<section class="sheet showans-host">'
+    + '<div class="toolbar">'
+    + '<span class="cknote">まちがえた問題だけを集めました</span>'
+    + '<button class="kbtn" onclick="tk(this)">カタカナ</button></div>'
+    + '<div class="head"><div class="tag">' + title + ' <small>解き直し</small></div>'
+    + '<div class="sub"><b>まちがえた問題</b></div></div>'
+    + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
+    + body
+    + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
+    + '<div class="foot"><span>' + title + '　解き直し</span>'
+    + '<span>まちがえた ' + picked.length + ' 問</span></div>'
+    + '</section>'
+    + '<script>'
+    + 'var SV=null;function pv(){var vs=speechSynthesis.getVoices();SV=vs.filter(function(v){return /^en/i.test(v.lang);})[0]||null;}if(window.speechSynthesis){pv();speechSynthesis.addEventListener("voiceschanged",pv);document.addEventListener("click",function(e){var el=e.target.closest(".sp");if(!el)return;var c=el.cloneNode(true);c.querySelectorAll("rt").forEach(function(x){x.remove();});if(!el.closest(".showans"))c.querySelectorAll(".ansfill,.fill2,.ansmark").forEach(function(x){x.remove();});var t=c.textContent.replace(/[()（）]/g," ").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim();if(!t||!/[A-Za-z]/.test(t))return;speechSynthesis.cancel();el.classList.add("playing");var u=new SpeechSynthesisUtterance(t);u.lang=(SV&&SV.lang)||"en-US";if(SV)u.voice=SV;u.rate=0.9;u.onend=u.onerror=function(){el.classList.remove("playing");};speechSynthesis.speak(u);});}'
+    + 'function tk(b){var s=b.closest(".sheet");var on=s.classList.toggle("showkana");'
+    + 'b.textContent=on?"カタカナを消す":"カタカナ";b.classList.toggle("on",on);}'
+    + 'function ta(b){var s=b.closest(".sheet");var on=s.classList.toggle("showans");'
+    + 'b.textContent=on?"答えをかくす":"答えを見る";b.classList.toggle("on",on);'
+    + 's.querySelectorAll(".qsec").forEach(function(q){q.classList.toggle("showans",on);});}'
+    + '<\/script></body></html>';
+
+  const w = window.open('', '_blank');
+  if(!w){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
+  w.document.open(); w.document.write(html); w.document.close();
+}
+
+// ===== v5: 英語を押すと読み上げる（Web Speech API） =====
+const SPEECH = {slow:false, voice:null, el:null};
+
+function toggleSlow(btn){
+  SPEECH.slow = !SPEECH.slow;
+  document.querySelectorAll('.spbtn').forEach(b => {
+    b.classList.toggle('on', SPEECH.slow);
+    b.textContent = SPEECH.slow ? 'ふつうの速さ' : 'ゆっくり';
+  });
+}
+
+(function initSpeech(){
+  if(!('speechSynthesis' in window)){
+    document.querySelectorAll('.spnote, .spbtn').forEach(e => e.remove());
+    return;
+  }
+  function pickVoice(){
+    const vs = speechSynthesis.getVoices();
+    SPEECH.voice = vs.find(v => /^en[-_]US/i.test(v.lang))
+                || vs.find(v => /^en[-_]GB/i.test(v.lang))
+                || vs.find(v => /^en/i.test(v.lang)) || null;
+  }
+  pickVoice();
+  speechSynthesis.addEventListener('voiceschanged', pickVoice);
+
+  // 読み上げ対象に .sp を付ける（まちがいの例ははずす）
+  const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, '
+            + '.hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll(SEL).forEach(el => {
+    if(el.closest('.bad, .xm, .x, s, .qzq')) return;
+    if(el.closest('.hbtn, .kbtn, .ksm, .abtn, .sbtn, .qzb, .rbtn, .spbtn')) return;
+    el.classList.add('sp');
+  });
+
+  function textOf(el){
+    const c = el.cloneNode(true);
+    c.querySelectorAll('rt').forEach(x => x.remove());          // カタカナは読まない
+    c.querySelectorAll('br').forEach(b => b.replaceWith(document.createTextNode('. ')));
+    // 答えが隠れているときは、答えを読み上げない
+    if(!el.closest('.showans')){
+      c.querySelectorAll('.ansfill, .fill2, .ansmark').forEach(x => x.remove());
+    }
+    let t = c.textContent;
+    t = t.replace(/[（）()]/g, ' ')
+         .replace(/[／]/g, ' , ')
+         .replace(/[～〜]/g, ' ')
+         .replace(/[‘’]/g, "'")
+         .replace(/[^\x20-\x7E]/g, ' ')       // 日本語は読まない
+         .replace(/\s*,\s*,+/g, ' , ')
+         .replace(/\s+/g, ' ')
+         .trim();
+    return t;
+  }
+
+  document.addEventListener('click', e => {
+    const el = e.target.closest('.sp');
+    if(!el) return;
+    const t = textOf(el);
+    if(!t || !/[A-Za-z]/.test(t)) return;
+    try{ speechSynthesis.cancel(); }catch(err){}
+    if(SPEECH.el) SPEECH.el.classList.remove('playing');
+    SPEECH.el = el;
+    el.classList.add('playing');
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = (SPEECH.voice && SPEECH.voice.lang) || 'en-US';
+    if(SPEECH.voice) u.voice = SPEECH.voice;
+    u.rate = SPEECH.slow ? 0.6 : 0.9;
+    u.pitch = 1;
+    u.onend = u.onerror = () => { el.classList.remove('playing'); };
+    try{ speechSynthesis.speak(u); }
+    catch(err){ el.classList.remove('playing'); }
+  });
+})();
+
+function toggleMore(btn){
+  const on = !btn.classList.contains('on');
+  document.querySelectorAll('.sheet').forEach(function(s){
+    s.classList.toggle('simple', on);
+  });
+  document.querySelectorAll('.mbtn').forEach(function(b){
+    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.classList.toggle('on', on);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
+}
+
+function toggleHint(btn){
+  const w = btn.closest('.hintwrap');
+  const on = w.classList.toggle('open');
+  btn.textContent = on ? 'ヒントをとじる' : 'どうしてもわからない時のヒント';
+  btn.classList.toggle('on', on);
+}
+
+</script>
+</body>
+</html>

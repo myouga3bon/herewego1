@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -763,27 +825,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ When I am free. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When I am free, I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">when</span> のまとまりだけでは文になりません。<b>もう1つ文が必要</b>です。</span></div>
+      <div class="qza"><span class="good en">○ When I am free<span class="fx">, I read books</span>.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">when</span> のまとまりだけでは文になりません。<b>もう1つ文が必要</b>です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ When I am free I read books. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When I am free, I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">when</span> を<b>前に置いたらコンマ</b>で区切ります。</span></div>
+      <div class="qza"><span class="good en">○ When I am free<span class="fx">,</span> I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">when</span> を<b>前に置いたらコンマ</b>で区切ります。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ I read books, when I am free. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I read books when I am free.</span><span class="gjp">わたしは ひまなとき 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<b>うしろに置くときはコンマなし</b>。</span></div>
+      <div class="qza"><span class="good en">○ I read books <span class="dl"></span>when I am free.</span><span class="gjp">わたしは ひまなとき 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<b>うしろに置くときはコンマなし</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ When I am free, I am read books. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When I am free, I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">am</span> と <span class="en">read</span> で<b>心臓が2つ</b>。<span class="en">am</span> はいりません。</span></div>
+      <div class="qza"><span class="good en">○ When I am free, I <span class="dl"></span>read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　<span class="en">am</span> と <span class="en">read</span> で<b>心臓が2つ</b>。<span class="en">am</span> はいりません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ When am I free, I read books. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When I am free, I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　くっつける <span class="en">when</span> のうしろは<b>ふつうの文の形</b>。疑問文の形にはしません。</span></div>
+      <div class="qza"><span class="good en">○ When <span class="fx">I</span> am <span class="dl"></span>free, I read books.</span><span class="gjp">ひまなとき、わたしは 本を 読みます。</span><span class="qzp"><b>ポイント</b>　くっつける <span class="en">when</span> のうしろは<b>ふつうの文の形</b>。疑問文の形にはしません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ When I was young, I like soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When I was young, I liked soccer.</span><span class="gjp">若かったとき、わたしは サッカーが 好きでした。</span><span class="qzp"><b>ポイント</b>　前が過去（<span class="en">was</span>）なら、うしろも<b>過去形</b>にそろえます。</span></div>
+      <div class="qza"><span class="good en">○ When I was young, I <span class="fx">liked</span> soccer.</span><span class="gjp">若かったとき、わたしは サッカーが 好きでした。</span><span class="qzp"><b>ポイント</b>　前が過去（<span class="en">was</span>）なら、うしろも<b>過去形</b>にそろえます。</span></div>
     </div>
   </div>
 
@@ -822,7 +884,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">when</span> ／ コンマ ／ いらない ／ 動詞 ／ 2つ</div></div>
-  <div class="expbox"><b>なぜ？</b>　日本語の「～するとき」は文のはじめに来ますが、英語は<b>どちらでもよい</b>のが大きなちがいです。<br>ただし前に出したときだけ、どこまでが「まとまり」かが分かりにくいので、<b>コンマで切れ目を見せます</b>。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">日本語の「～するとき」は文のはじめに来ますが、英語は<b>どちらでもよい</b>のが大きなちがいです。<br>ただし前に出したときだけ、どこまでが「まとまり」かが分かりにくいので、<b>コンマで切れ目を見せます</b>。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -840,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I listen to music ( ) when I am tired.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　文の<b>いちばん前が <span class="en">When</span></b> → コンマがいる（1・3・5・7）<br>文の<b>とちゅうに <span class="en">when</span></b> → コンマはいらない（2・4・6・8）<br>1と2、3と4のように、同じ意味の文が2つの形で書けることを確かめよう。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -856,6 +919,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">When I was young, I like soccer.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → うしろに文を足す（<span class="en">…, I study Japanese.</span>）<br>4 → コンマをとる　6 → <span class="en">When it rains,</span>（<span class="en">do</span> を使わない）<br>8 → <span class="en">I liked soccer.</span>（前が過去なら うしろも過去）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -871,6 +935,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">When I am tired, I （ア listen ／イ am listen） to music.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2 はコンマ。前に出したときだけ打ちます。<br>3 は「ひまな時間が<b>ある</b>」なので <span class="en">have</span>。4 は前後の時をそろえます。<br>5 は <span class="en">do</span> を使わない。6 は <span class="en">am</span> と <span class="en">listen</span> で心臓が2つになります。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -878,7 +943,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s"><span class="en">when</span> は <b>2つの文をくっつける</b>のり。<b>前に置いたらコンマ</b>、うしろならコンマなし。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 1-2　接続詞 when</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -904,7 +969,7 @@
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはおなかがすいたとき、パンを食べます。</span>　<span class="en">I eat bread（<span class="bl s"><span class="ansfill">when</span></span>）I（<span class="bl s"><span class="ansfill">am</span></span>）hungry.</span></div><div class="qnote">（　）が2つ。うしろに置くので小文字の <span class="en">when</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">彼が家に帰ったとき、わたしは本を読んでいました。</span>　<span class="en">（<span class="bl s"><span class="ansfill">When</span></span>）he got home, I read a book.</span></div><div class="qnote">主語が <span class="en">he</span> でも、形は同じ。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはひまなとき、テレビを見ます。</span>　<span class="en">I watch TV when I（<span class="bl s"><span class="ansfill">have</span></span>）free time.</span></div><div class="qnote">「ひまな時間が<b>ある</b>」なので <span class="en">have</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">忙しいとき、わたしは昼食を食べません。</span>　<span class="en">When I am busy, I（<span class="bl s"><span class="ansfill">don't</span></span>）eat lunch.</span></div><div class="qnote">うしろの文は<b>ふつうの打ち消し</b>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">忙しいとき、わたしは昼食を食べません。</span>　<span class="en">When I am busy, I（<span class="bl s"><span class="ansfill">don't</span></span>）eat lunch.</span></div><div class="qnote">うしろの文は<b>ふつうの否定文</b>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -913,18 +978,18 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　まず2つの文に分けて、それから <span class="en">when</span> でくっつけよう。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">ひまな時間があるとき、わたしは日本語を勉強します。</span>　<span class="paren en">（ I study Japanese / free time / When I have ）</span><div class="lines tight"><div><span class="fill2">When I have free time, I study Japanese.</span></div></div></div><div class="qnote">前に置いたので<b>コンマ</b>を入れる。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはひまな時間があるとき日本語を勉強します。</span>　<span class="paren en">（ when I have free time / Japanese / I study ）</span><div class="lines tight"><div><span class="fill2">I study Japanese when I have free time.</span></div></div></div><div class="qnote">うしろに置いたので<b>コンマなし</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">雨がふるとき、わたしは本を読みます。</span>　<span class="paren en">（ I read books / it rains / When ）</span><div class="lines tight"><div><span class="fill2">When it rains, I read books.</span></div></div></div><div class="qnote"><span class="en">When</span> → <span class="en">it rains</span> → コンマ の順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは家に帰ったら昼食を食べます。</span>　<span class="paren en">（ I get home / lunch / when / I eat ）</span><div class="lines tight"><div><span class="fill2">I eat lunch when I get home.</span></div></div></div><div class="qnote"><span class="en">I eat lunch</span> が中心の文。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは若いとき、サッカーが好きでした。</span>　<span class="paren en">（ I liked soccer / I was young / When ）</span><div class="lines tight"><div><span class="fill2">When I was young, I liked soccer.</span></div></div></div><div class="qnote">前も うしろも<b>過去形</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">つかれているとき、わたしは音楽を聞きます。</span>　<span class="paren en">（ to music / When I am tired / I listen ）</span><div class="lines tight"><div><span class="fill2">When I am tired, I listen to music.</span></div></div></div><div class="qnote"><span class="en">listen to ～</span> でひとかたまり。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは忙しいとき、テレビを見ません。</span>　<span class="paren en">（ when I am busy / watch TV / I / don&#39;t ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t watch TV when I am busy.</span></div></div></div><div class="qnote">中心の文を打ち消しにする。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">ひまな時間があるとき、わたしは日本語を勉強します。</span>　<span class="paren en">（ free / I have / study / When / I / time, / Japanese ）</span><div class="lines tight"><div><span class="fill2">When I have free time, I study Japanese.</span></div></div></div><div class="qnote">前に置いたので<b>コンマ</b>を入れる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはひまな時間があるとき日本語を勉強します。</span>　<span class="paren en">（ study / Japanese / I have / free / I / when / time ）</span><div class="lines tight"><div><span class="fill2">I study Japanese when I have free time.</span></div></div></div><div class="qnote">うしろに置いたので<b>コンマなし</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">雨がふるとき、わたしは本を読みます。</span>　<span class="paren en">（ I / it / read / rains, / When / books ）</span><div class="lines tight"><div><span class="fill2">When it rains, I read books.</span></div></div></div><div class="qnote"><span class="en">When</span> → <span class="en">it rains</span> → コンマ の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは家に帰ったら昼食を食べます。</span>　<span class="paren en">（ get / I / I / when / eat / home / lunch ）</span><div class="lines tight"><div><span class="fill2">I eat lunch when I get home.</span></div></div></div><div class="qnote"><span class="en">I eat lunch</span> が中心の文。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは若いとき、サッカーが好きでした。</span>　<span class="paren en">（ liked / was / I / I / When / soccer / young, ）</span><div class="lines tight"><div><span class="fill2">When I was young, I liked soccer.</span></div></div></div><div class="qnote">前も うしろも<b>過去形</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">つかれているとき、わたしは音楽を聞きます。</span>　<span class="paren en">（ tired, / I / to music / When / am / I / listen ）</span><div class="lines tight"><div><span class="fill2">When I am tired, I listen to music.</span></div></div></div><div class="qnote"><span class="en">listen to ～</span> でひとかたまり。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは忙しいとき、テレビを見ません。</span>　<span class="paren en">（ when / I / TV / watch / I am / don&#39;t / busy ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t watch TV when I am busy.</span></div></div></div><div class="qnote">中心の文を否定文にする。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 1-2　接続詞 when</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -945,7 +1010,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">雨がふるとき、わたしは本を読みます。<div class="lines"><div><span class="fill2">When it rains, I read books.</span></div></div></div><div class="qnote"><span class="en">it rains</span> の <span class="en">s</span> を忘れない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは若いとき、サッカーが好きでした。<div class="lines"><div><span class="fill2">When I was young, I liked soccer.</span></div></div></div><div class="qnote">前後とも過去形にそろえる。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">つかれているとき、わたしは音楽を聞きます。<div class="lines"><div><span class="fill2">When I am tired, I listen to music.</span></div></div></div><div class="qnote"><span class="en">listen to</span> の <span class="en">to</span> を忘れない。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしは忙しいときテレビを見ません。<div class="lines"><div><span class="fill2">I don&#39;t watch TV when I am busy.</span></div></div></div><div class="qnote">打ち消すのは<b>中心の文</b>のほう。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしは忙しいときテレビを見ません。<div class="lines"><div><span class="fill2">I don&#39;t watch TV when I am busy.</span></div></div></div><div class="qnote">否定文にするのは<b>中心の文</b>のほう。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">When I have free time ／ when I get home ／ When it rains ／ When I was young ／ When I am tired ／ when I am busy</span></div></div>
@@ -989,7 +1054,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 1-2　接続詞 when</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1259,7 +1324,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1361,6 +1426,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

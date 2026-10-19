@@ -431,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -646,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -826,6 +841,7 @@
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Excuse me. ／ help ／ What time ／ o&#39;clock ／ at</span></div></div>
   <div class="expbox"><b>おぼえ方</b>　<span class="en">What time</span> のうしろは、たずねる文の形（<span class="en">does ～ come?</span>）。<br>1年生でならった <span class="en">What do you ～?</span> と 同じ作りです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -845,6 +861,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">Have a nice（<span class="bl s"><span class="ansfill">trip</span></span>）!</span>（よい旅を）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　4 は 主語が <span class="en">Which bus</span>（1つ）なので <span class="en">goes</span>。<br>6 は <span class="en">does</span> があるので <b>原形（もとの形）</b>の <span class="en">come</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -861,6 +878,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Do you needs any help?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">come</span>　4 → <span class="en">goes</span><br>6 → 10時10分は <span class="en">ten ten</span>　8 → <span class="en">need</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -876,6 +894,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Do you need （ア any ／イ a） help?</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1 は <span class="en">does</span> があるので 原形（もとの形）。<br>2 は <span class="en">does</span> が ないので、主語に合わせて <span class="en">goes</span> になります。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -918,11 +937,11 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　文の最初は大文字。さいごに <b>.</b> か <b>?</b> をつける。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">何かお手伝いしましょうか。</span>　<span class="paren en">（ need / Do / any help / you ）</span><div class="lines tight"><div><span class="fill2">Do you need any help?</span></div></div></div><div class="qnote"><span class="en">Do</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">どのバスが本町駅に行きますか。</span>　<span class="paren en">（ goes / Which bus / to Honcho Station ）</span><div class="lines tight"><div><span class="fill2">Which bus goes to Honcho Station?</span></div></div></div><div class="qnote"><span class="en">Which bus</span> が主語。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">次のバスは何時に来ますか。</span>　<span class="paren en">（ the next bus / What time / come / does ）</span><div class="lines tight"><div><span class="fill2">What time does the next bus come?</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">今10時です。</span>　<span class="paren en">（ ten o&#39;clock / It&#39;s / now ）</span><div class="lines tight"><div><span class="fill2">It&#39;s ten o&#39;clock now.</span></div></div></div><div class="qnote"><span class="en">now</span> は さいご。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">次のバスは10時10分に来ます。</span>　<span class="paren en">（ at 10:10 / The next bus / comes ）</span><div class="lines tight"><div><span class="fill2">The next bus comes at 10:10.</span></div></div></div><div class="qnote">「～時に」は <span class="en">at</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">何かお手伝いしましょうか。</span>　<span class="paren en">（ any help / need / Do / you ）</span><div class="lines tight"><div><span class="fill2">Do you need any help?</span></div></div></div><div class="qnote"><span class="en">Do</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">どのバスが本町駅に行きますか。</span>　<span class="paren en">（ Honcho Station / goes / to / Which / bus ）</span><div class="lines tight"><div><span class="fill2">Which bus goes to Honcho Station?</span></div></div></div><div class="qnote"><span class="en">Which bus</span> が主語。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">次のバスは何時に来ますか。</span>　<span class="paren en">（ does / What / come / the next bus / time ）</span><div class="lines tight"><div><span class="fill2">What time does the next bus come?</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">今10時です。</span>　<span class="paren en">（ now / It&#39;s / ten / o&#39;clock ）</span><div class="lines tight"><div><span class="fill2">It&#39;s ten o&#39;clock now.</span></div></div></div><div class="qnote"><span class="en">now</span> は さいご。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">次のバスは10時10分に来ます。</span>　<span class="paren en">（ comes / at / The next bus / 10:10 ）</span><div class="lines tight"><div><span class="fill2">The next bus comes at 10:10.</span></div></div></div><div class="qnote">「～時に」は <span class="en">at</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">どういたしまして。</span>　<span class="paren en">（ welcome / You&#39;re ）</span><div class="lines tight"><div><span class="fill2">You&#39;re welcome.</span></div></div></div><div class="qnote">2語。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">よい旅を！</span>　<span class="paren en">（ a nice trip / Have ）</span><div class="lines tight"><div><span class="fill2">Have a nice trip!</span></div></div></div><div class="qnote">さいごは <b>!</b>。</div></div></li>
     </ol>
@@ -1342,6 +1361,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

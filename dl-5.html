@@ -431,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -646,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -834,6 +849,7 @@
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">How much does it cost? ／ up to ～ ／ over ／ off ／ only</span></div></div>
   <div class="expbox"><b>おぼえ方</b>　案内は <b>こうもく（Date・Time・Place・Fee・Age）</b>から さがすと 早い。<br>費用なら <span class="en">Fee</span>、場所なら <span class="en">Place</span> を見ます。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -853,6 +869,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">students（<span class="bl s"><span class="ansfill">only</span></span>）</span>（学生のみ）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　3 の <span class="en">up to</span> は「～まで」。<br>7 の <span class="en">yourself</span> は「あなた自身」。<span class="en">your own</span>（自分自身の）と セットで よく出ます。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -869,6 +886,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">写真は いらない。</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → 午前10時（<span class="en">10 a.m.</span>）から<br>4 → 1人 500円（学生なら 300円）　6 → 3枚まで　8 → 自分の写った写真が いる</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -884,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">students only</span> は（ア だれでも ／イ 学生だけ）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">up to</span>（～まで）と <span class="en">over</span>（～より上）は 反対の意味。<br>案内では どちらも よく出ます。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -926,13 +945,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　文の最初は大文字。さいごに <b>.</b> か <b>?</b> をつける。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">どのくらいの費用がかかりますか。</span>　<span class="paren en">（ does it / How much / cost ）</span><div class="lines tight"><div><span class="fill2">How much does it cost?</span></div></div></div><div class="qnote"><span class="en">How much</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">5枚のカードを作ってもいいですか。</span>　<span class="paren en">（ five cards / Can / make / I ）</span><div class="lines tight"><div><span class="fill2">Can I make five cards?</span></div></div></div><div class="qnote"><span class="en">Can</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">カードを3枚まで作れます。</span>　<span class="paren en">（ up to / You can make / three cards ）</span><div class="lines tight"><div><span class="fill2">You can make up to three cards.</span></div></div></div><div class="qnote">「～まで」の位置。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">友達や家族にあげるあなただけのカードを作ろう！</span>　<span class="paren en">（ for your friends and family / Make / unique greeting cards ）</span><div class="lines tight"><div><span class="fill2">Make unique greeting cards for your friends and family!</span></div></div></div><div class="qnote">動詞ではじめる。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">自分のはさみを持ってきてください。</span>　<span class="paren en">（ your own scissors / Please / bring ）</span><div class="lines tight"><div><span class="fill2">Please bring your own scissors.</span></div></div></div><div class="qnote"><span class="en">Please</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">さらに情報がほしい方は、メールを送ってください。</span>　<span class="paren en">（ please write / For more information, / to us ）</span><div class="lines tight"><div><span class="fill2">For more information, please write to us.</span></div></div></div><div class="qnote">コンマのあと。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">1人500円です。</span>　<span class="paren en">（ for one person / It&#39;s / five hundred yen ）</span><div class="lines tight"><div><span class="fill2">It&#39;s five hundred yen for one person.</span></div></div></div><div class="qnote">「1人」は さいご。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">どのくらいの費用がかかりますか。</span>　<span class="paren en">（ does / How / much / cost / it ）</span><div class="lines tight"><div><span class="fill2">How much does it cost?</span></div></div></div><div class="qnote"><span class="en">How much</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">5枚のカードを作ってもいいですか。</span>　<span class="paren en">（ make / Can / I / five cards ）</span><div class="lines tight"><div><span class="fill2">Can I make five cards?</span></div></div></div><div class="qnote"><span class="en">Can</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">カードを3枚まで作れます。</span>　<span class="paren en">（ can / You / make / up to / three cards ）</span><div class="lines tight"><div><span class="fill2">You can make up to three cards.</span></div></div></div><div class="qnote">「～まで」の位置。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">友達や家族にあげるあなただけのカードを作ろう！</span>　<span class="paren en">（ and / greeting / Make / for your friends / family / cards / unique ）</span><div class="lines tight"><div><span class="fill2">Make unique greeting cards for your friends and family!</span></div></div></div><div class="qnote">動詞ではじめる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">自分のはさみを持ってきてください。</span>　<span class="paren en">（ bring / Please / your own scissors ）</span><div class="lines tight"><div><span class="fill2">Please bring your own scissors.</span></div></div></div><div class="qnote"><span class="en">Please</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">さらに情報がほしい方は、メールを送ってください。</span>　<span class="paren en">（ information, / please / write / to us / For / more ）</span><div class="lines tight"><div><span class="fill2">For more information, please write to us.</span></div></div></div><div class="qnote">コンマのあと。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">1人500円です。</span>　<span class="paren en">（ one / five / for / hundred / yen / It&#39;s / person ）</span><div class="lines tight"><div><span class="fill2">It&#39;s five hundred yen for one person.</span></div></div></div><div class="qnote">「1人」は さいご。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1350,6 +1369,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

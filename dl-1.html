@@ -431,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -646,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -826,6 +841,7 @@
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Whose ／ yours ／ mine ／ &#39;s ／ ask</span></div></div>
   <div class="expbox"><b>おぼえ方</b>　<span class="en">Whose</span> は「誰の」。<span class="en">Who</span>（誰）に <span class="en">se</span> がついた形。<br><span class="en">yours</span>・<span class="en">mine</span> は、うしろに「もの」をつけません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -845,6 +861,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">It&#39;s（<span class="bl s"><span class="ansfill">by</span></span>）the desk.</span>（机のそばにあります）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　7 は <span class="en">Hiro</span> に <b><span class="en">&#39;s</span></b> をつけます。<br>6 の <span class="en">any</span> は たずねる文で「何か」の意味になります。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -861,6 +878,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Maybe it&#39;s Hiro.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Whose</span>　4 → <span class="en">yours</span><br>6 → <span class="en">mine</span>　8 → <span class="en">Hiro&#39;s</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -876,6 +894,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">It&#39;s （ア by ／イ in） the box.</span>（箱の中）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">my</span>・<span class="en">your</span> は うしろに「もの」が いります。<br><span class="en">mine</span>・<span class="en">yours</span> は 1語だけで使います。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -918,13 +937,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　文の最初は大文字。さいごに <b>.</b> か <b>?</b> をつける。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あれは誰の筆箱ですか。</span>　<span class="paren en">（ is / Whose / that / pencil case ）</span><div class="lines tight"><div><span class="fill2">Whose pencil case is that?</span></div></div></div><div class="qnote"><span class="en">Whose</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたの机の下にあります。</span>　<span class="paren en">（ your desk / It&#39;s / under ）</span><div class="lines tight"><div><span class="fill2">It&#39;s under your desk.</span></div></div></div><div class="qnote">場所は うしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたのものですか。</span>　<span class="paren en">（ it / Is / yours ）</span><div class="lines tight"><div><span class="fill2">Is it yours?</span></div></div></div><div class="qnote">さいごは <b>?</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、私のものではありません。</span>　<span class="paren en">（ mine / No, / it&#39;s not ）</span><div class="lines tight"><div><span class="fill2">No, it&#39;s not mine.</span></div></div></div><div class="qnote"><span class="en">not</span> のうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">何か思い当たりますか。</span>　<span class="paren en">（ any idea / Do / you have ）</span><div class="lines tight"><div><span class="fill2">Do you have any idea?</span></div></div></div><div class="qnote"><span class="en">Do</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">ヒロのものかもしれません。</span>　<span class="paren en">（ Hiro&#39;s / Maybe / it&#39;s ）</span><div class="lines tight"><div><span class="fill2">Maybe it&#39;s Hiro&#39;s.</span></div></div></div><div class="qnote"><span class="en">Maybe</span> が先。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼にきいてみましょう。</span>　<span class="paren en">（ him / Let&#39;s / ask ）</span><div class="lines tight"><div><span class="fill2">Let&#39;s ask him.</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あれは誰の筆箱ですか。</span>　<span class="paren en">（ pencil case / is / that / Whose ）</span><div class="lines tight"><div><span class="fill2">Whose pencil case is that?</span></div></div></div><div class="qnote"><span class="en">Whose</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたの机の下にあります。</span>　<span class="paren en">（ under / It&#39;s / your desk ）</span><div class="lines tight"><div><span class="fill2">It&#39;s under your desk.</span></div></div></div><div class="qnote">場所は うしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたのものですか。</span>　<span class="paren en">（ it / yours / Is ）</span><div class="lines tight"><div><span class="fill2">Is it yours?</span></div></div></div><div class="qnote">さいごは <b>?</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、私のものではありません。</span>　<span class="paren en">（ it&#39;s / mine / No, / not ）</span><div class="lines tight"><div><span class="fill2">No, it&#39;s not mine.</span></div></div></div><div class="qnote"><span class="en">not</span> のうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">何か思い当たりますか。</span>　<span class="paren en">（ you / have / Do / any idea ）</span><div class="lines tight"><div><span class="fill2">Do you have any idea?</span></div></div></div><div class="qnote"><span class="en">Do</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">ヒロのものかもしれません。</span>　<span class="paren en">（ Hiro&#39;s / it&#39;s / Maybe ）</span><div class="lines tight"><div><span class="fill2">Maybe it&#39;s Hiro&#39;s.</span></div></div></div><div class="qnote"><span class="en">Maybe</span> が先。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼にきいてみましょう。</span>　<span class="paren en">（ ask / him / Let&#39;s ）</span><div class="lines tight"><div><span class="fill2">Let&#39;s ask him.</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1342,6 +1361,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){
