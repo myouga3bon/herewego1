@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -745,10 +807,10 @@
       <div><span class="en">Are you</span> ・ <span class="en">Yes, I am.</span> ・ <span class="en">What are you doing?</span> を3回ずつ書き写そう！</div>
     </div>
   </div><div class="blk-sec more">
-    <h3 class="st"><span class="stepnum">4</span>打ち消しは be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">4</span>否定文は be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">4-3 で習ったとおりです。<br>　<b>be動詞のすぐうしろに <span class="en">not</span></b> を置きます。</p>
     <table class="kind">
-      <thead><tr><th>ふつうの文</th><th>打ち消しの文</th><th>短い形</th></tr></thead>
+      <thead><tr><th>ふつうの文</th><th>否定文</th><th>短い形</th></tr></thead>
       <tbody>
         <tr><td class="e">I am playing soccer.</td><td class="e" style="color:var(--ng);">I am <u>not</u> playing soccer.</td><td class="e">I&#39;m not</td></tr>
         <tr><td class="e">He is playing soccer.</td><td class="e" style="color:var(--ng);">He is <u>not</u> playing soccer.</td><td class="e">isn&#39;t</td></tr>
@@ -792,27 +854,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ Do you playing soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b>be動詞の文</b>。<span class="en">Do</span> は使いません。</span></div>
+      <div class="qza"><span class="good en">○ <span class="fx">Are</span> you playing soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b>be動詞の文</b>。<span class="en">Do</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ Are you play soccer? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Are you playing soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<b><span class="en">ing</span> が抜けています</b>。be動詞だけでは進行形になりません。</span></div>
+      <div class="qza"><span class="good en">○ Are you <span class="fx">playing</span> soccer?</span><span class="gjp">あなたは サッカーを しているところですか。</span><span class="qzp"><b>ポイント</b>　<b><span class="en">ing</span> が抜けています</b>。be動詞だけでは進行形になりません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ Are you playing soccer? — Yes, I do. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Yes, I am.</span><span class="gjp">はい、そうです。</span><span class="qzp"><b>ポイント</b>　<span class="en">Are</span> で聞かれたら <b><span class="en">am</span></b> で答える。</span></div>
+      <div class="qza"><span class="good en">○ <span class="dl"></span>Yes, I <span class="fx">am</span>.</span><span class="gjp">はい、そうです。</span><span class="qzp"><b>ポイント</b>　<span class="en">Are</span> で聞かれたら <b><span class="en">am</span></b> で答える。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ What are you do? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ What are you doing?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">do</span> も <b><span class="en">ing</span> の形</b>にします。</span></div>
+      <div class="qza"><span class="good en">○ What are you <span class="fx">doing</span>?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">do</span> も <b><span class="en">ing</span> の形</b>にします。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ What do you doing? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ What are you doing?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b><span class="en">are</span></b>。<span class="en">do</span> は使いません。</span></div>
+      <div class="qza"><span class="good en">○ What <span class="fx">are</span> you doing?</span><span class="gjp">あなたは なにを しているところですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> があるので <b><span class="en">are</span></b>。<span class="en">do</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ I don&#39;t playing soccer. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I am not playing soccer.</span><span class="gjp">わたしは サッカーを しているところでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の文の打ち消しは <b><span class="en">not</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
+      <div class="qza"><span class="good en">○ I <span class="fx">am not</span> playing soccer.</span><span class="gjp">わたしは サッカーを しているところでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の文の否定文は <b><span class="en">not</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
     </div>
   </div>
 
@@ -823,7 +885,7 @@
         <li>進行形のたずねる文は <b>be動詞を前に出す</b>。<span class="en">Are you playing ～?</span></li>
         <li><b><span class="en">Do</span> は使わない。</b><span class="en">ing</span> があれば be動詞の文。</li>
         <li>答えは <b><span class="en">Yes, I am.</span> ／ <span class="en">No, I&#39;m not.</span></b></li>
-        <li>打ち消しは <b>be動詞のうしろに <span class="en">not</span></b>。「なにしてるの？」は <span class="en">What are you doing?</span></li>
+        <li>否定文は <b>be動詞のうしろに <span class="en">not</span></b>。「なにしてるの？」は <span class="en">What are you doing?</span></li>
       </ul>
     </div>
   </div>
@@ -846,12 +908,12 @@
     <li><button class="qn" onclick="toggleQn(this)">1</button>進行形のたずねる文は、（<span class="bl"><span class="ansfill">be動詞</span></span>）を文の前に出す。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button>進行形に（<span class="bl s"><span class="ansfill">Do</span></span>）は使わない。<span class="en">ing</span> があれば be動詞の文。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>答えは <span class="en">Yes, I（<span class="bl s"><span class="ansfill">am</span></span>）.</span> ／ <span class="en">No, I&#39;m（<span class="bl s"><span class="ansfill">not</span></span>）.</span></li>
-    <li><button class="qn" onclick="toggleQn(this)">4</button>打ち消しは be動詞のうしろに（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
+    <li><button class="qn" onclick="toggleQn(this)">4</button>否定文は be動詞のうしろに（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
     <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>「なにをしているところですか」は <span class="en">What are you（<span class="bl s"><span class="ansfill">doing</span></span>）?</span></li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">be動詞</span> ／ <span class="en">Do</span> ／ <span class="en">am</span> ／ <span class="en">not</span> ／ <span class="en">doing</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　進行形は <span class="en">I ＝ playing</span>（わたし＝している最中）という<b>be動詞の文</b>です。<br>だから、たずね方も打ち消し方も、2-1・4-3 で習った be動詞のルールがそのまま使えます。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">進行形は <span class="en">I ＝ playing</span>（わたし＝している最中）という<b>be動詞の文</b>です。<br>だから、たずね方も否定文の作り方も、2-1・4-3 で習った be動詞のルールがそのまま使えます。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -871,6 +933,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">（<span class="bl s"><span class="ansfill">Are</span></span>）you eating lunch?</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　2段階で決めます。<br>① <b><span class="en">ing</span> がある</b> → be動詞。主語が <span class="en">you</span> なら <span class="en">Are</span>（1・5・10）、<span class="en">he・she</span>・名前なら <span class="en">Is</span>（3・6・8）<br>② <b><span class="en">ing</span> がない</b> → <span class="en">Do</span>（2・7）か <span class="en">Does</span>（4・9）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -887,6 +950,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I don&#39;t playing soccer.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Are you playing soccer?</span>（<span class="en">ing</span> があるので be動詞）<br>4 → <span class="en">What are you doing?</span>（同じく be動詞）　6 → <span class="en">Yes, I am.</span>（聞かれたことばで答える）<br>8 → <span class="en">I am not playing soccer.</span>（be動詞の文は <span class="en">not</span>）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -902,6 +966,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Does she like music?</span>　—（ア <span class="en">Yes, she is.</span> ／イ <span class="en">Yes, she does.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Are/Is</span> → <span class="en">am/is</span>（1・3・5）、<span class="en">Do/Does</span> → <span class="en">do/does</span>（2・6）。<br>4は <span class="en">What</span> で聞かれているので、<b><span class="en">Yes / No</span> では答えません</b>。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -909,7 +974,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s">進行形は <b>be動詞の文</b>。たずねる文は be動詞を前に出す。<span class="en">Do</span> は使わない。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 8-2　現在進行形の疑問文 / What are you doing?</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -944,18 +1009,18 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群の<b>大文字で始まることば</b>が先頭。<span class="en">ing</span> の形があれば be動詞を選びます。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーをしているところですか。</span>　<span class="paren en">（ soccer / playing / Are / you ）</span><div class="lines tight"><div><span class="fill2">Are you playing soccer?</span></div></div></div><div class="qnote"><span class="en">Are</span> → <span class="en">you</span> → <span class="en">ing</span> → なにを の順。終わりは <b>?</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにをしているところですか。</span>　<span class="paren en">（ doing / you / What / are ）</span><div class="lines tight"><div><span class="fill2">What are you doing?</span></div></div></div><div class="qnote"><span class="en">What</span> → <span class="en">are</span> → <span class="en">you</span> → <span class="en">doing</span>。<b>形ごとおぼえよう。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">はい、しています。</span>　<span class="paren en">（ am / I / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, I am.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のコンマはそのまま。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今走っているところですか。</span>　<span class="paren en">（ running / he / now / Is ）</span><div class="lines tight"><div><span class="fill2">Is he running now?</span></div></div></div><div class="qnote"><span class="en">now</span> はいちばん後ろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをしていません。</span>　<span class="paren en">（ playing / not / soccer / I am ）</span><div class="lines tight"><div><span class="fill2">I am not playing soccer.</span></div></div></div><div class="qnote"><span class="en">I am</span> のうしろに <span class="en">not</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはふだんサッカーをしますか。</span>　<span class="paren en">（ soccer / play / Do / you ）</span><div class="lines tight"><div><span class="fill2">Do you play soccer?</span></div></div></div><div class="qnote">語群に <span class="en">ing</span> がない。<b>ふだんのことの文</b>です。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは英語を勉強しているところです。</span>　<span class="paren en">（ English / studying / I / am ）</span><div class="lines tight"><div><span class="fill2">I am studying English.</span></div></div></div><div class="qnote">be動詞と <span class="en">ing</span> が2つそろっています。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーをしているところですか。</span>　<span class="paren en">（ playing / soccer / you / Are ）</span><div class="lines tight"><div><span class="fill2">Are you playing soccer?</span></div></div></div><div class="qnote"><span class="en">Are</span> → <span class="en">you</span> → <span class="en">ing</span> → なにを の順。終わりは <b>?</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにをしているところですか。</span>　<span class="paren en">（ are / What / you / doing ）</span><div class="lines tight"><div><span class="fill2">What are you doing?</span></div></div></div><div class="qnote"><span class="en">What</span> → <span class="en">are</span> → <span class="en">you</span> → <span class="en">doing</span>。<b>形ごとおぼえよう。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">はい、しています。</span>　<span class="paren en">（ I / am / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, I am.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のコンマはそのまま。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今走っているところですか。</span>　<span class="paren en">（ running / now / he / Is ）</span><div class="lines tight"><div><span class="fill2">Is he running now?</span></div></div></div><div class="qnote"><span class="en">now</span> はいちばん後ろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーをしていません。</span>　<span class="paren en">（ am / I / soccer / not / playing ）</span><div class="lines tight"><div><span class="fill2">I am not playing soccer.</span></div></div></div><div class="qnote"><span class="en">I am</span> のうしろに <span class="en">not</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはふだんサッカーをしますか。</span>　<span class="paren en">（ soccer / Do / you / play ）</span><div class="lines tight"><div><span class="fill2">Do you play soccer?</span></div></div></div><div class="qnote">語群に <span class="en">ing</span> がない。<b>ふだんのことの文</b>です。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは英語を勉強しているところです。</span>　<span class="paren en">（ English / am / studying / I ）</span><div class="lines tight"><div><span class="fill2">I am studying English.</span></div></div></div><div class="qnote">be動詞と <span class="en">ing</span> が2つそろっています。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 8-2　現在進行形の疑問文 / What are you doing?</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -1020,7 +1085,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 8-2　現在進行形の疑問文 / What are you doing?</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1290,7 +1355,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1392,6 +1457,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){
