@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -874,7 +902,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">to</span> ／ <span class="en">be</span> ／ <span class="en">can</span> ／ <span class="en">ing</span> ／ 原形 ／ 2語</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">to</span> は「これから～へ向かう」というイメージのことば。<b>これからしたいこと</b>を表すので <span class="en">want</span> と相性がよいのです。<br><span class="en">can</span> は「できる力を持っている」という意味で、これから向かうわけではないので <span class="en">to</span> がいりません。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">to</span> は「これから～へ向かう」というイメージのことば。<b>これからしたいこと</b>を表すので <span class="en">want</span> と相性がよいのです。<br><span class="en">can</span> は「できる力を持っている」という意味で、これから向かうわけではないので <span class="en">to</span> がいりません。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -894,6 +922,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I can（<span class="bl s"><span class="ansfill">×</span></span>）sing well.</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　（　）のすぐ前を見るだけ。<br><span class="en">want</span> → <b><span class="en">to</span></b>（1・3・5・7・9）　<span class="en">can</span>・<span class="en">can&#39;t</span> → <b><span class="en">×</span></b>（2・4・6・8・10）<br>どちらの場合も、そのうしろの動詞は<b>原形（もとの形）</b>です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -910,6 +939,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I want to going to Paris.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I want to swim.</span>（<span class="en">to</span> を足す）　4 → <span class="en">I can swim.</span>（<span class="en">to</span> を消す）<br>6 → <span class="en">I want to be a doctor.</span>（<span class="en">am</span> → <span class="en">be</span>）　8 → <span class="en">I want to go to Paris.</span>（ing を取る）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -925,6 +955,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I want to（ア going ／イ go）to Paris.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">ing</span> になるのは <span class="en">like</span> のうしろだけ（2・5）。<br><span class="en">can</span>（3）も <span class="en">want to</span>（1・4・6）も、うしろは<b>原形（もとの形）</b>です。4の <span class="en">be</span> は <span class="en">am</span> の原形（もとの形）。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -967,13 +998,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群に <span class="en">to</span> があれば <span class="en">want</span> のすぐうしろに置きます。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぎたいです。</span>　<span class="paren en">（ swim / to / I / want ）</span><div class="lines tight"><div><span class="fill2">I want to swim.</span></div></div></div><div class="qnote"><span class="en">I</span> → <span class="en">want</span> → <span class="en">to</span> → 動詞 の順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはアメリカに行きたいです。</span>　<span class="paren en">（ to America / want / I / go / to ）</span><div class="lines tight"><div><span class="fill2">I want to go to America.</span></div></div></div><div class="qnote"><span class="en">to</span> が2回出てきます。1つめは <span class="en">want</span> のうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは医者になりたいです。</span>　<span class="paren en">（ a doctor / be / I / want / to ）</span><div class="lines tight"><div><span class="fill2">I want to be a doctor.</span></div></div></div><div class="qnote"><span class="en">a doctor</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ swim / I / can ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">語群に <span class="en">to</span> がない。<b>ないものは使えません。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはパンダを見たいです。</span>　<span class="paren en">（ pandas / to / see / I / want ）</span><div class="lines tight"><div><span class="fill2">I want to see pandas.</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぎたいです。</span>　<span class="paren en">（ swim / want / I / to ）</span><div class="lines tight"><div><span class="fill2">I want to swim.</span></div></div></div><div class="qnote"><span class="en">I</span> → <span class="en">want</span> → <span class="en">to</span> → 動詞 の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはアメリカに行きたいです。</span>　<span class="paren en">（ to / go / America / I / want / to ）</span><div class="lines tight"><div><span class="fill2">I want to go to America.</span></div></div></div><div class="qnote"><span class="en">to</span> が2回出てきます。1つめは <span class="en">want</span> のうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは医者になりたいです。</span>　<span class="paren en">（ a doctor / be / to / want / I ）</span><div class="lines tight"><div><span class="fill2">I want to be a doctor.</span></div></div></div><div class="qnote"><span class="en">a doctor</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ can / I / swim ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">語群に <span class="en">to</span> がない。<b>ないものは使えません。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはパンダを見たいです。</span>　<span class="paren en">（ see / pandas / I / to / want ）</span><div class="lines tight"><div><span class="fill2">I want to see pandas.</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはおどることが好きです。</span>　<span class="paren en">（ dancing / like / I ）</span><div class="lines tight"><div><span class="fill2">I like dancing.</span></div></div></div><div class="qnote">語群が <span class="en">dancing</span>。<span class="en">like</span> とセットです。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはすしを食べたいです。</span>　<span class="paren en">（ sushi / want / eat / I / to ）</span><div class="lines tight"><div><span class="fill2">I want to eat sushi.</span></div></div></div><div class="qnote"><span class="en">want</span> → <span class="en">to</span> → <span class="en">eat</span> → <span class="en">sushi</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはすしを食べたいです。</span>　<span class="paren en">（ want / eat / I / to / sushi ）</span><div class="lines tight"><div><span class="fill2">I want to eat sushi.</span></div></div></div><div class="qnote"><span class="en">want</span> → <span class="en">to</span> → <span class="en">eat</span> → <span class="en">sushi</span>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1415,6 +1446,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

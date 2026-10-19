@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -721,7 +783,7 @@
     <p class="talk"><span class="en">after school</span>（放課後）、<span class="en">after dinner</span>（夕食のあと）のように、<span class="en">after</span> を使う言い方もよく出ます。</p>
   </div>
 
-  <div class="blk-sec more">
+  <div class="blk-sec">
     <h3 class="st"><span class="stepnum">4</span>かなり大事｜4つのたずねことばの整理<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　ここまでに<b>4つのたずねことば</b>を習いました。<br>　答え方はぜんぶ同じで、<b>中身で答える</b>です。</p>
     <table class="kind">
@@ -760,7 +822,7 @@
   </div>
 
 <!-- v8: 必須のことば -->
-  <div class="blk-sec more">
+  <div class="blk-sec">
     <h3 class="st"><span class="stepnum">6</span>時を表すことば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">答えるときは、<b>時を表すことば</b>を使います。<br>　<span class="en">in</span>・<span class="en">on</span>・<span class="en">at</span> の使い分けをおぼえましょう。</p>
     <table class="kind kw">
@@ -783,27 +845,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ When your birthday is? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。</span></div>
+      <div class="qza"><span class="good en">○ When <span class="fx">is</span> your birthday<span class="dl"></span>?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">is</span> → 主語</b> の順。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ When is your birthday? — Yes, it is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> で聞かれたら <b>時で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
+      <div class="qza"><span class="good en">○ <span class="fx">It&#39;s in August</span>.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> で聞かれたら <b>時で答える</b>。<span class="en">Yes / No</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ When you do study? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When do you study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
+      <div class="qza"><span class="good en">○ When <span class="fx">do</span> you <span class="dl"></span>study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">When</span> のうしろは <b><span class="en">do you</span></b> の順。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ When is you study? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When do you study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">study</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ When <span class="fx">do</span> you study?</span><span class="gjp">あなたは いつ 勉強しますか。</span><span class="qzp"><b>ポイント</b>　<span class="en">study</span> は動作のことば。<b>動作の文は <span class="en">do you</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ It&#39;s on August. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ It&#39;s in August.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　月には <b><span class="en">in</span></b> をつけます。<span class="en">on</span> は曜日や日づけ用です。</span></div>
+      <div class="qza"><span class="good en">○ It&#39;s <span class="fx">in</span> August.</span><span class="gjp">それは 8月 です。</span><span class="qzp"><b>ポイント</b>　月には <b><span class="en">in</span></b> をつけます。<span class="en">on</span> は曜日や日づけ用です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ Where is your birthday? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ When is your birthday?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　誕生日は<b>時</b>なので <span class="en">When</span>。<span class="en">Where</span> は場所用です。</span></div>
+      <div class="qza"><span class="good en">○ <span class="fx">When</span> is your birthday?</span><span class="gjp">あなたの 誕生日は いつ ですか。</span><span class="qzp"><b>ポイント</b>　誕生日は<b>時</b>なので <span class="en">When</span>。<span class="en">Where</span> は場所用です。</span></div>
     </div>
   </div>
 
@@ -842,7 +904,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">When</span> ／ <span class="en">Where</span> ／ <span class="en">is</span> ／ <span class="en">do you</span> ／ <span class="en">on</span> ／ <span class="en">in</span> ／ <span class="en">at</span> ／ <span class="en">Yes / No</span> ／ 時</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">What・Who・Where・When</span> はぜんぶ<b>「知りたいところ」</b>を表すことば。だから いちばん前に立ち、中身で答えます。<br>時のことばは<b>範囲の大きさ</b>で決まります。時こく（せまい）→<span class="en">at</span>、曜日→<span class="en">on</span>、月・季節（広い）→<span class="en">in</span>。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">What・Who・Where・When</span> はぜんぶ<b>「知りたいところ」</b>を表すことば。だから いちばん前に立ち、中身で答えます。<br>時のことばは<b>範囲の大きさ</b>で決まります。時こく（せまい）→<span class="en">at</span>、曜日→<span class="en">on</span>、月・季節（広い）→<span class="en">in</span>。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -862,6 +924,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I practice（<span class="bl s"><span class="ansfill">at</span></span>）five.</span>（5時に）</div>
   </div>
   <div class="expbox"><b>見つけ方</b>　日本語を見るだけ。<br><b>時こく</b>（7時・6時・5時）→ <span class="en">at</span>（3・6・10）　<b>曜日</b>（月・日・土）→ <span class="en">on</span>（2・5・8）<br><b>月・季節</b>（8月・夏・7月・冬）→ <span class="en">in</span>（1・4・7・9）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -878,6 +941,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">When is you study?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">When is your birthday?</span>（<span class="en">is</span> → 主語 の順に）<br>4 → <span class="en">When do you study?</span>（<span class="en">do you</span> の順に）　6 → <span class="en">It&#39;s in August.</span>（月は <span class="en">in</span>）<br>8 → <span class="en">When do you study?</span>（動作の文は <span class="en">do you</span>）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -893,6 +957,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button>あなたは<b>どこ</b>に住んでいますか。（<span class="bl s"><span class="ansfill">ウ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　4つとも <span class="en">W</span> で始まり、<b>どれも <span class="en">Yes / No</span> では答えません</b>。<br>日本語の「なに・だれ・どこ・いつ」と1対1で結びつけておけば、まちがえません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -900,7 +965,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s"><span class="en">When</span> は「いつ」。答えは <b>時</b>で言う。<span class="en">What・Who・Where・When</span> は <span class="en">Yes / No</span> を使わない。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 5-3　When ～?</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -936,17 +1001,17 @@
     <div class="hint"><b>コツ</b>　<span class="en">When</span> が先頭。そのうしろは <span class="en">is</span> ＋ 主語、または <span class="en">do</span> ＋ <span class="en">you</span> ＋ 動詞。</div>
     <ol class="q numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたの誕生日はいつですか。</span>　<span class="paren en">（ your birthday / When / is ）</span><div class="lines tight"><div><span class="fill2">When is your birthday?</span></div></div></div><div class="qnote"><span class="en">When</span> → <span class="en">is</span> → 主語 の順。終わりは <b>?</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">それは8月です。</span>　<span class="paren en">（ August / It&#39;s / in ）</span><div class="lines tight"><div><span class="fill2">It&#39;s in August.</span></div></div></div><div class="qnote"><span class="en">in August</span> でひとかたまり。月は大文字ではじめる。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはいつ勉強しますか。</span>　<span class="paren en">（ study / you / When / do ）</span><div class="lines tight"><div><span class="fill2">When do you study?</span></div></div></div><div class="qnote"><span class="en">When</span> → <span class="en">do</span> → <span class="en">you</span> → 動詞。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">それは月曜日です。</span>　<span class="paren en">（ Monday / on / It&#39;s ）</span><div class="lines tight"><div><span class="fill2">It&#39;s on Monday.</span></div></div></div><div class="qnote">曜日なので <span class="en">on</span>。曜日も大文字ではじめる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">それは8月です。</span>　<span class="paren en">（ in / It&#39;s / August ）</span><div class="lines tight"><div><span class="fill2">It&#39;s in August.</span></div></div></div><div class="qnote"><span class="en">in August</span> でひとかたまり。月は大文字ではじめる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはいつ勉強しますか。</span>　<span class="paren en">（ study / When / do / you ）</span><div class="lines tight"><div><span class="fill2">When do you study?</span></div></div></div><div class="qnote"><span class="en">When</span> → <span class="en">do</span> → <span class="en">you</span> → 動詞。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">それは月曜日です。</span>　<span class="paren en">（ on / It&#39;s / Monday ）</span><div class="lines tight"><div><span class="fill2">It&#39;s on Monday.</span></div></div></div><div class="qnote">曜日なので <span class="en">on</span>。曜日も大文字ではじめる。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしのかばんはどこですか。</span>　<span class="paren en">（ my bag / is / Where ）</span><div class="lines tight"><div><span class="fill2">Where is my bag?</span></div></div></div><div class="qnote">語群が <span class="en">Where</span>。<b>場所をたずねる文</b>です。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは7時に勉強します。</span>　<span class="paren en">（ seven / study / at / I ）</span><div class="lines tight"><div><span class="fill2">I study at seven.</span></div></div></div><div class="qnote">時こくなので <span class="en">at</span>。いちばん後ろに置きます。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはいつサッカーを練習しますか。</span>　<span class="paren en">（ soccer / practice / When / you / do ）</span><div class="lines tight"><div><span class="fill2">When do you practice soccer?</span></div></div></div><div class="qnote">3番と同じ形。<span class="en">soccer</span> はいちばん後ろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは7時に勉強します。</span>　<span class="paren en">（ study / I / at / seven ）</span><div class="lines tight"><div><span class="fill2">I study at seven.</span></div></div></div><div class="qnote">時こくなので <span class="en">at</span>。いちばん後ろに置きます。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはいつサッカーを練習しますか。</span>　<span class="paren en">（ practice / When / you / soccer / do ）</span><div class="lines tight"><div><span class="fill2">When do you practice soccer?</span></div></div></div><div class="qnote">3番と同じ形。<span class="en">soccer</span> はいちばん後ろ。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 5-3　When ～?</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -1011,7 +1076,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 1 ／ Unit 5-3　When ～?</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1281,7 +1346,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1383,6 +1448,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

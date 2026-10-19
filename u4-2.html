@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -869,7 +897,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Who&#39;s</span> ／ <span class="en">is</span> ／ <span class="en">he</span> ／ <span class="en">she</span> ／ <span class="en">What</span> ／ <span class="en">Yes / No</span> ／ 名前 ／ ?</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">Who</span> も <span class="en">What</span> も「知りたいところ」を表すことば。だから<b>いちばん前に立ちます</b>。<br>知りたい中身を聞いているので、<span class="en">Yes / No</span> では答えになりません。3-1 とまったく同じ考え方です。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">Who</span> も <span class="en">What</span> も「知りたいところ」を表すことば。だから<b>いちばん前に立ちます</b>。<br>知りたい中身を聞いているので、<span class="en">Yes / No</span> では答えになりません。3-1 とまったく同じ考え方です。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -889,6 +917,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">（<span class="bl s"><span class="ansfill">What</span></span>）do you eat?</span>（なに）</div>
   </div>
   <div class="expbox"><b>見つけ方</b>　日本語を見るだけ。<br>「<b>だれ</b>」→ <span class="en">Who&#39;s</span>（1・3・5・7・9）　「<b>なに・どんな</b>」→ <span class="en">What</span>（2・4・6・8・10）<br><span class="en">man</span> は男の人、<span class="en">woman</span> は女の人という意味です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -905,6 +934,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">What&#39;s that boy?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Who&#39;s that girl?</span>（<span class="en">is</span> が必要）　4 → <span class="en">Who&#39;s that boy?</span>（&#39;を入れる）<br>6 → <span class="en">Who&#39;s that girl?</span>（終わりを ? に）　8 → <span class="en">Who&#39;s that boy?</span>（人なので <span class="en">Who</span>）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -920,6 +950,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Who&#39;s your teacher?</span>　—（ア <span class="en">Yes, he is.</span> ／イ <span class="en">Mike is.</span>）（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Who</span> の文に <span class="en">Yes / No</span> で答えると、答えになりません（1・3・6）。<br>男の人か女の人かで <span class="en">he</span>／<span class="en">she</span> を選びます（2・5）。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -962,13 +993,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群の<b>大文字で始まることば</b>が先頭。<span class="en">Who&#39;s</span> か <span class="en">What</span> です。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あの女の子はだれですか。</span>　<span class="paren en">（ that girl / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that girl?</span></div></div></div><div class="qnote">2つだけ。<span class="en">Who&#39;s</span> が先頭、終わりは <b>?</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あの女の子はだれですか。</span>　<span class="paren en">（ girl / Who&#39;s / that ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that girl?</span></div></div></div><div class="qnote">2つだけ。<span class="en">Who&#39;s</span> が先頭、終わりは <b>?</b>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの姉妹です。</span>　<span class="paren en">（ my sister / She&#39;s ）</span><div class="lines tight"><div><span class="fill2">She&#39;s my sister.</span></div></div></div><div class="qnote"><span class="en">my sister</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あの男の子はだれですか。</span>　<span class="paren en">（ boy / Who&#39;s / that ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that boy?</span></div></div></div><div class="qnote"><span class="en">that boy</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちです。</span>　<span class="paren en">（ friend / He&#39;s / my ）</span><div class="lines tight"><div><span class="fill2">He&#39;s my friend.</span></div></div></div><div class="qnote">男の子なので <span class="en">He&#39;s</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたの先生はだれですか。</span>　<span class="paren en">（ teacher / your / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s your teacher?</span></div></div></div><div class="qnote"><span class="en">your teacher</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにが好きですか。</span>　<span class="paren en">（ like / you / What / do ）</span><div class="lines tight"><div><span class="fill2">What do you like?</span></div></div></div><div class="qnote">語群に <span class="en">What</span> がある。3-1 の形です。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの先生です。</span>　<span class="paren en">（ my / is / teacher / She ）</span><div class="lines tight"><div><span class="fill2">She is my teacher.</span></div></div></div><div class="qnote">語群が <span class="en">She</span> と <span class="en">is</span>。短くしない形です。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あの男の子はだれですか。</span>　<span class="paren en">（ boy / that / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s that boy?</span></div></div></div><div class="qnote"><span class="en">that boy</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしの友だちです。</span>　<span class="paren en">（ my friend / He&#39;s ）</span><div class="lines tight"><div><span class="fill2">He&#39;s my friend.</span></div></div></div><div class="qnote">男の子なので <span class="en">He&#39;s</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたの先生はだれですか。</span>　<span class="paren en">（ your teacher / Who&#39;s ）</span><div class="lines tight"><div><span class="fill2">Who&#39;s your teacher?</span></div></div></div><div class="qnote"><span class="en">your teacher</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはなにが好きですか。</span>　<span class="paren en">（ like / do / you / What ）</span><div class="lines tight"><div><span class="fill2">What do you like?</span></div></div></div><div class="qnote">語群に <span class="en">What</span> がある。3-1 の形です。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしの先生です。</span>　<span class="paren en">（ is / my teacher / She ）</span><div class="lines tight"><div><span class="fill2">She is my teacher.</span></div></div></div><div class="qnote">語群が <span class="en">She</span> と <span class="en">is</span>。短くしない形です。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1410,6 +1441,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

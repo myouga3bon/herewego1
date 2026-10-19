@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -787,7 +815,7 @@
       </div>
       <div class="col no">
         <div class="ttl"><svg class="ic-l"><use href="#i-person"/></svg>
-          <span>✕ ちがいます<small>打ち消すとき</small></span></div>
+          <span>✕ ちがいます<small>否定文にするとき</small></span></div>
         <div class="in"><div class="ex">No, I&#39;m not.</div></div>
       </div>
     </div>
@@ -879,7 +907,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">am</span> ／ <span class="en">are</span> ／ <span class="en">You&#39;re</span> ／ <span class="en">&#39;m</span> ／ <span class="en">do</span> ／ 前 ／ ?</div></div>
-  <div class="expbox"><b>なぜ？</b>　be動詞は「＝」のしるし。だれの話かによって <span class="en">am</span>／<span class="en">are</span> と形が変わります。<br>たずねる文で前に出すのは<b>be動詞だけ</b>。あとのことばの順番はそのままです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">be動詞は「＝」のしるし。だれの話かによって <span class="en">am</span>／<span class="en">are</span> と形が変わります。<br>たずねる文で前に出すのは<b>be動詞だけ</b>。あとのことばの順番はそのままです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -899,6 +927,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">You（<span class="bl s"><span class="ansfill">are</span></span>）a soccer fan.</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　（　）のすぐ前（たずねる文なら すぐ後ろ）の主語を見るだけ。<br><span class="en">I</span> → <span class="en">am</span>（1・4・6・9）　<span class="en">you</span> → <span class="en">are</span>（2・3・7・10）<br>5・8は<b>たずねる文</b>なので <span class="en">Are</span> が前に出ています。文のはじめなので大文字です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -915,6 +944,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">No, I amn&#39;t.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">You are from Japan.</span>（<span class="en">you</span> には <span class="en">are</span>）<br>4 → <span class="en">Are you a student?</span>（<span class="en">are</span> を前に出す）　5 → <span class="en">Are you Ken?</span>（終わりを ? に）<br>8 → <span class="en">No, I&#39;m not.</span>（<span class="en">amn&#39;t</span> はない）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -930,6 +960,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Are you busy?</span>　—（ア <span class="en">No, I&#39;m not.</span> ／イ <span class="en">No, I don&#39;t.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Are</span> で聞かれたら <b><span class="en">am</span> で答える</b>。これがルールです。<br>5・6のように <span class="en">do</span> を使った答えは、<span class="en">Are</span> の文には合いません（<span class="en">do</span> の答えは次の 2-2 で習います）。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -972,13 +1003,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群の<b>いちばん前に来るもの</b>を先に決める。<span class="en">Are</span> があれば、それが先頭です。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはケンです。</span>　<span class="paren en">（ Ken / you / are ）</span><div class="lines tight"><div><span class="fill2">You are Ken.</span></div></div></div><div class="qnote"><span class="en">you</span> → <span class="en">are</span> → なにか の順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはケンですか。</span>　<span class="paren en">（ Ken / Are / you ）</span><div class="lines tight"><div><span class="fill2">Are you Ken?</span></div></div></div><div class="qnote">語群の <span class="en">Are</span> が<b>大文字</b>。だから先頭です。終わりは <b>?</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="paren en">（ a / you / student / Are ）</span><div class="lines tight"><div><span class="fill2">Are you a student?</span></div></div></div><div class="qnote"><span class="en">a student</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは長野出身です。</span>　<span class="paren en">（ from / I / Nagano / am ）</span><div class="lines tight"><div><span class="fill2">I am from Nagano.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。主語は <span class="en">I</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは日本出身ですか。</span>　<span class="paren en">（ Japan / you / from / Are ）</span><div class="lines tight"><div><span class="fill2">Are you from Japan?</span></div></div></div><div class="qnote"><span class="en">from Japan</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">はい、そうです。</span>　<span class="paren en">（ am / I / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, I am.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のうしろにコンマがついたまま使います。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーファンです。</span>　<span class="paren en">（ fan / a / You&#39;re / soccer ）</span><div class="lines tight"><div><span class="fill2">You&#39;re a soccer fan.</span></div></div></div><div class="qnote">語群に <span class="en">are</span> がなく <span class="en">You&#39;re</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはケンです。</span>　<span class="paren en">（ Ken / are / You ）</span><div class="lines tight"><div><span class="fill2">You are Ken.</span></div></div></div><div class="qnote"><span class="en">you</span> → <span class="en">are</span> → なにか の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはケンですか。</span>　<span class="paren en">（ Ken / you / Are ）</span><div class="lines tight"><div><span class="fill2">Are you Ken?</span></div></div></div><div class="qnote">語群の <span class="en">Are</span> が<b>大文字</b>。だから先頭です。終わりは <b>?</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="paren en">（ you / a student / Are ）</span><div class="lines tight"><div><span class="fill2">Are you a student?</span></div></div></div><div class="qnote"><span class="en">a student</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは長野出身です。</span>　<span class="paren en">（ Nagano / am / I / from ）</span><div class="lines tight"><div><span class="fill2">I am from Nagano.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。主語は <span class="en">I</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは日本出身ですか。</span>　<span class="paren en">（ you / from / Japan / Are ）</span><div class="lines tight"><div><span class="fill2">Are you from Japan?</span></div></div></div><div class="qnote"><span class="en">from Japan</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">はい、そうです。</span>　<span class="paren en">（ I / am / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, I am.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のうしろにコンマがついたまま使います。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーファンです。</span>　<span class="paren en">（ a soccer fan / You&#39;re ）</span><div class="lines tight"><div><span class="fill2">You&#39;re a soccer fan.</span></div></div></div><div class="qnote">語群に <span class="en">are</span> がなく <span class="en">You&#39;re</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1420,6 +1451,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -705,7 +733,7 @@
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「<b>これは わたしの かばんです</b>」のように、<b>もの</b>をさして言う文です。<br>　近いものは <span class="en">this</span>（これ）、遠いものは <span class="en">that</span>（あれ）。</p>
-    <p class="talk">あわせて、<b>たずねる形</b>と<b>打ち消す形</b>をならいます。</p>
+    <p class="talk">あわせて、<b>たずねる形</b>と<b>否定文にする形</b>をならいます。</p>
     <div class="gitem">
       <div class="gh"><span class="gn">❶</span>「これは ～ ですか」<small>たずねる文</small></div>
       <div class="gmap"><span class="j">これは あなたの かばん ですか</span><span class="ar">→</span><span class="e en">Is this your bag?</span></div>
@@ -714,7 +742,7 @@
       <div class="gnote"><b>is を前に出して</b>、終わりを <b>?</b> にします。</div>
     </div>
     <div class="gitem b2">
-      <div class="gh"><span class="gn">❷</span>「これは ～ では ありません」<small>打ち消す文</small></div>
+      <div class="gh"><span class="gn">❷</span>「これは ～ では ありません」<small>否定文</small></div>
       <div class="gmap"><span class="j">これは わたしの かばん では ありません</span><span class="ar">→</span><span class="e en">This is not my bag.</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This is not my bag.</span><span class="t">これは わたしの かばん ではありません。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">This isn&#39;t my bag.</span><span class="t">これは わたしの かばん ではありません。</span></div>
@@ -739,7 +767,7 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">たずねる文は <b><span class="en">Is</span> を前に出す</b>。<br>　打ち消しは <span class="en">is</span> のうしろに <span class="en">not</span> を置きます。</p>
+    <p class="talk">たずねる文は <b><span class="en">Is</span> を前に出す</b>。<br>　否定文は <span class="en">is</span> のうしろに <span class="en">not</span> を置きます。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
       <tbody>
@@ -754,10 +782,10 @@
       <div><span class="en">Is this</span> ・ <span class="en">is not</span> ・ <span class="en">isn&#39;t</span> を3回ずつ書き写そう！</div>
     </div>
   </div><div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>かなり大事｜打ち消しは be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">ここが今回のヤマです。<br>　be動詞の文を打ち消すときは、<b>be動詞のすぐうしろに <span class="en">not</span> を置く</b>だけ。</p>
+    <h3 class="st"><span class="stepnum">4</span>かなり大事｜否定文は be動詞のうしろに <span class="en">not</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <p class="talk">ここが今回のヤマです。<br>　be動詞の文を否定文にするときは、<b>be動詞のすぐうしろに <span class="en">not</span> を置く</b>だけ。</p>
     <table class="kind">
-      <thead><tr><th>ふつうの文</th><th>打ち消しの文</th><th>短い形</th></tr></thead>
+      <thead><tr><th>ふつうの文</th><th>否定文</th><th>短い形</th></tr></thead>
       <tbody>
         <tr><td class="e">I am a student.</td><td class="e" style="color:var(--ng);">I am <u>not</u> a student.</td><td class="e">I&#39;m not</td></tr>
         <tr><td class="e">You are tall.</td><td class="e" style="color:var(--ng);">You are <u>not</u> tall.</td><td class="e">aren&#39;t</td></tr>
@@ -773,7 +801,7 @@
       <div class="txt">
         <div class="h">合言葉：青は <span class="en">not</span>、ピンクは <span class="en">don&#39;t</span></div>
         <p><b class="cb">青＝be動詞 ＋ <span class="en">not</span></b>　<b class="cp">ピンク＝<span class="en">don&#39;t</span> ＋ 動詞</b>　
-        打ち消し方も、青とピンクでちがいます。<br>
+        否定文の作り方も、青とピンクでちがいます。<br>
         <span class="xm">✕ This don&#39;t my bag ✕</span>　<span class="xm">✕ I don&#39;t a student ✕</span></p>
       </div>
     </div>
@@ -813,7 +841,7 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ This don&#39;t my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ This <span class="fx">is not</span> my bag.</span><span class="gjp">これは わたしの かばんでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の打ち消しは <b><span class="en">is not</span></b>。<span class="en">don&#39;t</span> は動作のことば専用です。</span></div>
+      <div class="qza"><span class="good en">○ This <span class="fx">is not</span> my bag.</span><span class="gjp">これは わたしの かばんでは ありません。</span><span class="qzp"><b>ポイント</b>　be動詞の否定文は <b><span class="en">is not</span></b>。<span class="en">don&#39;t</span> は動作のことば専用です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ This not is my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -843,7 +871,7 @@
       <ul class="sumlist">
         <li>「これは～ですか」は <b><span class="en">Is this ～?</span></b>　<span class="en">is</span> を前に出して、終わりを ? にする。</li>
         <li>答えは <b><span class="en">Yes, it is.</span> ／ <span class="en">No, it isn&#39;t.</span></b>　主語は <span class="en">it</span>。</li>
-        <li><b>打ち消しは be動詞のすぐうしろに <span class="en">not</span>。</b><span class="en">don&#39;t</span> は使わない。</li>
+        <li><b>否定文は be動詞のすぐうしろに <span class="en">not</span>。</b><span class="en">don&#39;t</span> は使わない。</li>
         <li>短い形は <b><span class="en">isn&#39;t</span> ／ <span class="en">aren&#39;t</span></b>。<span class="en">amn&#39;t</span> はないので <span class="en">I&#39;m not</span>。</li>
       </ul>
     </div>
@@ -864,15 +892,15 @@
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
-    <li><button class="qn" onclick="toggleQn(this)">1</button>be動詞の文を打ち消すときは、be動詞の（<span class="bl s"><span class="ansfill">うしろ</span></span>）に（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
+    <li><button class="qn" onclick="toggleQn(this)">1</button>be動詞の文を否定文にするときは、be動詞の（<span class="bl s"><span class="ansfill">うしろ</span></span>）に（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button>「これは～ですか」は（<span class="bl s"><span class="ansfill">is</span></span>）を文の前に出して、終わりを（<span class="bl s"><span class="ansfill">?</span></span>）にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>答えの主語は（<span class="bl s"><span class="ansfill">it</span></span>）を使う。<span class="en">Yes, （<span class="bl s"><span class="ansfill">it</span></span>） is.</span> ／ <span class="en">No, it isn&#39;t.</span></li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">is not</span> の短い形は（<span class="bl s"><span class="ansfill">isn't</span></span>）、<span class="en">are not</span> は（<span class="bl s"><span class="ansfill">aren't</span></span>）。</li>
-    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>動作のことばを打ち消すときは（<span class="bl s"><span class="ansfill">don't</span></span>）を使う。be動詞の文には使わない。</li>
+    <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>動作のことばを否定文にするときは（<span class="bl s"><span class="ansfill">don't</span></span>）を使う。be動詞の文には使わない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">is</span> ／ <span class="en">not</span> ／ <span class="en">it</span> ／ <span class="en">isn&#39;t</span> ／ <span class="en">aren&#39;t</span> ／ <span class="en">don&#39;t</span> ／ うしろ ／ ?</div></div>
-  <div class="expbox"><b>なぜ？</b>　be動詞は「＝」のしるし。その「＝」を打ち消すので、<b>すぐうしろに <span class="en">not</span></b> を置いて「＝ではない」と表します。<br>動作のことばには「＝」がないので、<span class="en">don&#39;t</span> という別の打ち消し役が必要になるのです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">be動詞は「＝」のしるし。その「＝」を否定文にするので、<b>すぐうしろに <span class="en">not</span></b> を置いて「＝ではない」と表します。<br>動作のことばには「＝」がないので、<span class="en">don&#39;t</span> という別の否定文役が必要になるのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -892,6 +920,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She is（<span class="bl s"><span class="ansfill">not</span></span>）kind.</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　文の中に be動詞があるかだけを見ます。<br><b>be動詞がある</b>（<span class="en">is・am・are</span>）→ <span class="en">not</span>（1・3・5・7・9・10）<br><b>動作のことばだけ</b>（<span class="en">like・play・have・study</span>）→ <span class="en">don&#39;t</span>（2・4・6・8）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -908,6 +937,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I amn&#39;t a student.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">This is not my bag.</span>（be動詞の文は <span class="en">not</span>）<br>4 → <span class="en">Is this your bag?</span>（<span class="en">is</span> を前に出す）　6 → <span class="en">This is not my bag.</span>（<span class="en">not</span> をうしろへ）<br>8 → <span class="en">I&#39;m not a student.</span>（<span class="en">amn&#39;t</span> はない）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -923,12 +953,13 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Is this a pen?</span>　—（ア <span class="en">Yes, it is.</span> ／イ <span class="en">Yes, I am.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Is this ～?</span> と聞かれたら、答えの主語は <b><span class="en">it</span></b>（1・2・4・6）。<br><span class="en">Are you ～?</span> なら <span class="en">I</span>（3）、<span class="en">Do you ～?</span> なら <span class="en">I ＋ don&#39;t</span>（5）。<b>先頭を見て決める</b>のは今までと同じです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
-    <b>合言葉</b><span class="s">be動詞の打ち消しは <b>be動詞のすぐうしろに <span class="en">not</span></b>。<span class="en">don&#39;t</span> は使わない。</span>
+    <b>合言葉</b><span class="s">be動詞の否定文は <b>be動詞のすぐうしろに <span class="en">not</span></b>。<span class="en">don&#39;t</span> は使わない。</span>
   </div>
   <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
@@ -965,13 +996,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">not</span> は be動詞の<b>すぐうしろ</b>に置きます。語群に大文字の語があれば、それが先頭。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしのかばんではありません。</span>　<span class="paren en">（ my bag / not / This / is ）</span><div class="lines tight"><div><span class="fill2">This is not my bag.</span></div></div></div><div class="qnote"><span class="en">This</span> → <span class="en">is</span> → <span class="en">not</span> → なにか の順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">これはあなたのかばんですか。</span>　<span class="paren en">（ your bag / this / Is ）</span><div class="lines tight"><div><span class="fill2">Is this your bag?</span></div></div></div><div class="qnote">語群の <span class="en">Is</span> が大文字。だから先頭です。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしのかばんではありません。</span>　<span class="paren en">（ not / This / is / my bag ）</span><div class="lines tight"><div><span class="fill2">This is not my bag.</span></div></div></div><div class="qnote"><span class="en">This</span> → <span class="en">is</span> → <span class="en">not</span> → なにか の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">これはあなたのかばんですか。</span>　<span class="paren en">（ this / your bag / Is ）</span><div class="lines tight"><div><span class="fill2">Is this your bag?</span></div></div></div><div class="qnote">語群の <span class="en">Is</span> が大文字。だから先頭です。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">はい、そうです。</span>　<span class="paren en">（ is / it / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, it is.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のコンマはそのまま。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒ではありません。</span>　<span class="paren en">（ a student / am / I / not ）</span><div class="lines tight"><div><span class="fill2">I am not a student.</span></div></div></div><div class="qnote"><span class="en">am</span> → <span class="en">not</span> の順。<span class="en">a student</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆が好きではありません。</span>　<span class="paren en">（ natto / like / don&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote">語群に <span class="en">don&#39;t</span> がある。<b>動作の文</b>です。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしのペンではありません。</span>　<span class="paren en">（ my pen / isn&#39;t / This ）</span><div class="lines tight"><div><span class="fill2">This isn&#39;t my pen.</span></div></div></div><div class="qnote">語群が <span class="en">isn&#39;t</span>。短い形で書きます。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたの自転車ですか。</span>　<span class="paren en">（ your bike / that / Is ）</span><div class="lines tight"><div><span class="fill2">Is that your bike?</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">this</span> が <span class="en">that</span> になっただけ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒ではありません。</span>　<span class="paren en">（ a student / not / am / I ）</span><div class="lines tight"><div><span class="fill2">I am not a student.</span></div></div></div><div class="qnote"><span class="en">am</span> → <span class="en">not</span> の順。<span class="en">a student</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆が好きではありません。</span>　<span class="paren en">（ don&#39;t / natto / like / I ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote">語群に <span class="en">don&#39;t</span> がある。<b>動作の文</b>です。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしのペンではありません。</span>　<span class="paren en">（ my pen / This isn&#39;t ）</span><div class="lines tight"><div><span class="fill2">This isn&#39;t my pen.</span></div></div></div><div class="qnote">語群が <span class="en">isn&#39;t</span>。短い形で書きます。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あれはあなたの自転車ですか。</span>　<span class="paren en">（ that / your bike / Is ）</span><div class="lines tight"><div><span class="fill2">Is that your bike?</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">this</span> が <span class="en">that</span> になっただけ。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1005,7 +1036,7 @@
   </div>
 
   <div class="half bottom qsec">
-    <h3 class="sec">レベル4チェック　自由英作文<em>机の上のものについて、たずねたり打ち消したりしよう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="sec">レベル4チェック　自由英作文<em>机の上のものについて、たずねたり否定文たりしよう</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="cond">
       <div class="h"><svg class="ic"><use href="#i-pen"/></svg> 条件</div>
       <ul>
@@ -1023,14 +1054,14 @@
     </div>
     <div class="modelnote">これは例です。同じでなくてかまいません。かばん・ペン・本・ぼうし・自転車 のどれかで書いてみよう。</div>
     <div class="checklist">
-      <span class="key">be動詞の打ち消しは not</span>
+      <span class="key">be動詞の否定文は not</span>
       <span>don&#39;t を be動詞の文に使っていない</span>
       <span>答えの主語は it</span>
       <span>isn&#39;t のアポストロフィ</span>
     </div>
     <div class="ribbon">
       <svg class="ic-l beat"><use href="#i-heart"/></svg>
-      <b>書けたら 見直し</b><span class="s">じぶんの文の打ち消しのことばに○をつけよう。be動詞の文に <span class="en">don&#39;t</span> があったら、そこがまちがい。</span>
+      <b>書けたら 見直し</b><span class="s">じぶんの文の否定文のことばに○をつけよう。be動詞の文に <span class="en">don&#39;t</span> があったら、そこがまちがい。</span>
     </div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1413,6 +1444,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

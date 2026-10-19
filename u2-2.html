@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -874,7 +902,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Do</span> ／ <span class="en">Are</span> ／ <span class="en">do</span> ／ <span class="en">don&#39;t</span> ／ 原形 ／ つけない ／ 1 ／ ?</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">Do</span> は「たずねますよ」という合図です。合図が前に立つので、<b>うしろの文はそのまま</b>でよいのです。<br>be動詞の文には合図がもともとある（<span class="en">are</span> を前に出す）ので、<span class="en">Do</span> はいりません。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">Do</span> は「たずねますよ」という合図です。合図が前に立つので、<b>うしろの文はそのまま</b>でよいのです。<br>be動詞の文には合図がもともとある（<span class="en">are</span> を前に出す）ので、<span class="en">Do</span> はいりません。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -894,6 +922,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">（<span class="bl s"><span class="ansfill">Are</span></span>）you a soccer fan?</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　<span class="en">you</span> のうしろを見よう。<br><b>動作のことばがある</b>（<span class="en">like・play・have・study・eat</span>）→ <span class="en">Do</span>（1・3・6・7・9）<br><b>動作のことばがない</b>（生徒・日本出身・うれしい・12歳・サッカーファン）→ <span class="en">Are</span>（2・4・5・8・10）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -910,6 +939,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">No, I don&#39;t.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Do you like soccer?</span>（動作の文は <span class="en">Do</span>）<br>4 → <span class="en">Are you a student?</span>（動作のことばがないので <span class="en">Are</span>）<br>5 → <span class="en">Do you like soccer?</span>（s を取る）　7 → <span class="en">Do you like soccer?</span>（<span class="en">Do</span> を足す）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -925,6 +955,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Do you study math?</span>　—（ア <span class="en">Yes, I do.</span> ／イ <span class="en">Yes, I study.</span>）（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">Do</span> で聞かれたら <span class="en">do</span>／<span class="en">don&#39;t</span>、<span class="en">Are</span> で聞かれたら <span class="en">am</span>／<span class="en">&#39;m not</span>。<br>6のイのように動詞をくりかえす必要はありません。4のイは「あなた」になってしまうのでまちがいです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -967,13 +998,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群の中の<b>大文字で始まることば</b>が先頭になります。<span class="en">Do</span> か <span class="en">Are</span> のどちらかです。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーが好きですか。</span>　<span class="paren en">（ soccer / you / Do / like ）</span><div class="lines tight"><div><span class="fill2">Do you like soccer?</span></div></div></div><div class="qnote"><span class="en">Do</span> → <span class="en">you</span> → 動詞 → なにを の順。終わりは <b>?</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="paren en">（ a / you / student / Are ）</span><div class="lines tight"><div><span class="fill2">Are you a student?</span></div></div></div><div class="qnote">語群に <span class="en">Are</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはテニスをしますか。</span>　<span class="paren en">（ tennis / Do / play / you ）</span><div class="lines tight"><div><span class="fill2">Do you play tennis?</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">はい、します。</span>　<span class="paren en">（ do / I / Yes, ）</span><div class="lines tight"><div><span class="fill2">Yes, I do.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のコンマはそのまま使います。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは犬を飼っていますか。</span>　<span class="paren en">（ a dog / you / have / Do ）</span><div class="lines tight"><div><span class="fill2">Do you have a dog?</span></div></div></div><div class="qnote"><span class="en">a dog</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、しません。</span>　<span class="paren en">（ don&#39;t / I / No, ）</span><div class="lines tight"><div><span class="fill2">No, I don&#39;t.</span></div></div></div><div class="qnote"><span class="en">No,</span> → <span class="en">I</span> → <span class="en">don&#39;t</span> の順。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは音楽が好きです。</span>　<span class="paren en">（ music / like / You ）</span><div class="lines tight"><div><span class="fill2">You like music.</span></div></div></div><div class="qnote">語群に <span class="en">Do</span> がない。だから<b>たずねる文ではありません</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはサッカーが好きですか。</span>　<span class="paren en">（ soccer / Do / like / you ）</span><div class="lines tight"><div><span class="fill2">Do you like soccer?</span></div></div></div><div class="qnote"><span class="en">Do</span> → <span class="en">you</span> → 動詞 → なにを の順。終わりは <b>?</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは生徒ですか。</span>　<span class="paren en">（ you / a student / Are ）</span><div class="lines tight"><div><span class="fill2">Are you a student?</span></div></div></div><div class="qnote">語群に <span class="en">Are</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはテニスをしますか。</span>　<span class="paren en">（ you / play / tennis / Do ）</span><div class="lines tight"><div><span class="fill2">Do you play tennis?</span></div></div></div><div class="qnote">1番と同じ形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">はい、します。</span>　<span class="paren en">（ I / Yes, / do ）</span><div class="lines tight"><div><span class="fill2">Yes, I do.</span></div></div></div><div class="qnote"><span class="en">Yes,</span> のコンマはそのまま使います。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは犬を飼っていますか。</span>　<span class="paren en">（ have / a dog / you / Do ）</span><div class="lines tight"><div><span class="fill2">Do you have a dog?</span></div></div></div><div class="qnote"><span class="en">a dog</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、しません。</span>　<span class="paren en">（ I / don&#39;t / No, ）</span><div class="lines tight"><div><span class="fill2">No, I don&#39;t.</span></div></div></div><div class="qnote"><span class="en">No,</span> → <span class="en">I</span> → <span class="en">don&#39;t</span> の順。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは音楽が好きです。</span>　<span class="paren en">（ like / music / You ）</span><div class="lines tight"><div><span class="fill2">You like music.</span></div></div></div><div class="qnote">語群に <span class="en">Do</span> がない。だから<b>たずねる文ではありません</b>。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1415,6 +1446,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){
