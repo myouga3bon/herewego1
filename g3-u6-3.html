@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -854,7 +882,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：主語 ／ <span class="en">does</span> ／ <span class="en">s</span> ／ うしろ ／ <span class="en">tell</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">does</span> は「<b>たずねますよ</b>」という合図のことばです。<br>文の中に入れると もうたずねていないので、<b>合図がいらなくなる</b>のです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">does</span> は「<b>たずねますよ</b>」という合図のことばです。<br>文の中に入れると もうたずねていないので、<b>合図がいらなくなる</b>のです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -874,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I know when he（<span class="bl s"><span class="ansfill">comes</span></span>）.</span>（come）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　1・2・6・9・10 は <span class="en">does</span> が消えたので、<b>動詞に <span class="en">s</span></b> がつきます。<br>3・7 は <span class="en">be</span>動詞が<b>うしろ</b>に来ています。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -890,6 +919,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I know what he want.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">what he wants</span>　4 → <span class="en">where he lives</span><br>6 → <span class="en">where he is</span>　8 → <span class="en">wants</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -905,6 +935,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I know （ア what he likes ／イ he what likes）.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　4 は <span class="en">does</span> が消えたので <span class="en">wants</span>。<br>6 は<b>疑問詞が先</b>という順番のルールです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -947,13 +978,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　疑問詞のうしろは<b>ふつうの文の順</b>（主語 → 動詞）。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼が何をほしいか知っています。</span>　<span class="paren en">（ what he wants / I / know ）</span><div class="lines tight"><div><span class="fill2">I know what he wants.</span></div></div></div><div class="qnote">ふつうの順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこに住んでいるか知っています。</span>　<span class="paren en">（ he lives / I know / where ）</span><div class="lines tight"><div><span class="fill2">I know where he lives.</span></div></div></div><div class="qnote"><span class="en">does</span> は書かない。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこにいるか知っています。</span>　<span class="paren en">（ he is / where / I know ）</span><div class="lines tight"><div><span class="fill2">I know where he is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼が何をほしいか教えてください。</span>　<span class="paren en">（ what he wants / me / Tell ）</span><div class="lines tight"><div><span class="fill2">Tell me what he wants.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあの女の子がだれか知っています。</span>　<span class="paren en">（ that girl is / who / I know ）</span><div class="lines tight"><div><span class="fill2">I know who that girl is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこにいるか知りません。</span>　<span class="paren en">（ where he is / I / don&#39;t know ）</span><div class="lines tight"><div><span class="fill2">I don't know where he is.</span></div></div></div><div class="qnote">打ち消しの文。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がいつ来るか知っています。</span>　<span class="paren en">（ he comes / when / I know ）</span><div class="lines tight"><div><span class="fill2">I know when he comes.</span></div></div></div><div class="qnote"><span class="en">s</span> がもどる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼が何をほしいか知っています。</span>　<span class="paren en">（ wants / know / he / what / I ）</span><div class="lines tight"><div><span class="fill2">I know what he wants.</span></div></div></div><div class="qnote">ふつうの順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこに住んでいるか知っています。</span>　<span class="paren en">（ lives / he / where / know / I ）</span><div class="lines tight"><div><span class="fill2">I know where he lives.</span></div></div></div><div class="qnote"><span class="en">does</span> は書かない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこにいるか知っています。</span>　<span class="paren en">（ where / I / know / is / he ）</span><div class="lines tight"><div><span class="fill2">I know where he is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼が何をほしいか教えてください。</span>　<span class="paren en">（ me / Tell / he / what / wants ）</span><div class="lines tight"><div><span class="fill2">Tell me what he wants.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあの女の子がだれか知っています。</span>　<span class="paren en">（ is / I / girl / who / know / that ）</span><div class="lines tight"><div><span class="fill2">I know who that girl is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がどこにいるか知りません。</span>　<span class="paren en">（ where he is / I / don&#39;t know ）</span><div class="lines tight"><div><span class="fill2">I don't know where he is.</span></div></div></div><div class="qnote">否定文。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼がいつ来るか知っています。</span>　<span class="paren en">（ when / know / comes / I / he ）</span><div class="lines tight"><div><span class="fill2">I know when he comes.</span></div></div></div><div class="qnote"><span class="en">s</span> がもどる。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -979,7 +1010,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">わたしは彼がどこにいるか知っています。<div class="lines"><div><span class="fill2">I know where he is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">彼が何をほしいか教えてください。<div class="lines"><div><span class="fill2">Tell me what he wants.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしはあの女の子がだれか知っています。<div class="lines"><div><span class="fill2">I know who that girl is.</span></div></div></div><div class="qnote"><span class="en">be</span>動詞はうしろ。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしは彼がどこにいるか知りません。<div class="lines"><div><span class="fill2">I don't know where he is.</span></div></div></div><div class="qnote">打ち消しの文。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしは彼がどこにいるか知りません。<div class="lines"><div><span class="fill2">I don't know where he is.</span></div></div></div><div class="qnote">否定文。</div></div></li>
     </ol>
     <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint"><span class="en">what he wants ／ where he lives ／ where he is ／ who that girl is ／ Tell me ／ I don&#39;t know</span></div></div>
@@ -1395,6 +1426,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -781,11 +809,11 @@
   </div>
 
   <div class="blk-sec more">
-    <h3 class="st"><span class="stepnum">5</span>たずねる・打ち消す<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">5</span>たずねる文・否定文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">やり方は 2-2 と同じ。<br>　<b>動かすのは <span class="en">have</span> だけ</b>です。</p>
     <div class="eqbox" style="border-left-color:var(--gv);background:rgba(194,24,91,.06);">
       たずねる：<span class="eq" style="color:var(--gv);">Have</span> you been studying?（<span class="en">Have</span> を前に出す）<br>
-      打ち消す：I <span class="eq" style="color:var(--gv);">haven&#39;t</span> been studying.（<span class="en">have</span> のうしろに <span class="en">not</span>）
+      否定文にする：I <span class="eq" style="color:var(--gv);">haven&#39;t</span> been studying.（<span class="en">have</span> のうしろに <span class="en">not</span>）
     </div>
     <p class="talk"><span class="en">been ～ing</span> の部分は<b>そのまま</b>です。</p>
   </div>
@@ -854,7 +882,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">been</span> ／ <span class="en">ing</span> ／ <span class="en">has</span> ／ <span class="en">for</span> ／ 状態</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">I am studying.</span> は「いま勉強中」だけ。<br><span class="en">have been</span> をつけると「<b>前から ずっと</b> 勉強し続けている」と、長さが加わります。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">I am studying.</span> は「いま勉強中」だけ。<br><span class="en">have been</span> をつけると「<b>前から ずっと</b> 勉強し続けている」と、長さが加わります。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -874,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She（<span class="bl s"><span class="ansfill">has</span></span>）been running for an hour.</span>（主語は She）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　3・10 は主語が1つなので <span class="en">has</span>。<br>9 は <span class="en">know</span>（状態）なので <span class="en">ing</span> にせず <span class="en">known</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -890,6 +919,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I have been study for two hours.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">have been studying</span>　4 → <span class="en">has</span><br>6 → <span class="en">have known</span>　8 → <span class="en">studying</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -905,6 +935,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I have been studying （ア for ／イ since） two hours.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　3 は <span class="en">ten</span>（10時）が始まりなので <span class="en">since</span>。<br>6 は <span class="en">two hours</span> が長さなので <span class="en">for</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -947,13 +978,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　主語 → <span class="en">have/has been</span> → 動詞ing → <span class="en">for/since</span> ～。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは2時間ずっと勉強しています。</span>　<span class="paren en">（ for two hours / studying / I have been ）</span><div class="lines tight"><div><span class="fill2">I have been studying for two hours.</span></div></div></div><div class="qnote">3語セット。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">朝からずっと雨がふっています。</span>　<span class="paren en">（ since morning / raining / It has been ）</span><div class="lines tight"><div><span class="fill2">It has been raining since morning.</span></div></div></div><div class="qnote"><span class="en">has</span> を使う。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは10時からずっと待っています。</span>　<span class="paren en">（ since ten / I have been / waiting ）</span><div class="lines tight"><div><span class="fill2">I have been waiting since ten.</span></div></div></div><div class="qnote"><span class="en">since</span> は始まり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は1時間ずっとサッカーをしています。</span>　<span class="paren en">（ for an hour / soccer / He has been playing ）</span><div class="lines tight"><div><span class="fill2">He has been playing soccer for an hour.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはどのくらいずっと待っていますか。</span>　<span class="paren en">（ been waiting / How long / have you ）</span><div class="lines tight"><div><span class="fill2">How long have you been waiting?</span></div></div></div><div class="qnote">先頭に <span class="en">How long</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は1時間ずっと走っています。</span>　<span class="paren en">（ for an hour / running / She has been ）</span><div class="lines tight"><div><span class="fill2">She has been running for an hour.</span></div></div></div><div class="qnote"><span class="en">has been</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは3年間彼を知っています。</span>　<span class="paren en">（ him / for three years / I have known ）</span><div class="lines tight"><div><span class="fill2">I have known him for three years.</span></div></div></div><div class="qnote">状態は <span class="en">ing</span> にしない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは2時間ずっと勉強しています。</span>　<span class="paren en">（ for / studying / have / been / hours / two / I ）</span><div class="lines tight"><div><span class="fill2">I have been studying for two hours.</span></div></div></div><div class="qnote">3語セット。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">朝からずっと雨がふっています。</span>　<span class="paren en">（ has / raining / since morning / been / It ）</span><div class="lines tight"><div><span class="fill2">It has been raining since morning.</span></div></div></div><div class="qnote"><span class="en">has</span> を使う。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは10時からずっと待っています。</span>　<span class="paren en">（ have / waiting / I / since ten / been ）</span><div class="lines tight"><div><span class="fill2">I have been waiting since ten.</span></div></div></div><div class="qnote"><span class="en">since</span> は始まり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は1時間ずっとサッカーをしています。</span>　<span class="paren en">（ soccer / playing / has / been / an hour / for / He ）</span><div class="lines tight"><div><span class="fill2">He has been playing soccer for an hour.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはどのくらいずっと待っていますか。</span>　<span class="paren en">（ been waiting / you / long / have / How ）</span><div class="lines tight"><div><span class="fill2">How long have you been waiting?</span></div></div></div><div class="qnote">先頭に <span class="en">How long</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は1時間ずっと走っています。</span>　<span class="paren en">（ an hour / She / running / has / for / been ）</span><div class="lines tight"><div><span class="fill2">She has been running for an hour.</span></div></div></div><div class="qnote"><span class="en">has been</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは3年間彼を知っています。</span>　<span class="paren en">（ three / known / I / for / years / him / have ）</span><div class="lines tight"><div><span class="fill2">I have known him for three years.</span></div></div></div><div class="qnote">状態は <span class="en">ing</span> にしない。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1395,6 +1426,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

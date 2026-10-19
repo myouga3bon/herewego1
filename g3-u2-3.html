@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -718,7 +746,7 @@
       <div class="gmap"><span class="j">一度も <b>見た ことが ない</b></span><span class="ar">→</span><span class="e en"><b>have never seen</b></span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I have never seen a panda.</span><span class="t">わたしは 一度も パンダを 見た ことが ありません。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">He has never been to Kyoto.</span><span class="t">彼は 一度も 京都へ 行った ことが ありません。</span></div>
-      <div class="gnote"><b>never</b>（一度も～ない）は <b>have と過去分詞の間</b>。これだけで打ち消しになります。</div>
+      <div class="gnote"><b>never</b>（一度も～ない）は <b>have と過去分詞の間</b>。これだけで否定文になります。</div>
     </div>
     <p class="talk">たずねるときは <b><span class="en">Have you ever ～?</span></b>（今までに～したことがありますか）を使います。</p>
     <div class="copy">
@@ -732,7 +760,7 @@
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">never</span> があれば、<b><span class="en">not</span> はいりません</b>。</p>
     <div class="eqbox">
       I have <span class="eq" style="color:var(--gv);">never</span> seen a panda.　◯<br>
-      I <span class="eq" style="color:var(--ng);">haven&#39;t never</span> seen a panda.　✕（打ち消しが2つ）
+      I <span class="eq" style="color:var(--ng);">haven&#39;t never</span> seen a panda.　✕（否定文が2つ）
     </div>
     <div class="judge">
       <div class="col yes">
@@ -742,11 +770,11 @@
       </div>
       <div class="col no">
         <div class="ttl"><svg class="ic-l"><use href="#i-globe"/></svg>
-          <span>✕ 打ち消しが2つ<small>haven&#39;t と never</small></span></div>
+          <span>✕ 否定文が2つ<small>haven&#39;t と never</small></span></div>
         <div class="in"><div class="ex">I haven&#39;t never seen it.<br>I don&#39;t have never seen it.</div></div>
       </div>
     </div>
-    <p class="talk"><span class="en">never</span> は「<b>一度も～ない</b>」という強い打ち消しのことばです。</p>
+    <p class="talk"><span class="en">never</span> は「<b>一度も～ない</b>」という強い否定文のことばです。</p>
   </div>
 
   <div class="blk-sec">
@@ -855,7 +883,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：過去分詞 ／ <span class="en">never</span> ／ 間 ／ <span class="en">once</span> ／ <span class="en">been</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">I saw a panda.</span> は「むかし見た」だけ。<br><span class="en">have</span> をつけると「見た経験が<b>いまの自分にある</b>」という意味になります。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">I saw a panda.</span> は「むかし見た」だけ。<br><span class="en">have</span> をつけると「見た経験が<b>いまの自分にある</b>」という意味になります。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -875,6 +903,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She has never（<span class="bl s"><span class="ansfill">seen</span></span>）a panda.</span>（see）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　4・6 は<b>間</b>に入れることば。7・8 は<b>文の終わり</b>につけることば。<br>5・10 は主語が <span class="en">He・She</span> なので <span class="en">has</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -891,6 +920,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">He have never been there.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">seen</span>　4 → <span class="en">have never seen</span><br>6 → <span class="en">Have</span>　8 → <span class="en">has</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -906,6 +936,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I have eaten sushi （ア never ／イ before）.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　2 は「行ったことがある」なので <span class="en">been</span>。<br>6 は<b>文の終わり</b>なので <span class="en">before</span>。<span class="en">never</span> はここには置けません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -948,13 +979,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　主語 → <span class="en">have/has</span> → <span class="en">never/ever</span> → 過去分詞 → うしろに <span class="en">once</span> など。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは一度もパンダを見たことがありません。</span>　<span class="paren en">（ a panda / I have never / seen ）</span><div class="lines tight"><div><span class="fill2">I have never seen a panda.</span></div></div></div><div class="qnote"><span class="en">never</span> は間。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは一度京都へ行ったことがあります。</span>　<span class="paren en">（ once / to Kyoto / I have been ）</span><div class="lines tight"><div><span class="fill2">I have been to Kyoto once.</span></div></div></div><div class="qnote"><span class="en">once</span> はうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは今までにパンダを見たことがありますか。</span>　<span class="paren en">（ a panda / seen / Have you ever ）</span><div class="lines tight"><div><span class="fill2">Have you ever seen a panda?</span></div></div></div><div class="qnote"><span class="en">ever</span> は間。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は一度も京都へ行ったことがありません。</span>　<span class="paren en">（ to Kyoto / been / He has never ）</span><div class="lines tight"><div><span class="fill2">He has never been to Kyoto.</span></div></div></div><div class="qnote"><span class="en">has</span> を使う。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは前にすしを食べたことがあります。</span>　<span class="paren en">（ before / sushi / I have eaten ）</span><div class="lines tight"><div><span class="fill2">I have eaten sushi before.</span></div></div></div><div class="qnote"><span class="en">before</span> はうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは今までに京都へ行ったことがありますか。</span>　<span class="paren en">（ to Kyoto / been / Have you ever ）</span><div class="lines tight"><div><span class="fill2">Have you ever been to Kyoto?</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は一度もすしを食べたことがありません。</span>　<span class="paren en">（ sushi / She has never / eaten ）</span><div class="lines tight"><div><span class="fill2">She has never eaten sushi.</span></div></div></div><div class="qnote"><span class="en">never</span> は間。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは一度もパンダを見たことがありません。</span>　<span class="paren en">（ seen / I / have / never / a panda ）</span><div class="lines tight"><div><span class="fill2">I have never seen a panda.</span></div></div></div><div class="qnote"><span class="en">never</span> は間。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは一度京都へ行ったことがあります。</span>　<span class="paren en">（ to / once / been / I / have / Kyoto ）</span><div class="lines tight"><div><span class="fill2">I have been to Kyoto once.</span></div></div></div><div class="qnote"><span class="en">once</span> はうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは今までにパンダを見たことがありますか。</span>　<span class="paren en">（ ever / Have / a panda / seen / you ）</span><div class="lines tight"><div><span class="fill2">Have you ever seen a panda?</span></div></div></div><div class="qnote"><span class="en">ever</span> は間。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は一度も京都へ行ったことがありません。</span>　<span class="paren en">（ Kyoto / to / never / has / been / He ）</span><div class="lines tight"><div><span class="fill2">He has never been to Kyoto.</span></div></div></div><div class="qnote"><span class="en">has</span> を使う。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは前にすしを食べたことがあります。</span>　<span class="paren en">（ have / before / I / eaten / sushi ）</span><div class="lines tight"><div><span class="fill2">I have eaten sushi before.</span></div></div></div><div class="qnote"><span class="en">before</span> はうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは今までに京都へ行ったことがありますか。</span>　<span class="paren en">（ Kyoto / ever / you / been / Have / to ）</span><div class="lines tight"><div><span class="fill2">Have you ever been to Kyoto?</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼女は一度もすしを食べたことがありません。</span>　<span class="paren en">（ has / She / sushi / eaten / never ）</span><div class="lines tight"><div><span class="fill2">She has never eaten sushi.</span></div></div></div><div class="qnote"><span class="en">never</span> は間。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1396,6 +1427,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

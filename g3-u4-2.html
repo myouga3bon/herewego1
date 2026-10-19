@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -853,7 +881,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">who</span> ／ <span class="en">which</span> ／ 動詞 ／ 主語 ／ 人</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">I have a friend.</span> と <span class="en">He plays the piano.</span> の2文を1つにするとき、<br>2つめの <span class="en">He</span> を <b><span class="en">who</span></b> に変えて、<span class="en">a friend</span> のうしろにつなげているのです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">I have a friend.</span> と <span class="en">He plays the piano.</span> の2文を1つにするとき、<br>2つめの <span class="en">He</span> を <b><span class="en">who</span></b> に変えて、<span class="en">a friend</span> のうしろにつなげているのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -873,6 +901,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I know a boy（<span class="bl s"><span class="ansfill">who</span></span>）lives near my house.</span></div>
   </div>
   <div class="expbox"><b>かくにん</b>　<span class="en">friend・girl・uncle・teacher・boy</span> は<b>人</b>なので <span class="en">who</span>。<br><span class="en">bus・dog</span> は<b>もの・動物</b>なので <span class="en">which</span>。9 は2人以上なので <span class="en">play</span>。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -889,6 +918,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I have a friend who play the piano.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">who</span>　4 → <span class="en">she</span> を取る<br>6 → <span class="en">which</span>　8 → <span class="en">plays</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -904,6 +934,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I have a dog （ア who ／イ which） runs fast.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　5 は <span class="en">friends</span>（2人以上）なので <span class="en">play</span>。<br>6 は犬＝動物なので <span class="en">which</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -946,13 +977,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　説明したい人を先に書き、そのうしろに <span class="en">who</span> ＋ 動詞。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしにはピアノをひく友だちがいます。</span>　<span class="paren en">（ who plays the piano / a friend / I have ）</span><div class="lines tight"><div><span class="fill2">I have a friend who plays the piano.</span></div></div></div><div class="qnote">人が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌がじょうずな女の子を知っています。</span>　<span class="paren en">（ who sings well / a girl / I know ）</span><div class="lines tight"><div><span class="fill2">I know a girl who sings well.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしには店を経営しているおじがいます。</span>　<span class="paren en">（ who runs a shop / an uncle / I have ）</span><div class="lines tight"><div><span class="fill2">I have an uncle who runs a shop.</span></div></div></div><div class="qnote"><span class="en">runs</span> の <span class="en">s</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">これは英語を教える先生です。</span>　<span class="paren en">（ who teaches English / This is / a teacher ）</span><div class="lines tight"><div><span class="fill2">This is a teacher who teaches English.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは家の近くに住む男の子を知っています。</span>　<span class="paren en">（ near my house / a boy who lives / I know ）</span><div class="lines tight"><div><span class="fill2">I know a boy who lives near my house.</span></div></div></div><div class="qnote">人 → <span class="en">who</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これは駅へ行くバスです。</span>　<span class="paren en">（ which goes to the station / a bus / This is ）</span><div class="lines tight"><div><span class="fill2">This is a bus which goes to the station.</span></div></div></div><div class="qnote">ものは <span class="en">which</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしにはピアノをひく友だちが何人かいます。</span>　<span class="paren en">（ who play the piano / friends / I have ）</span><div class="lines tight"><div><span class="fill2">I have friends who play the piano.</span></div></div></div><div class="qnote">2人以上。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしにはピアノをひく友だちがいます。</span>　<span class="paren en">（ who / the piano / a friend / plays / I / have ）</span><div class="lines tight"><div><span class="fill2">I have a friend who plays the piano.</span></div></div></div><div class="qnote">人が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは歌がじょうずな女の子を知っています。</span>　<span class="paren en">（ who / sings / I / know / well / a girl ）</span><div class="lines tight"><div><span class="fill2">I know a girl who sings well.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしには店を経営しているおじがいます。</span>　<span class="paren en">（ who / runs / have / a shop / I / an uncle ）</span><div class="lines tight"><div><span class="fill2">I have an uncle who runs a shop.</span></div></div></div><div class="qnote"><span class="en">runs</span> の <span class="en">s</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">これは英語を教える先生です。</span>　<span class="paren en">（ teaches / a teacher / who / This / is / English ）</span><div class="lines tight"><div><span class="fill2">This is a teacher who teaches English.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは家の近くに住む男の子を知っています。</span>　<span class="paren en">（ know / who / my house / a boy / near / I / lives ）</span><div class="lines tight"><div><span class="fill2">I know a boy who lives near my house.</span></div></div></div><div class="qnote">人 → <span class="en">who</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これは駅へ行くバスです。</span>　<span class="paren en">（ the station / a bus / to / which / This / is / goes ）</span><div class="lines tight"><div><span class="fill2">This is a bus which goes to the station.</span></div></div></div><div class="qnote">ものは <span class="en">which</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしにはピアノをひく友だちが何人かいます。</span>　<span class="paren en">（ play / have / the piano / who / I / friends ）</span><div class="lines tight"><div><span class="fill2">I have friends who play the piano.</span></div></div></div><div class="qnote">2人以上。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1394,6 +1425,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -854,7 +882,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">that</span> ／ もの ／ 主語 ／ あける ／ はぶく</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">who</span> と <span class="en">which</span> を使い分けるのは めんどうです。<br><b><span class="en">that</span> はどちらにも使える</b>ので、会話でもテストでもよく出てきます。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">who</span> と <span class="en">which</span> を使い分けるのは めんどうです。<br><b><span class="en">that</span> はどちらにも使える</b>ので、会話でもテストでもよく出てきます。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -874,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">She is the girl（<span class="bl s"><span class="ansfill">that</span></span>）I saw.</span></div>
   </div>
   <div class="expbox"><b>かくにん</b>　3・4・5 は過去のことなので <span class="en">saw・bought・met</span>。<br>9 は <span class="en">that</span> のうしろが<b>動詞</b>なので、主語のはたらきの形です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -890,6 +919,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">This is the bag that I buy last week.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">it</span> を取る　4 → <span class="en">that</span>（または <span class="en">who</span>）<br>6 → <span class="en">I read</span>　8 → <span class="en">bought</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -905,6 +935,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">This is the movie that （ア saw I ／イ I saw）.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　2 は人なので <span class="en">which</span> は使えません。<br>4 は <span class="en">that</span> が主語のはたらきをしている形です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -947,13 +978,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">that</span> のうしろは<b>ふつうの文の順</b>（主語 → 動詞）。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしがきのう読んだ本です。</span>　<span class="paren en">（ that I read yesterday / the book / This is ）</span><div class="lines tight"><div><span class="fill2">This is the book that I read yesterday.</span></div></div></div><div class="qnote">名前が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが公園で会った人です。</span>　<span class="paren en">（ that I met in the park / This is / the man ）</span><div class="lines tight"><div><span class="fill2">This is the man that I met in the park.</span></div></div></div><div class="qnote">人にも使える。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしがきのう見た女の子です。</span>　<span class="paren en">（ that I saw yesterday / She is / the girl ）</span><div class="lines tight"><div><span class="fill2">She is the girl that I saw yesterday.</span></div></div></div><div class="qnote">過去形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが先週買ったかばんです。</span>　<span class="paren en">（ that I bought last week / the bag / This is ）</span><div class="lines tight"><div><span class="fill2">This is the bag that I bought last week.</span></div></div></div><div class="qnote">うしろはあける。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが見た映画です。</span>　<span class="paren en">（ that I saw / the movie / This is ）</span><div class="lines tight"><div><span class="fill2">This is the movie that I saw.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これは駅へ行くバスです。</span>　<span class="paren en">（ that goes to the station / a bus / This is ）</span><div class="lines tight"><div><span class="fill2">This is a bus that goes to the station.</span></div></div></div><div class="qnote">うしろは動詞。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが好きな歌です。</span>　<span class="paren en">（ that I like / the song / This is ）</span><div class="lines tight"><div><span class="fill2">This is the song that I like.</span></div></div></div><div class="qnote">うしろはあける。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしがきのう読んだ本です。</span>　<span class="paren en">（ yesterday / This / I / the book / that / read / is ）</span><div class="lines tight"><div><span class="fill2">This is the book that I read yesterday.</span></div></div></div><div class="qnote">名前が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが公園で会った人です。</span>　<span class="paren en">（ that / is / the man / This / met / I / in the park ）</span><div class="lines tight"><div><span class="fill2">This is the man that I met in the park.</span></div></div></div><div class="qnote">人にも使える。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしがきのう見た女の子です。</span>　<span class="paren en">（ the girl / yesterday / that / I / saw / She / is ）</span><div class="lines tight"><div><span class="fill2">She is the girl that I saw yesterday.</span></div></div></div><div class="qnote">過去形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが先週買ったかばんです。</span>　<span class="paren en">（ last / This is / the bag / bought / that / I / week ）</span><div class="lines tight"><div><span class="fill2">This is the bag that I bought last week.</span></div></div></div><div class="qnote">うしろはあける。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが見た映画です。</span>　<span class="paren en">（ the movie / This / saw / I / is / that ）</span><div class="lines tight"><div><span class="fill2">This is the movie that I saw.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">これは駅へ行くバスです。</span>　<span class="paren en">（ the station / a bus / is / This / to / goes / that ）</span><div class="lines tight"><div><span class="fill2">This is a bus that goes to the station.</span></div></div></div><div class="qnote">うしろは動詞。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">これはわたしが好きな歌です。</span>　<span class="paren en">（ I / This / like / that / the song / is ）</span><div class="lines tight"><div><span class="fill2">This is the song that I like.</span></div></div></div><div class="qnote">うしろはあける。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1395,6 +1426,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

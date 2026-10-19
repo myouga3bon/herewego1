@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -855,7 +883,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">what</span> ／ <span class="en">how</span> ／ 原形 ／ 名前 ／ 主語</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">I don&#39;t know.</span> だけでは「何を知らないのか」が分かりません。<br>そこに <span class="en">what to do</span> をつけて、<b>知らない中身</b>を1つの名前として足しているのです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">I don&#39;t know.</span> だけでは「何を知らないのか」が分かりません。<br>そこに <span class="en">what to do</span> をつけて、<b>知らない中身</b>を1つの名前として足しているのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -875,6 +903,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">Please tell me how to（<span class="bl s"><span class="ansfill">use</span></span>）it.</span>（使う）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　3・5・8・9・10 は<b>原形（もとの形）</b>。<span class="en">s</span> も <span class="en">ing</span> もつけません。<br>1・4・6・7 は疑問詞です。意味で選びましょう。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -891,6 +920,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I know how to uses it.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">do</span>　4 → <span class="en">how to use</span><br>6 → <span class="en">what to do</span>　8 → <span class="en">use</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -906,6 +936,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I know （ア when to ／イ to when） start.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　順番はいつも <b>疑問詞 → <span class="en">to</span> → 原形</b>。<br><span class="en">to</span> を前に出したり、主語を入れたりしません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -949,12 +980,12 @@
     <div class="hint"><b>コツ</b>　動詞のうしろに、かたまりをそのまま置く。</div>
     <ol class="q numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは何をすればよいか分かりません。</span>　<span class="paren en">（ what to do / I / don&#39;t know ）</span><div class="lines tight"><div><span class="fill2">I don't know what to do.</span></div></div></div><div class="qnote">かたまりはうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはその使い方を知っています。</span>　<span class="paren en">（ how to use / I know / it ）</span><div class="lines tight"><div><span class="fill2">I know how to use it.</span></div></div></div><div class="qnote"><span class="en">to</span> を入れる。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">どこへ行けばよいか教えてください。</span>　<span class="paren en">（ where to go / me / Tell ）</span><div class="lines tight"><div><span class="fill2">Tell me where to go.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">何を買えばよいか教えてください。</span>　<span class="paren en">（ what to buy / Tell / me ）</span><div class="lines tight"><div><span class="fill2">Tell me what to buy.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはいつ始めればよいか知っています。</span>　<span class="paren en">（ to start / I know / when ）</span><div class="lines tight"><div><span class="fill2">I know when to start.</span></div></div></div><div class="qnote">疑問詞が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしにそこへの行き方を教えてくれました。</span>　<span class="paren en">（ how to go there / He showed / me ）</span><div class="lines tight"><div><span class="fill2">He showed me how to go there.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">その使い方を教えてください。</span>　<span class="paren en">（ how to use it / me / Please tell ）</span><div class="lines tight"><div><span class="fill2">Please tell me how to use it.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはその使い方を知っています。</span>　<span class="paren en">（ use / know / it / to / how / I ）</span><div class="lines tight"><div><span class="fill2">I know how to use it.</span></div></div></div><div class="qnote"><span class="en">to</span> を入れる。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">どこへ行けばよいか教えてください。</span>　<span class="paren en">（ where / me / Tell / go / to ）</span><div class="lines tight"><div><span class="fill2">Tell me where to go.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">何を買えばよいか教えてください。</span>　<span class="paren en">（ to / Tell / me / what / buy ）</span><div class="lines tight"><div><span class="fill2">Tell me what to buy.</span></div></div></div><div class="qnote">同じ作り。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはいつ始めればよいか知っています。</span>　<span class="paren en">（ know / I / to start / when ）</span><div class="lines tight"><div><span class="fill2">I know when to start.</span></div></div></div><div class="qnote">疑問詞が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしにそこへの行き方を教えてくれました。</span>　<span class="paren en">（ me / to / there / go / showed / He / how ）</span><div class="lines tight"><div><span class="fill2">He showed me how to go there.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">その使い方を教えてください。</span>　<span class="paren en">（ it / Please / use / me / to / tell / how ）</span><div class="lines tight"><div><span class="fill2">Please tell me how to use it.</span></div></div></div><div class="qnote">「だれに」が先。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1396,6 +1427,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

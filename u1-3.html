@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -772,12 +800,12 @@
 
   <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">5</span>「～できない」は <span class="en">can&#39;t</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">打ち消すときは <span class="en">can</span> を <span class="en">can&#39;t</span> に変えるだけ。<br>　<b>うしろの形は変えません</b>。</p>
+    <p class="talk">否定文にするときは <span class="en">can</span> を <span class="en">can&#39;t</span> に変えるだけ。<br>　<b>うしろの形は変えません</b>。</p>
     <div class="eqbox" style="border-left-color:var(--ng);background:rgba(181,39,63,.06);">
       <span class="eq" style="color:var(--gv);">I can swim.</span>　→　<span class="eq" style="color:var(--ng);">I can&#39;t swim.</span>（泳げません）<br>
       <span class="en">can&#39;t</span>＝<span class="en">cannot</span>。どちらも同じ意味です。&#39;（アポストロフィ）を忘れずに。
     </div>
-    <p class="talk">前回の <span class="en">don&#39;t</span> のときとちがい、<b><span class="en">don&#39;t</span> は使いません</b>。<br>　<span class="en">can</span> の文の打ち消しは、いつでも <span class="en">can&#39;t</span> です。</p>
+    <p class="talk">前回の <span class="en">don&#39;t</span> のときとちがい、<b><span class="en">don&#39;t</span> は使いません</b>。<br>　<span class="en">can</span> の文の否定文は、いつでも <span class="en">can&#39;t</span> です。</p>
   </div>
 
   <div class="blk-sec more">
@@ -834,7 +862,7 @@
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ I don&#39;t can swim. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I <span class="fx">can&#39;t</span> swim.</span><span class="gjp">わたしは 泳ぐことが できません。</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> の文の打ち消しは <b><span class="en">can&#39;t</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
+      <div class="qza"><span class="good en">○ I <span class="fx">can&#39;t</span> swim.</span><span class="gjp">わたしは 泳ぐことが できません。</span><span class="qzp"><b>ポイント</b>　<span class="en">can</span> の文の否定文は <b><span class="en">can&#39;t</span></b>。<span class="en">don&#39;t</span> は使いません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ I can to swim. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -872,12 +900,12 @@
     <li><button class="qn" onclick="toggleQn(this)">1</button>「わたしは～できます」は <span class="en">I （<span class="bl s"><span class="ansfill">can</span></span>） ～.</span>　<span class="en">can</span> は動詞の（<span class="bl s"><span class="ansfill">前</span></span>）に置く。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button><span class="en">can</span> のうしろの動詞は、かざりのない（<span class="bl"><span class="ansfill">原形</span></span>）にする。<span class="en">ing</span> も <span class="en">s</span> も（<span class="bl s"><span class="ansfill">つけない</span></span>）。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>「～できません」は <span class="en">I （<span class="bl s"><span class="ansfill">can't</span></span>） ～.</span>　これは（<span class="bl s"><span class="ansfill">cannot</span></span>）を短くした形。</li>
-    <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">can</span> の文を打ち消すときに（<span class="bl s"><span class="ansfill">don't</span></span>）は使わない。</li>
+    <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">can</span> の文を否定文にするときに（<span class="bl s"><span class="ansfill">don't</span></span>）は使わない。</li>
     <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>1つの文に心臓（動詞）は（<span class="bl s"><span class="ansfill">1</span></span>）つだけ。だから（<span class="bl s"><span class="ansfill">am</span></span>）と <span class="en">can</span> はいっしょに使わない。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">can</span> ／ <span class="en">can&#39;t</span> ／ <span class="en">cannot</span> ／ <span class="en">don&#39;t</span> ／ <span class="en">am</span> ／ 原形 ／ 前 ／ つけない ／ 1</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">can</span> は「できる」という意味を足すだけの<b>助っ人</b>。文の心臓（動詞）はうしろの動詞なので、<span class="en">can</span> はその前に入ります。<br>助っ人がついた動詞は<b>すっぴん（原形（もとの形））</b>になる、と覚えておけば迷いません。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">can</span> は「できる」という意味を足すだけの<b>助っ人</b>。文の心臓（動詞）はうしろの動詞なので、<span class="en">can</span> はその前に入ります。<br>助っ人がついた動詞は<b>すっぴん（原形（もとの形））</b>になる、と覚えておけば迷いません。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -897,6 +925,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I（<span class="bl s"><span class="ansfill">am</span></span>）a soccer fan.</span></div>
   </div>
   <div class="expbox"><b>見つけ方</b>　（　）のうしろを見よう。<br><b>動作のことば</b>（<span class="en">swim・cook・play・run・sing</span>）→ <span class="en">can</span>（1・4・5・7・9）<br><b>「わたし＝それ」になる</b>（生徒・うれしい・長野出身・12歳・サッカーファン）→ <span class="en">am</span>（2・3・6・8・10）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -913,6 +942,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I can sings well.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I can swim.</span>（ing を取る）　4 → <span class="en">I can&#39;t swim.</span>（&#39;を入れる）<br>6 → <span class="en">I can cook.</span>（<span class="en">am</span> を消す）　8 → <span class="en">I can sing well.</span>（s を取る）<br>2と8は<b>うしろの形</b>のまちがい。4は<b>書き方</b>、6は<b>心臓（動詞）が2つ</b>のまちがいです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -928,6 +958,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I can（ア sings ／イ sing）well.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　答えはぜんぶ「原形（もとの形）」です。<span class="en">ing</span> がついた形と <span class="en">s</span> がついた形は、<span class="en">can</span> のうしろには入れません。<br>5番のように <span class="en">can&#39;t</span> のときも同じルールです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -970,13 +1001,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　語群に <span class="en">can</span> か <span class="en">can&#39;t</span> があれば、それを<b>動詞のすぐ前</b>に置きます。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ swim / I / can ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">「だれが → できる → どうする」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはピアノをひくことができます。</span>　<span class="paren en">（ the piano / can / I / play ）</span><div class="lines tight"><div><span class="fill2">I can play the piano.</span></div></div></div><div class="qnote"><span class="en">can</span> は <span class="en">play</span> の<b>すぐ前</b>。<span class="x">✕ I play can the piano.</span></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができません。</span>　<span class="paren en">（ cook / I / can&#39;t ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t cook.</span></div></div></div><div class="qnote"><span class="en">can&#39;t</span> のうしろも <b>原形（もとの形）</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a / I / student / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。<b>語群を見ればどちらの文か分かる。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは速く走ることができます。</span>　<span class="paren en">（ fast / can / run / I ）</span><div class="lines tight"><div><span class="fill2">I can run fast.</span></div></div></div><div class="qnote"><span class="en">fast</span>（速く）は<b>いちばん後ろ</b>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆を食べることができません。</span>　<span class="paren en">（ natto / I / eat / can&#39;t ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t eat natto.</span></div></div></div><div class="qnote"><span class="en">can&#39;t</span> → <span class="en">eat</span> → <span class="en">natto</span> の順。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはテニスが好きです。</span>　<span class="paren en">（ tennis / like / I ）</span><div class="lines tight"><div><span class="fill2">I like tennis.</span></div></div></div><div class="qnote">語群に <span class="en">can</span> がない。<b>ないものは使えません。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは泳ぐことができます。</span>　<span class="paren en">（ can / I / swim ）</span><div class="lines tight"><div><span class="fill2">I can swim.</span></div></div></div><div class="qnote">「だれが → できる → どうする」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはピアノをひくことができます。</span>　<span class="paren en">（ play / the piano / I / can ）</span><div class="lines tight"><div><span class="fill2">I can play the piano.</span></div></div></div><div class="qnote"><span class="en">can</span> は <span class="en">play</span> の<b>すぐ前</b>。<span class="x">✕ I play can the piano.</span></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは料理をすることができません。</span>　<span class="paren en">（ cook / can&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t cook.</span></div></div></div><div class="qnote"><span class="en">can&#39;t</span> のうしろも <b>原形（もとの形）</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a student / I / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。<b>語群を見ればどちらの文か分かる。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは速く走ることができます。</span>　<span class="paren en">（ run / fast / I / can ）</span><div class="lines tight"><div><span class="fill2">I can run fast.</span></div></div></div><div class="qnote"><span class="en">fast</span>（速く）は<b>いちばん後ろ</b>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは納豆を食べることができません。</span>　<span class="paren en">（ eat / I / natto / can&#39;t ）</span><div class="lines tight"><div><span class="fill2">I can&#39;t eat natto.</span></div></div></div><div class="qnote"><span class="en">can&#39;t</span> → <span class="en">eat</span> → <span class="en">natto</span> の順。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはテニスが好きです。</span>　<span class="paren en">（ like / tennis / I ）</span><div class="lines tight"><div><span class="fill2">I like tennis.</span></div></div></div><div class="qnote">語群に <span class="en">can</span> がない。<b>ないものは使えません。</b></div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1418,6 +1449,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

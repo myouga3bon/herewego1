@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -853,6 +881,7 @@
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：過去形 ／ <span class="en">could</span> ／ 原形 ／ <span class="en">were</span> ／ <span class="en">hope</span></div></div>
   <div class="expbox"><b>見分け方</b>　<span class="en">wish</span> を見たら、うしろは<b>かならず過去形</b>。<br>「実際はそうではないんだ」という気持ちのサインです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -872,6 +901,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I wish I（<span class="bl s"><span class="ansfill">were</span></span>）taller.</span>（am）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　3・5・10 は <span class="en">were</span>。4 は <span class="en">have</span> → <span class="en">had</span>。<br>9 は「晴れると いいな」というありえる話なので <span class="en">hope</span> です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -888,6 +918,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I wish I have money.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">could</span>　4 → <span class="en">fly</span><br>6 → <span class="en">were</span>　8 → <span class="en">had</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -903,6 +934,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I wish you （ア were ／イ are） here.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　5 は「晴れると いいな」というありえる話なので <span class="en">hope</span>。<br>ほかは実際とちがう願いなので <span class="en">wish</span> ＋ 過去形です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -945,13 +977,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">I wish</span> を先に置き、そのあとに主語 ＋ 過去形。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">空を飛べたらいいのに。</span>　<span class="paren en">（ fly / I wish / I could ）</span><div class="lines tight"><div><span class="fill2">I wish I could fly.</span></div></div></div><div class="qnote"><span class="en">I wish</span> が先。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしが鳥だったらいいのに。</span>　<span class="paren en">（ a bird / I wish / I were ）</span><div class="lines tight"><div><span class="fill2">I wish I were a bird.</span></div></div></div><div class="qnote"><span class="en">were</span> を使う。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">お金がたくさんあったらいいのに。</span>　<span class="paren en">（ a lot of money / I wish / I had ）</span><div class="lines tight"><div><span class="fill2">I wish I had a lot of money.</span></div></div></div><div class="qnote"><span class="en">had</span> を使う。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">あなたがここにいたらいいのに。</span>　<span class="paren en">（ here / I wish / you were ）</span><div class="lines tight"><div><span class="fill2">I wish you were here.</span></div></div></div><div class="qnote">主語は <span class="en">you</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">英語をじょうずに話せたらいいのに。</span>　<span class="paren en">（ English well / I wish / I could speak ）</span><div class="lines tight"><div><span class="fill2">I wish I could speak English well.</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼が来られたらいいのに。</span>　<span class="paren en">（ come / I wish / he could ）</span><div class="lines tight"><div><span class="fill2">I wish he could come.</span></div></div></div><div class="qnote"><span class="en">he</span> でも <span class="en">could</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">晴れるといいな。</span>　<span class="paren en">（ it will be sunny / I hope ）</span><div class="lines tight"><div><span class="fill2">I hope it will be sunny.</span></div></div></div><div class="qnote">ありえる話。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">空を飛べたらいいのに。</span>　<span class="paren en">（ could / I / I / wish / fly ）</span><div class="lines tight"><div><span class="fill2">I wish I could fly.</span></div></div></div><div class="qnote"><span class="en">I wish</span> が先。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしが鳥だったらいいのに。</span>　<span class="paren en">（ a bird / I / were / I / wish ）</span><div class="lines tight"><div><span class="fill2">I wish I were a bird.</span></div></div></div><div class="qnote"><span class="en">were</span> を使う。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">お金がたくさんあったらいいのに。</span>　<span class="paren en">（ of / a lot / I / I / wish / money / had ）</span><div class="lines tight"><div><span class="fill2">I wish I had a lot of money.</span></div></div></div><div class="qnote"><span class="en">had</span> を使う。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">あなたがここにいたらいいのに。</span>　<span class="paren en">（ here / wish / were / you / I ）</span><div class="lines tight"><div><span class="fill2">I wish you were here.</span></div></div></div><div class="qnote">主語は <span class="en">you</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">英語をじょうずに話せたらいいのに。</span>　<span class="paren en">（ English / wish / could / I / I / speak / well ）</span><div class="lines tight"><div><span class="fill2">I wish I could speak English well.</span></div></div></div><div class="qnote">原形（もとの形）。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼が来られたらいいのに。</span>　<span class="paren en">（ could / I / wish / come / he ）</span><div class="lines tight"><div><span class="fill2">I wish he could come.</span></div></div></div><div class="qnote"><span class="en">he</span> でも <span class="en">could</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">晴れるといいな。</span>　<span class="paren en">（ it / I / sunny / hope / will / be ）</span><div class="lines tight"><div><span class="fill2">I hope it will be sunny.</span></div></div></div><div class="qnote">ありえる話。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1393,6 +1425,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

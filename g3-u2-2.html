@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -633,14 +655,20 @@
   @media print{.ansbar .tophome{display:none;}}
 
 
-  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
-  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
-  .showans .lines.tight div{min-height:7.0mm;}
-  .showans .lines div.gl{align-items:flex-start;}
-  .showans .lines div.gl .fill2{position:static;padding-left:0;}
-  .showans .lines div.gl .given,
-  .showans .lines div.gl i{display:none;}
-  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
 
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
@@ -704,7 +732,7 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「<b>もう 終えましたか</b>」「<b>まだ 終えていません</b>」のように、現在完了を<b>たずねる・打ち消す</b>やり方です。</p>
+    <p class="talk">「<b>もう 終えましたか</b>」「<b>まだ 終えていません</b>」のように、現在完了を<b>たずねる文・否定文</b>やり方です。</p>
     <p class="talk">やり方は 1年生の <span class="en">be</span>動詞と同じ。<br>　<b>動かすのは <span class="en">have</span> だけ</b>です。</p>
     <div class="gitem">
       <div class="gh"><span class="gn">❶</span>「もう ～しましたか」<small>たずねる文</small></div>
@@ -714,7 +742,7 @@
       <div class="gnote"><b>Have を前に出す</b>だけ。文の終わりに <b>yet</b>（もう）をつけます。</div>
     </div>
     <div class="gitem b2">
-      <div class="gh"><span class="gn">❷</span>「まだ ～していません」<small>打ち消す文</small></div>
+      <div class="gh"><span class="gn">❷</span>「まだ ～していません」<small>否定文</small></div>
       <div class="gmap"><span class="j">まだ <b>終えて いません</b></span><span class="ar">→</span><span class="e en"><b>haven&#39;t finished</b> ～ yet</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I haven&#39;t finished it yet.</span><span class="t">わたしは まだ それを 終えて いません。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">The train hasn&#39;t arrived yet.</span><span class="t">電車は まだ 着いて いません。</span></div>
@@ -732,7 +760,7 @@
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">yet</span> は<b>文の種類で意味が変わります</b>。</p>
     <div class="eqbox">
       たずねる文：Have you finished it <span class="eq" style="color:var(--be);">yet</span>?（<b>もう</b>終えましたか）<br>
-      打ち消す文：I haven&#39;t finished it <span class="eq" style="color:var(--gv);">yet</span>.（<b>まだ</b>終えていません）
+      否定文：I haven&#39;t finished it <span class="eq" style="color:var(--gv);">yet</span>.（<b>まだ</b>終えていません）
     </div>
     <div class="judge">
       <div class="col yes">
@@ -785,7 +813,7 @@
     <p class="talk"><span class="en">Have</span> が <b><span class="en">Has</span></b> に変わります。</p>
     <div class="eqbox" style="border-left-color:var(--gv);background:rgba(194,24,91,.06);">
       <span class="eq" style="color:var(--gv);">Has</span> he finished it yet?（たずねる）<br>
-      He <span class="eq" style="color:var(--gv);">hasn&#39;t</span> finished it yet.（打ち消す）
+      He <span class="eq" style="color:var(--gv);">hasn&#39;t</span> finished it yet.（否定文にする）
     </div>
     <p class="talk">変わるのは <span class="en">have → has</span> だけ。<br>　<b>過去分詞はそのまま</b>です。</p>
   </div>
@@ -807,7 +835,7 @@
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ I don&#39;t have finished it yet. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I <span class="fx">haven&#39;t</span> finished it yet.</span><span class="gjp">わたしは まだ それを 終えて いません。</span><span class="qzp"><b>ポイント</b>　打ち消しは <b><span class="en">have</span> のうしろに <span class="en">not</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ I <span class="fx">haven&#39;t</span> finished it yet.</span><span class="gjp">わたしは まだ それを 終えて いません。</span><span class="qzp"><b>ポイント</b>　否定文は <b><span class="en">have</span> のうしろに <span class="en">not</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ Have you yet finished it? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -824,8 +852,8 @@
     <div>今回のまとめ　ノートに写す<span class="min">目安 2分</span>
       <ul class="sumlist">
         <li>たずねるときは <b><span class="en">Have ／ Has</span> を前に出す</b>。終わりに <span class="en">yet</span>。</li>
-        <li>打ち消すときは <b><span class="en">haven&#39;t ／ hasn&#39;t</span></b>。終わりに <span class="en">yet</span>。</li>
-        <li><span class="en">yet</span> は、たずねる文では「<b>もう</b>」、打ち消す文では「<b>まだ</b>」。</li>
+        <li>否定文にするときは <b><span class="en">haven&#39;t ／ hasn&#39;t</span></b>。終わりに <span class="en">yet</span>。</li>
+        <li><span class="en">yet</span> は、たずねる文では「<b>もう</b>」、否定文では「<b>まだ</b>」。</li>
         <li>答えるときも <b><span class="en">have ／ has</span></b> を使う。<span class="en">did</span> では答えない。</li>
       </ul>
     </div>
@@ -847,14 +875,14 @@
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>たずねるときは（<span class="bl s"><span class="ansfill">Have</span></span>）を文の前に出す。</li>
-    <li><button class="qn" onclick="toggleQn(this)">2</button>打ち消すときは <span class="en">have</span> のうしろに（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
+    <li><button class="qn" onclick="toggleQn(this)">2</button>否定文にするときは <span class="en">have</span> のうしろに（<span class="bl s"><span class="ansfill">not</span></span>）を置く。</li>
     <li><button class="qn" onclick="toggleQn(this)">3</button>文の終わりにつける（<span class="bl s"><span class="ansfill">yet</span></span>）は、たずねる文では「もう」という意味になる。</li>
-    <li><button class="qn" onclick="toggleQn(this)">4</button>同じ（<span class="bl s"><span class="ansfill">yet</span></span>）は、打ち消す文では「まだ」という意味になる。</li>
+    <li><button class="qn" onclick="toggleQn(this)">4</button>同じ（<span class="bl s"><span class="ansfill">yet</span></span>）は、否定文では「まだ」という意味になる。</li>
     <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>答えるときも <span class="en">did</span> ではなく（<span class="bl s"><span class="ansfill">have</span></span>）を使う。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">Have</span> ／ <span class="en">not</span> ／ <span class="en">yet</span> ／ <span class="en">have</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　現在完了は <span class="en">have</span> が<b>助っ人のことば</b>です。<br>だから、たずねるときも打ち消すときも、<b>動かすのは <span class="en">have</span> だけ</b>。過去分詞はさわりません。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">現在完了は <span class="en">have</span> が<b>助っ人のことば</b>です。<br>だから、たずねるときも否定文にするときも、<b>動かすのは <span class="en">have</span> だけ</b>。過去分詞はさわりません。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -874,6 +902,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">The train（<span class="bl"><span class="ansfill">hasn't</span></span>）arrived yet.</span>（まだ着かない）</div>
   </div>
   <div class="expbox"><b>かくにん</b>　3・5・10 は主語が1つなので <span class="en">Has・hasn&#39;t</span>。<br>2・9 は<b>過去分詞</b>のまま。<span class="en">finish・eat</span> にもどしません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -890,6 +919,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Have you yet finished it?</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">Have</span>　4 → <span class="en">haven&#39;t</span><br>6 → <span class="en">Has</span>　8 → <span class="en">yet</span> を文の終わりへ</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -905,12 +935,13 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">Have you finished it? — Yes, I （ア did ／イ have）.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　5 はたずねる文なので <span class="en">yet</span>（もう）。<br>6 は <span class="en">Have</span> で聞かれているので <span class="en">have</span> で答えます。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
   <div class="ribbon">
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
-    <b>合言葉</b><span class="s">たずねるときは <b><span class="en">Have</span> を前に出す</b>。打ち消すときは <b><span class="en">have not</span></b>。</span>
+    <b>合言葉</b><span class="s">たずねるときは <b><span class="en">Have</span> を前に出す</b>。否定文にするときは <b><span class="en">have not</span></b>。</span>
   </div>
   <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
@@ -927,12 +958,12 @@
     <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <div class="hint"><b>コツ</b>　たずねる＝<span class="en">Have</span> を前へ。打ち消す＝<span class="en">haven&#39;t</span>。</div>
+    <div class="hint"><b>コツ</b>　たずねる＝<span class="en">Have</span> を前へ。否定文にする＝<span class="en">haven&#39;t</span>。</div>
     <ol class="q sp numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもうそれを終えましたか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Have</span></span>）you finished it yet?</span></div><div class="qnote">前に出す。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもうそれを終えましたか。</span>　<span class="en">Have you（<span class="bl s"><span class="ansfill">finished</span></span>）it yet?</span></div><div class="qnote">過去分詞のまま。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼はもうそれを終えましたか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Has</span></span>）he finished it yet?</span></div><div class="qnote">主語は <span class="en">he</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはまだそれを終えていません。</span>　<span class="en">I（<span class="bl"><span class="ansfill">haven't</span></span>）finished it yet.</span></div><div class="qnote">打ち消し。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはまだそれを終えていません。</span>　<span class="en">I（<span class="bl"><span class="ansfill">haven't</span></span>）finished it yet.</span></div><div class="qnote">否定文。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">電車はまだ着いていません。</span>　<span class="en">The train（<span class="bl"><span class="ansfill">hasn't</span></span>）arrived yet.</span></div><div class="qnote">主語は1つ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもう昼食を食べましたか。</span>　<span class="en">Have you（<span class="bl s"><span class="ansfill">eaten</span></span>）lunch yet?</span></div><div class="qnote"><span class="en">eat</span> の過去分詞。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">— はい、終えました。</span>　<span class="en">— Yes, I（<span class="bl s"><span class="ansfill">have</span></span>）.</span></div><div class="qnote">聞かれたことばで。</div></div></li>
@@ -947,13 +978,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">yet</span> は<b>いちばんうしろ</b>に置く。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもうそれを終えましたか。</span>　<span class="paren en">（ it yet / finished / Have you ）</span><div class="lines tight"><div><span class="fill2">Have you finished it yet?</span></div></div></div><div class="qnote"><span class="en">Have</span> が先頭。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもうそれを終えましたか。</span>　<span class="paren en">（ finished / Have / it / you / yet ）</span><div class="lines tight"><div><span class="fill2">Have you finished it yet?</span></div></div></div><div class="qnote"><span class="en">Have</span> が先頭。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはまだそれを終えていません。</span>　<span class="paren en">（ it yet / I haven&#39;t / finished ）</span><div class="lines tight"><div><span class="fill2">I haven't finished it yet.</span></div></div></div><div class="qnote"><span class="en">yet</span> はうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼はもうそれを終えましたか。</span>　<span class="paren en">（ it yet / Has he / finished ）</span><div class="lines tight"><div><span class="fill2">Has he finished it yet?</span></div></div></div><div class="qnote"><span class="en">Has</span> を使う。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼はもうそれを終えましたか。</span>　<span class="paren en">（ finished / Has / it / yet / he ）</span><div class="lines tight"><div><span class="fill2">Has he finished it yet?</span></div></div></div><div class="qnote"><span class="en">Has</span> を使う。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">電車はまだ着いていません。</span>　<span class="paren en">（ yet / arrived / The train hasn&#39;t ）</span><div class="lines tight"><div><span class="fill2">The train hasn't arrived yet.</span></div></div></div><div class="qnote">主語は1つ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもう昼食を食べましたか。</span>　<span class="paren en">（ lunch yet / eaten / Have you ）</span><div class="lines tight"><div><span class="fill2">Have you eaten lunch yet?</span></div></div></div><div class="qnote"><span class="en">eaten</span> の形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">あなたはもう昼食を食べましたか。</span>　<span class="paren en">（ lunch yet / eaten / Have / you ）</span><div class="lines tight"><div><span class="fill2">Have you eaten lunch yet?</span></div></div></div><div class="qnote"><span class="en">eaten</span> の形。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">彼はまだ部屋をそうじしていません。</span>　<span class="paren en">（ his room yet / cleaned / He hasn&#39;t ）</span><div class="lines tight"><div><span class="fill2">He hasn't cleaned his room yet.</span></div></div></div><div class="qnote">長くても同じ。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはまだ昼食を食べていません。</span>　<span class="paren en">（ lunch yet / I haven&#39;t / eaten ）</span><div class="lines tight"><div><span class="fill2">I haven't eaten lunch yet.</span></div></div></div><div class="qnote">打ち消し。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはまだ昼食を食べていません。</span>　<span class="paren en">（ lunch yet / I haven&#39;t / eaten ）</span><div class="lines tight"><div><span class="fill2">I haven't eaten lunch yet.</span></div></div></div><div class="qnote">否定文。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1395,6 +1426,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

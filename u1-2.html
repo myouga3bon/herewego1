@@ -641,6 +641,22 @@
   .showans .lines div.gl i{display:none;}
   .showans .lines .fill2{line-height:1.35;display:inline-block;}
 
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -713,7 +729,7 @@
       <div class="gnote"><span class="en">I</span> のつぎに<b>動作のことば</b>を置くだけ。<span class="en">am</span> は<b>使いません</b>。</div>
     </div>
     <div class="gitem b2">
-      <div class="gh"><span class="gn">❷</span>「～しません・～は 好きでは ありません」<small>打ち消す文</small></div>
+      <div class="gh"><span class="gn">❷</span>「～しません・～は 好きでは ありません」<small>否定文</small></div>
       <div class="gmap"><span class="j">納豆は 好きでは ありません</span><span class="ar">→</span><span class="e en">I don&#39;t like natto.</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I don&#39;t like natto.</span><span class="t">わたしは 納豆が 好きでは ありません。</span></div>
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">I don&#39;t play soccer.</span><span class="t">わたしは サッカーを しません。</span></div>
@@ -745,13 +761,13 @@
 
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">3</span>テストによく出ることば<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「する・好き」をあらわすことばが <b>動作のことば</b>です。<br>　打ち消すときは、その前に <span class="en">don&#39;t</span> を置きます。</p>
+    <p class="talk">「する・好き」をあらわすことばが <b>動作のことば</b>です。<br>　否定文にするときは、その前に <span class="en">don&#39;t</span> を置きます。</p>
     <table class="kind kw">
       <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
       <tbody>
         <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">like</span></td><td class="k">好きです</td><td class="e">I <u>like</u> dogs.</td></tr>
         <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">play</span></td><td class="k">します（スポーツなど）</td><td class="e">I <u>play</u> soccer.</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">don&#39;t</span></td><td class="k">～しません（打ち消し）</td><td class="e">I <u>don&#39;t</u> like natto.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">don&#39;t</span></td><td class="k">～しません（否定文）</td><td class="e">I <u>don&#39;t</u> like natto.</td></tr>
       </tbody>
     </table>
     <div class="copy">
@@ -762,7 +778,7 @@
 
 <div class="blk-sec more">
     <h3 class="st"><span class="stepnum">4</span>「～ない」は <span class="en">don&#39;t</span> を 動詞の前に置くだけ<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
-    <p class="talk">「好きでは<b>ない</b>」と打ち消したいときは、<b>動作のことばのすぐ前に <span class="en">don&#39;t</span> を置く</b>だけ。<br>　ほかはなにも変えません。</p>
+    <p class="talk">「好きでは<b>ない</b>」と否定文たいときは、<b>動作のことばのすぐ前に <span class="en">don&#39;t</span> を置く</b>だけ。<br>　ほかはなにも変えません。</p>
     <div class="blocks">
       <div class="blk fill" style="background:var(--gv);"><div class="w en">I</div><div class="r">だれが</div></div>
       <div class="plus">＋</div>
@@ -831,7 +847,7 @@
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ I not like natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I <span class="fx">don&#39;t</span> like natto.</span><span class="gjp">わたしは 納豆が 好きでは ありません。</span><span class="qzp"><b>ポイント</b>　<b>not</b> だけでは打ち消せません。<b>don't</b> を動詞のすぐ前に置きます。</span></div>
+      <div class="qza"><span class="good en">○ I <span class="fx">don&#39;t</span> like natto.</span><span class="gjp">わたしは 納豆が 好きでは ありません。</span><span class="qzp"><b>ポイント</b>　<b>not</b> だけでは否定文になりません。<b>don't</b> を動詞のすぐ前に置きます。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ I like not natto. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -886,8 +902,8 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">like</span> ／ <span class="en">don&#39;t</span> ／ <span class="en">do not</span> ／ <span class="en">am</span> ／ 前 ／ ぎゃく ／ 動作 ／ 1</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">like</span> は「好きだ」という<b>動作・気もちを表すことば</b>。<span class="en">am</span> は「＝」のしるしなので、はたらきがちがいます。<br>
-  「～ない」は <span class="en">not</span> だけでは足りません。<b><span class="en">don&#39;t</span>（＝<span class="en">do not</span>）を動詞のすぐ前</b>に置きます。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">like</span> は「好きだ」という<b>動作・気もちを表すことば</b>。<span class="en">am</span> は「＝」のしるしなので、はたらきがちがいます。<br>
+  「～ない」は <span class="en">not</span> だけでは足りません。<b><span class="en">don&#39;t</span>（＝<span class="en">do not</span>）を動詞のすぐ前</b>に置きます。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -910,6 +926,7 @@
   <b>「わたし＝それ」になる</b>（生徒・長野出身・うれしい・12歳・サッカーファン）→ <span class="en">am</span>（1・2・4・7・10）<br>
   <b>「それが好き」という意味になる</b>（犬・音楽・サッカー・ねこ・英語）→ <span class="en">like</span>（3・5・6・8・9）<br>
   <span class="en">I am dogs.</span> だと「わたしは犬です」になってしまいます。声に出すと変だと気づけます。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -928,6 +945,7 @@
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I like spring.</span>（<span class="en">am</span> を消す）　4 → <span class="en">I don&#39;t like natto.</span>（<span class="en">not</span> を <span class="en">don&#39;t</span> にして前へ）<br>
   5 → <span class="en">I don&#39;t like fish.</span>（&#39;を入れる）　8 → <span class="en">I like spring.</span>（「どうする → なにを」の順に）<br>
   2は<b>心臓（動詞）が2つ</b>のまちがい。4・5・8は<b>書き方と順番</b>のまちがいです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -946,6 +964,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I am happy.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　英語の文は、この<b>2種類しかありません</b>。どちらの仲間かが分かれば、<span class="en">am</span> を入れるかどうかで迷わなくなります。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -988,12 +1007,12 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　まず語群に <span class="en">am</span> があるか見る。なければ動作の文。<span class="en">don&#39;t</span> があれば<b>動詞のすぐ前</b>に置きます。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは春が好きです。</span>　<span class="paren en">（ spring / I / like ）</span><div class="lines tight"><div><span class="fill2">I like spring.</span></div></div></div><div class="qnote">「だれが → どうする → なにを」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーが好きではありません。</span>　<span class="paren en">（ don&#39;t / soccer / I / like ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like soccer.</span></div></div></div><div class="qnote"><span class="en">don&#39;t</span> は <span class="en">like</span> の<b>すぐ前</b>。<span class="x">✕ I like don&#39;t soccer.</span></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは春が好きです。</span>　<span class="paren en">（ like / spring / I ）</span><div class="lines tight"><div><span class="fill2">I like spring.</span></div></div></div><div class="qnote">「だれが → どうする → なにを」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーが好きではありません。</span>　<span class="paren en">（ like / don&#39;t / soccer / I ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like soccer.</span></div></div></div><div class="qnote"><span class="en">don&#39;t</span> は <span class="en">like</span> の<b>すぐ前</b>。<span class="x">✕ I like don&#39;t soccer.</span></div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは犬を飼っています。</span>　<span class="paren en">（ a dog / I / have ）</span><div class="lines tight"><div><span class="fill2">I have a dog.</span></div></div></div><div class="qnote"><span class="en">a dog</span> でひとかたまり。ばらばらにしません。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a / I / student / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。<b>語群を見れば どちらの文か分かる。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは魚が好きではありません。</span>　<span class="paren en">（ like / fish / don&#39;t / I ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like fish.</span></div></div></div><div class="qnote">2番と同じ形。<b><span class="en">don&#39;t</span> → 動詞 → なにを</b> の順。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはテレビを見ます。</span>　<span class="paren en">（ TV / watch / I ）</span><div class="lines tight"><div><span class="fill2">I watch TV.</span></div></div></div><div class="qnote">「見る」は <b><span class="en">watch</span></b>。<span class="en">TV</span> は大文字2つで書きます。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a student / I / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がある。<b>語群を見れば どちらの文か分かる。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは魚が好きではありません。</span>　<span class="paren en">（ like / I / fish / don&#39;t ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t like fish.</span></div></div></div><div class="qnote">2番と同じ形。<b><span class="en">don&#39;t</span> → 動詞 → なにを</b> の順。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはテレビを見ます。</span>　<span class="paren en">（ watch / I / TV ）</span><div class="lines tight"><div><span class="fill2">I watch TV.</span></div></div></div><div class="qnote">「見る」は <b><span class="en">watch</span></b>。<span class="en">TV</span> は大文字2つで書きます。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはうれしいです。</span>　<span class="paren en">（ happy / am / I ）</span><div class="lines tight"><div><span class="fill2">I am happy.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> があるので be動詞の文。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
@@ -1015,7 +1034,7 @@
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain">わたしは犬が好きです。<div class="lines"><div><span class="fill2">I like dogs.</span></div></div></div><div class="qnote"><b><span class="en">dogs</span> と <span class="en">s</span> をつける。</b>「犬というもの全部」の意味になります。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain">わたしは納豆が好きではありません。<div class="lines"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote"><span class="en">not</span> だけでは打ち消せない。<b><span class="en">don&#39;t</span> を <span class="en">like</span> の前に。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain">わたしは納豆が好きではありません。<div class="lines"><div><span class="fill2">I don&#39;t like natto.</span></div></div></div><div class="qnote"><span class="en">not</span> だけでは否定文にならない。<b><span class="en">don&#39;t</span> を <span class="en">like</span> の前に。</b></div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">わたしはサッカーをします。<div class="lines"><div><span class="fill2">I play soccer.</span></div></div></div><div class="qnote"><span class="en">soccer</span> は数えられないので <span class="en">s</span> も <span class="en">a</span> もつけません。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">わたしは生徒です。<div class="lines"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote"><span class="en">I&#39;m a student.</span> でも正解。<b><span class="en">a</span> を忘れない。</b></div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしは音楽が好きではありません。<div class="lines"><div><span class="fill2">I don&#39;t like music.</span></div></div></div><div class="qnote">2番と同じ形。<span class="en">music</span> に <span class="en">s</span> はつけません。</div></div></li>
@@ -1432,6 +1451,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

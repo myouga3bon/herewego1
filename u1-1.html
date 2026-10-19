@@ -641,6 +641,22 @@
   .showans .lines div.gl i{display:none;}
   .showans .lines .fill2{line-height:1.35;display:inline-block;}
 
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -870,7 +886,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">am</span> ／ <span class="en">I'm</span> ／ <span class="en">a</span> ／ <span class="en">from</span> ／ ＝ ／ 動作 ／ 大文字 ／ 1</div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">am</span> は「＝」のしるし。<span class="en">I ＝ Eri</span> のように、うしろには「わたしがどんな人か」を表す語だけが入ります。<span class="en">play・like</span> のような動作の語がある文には、もう心臓（動詞）があるので <span class="en">am</span> はいりません。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">am</span> は「＝」のしるし。<span class="en">I ＝ Eri</span> のように、うしろには「わたしがどんな人か」を表す語だけが入ります。<span class="en">play・like</span> のような動作の語がある文には、もう心臓（動詞）があるので <span class="en">am</span> はいりません。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -891,6 +907,7 @@
   </div>
   <div class="expbox"><b>見つけ方</b>　うしろに <span class="en">like・play・have・run・watch</span> のような<b>動作のことば</b>があるか、それだけを見ます。<br>
   <b>あった</b>（3・5・6・8・9）→ <span class="en">am</span> は入らない。　<b>なかった</b>（1・2・4・7・10）→ <span class="en">am</span> が必要。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -908,6 +925,7 @@
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">I play tennis.</span>（<span class="en">am</span> を消す）　5 → <span class="en">I like dogs.</span>（<span class="en">am</span> を消す）　4 → <span class="en">I am a student.</span>（<span class="en">a</span> を入れる）　8 → <span class="en">I'm from Nagano.</span>（'を入れる）<br>
   2と5は<b>心臓（動詞）が2つ</b>のまちがい。4と8は<b>書き方</b>のまちがいです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -929,6 +947,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I&#39;m <u>a student</u>.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　<span class="en">I am</span> のうしろに置けるのは<b>名前・身分・出身・年れい・気もち</b>の5つだけ。これを覚えておくと、4ページ目の英作文で手が止まりません。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -971,13 +990,13 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　まず語群に <span class="en">am</span> があるか見る。<b>あれば be動詞の文、なければ動作の文</b>。語群にないものは使えません。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはユミです。</span>　<span class="paren en">（ Yumi / I / am ）</span><div class="lines tight"><div><span class="fill2">I am Yumi.</span></div></div></div><div class="qnote">「だれが → ＝ → なにか」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a / I / student / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote"><span class="en">a</span> は <span class="en">student</span> の<b>すぐ前</b>に置きます。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは長野出身です。</span>　<span class="paren en">（ from / I'm / Nagano ）</span><div class="lines tight"><div><span class="fill2">I'm from Nagano.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がなく <span class="en">I&#39;m</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">★<span class="jp-cue">わたしは犬が好きです。</span>　<span class="paren en">（ dogs / I / like ）</span><div class="lines tight"><div><span class="fill2">I like dogs.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がない。<b>ないものは使えない</b>ので <span class='x'>✕ I am like dogs.</span></div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーファンです。</span>　<span class="paren en">（ soccer / I'm / fan / a ）</span><div class="lines tight"><div><span class="fill2">I'm a soccer fan.</span></div></div></div><div class="qnote"><b><span class="en">a soccer fan</span></b> でひとかたまり。<span class="en">a</span> はその先頭。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはユミです。</span>　<span class="paren en">（ Yumi / am / I ）</span><div class="lines tight"><div><span class="fill2">I am Yumi.</span></div></div></div><div class="qnote">「だれが → ＝ → なにか」の順。<b>はじめは大文字、終わりにピリオド。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは生徒です。</span>　<span class="paren en">（ a student / I / am ）</span><div class="lines tight"><div><span class="fill2">I am a student.</span></div></div></div><div class="qnote"><span class="en">a</span> は <span class="en">student</span> の<b>すぐ前</b>に置きます。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは長野出身です。</span>　<span class="paren en">（ from / Nagano / I'm ）</span><div class="lines tight"><div><span class="fill2">I'm from Nagano.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がなく <span class="en">I&#39;m</span> がある。<b>語群を見れば形が分かる。</b></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">★<span class="jp-cue">わたしは犬が好きです。</span>　<span class="paren en">（ like / I / dogs ）</span><div class="lines tight"><div><span class="fill2">I like dogs.</span></div></div></div><div class="qnote">語群に <span class="en">am</span> がない。<b>ないものは使えない</b>ので <span class='x'>✕ I am like dogs.</span></div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはサッカーファンです。</span>　<span class="paren en">（ a soccer fan / I'm ）</span><div class="lines tight"><div><span class="fill2">I'm a soccer fan.</span></div></div></div><div class="qnote"><b><span class="en">a soccer fan</span></b> でひとかたまり。<span class="en">a</span> はその先頭。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはうれしいです。</span>　<span class="paren en">（ happy / am / I ）</span><div class="lines tight"><div><span class="fill2">I am happy.</span></div></div></div><div class="qnote"><span class="en">am</span> のうしろに<b>気もちのことば</b>が来ます。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはオーストラリア出身です。</span>　<span class="paren en">（ Australia / I'm / from ）</span><div class="lines tight"><div><span class="fill2">I'm from Australia.</span></div></div></div><div class="qnote"><span class="en">I&#39;m</span> ＋ <span class="en">from</span> ＋ 国名。<b>国名は大文字ではじめる。</b></div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはオーストラリア出身です。</span>　<span class="paren en">（ from / Australia / I'm ）</span><div class="lines tight"><div><span class="fill2">I'm from Australia.</span></div></div></div><div class="qnote"><span class="en">I&#39;m</span> ＋ <span class="en">from</span> ＋ 国名。<b>国名は大文字ではじめる。</b></div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1414,6 +1433,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){
