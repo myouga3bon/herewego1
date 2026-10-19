@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -753,27 +815,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ I want he to help me. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I want him to help me.</span><span class="gjp">わたしは 彼に 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　はさむ人は <b><span class="en">him</span></b> の形。<span class="en">he</span> は主語のときの形です。</span></div>
+      <div class="qza"><span class="good en">○ I want <span class="fx">him</span> to help me.</span><span class="gjp">わたしは 彼に 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　はさむ人は <b><span class="en">him</span></b> の形。<span class="en">he</span> は主語のときの形です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ I want you help me. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I want you to help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<b><span class="en">to</span> が抜けています</b>。</span></div>
+      <div class="qza"><span class="good en">○ I want you <span class="fx">to</span> help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<b><span class="en">to</span> が抜けています</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ I want you to helps me. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I want you to help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> のうしろは<b>原形（もとの形）</b>。</span></div>
+      <div class="qza"><span class="good en">○ I want you to <span class="fx">help</span> me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> のうしろは<b>原形（もとの形）</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ I want you to helping me. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I want you to help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> と <span class="en">ing</span> を<b>両方つけません</b>。</span></div>
+      <div class="qza"><span class="good en">○ I want you to <span class="fx">help</span> me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> と <span class="en">ing</span> を<b>両方つけません</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ I want that you help me. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I want you to help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">that</span> は使いません。<b>人 ＋ <span class="en">to</span></b> の形です。</span></div>
+      <div class="qza"><span class="good en">○ I want <span class="dl"></span>you <span class="fx">to</span> help me.</span><span class="gjp">わたしは あなたに 手伝って ほしいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">that</span> は使いません。<b>人 ＋ <span class="en">to</span></b> の形です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ She want me to help her. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ She wants me to help her.</span><span class="gjp">彼女は わたしに 手伝って ほしがって います。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">She</span> なので <b><span class="en">wants</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ She <span class="fx">wants</span> me to help her.</span><span class="gjp">彼女は わたしに 手伝って ほしがって います。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">She</span> なので <b><span class="en">wants</span></b>。</span></div>
     </div>
   </div>
 
@@ -812,7 +874,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">to</span> ／ 人 ／ <span class="en">him</span> ／ もと ／ <span class="en">ask</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">I want you</span> で「あなたがほしい」と切れてしまわないよう、<br>そのうしろに <span class="en">to help me</span> と足して、「あなたに<b>してほしいこと</b>」を説明しているのです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">I want you</span> で「あなたがほしい」と切れてしまわないよう、<br>そのうしろに <span class="en">to help me</span> と足して、「あなたに<b>してほしいこと</b>」を説明しているのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -832,6 +894,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I want you to（<span class="bl s"><span class="ansfill">clean</span></span>）your room.</span></div>
   </div>
   <div class="expbox"><b>かくにん</b>　主語とちがう形になるのは <span class="en">I→me、he→him、she→her、we→us、they→them</span>。<br>9 は主語が <span class="en">She</span> なので <span class="en">wants</span>。10 は <span class="en">to</span> のうしろなので<b>原形（もとの形）</b>です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -848,6 +911,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">I want you to helping me.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">to</span> を入れる　4 → <span class="en">him</span><br>6 → <span class="en">wants</span>　8 → <span class="en">to help</span></div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -863,6 +927,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I want you to （ア clean ／イ cleans） your room.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2 は<b>人がはさまっているか</b>で、する人が変わります。<br>5 は「あなたに」とあるので、人をはさむ形です。3・4・6 は形のルールです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -870,7 +935,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s"><b><span class="en">want ＋ 人 ＋ to ～</span></b> ＝「（人）に～してほしい」。人は <span class="en">me・you・him</span> の形。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 8-1　want ＋ 人 ＋ 不定詞</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -905,18 +970,18 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　主語 → <span class="en">want</span> → 人 → <span class="en">to</span> → 原形（もとの形）、の順。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに手伝ってほしいです。</span>　<span class="paren en">（ to help me / I want / you ）</span><div class="lines tight"><div><span class="fill2">I want you to help me.</span></div></div></div><div class="qnote">人が <span class="en">want</span> のすぐうしろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼に来てほしいです。</span>　<span class="paren en">（ to come / him / I want ）</span><div class="lines tight"><div><span class="fill2">I want him to come.</span></div></div></div><div class="qnote"><span class="en">him</span> の形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしに勉強してほしいです。</span>　<span class="paren en">（ to study / She wants / me ）</span><div class="lines tight"><div><span class="fill2">She wants me to study.</span></div></div></div><div class="qnote"><span class="en">wants</span> の <span class="en">s</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼に待つように言いました。</span>　<span class="paren en">（ to wait / I told / him ）</span><div class="lines tight"><div><span class="fill2">I told him to wait.</span></div></div></div><div class="qnote"><span class="en">tell</span> も同じ作り。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに部屋をそうじしてほしいです。</span>　<span class="paren en">（ to clean your room / you / I want ）</span><div class="lines tight"><div><span class="fill2">I want you to clean your room.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたを手伝いたいです。</span>　<span class="paren en">（ you / to help / I want ）</span><div class="lines tight"><div><span class="fill2">I want to help you.</span></div></div></div><div class="qnote">人をはさまない形。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="paren en">（ to help him / us / He wants ）</span><div class="lines tight"><div><span class="fill2">He wants us to help him.</span></div></div></div><div class="qnote"><span class="en">us</span> の形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに手伝ってほしいです。</span>　<span class="paren en">（ me / help / want / you / to / I ）</span><div class="lines tight"><div><span class="fill2">I want you to help me.</span></div></div></div><div class="qnote">人が <span class="en">want</span> のすぐうしろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼に来てほしいです。</span>　<span class="paren en">（ to come / him / I / want ）</span><div class="lines tight"><div><span class="fill2">I want him to come.</span></div></div></div><div class="qnote"><span class="en">him</span> の形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼女はわたしに勉強してほしいです。</span>　<span class="paren en">（ me / She / wants / to study ）</span><div class="lines tight"><div><span class="fill2">She wants me to study.</span></div></div></div><div class="qnote"><span class="en">wants</span> の <span class="en">s</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼に待つように言いました。</span>　<span class="paren en">（ to wait / told / I / him ）</span><div class="lines tight"><div><span class="fill2">I told him to wait.</span></div></div></div><div class="qnote"><span class="en">tell</span> も同じ作り。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたに部屋をそうじしてほしいです。</span>　<span class="paren en">（ want / you / clean / your room / I / to ）</span><div class="lines tight"><div><span class="fill2">I want you to clean your room.</span></div></div></div><div class="qnote">長くても作りは同じ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたを手伝いたいです。</span>　<span class="paren en">（ you / want / I / to help ）</span><div class="lines tight"><div><span class="fill2">I want to help you.</span></div></div></div><div class="qnote">人をはさまない形。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしたちに手伝ってほしいです。</span>　<span class="paren en">（ us / to / him / He / help / wants ）</span><div class="lines tight"><div><span class="fill2">He wants us to help him.</span></div></div></div><div class="qnote"><span class="en">us</span> の形。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 8-1　want ＋ 人 ＋ 不定詞</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -981,7 +1046,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 8-1　want ＋ 人 ＋ 不定詞</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1251,7 +1316,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1353,6 +1418,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

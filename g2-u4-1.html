@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -724,7 +786,7 @@
         <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">There is</span></td><td class="k">1つあるとき</td><td class="e"><u>There is</u> a garden.</td></tr>
         <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">There are</span></td><td class="k">2つ以上あるとき</td><td class="e"><u>There are</u> two cats.</td></tr>
         <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">Is there</span></td><td class="k">たずねる文</td><td class="e"><u>Is there</u> a garden?</td></tr>
-        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">There isn&#39;t</span></td><td class="k">打ち消し</td><td class="e"><u>There isn&#39;t</u> a garden.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en">There isn&#39;t</span></td><td class="k">否定文</td><td class="e"><u>There isn&#39;t</u> a garden.</td></tr>
       </tbody>
     </table>
     <div class="copy">
@@ -734,13 +796,13 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">4</span>たずねる文・打ち消し・答え方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">4</span>たずねる文・否定文・答え方<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">be動詞の文なので、<b>1年生のルールがそのまま使えます</b>。<br>　答えにも <span class="en">there</span> を入れるのがポイントです。</p>
     <table class="kind">
       <thead><tr><th>作る文</th><th>やり方</th><th>れい文</th></tr></thead>
       <tbody>
         <tr><td class="k">たずねる文</td><td class="k" style="color:var(--ng);font-weight:700;">be動詞を前に出す</td><td class="e"><u>Is there</u> a garden?</td></tr>
-        <tr><td class="k">打ち消し</td><td class="k" style="color:var(--ng);font-weight:700;">be動詞のうしろに not</td><td class="e">There <u>isn&#39;t</u> a garden.</td></tr>
+        <tr><td class="k">否定文</td><td class="k" style="color:var(--ng);font-weight:700;">be動詞のうしろに not</td><td class="e">There <u>isn&#39;t</u> a garden.</td></tr>
         <tr><td class="k">答え方</td><td class="k">there を入れて返す</td><td class="e">— Yes, <u>there is</u>. ／ No, <u>there isn&#39;t</u>.</td></tr>
       </tbody>
     </table>
@@ -762,27 +824,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ There is two cats. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ There are two cats.</span><span class="gjp">ねこが 2ひき います。</span><span class="qzp"><b>ポイント</b>　うしろが <span class="en">two cats</span>（2ひき）なので <b><span class="en">are</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ There <span class="fx">are</span> two cats.</span><span class="gjp">ねこが 2ひき います。</span><span class="qzp"><b>ポイント</b>　うしろが <span class="en">two cats</span>（2ひき）なので <b><span class="en">are</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ There are a garden. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ There is a garden.</span><span class="gjp">庭が あります。</span><span class="qzp"><b>ポイント</b>　うしろが <span class="en">a garden</span>（1つ）なので <b><span class="en">is</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ There <span class="fx">is</span> a garden.</span><span class="gjp">庭が あります。</span><span class="qzp"><b>ポイント</b>　うしろが <span class="en">a garden</span>（1つ）なので <b><span class="en">is</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ Is there a garden? — Yes, it is. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Is there a garden? — Yes, there is.</span><span class="gjp">庭が ありますか。— はい、あります。</span><span class="qzp"><b>ポイント</b>　答えにも <b><span class="en">there</span></b> を入れます。</span></div>
+      <div class="qza"><span class="good en">○ Is there a garden? — Yes, <span class="fx">there</span> is.</span><span class="gjp">庭が ありますか。— はい、あります。</span><span class="qzp"><b>ポイント</b>　答えにも <b><span class="en">there</span></b> を入れます。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ Do you have there a garden? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Is there a garden?</span><span class="gjp">庭が ありますか。</span><span class="qzp"><b>ポイント</b>　be動詞の文なので <b><span class="en">Is</span> を前に出す</b>だけです。</span></div>
+      <div class="qza"><span class="good en">○ <span class="fx">Is</span> there a garden?</span><span class="gjp">庭が ありますか。</span><span class="qzp"><b>ポイント</b>　be動詞の文なので <b><span class="en">Is</span> を前に出す</b>だけです。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ There have a garden. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ There is a garden.</span><span class="gjp">庭が あります。</span><span class="qzp"><b>ポイント</b>　<span class="en">have</span> は使いません。<b>be動詞</b>を使います。</span></div>
+      <div class="qza"><span class="good en">○ There <span class="fx">is</span> a garden.</span><span class="gjp">庭が あります。</span><span class="qzp"><b>ポイント</b>　<span class="en">have</span> は使いません。<b>be動詞</b>を使います。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ There were a garden. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ There was a garden.</span><span class="gjp">庭が ありました。</span><span class="qzp"><b>ポイント</b>　うしろが1つなので <b><span class="en">was</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ There <span class="fx">was</span> a garden.</span><span class="gjp">庭が ありました。</span><span class="qzp"><b>ポイント</b>　うしろが1つなので <b><span class="en">was</span></b>。</span></div>
     </div>
   </div>
 
@@ -821,7 +883,7 @@
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">is / are</span> ／ うしろ ／ <span class="en">are</span> ／ 前 ／ <span class="en">there</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　この <span class="en">There</span> は「ほら、あるよ」と<b>合図を送るだけのことば</b>です。中身がありません。<br>だから文のほんとうの主役は<b>うしろの名前</b>。be動詞はその数に合わせるのです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody">この <span class="en">There</span> は「ほら、あるよ」と<b>合図を送るだけのことば</b>です。中身がありません。<br>だから文のほんとうの主役は<b>うしろの名前</b>。be動詞はその数に合わせるのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -841,6 +903,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">（<span class="bl s"><span class="ansfill">Are</span></span>）there any books?</span></div>
   </div>
   <div class="expbox"><b>見分け方</b>　<span class="en">a ～</span>（1つ）→ <span class="en">is</span>（1・4・6・8・9）<br><span class="en">two・three・several・many</span> や <span class="en">s</span> のついた名前（2つ以上）→ <span class="en">are</span>（2・3・5・7・10）<br><span class="en">a</span> が見えたら <span class="en">is</span>、と覚えると速いです。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -857,6 +920,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">Yes, it is.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">There is a big garden.</span>　4 → <span class="en">There are two cats.</span><br>6 → <span class="en">Is there a garden?</span>（be動詞の文）　8 → <span class="en">Yes, there is.</span>（<span class="en">there</span> を入れる）</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -872,6 +936,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">There （ア isn&#39;t ／イ don&#39;t） a park near here.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2・5 はうしろの数。3・6 は be動詞の文に <span class="en">do</span> を混ぜないこと。<br>4 は答え方です。<span class="en">Yes, it is.</span> と言いたくなりますが、<span class="en">there</span> を使います。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -879,7 +944,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s"><span class="en">There is / are</span> は <b>「ある・いる」</b>。be動詞は <b>うしろの名前の数</b>で決まる。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 4-1　There is ／ There are</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -900,12 +965,12 @@
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">本が3さつあります。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">are</span></span>）three books.</span></div><div class="qnote"><span class="en">several</span> は「いくつかの」。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">その近くに大きな庭がありますか。</span>　<span class="en">（<span class="bl s"><span class="ansfill">Is</span></span>）there a big garden near there?</span></div><div class="qnote">be動詞を前に出す。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">はい、あります。</span>　<span class="en">Yes,（<span class="bl s"><span class="ansfill">there</span></span>）is.</span></div><div class="qnote"><span class="en">it</span> ではなく <span class="en">there</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、ありません。</span>　<span class="en">No, there（<span class="bl s"><span class="ansfill">isn't</span></span>）.</span></div><div class="qnote">打ち消しの短い形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">いいえ、ありません。</span>　<span class="en">No, there（<span class="bl s"><span class="ansfill">isn't</span></span>）.</span></div><div class="qnote">否定文の短い形。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">部屋にねこが2ひきいます。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">are</span></span>）two cats in the room.</span></div><div class="qnote"><span class="en">two cats</span> は2ひき。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">机の上に本が1冊あります。</span>　<span class="en">There is（<span class="bl s"><span class="ansfill">a</span></span>）book on the desk.</span></div><div class="qnote">1冊なので <span class="en">a</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">以前そこに庭がありました。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">was</span></span>）a garden there before.</span></div><div class="qnote">過去で1つなので <span class="en">was</span>。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">そこにねこが2ひきいました。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">were</span></span>）two cats there.</span></div><div class="qnote">過去で2ひきなので <span class="en">were</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">この近くに公園はありません。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">isn't</span></span>）a park near here.</span></div><div class="qnote">1つのものを打ち消す。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">10</button><div class="row"><div class="qmain"><span class="jp-cue">この近くに公園はありません。</span>　<span class="en">There（<span class="bl s"><span class="ansfill">isn't</span></span>）a park near here.</span></div><div class="qnote">1つのものを否定文にする。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -914,18 +979,18 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">There</span> → be動詞 → 名前 → 場所、の順。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">その近くに大きな庭があります。</span>　<span class="paren en">（ a big garden / There is / near there ）</span><div class="lines tight"><div><span class="fill2">There is a big garden near there.</span></div></div></div><div class="qnote">場所はいちばん後ろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">本が3さつあります。</span>　<span class="paren en">（ three books / There / are ）</span><div class="lines tight"><div><span class="fill2">There are three books.</span></div></div></div><div class="qnote"><span class="en">are</span> を選ぶ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">その近くに大きな庭がありますか。</span>　<span class="paren en">（ near there / a big garden / Is there ）</span><div class="lines tight"><div><span class="fill2">Is there a big garden near there?</span></div></div></div><div class="qnote"><span class="en">Is there</span> が先頭。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">部屋にねこが2ひきいます。</span>　<span class="paren en">（ in the room / two cats / There are ）</span><div class="lines tight"><div><span class="fill2">There are two cats in the room.</span></div></div></div><div class="qnote">「どこに」は後ろ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">机の上に本が1冊あります。</span>　<span class="paren en">（ on the desk / There is / a book ）</span><div class="lines tight"><div><span class="fill2">There is a book on the desk.</span></div></div></div><div class="qnote"><span class="en">a book</span> は1冊。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">以前そこに庭がありました。</span>　<span class="paren en">（ a garden / There was / there before ）</span><div class="lines tight"><div><span class="fill2">There was a garden there before.</span></div></div></div><div class="qnote">過去形の <span class="en">was</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">この近くに公園はありません。</span>　<span class="paren en">（ near here / a park / There isn&#39;t ）</span><div class="lines tight"><div><span class="fill2">There isn&#39;t a park near here.</span></div></div></div><div class="qnote">打ち消しの形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">その近くに大きな庭があります。</span>　<span class="paren en">（ near there / There / a big garden / is ）</span><div class="lines tight"><div><span class="fill2">There is a big garden near there.</span></div></div></div><div class="qnote">場所はいちばん後ろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">本が3さつあります。</span>　<span class="paren en">（ three books / are / There ）</span><div class="lines tight"><div><span class="fill2">There are three books.</span></div></div></div><div class="qnote"><span class="en">are</span> を選ぶ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">その近くに大きな庭がありますか。</span>　<span class="paren en">（ there / near there / Is / a big garden ）</span><div class="lines tight"><div><span class="fill2">Is there a big garden near there?</span></div></div></div><div class="qnote"><span class="en">Is there</span> が先頭。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">部屋にねこが2ひきいます。</span>　<span class="paren en">（ the room / in / two cats / There / are ）</span><div class="lines tight"><div><span class="fill2">There are two cats in the room.</span></div></div></div><div class="qnote">「どこに」は後ろ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">机の上に本が1冊あります。</span>　<span class="paren en">（ a book / is / on / There / the desk ）</span><div class="lines tight"><div><span class="fill2">There is a book on the desk.</span></div></div></div><div class="qnote"><span class="en">a book</span> は1冊。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">以前そこに庭がありました。</span>　<span class="paren en">（ before / There / a garden / was / there ）</span><div class="lines tight"><div><span class="fill2">There was a garden there before.</span></div></div></div><div class="qnote">過去形の <span class="en">was</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">この近くに公園はありません。</span>　<span class="paren en">（ isn&#39;t / here / a park near / There ）</span><div class="lines tight"><div><span class="fill2">There isn&#39;t a park near here.</span></div></div></div><div class="qnote">否定文の形。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 4-1　There is ／ There are</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -990,7 +1055,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 4-1　There is ／ There are</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1260,7 +1325,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1362,6 +1427,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){

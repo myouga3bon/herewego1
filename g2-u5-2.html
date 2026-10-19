@@ -56,6 +56,8 @@
     font-size:9.5pt;font-weight:700;margin-right:7px;flex:none;}
   h3.st{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5pt;font-weight:900;
     color:var(--key);margin:0 0 2px;display:flex;align-items:center;line-height:1.25;}
+  /* 会話本文の中の 大事な表現 */
+  .kf{color:var(--gv);font-weight:700;}
   .blk-sec{margin-bottom:8px;}
   .blk-sec + .blk-sec{border-top:1px solid var(--rule);padding-top:6px;}
   .talk{font-size:10.5pt;line-height:1.55;margin:0 0 3px;}
@@ -169,6 +171,17 @@
 
   .lines div{border-bottom:1.2px solid var(--rule);height:8.4mm;}
   .lines.tight div{height:7.0mm;}
+  /* 和文英訳：その場限りの語を 最初から出す行 */
+  /* Daily Life：セリフの役割 */
+  .kind .role{display:inline-block;margin-left:2em;margin-top:1px;
+    color:#15803D;font-size:8.3pt;font-weight:500;line-height:1.35;}
+  .lines div.gl{display:flex;align-items:flex-end;position:relative;}
+  .lines div.gl i{align-self:stretch;min-width:30px;}
+  .lines div.gl .given{font-family:"Lexend",sans-serif;font-weight:400;font-size:9.2pt;
+    color:#4A5560;white-space:nowrap;padding:0 5px;line-height:1.1;
+    align-self:flex-end;margin-bottom:0.5mm;}
+  .lines div.gl .fill2{position:absolute;left:4px;bottom:1.5px;}
+  .showans .lines div.gl .given{opacity:.18;}
 
   .cond{border:1.5px solid var(--key);border-radius:4px;padding:5px 13px;margin-bottom:5px;font-size:11pt;}
   .cond .h{font-weight:700;color:var(--key);font-size:10.5pt;margin-bottom:1px;}
@@ -418,6 +431,15 @@
   .showkana .faint, .showkana .ribbon, .showkana .heart p,
   .showkana .keychips, .showkana .blk .w, .showkana .sec em{
     line-height:2.1;}
+  /* ===== v19: 答え表示時は 行を伸ばす（重なり防止） ===== */
+  .showans .lines div{height:auto;min-height:8.4mm;padding-bottom:1px;}
+  .showans .lines.tight div{min-height:7.0mm;}
+  .showans .lines div.gl{align-items:flex-start;}
+  .showans .lines div.gl .fill2{position:static;padding-left:0;}
+  .showans .lines div.gl .given,
+  .showans .lines div.gl i{display:none;}
+  .showans .lines .fill2{line-height:1.35;display:inline-block;}
+
 
   /* ===== v2: 濃い背景の上のカタカナは白く ===== */
   .hero ruby.rb rt,
@@ -608,6 +630,46 @@
   .qhint b{color:#3C7A14;}
   .simple .qhint{display:flex;}
   @media print{ .qhint{display:none;} .simple .opt{display:revert !important;} }
+
+  /* ===== v15: 正解の訂正部分に色 ===== */
+  .qza .good .fx{text-decoration:underline;text-decoration-color:#D98400;
+    text-decoration-thickness:2.3px;text-underline-offset:3.5px;}
+  .qza .good .dl{display:inline-block;width:11px;position:relative;}
+  .qza .good .dl::after{content:"▲";position:absolute;left:0;bottom:-8.5pt;
+    font-size:9pt;color:var(--ng);line-height:1;}
+  .qza .good{padding-bottom:7pt;display:inline-block;}
+  @media print{
+    .qza .good .fx{text-decoration-color:#444;}
+    .qza .good .dl::after{color:#666;}
+  }
+
+
+
+  /* ===== v17: ○トップ（答えバーの右） ===== */
+  .ansbar .tophome{display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:50%;flex:none;
+    border:2px solid #9BC96B;background:transparent;color:#4F8C1F;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:7.5pt;
+    letter-spacing:.2px;text-decoration:none;line-height:1;}
+  .ansbar .tophome:active{transform:translateY(2px);}
+  @media print{.ansbar .tophome{display:none;}}
+
+
+  /* ===== v21: 文法ミニ知識（気になる人だけ） ===== */
+  .mini{margin-top:5px;}
+  .minibtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:9pt;
+    background:#FFF8E8;border:1.5px dashed #D9A441;color:#8A5F10;
+    border-radius:999px;padding:2px 13px 3px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;line-height:1.5;}
+  .minibtn:active{transform:translateY(1px);}
+  .minibtn .pm{font-family:"Lexend",sans-serif;font-size:10pt;line-height:1;}
+  .minibody{display:none;margin-top:4px;background:#FFFCF4;
+    border-left:4px solid #D9A441;border-radius:0 6px 6px 0;
+    padding:4px 13px 5px;font-size:10pt;line-height:1.8;color:#5C4A24;}
+  .mini.open .minibody{display:block;}
+  .expbox.nohead{background:none;border-left:none;padding:0;margin-top:5px;}
+  @media print{ .mini{display:none;} .expbox.nohead{display:none;} }
+
   @media print{ .ansbar,.toolbar{display:none;} .sheet{box-shadow:none;margin:0;} }
 </style>
 </head>
@@ -631,7 +693,7 @@
 </svg>
 
 
-<div class="gauge" aria-hidden="true">
+<div class="gauge">
   <div class="cap"></div>
   <div class="body"><div class="fill" id="gfill"></div></div>
   <div class="pct" id="gpct">0%</div>
@@ -671,7 +733,7 @@
   <div class="blk-sec">
     <h3 class="st"><span class="stepnum">1</span>きほんの文<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">「<b>勉強しなければ ならない</b>」は <span class="en">must</span> でも言えますが、会話では <span class="en">have to</span> のほうがよく使われます。</p>
-    <p class="talk">大事なのは、<b>打ち消すと意味が変わる</b>こと。<br>　<span class="en">must not</span> とは<b>まったくちがう</b>意味になります。</p>
+    <p class="talk">大事なのは、<b>否定文にすると意味が変わる</b>こと。<br>　<span class="en">must not</span> とは<b>まったくちがう</b>意味になります。</p>
     <div class="gitem">
       <div class="gh"><span class="gn">❶</span>「～しなければ ならない」<small>must よりやわらかい</small></div>
       <div class="gmap"><span class="j">きょう 勉強しなければ ならない</span><span class="ar">→</span><span class="e en">have to study today</span></div>
@@ -686,7 +748,7 @@
       <div class="exline"><svg class="pn"><use href="#i-pen"/></svg><span class="s en">He doesn&#39;t have to go.</span><span class="t">彼は 行かなくても よいです。</span></div>
       <div class="gnote"><b><span class="en">don&#39;t have to</span></b> は「<b>しなくていい</b>」。<span class="en">must not</span>（してはいけない）と<b>反対の意味</b>なので要注意。</div>
     </div>
-    <p class="talk"><span class="en">have</span> はふつうの動詞なので、打ち消すときは <b><span class="en">don&#39;t ／ doesn&#39;t</span></b> を使います。</p>
+    <p class="talk"><span class="en">have</span> はふつうの動詞なので、否定文にするときは <b><span class="en">don&#39;t ／ doesn&#39;t</span></b> を使います。</p>
     <div class="copy">
       <svg><use href="#i-pen"/></svg>
       <div>きほんの文を3回音読して、さらに3回ずつ書き写そう</div>
@@ -694,7 +756,7 @@
   </div>
 
   <div class="blk-sec">
-    <h3 class="st"><span class="stepnum">2</span>かなり大事｜打ち消すと意味が正反対<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
+    <h3 class="st"><span class="stepnum">2</span>かなり大事｜否定文にすると意味が正反対<button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <p class="talk">ここが今回のヤマです。<br>　<span class="en">must not</span> と <span class="en">don&#39;t have to</span> は、<b>意味がまったくちがいます</b>。</p>
     <div class="judge">
       <div class="col no">
@@ -708,7 +770,7 @@
         <div class="in"><div class="ex">You don&#39;t have to come.<br>＝ 来なくてよい</div></div>
       </div>
     </div>
-    <p class="talk">「しなければならない」の打ち消しなので「しなくてよい」になります。<br>　<b>禁止ではありません</b>。<br>　ここを取りちがえると、意味が逆になってしまいます。</p>
+    <p class="talk">「しなければならない」の否定文なので「しなくてよい」になります。<br>　<b>禁止ではありません</b>。<br>　ここを取りちがえると、意味が逆になってしまいます。</p>
     <div class="heart">
       <div class="hearts">
         <svg class="hb beat"><use href="#i-heart"/></svg>
@@ -748,7 +810,7 @@
       <thead><tr><th>くらべること</th><th><span class="en">must</span></th><th><span class="en">have to</span></th></tr></thead>
       <tbody>
         <tr><td class="k">主語が he のとき</td><td class="e">He <u>must</u> go.</td><td class="e">He <u>has to</u> go.</td></tr>
-        <tr><td class="k">打ち消し</td><td class="e">He <u>must not</u> go.（禁止）</td><td class="e">He <u>doesn&#39;t have to</u> go.（不要）</td></tr>
+        <tr><td class="k">否定文</td><td class="e">He <u>must not</u> go.（禁止）</td><td class="e">He <u>doesn&#39;t have to</u> go.（不要）</td></tr>
         <tr><td class="k">たずねる文</td><td class="e"><u>Must</u> he go?</td><td class="e"><u>Does</u> he <u>have to</u> go?</td></tr>
       </tbody>
     </table>
@@ -770,27 +832,27 @@
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ He have to go now. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He has to go now.</span><span class="gjp">彼は 今 行かなければ なりません。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">He</span> なので <b><span class="en">has to</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ He <span class="fx">has</span> to go now.</span><span class="gjp">彼は 今 行かなければ なりません。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">He</span> なので <b><span class="en">has to</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ We have to cleaning our room. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ We have to clean our room.</span><span class="gjp">わたしたちは 部屋を そうじしなければ なりません。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> のうしろは<b>原形（もとの形）</b>。</span></div>
+      <div class="qza"><span class="good en">○ We have to <span class="fx">clean</span> our room.</span><span class="gjp">わたしたちは 部屋を そうじしなければ なりません。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> のうしろは<b>原形（もとの形）</b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ You haven&#39;t to come. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ You don&#39;t have to come.</span><span class="gjp">あなたは 来なくても よいです。</span><span class="qzp"><b>ポイント</b>　打ち消しは <b><span class="en">don&#39;t have to</span></b>。<span class="en">have</span> はふつうの動詞です。</span></div>
+      <div class="qza"><span class="good en">○ You <span class="fx">don&#39;t have</span> to come.</span><span class="gjp">あなたは 来なくても よいです。</span><span class="qzp"><b>ポイント</b>　否定文は <b><span class="en">don&#39;t have to</span></b>。<span class="en">have</span> はふつうの動詞です。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ He doesn&#39;t has to go. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ He doesn&#39;t have to go.</span><span class="gjp">彼は 行かなくても よいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">doesn&#39;t</span> のうしろは<b>原形（もとの形）</b>。<span class="en">has</span> にしません。</span></div>
+      <div class="qza"><span class="good en">○ He doesn&#39;t <span class="fx">have</span> to go.</span><span class="gjp">彼は 行かなくても よいです。</span><span class="qzp"><b>ポイント</b>　<span class="en">doesn&#39;t</span> のうしろは<b>原形（もとの形）</b>。<span class="en">has</span> にしません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ Do he have to go? ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Does he have to go?</span><span class="gjp">彼は 行かなければ なりませんか。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">Does</span></b>。</span></div>
+      <div class="qza"><span class="good en">○ <span class="fx">Does</span> he have to go?</span><span class="gjp">彼は 行かなければ なりませんか。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">he</span> なので <b><span class="en">Does</span></b>。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ I must to go home. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I have to go home.</span><span class="gjp">わたしは 家に 帰らなければ なりません。</span><span class="qzp"><b>ポイント</b>　<span class="en">must</span> に <span class="en">to</span> はつきません。<span class="en">have to</span> にするか <span class="en">must go</span> にします。</span></div>
+      <div class="qza"><span class="good en">○ I <span class="fx">have</span> to go home.</span><span class="gjp">わたしは 家に 帰らなければ なりません。</span><span class="qzp"><b>ポイント</b>　<span class="en">must</span> に <span class="en">to</span> はつきません。<span class="en">have to</span> にするか <span class="en">must go</span> にします。</span></div>
     </div>
   </div>
 
@@ -823,13 +885,13 @@
   <ol class="q numq">
     <li><button class="qn" onclick="toggleQn(this)">1</button>「～しなければならない」は、<span class="en">have</span>（<span class="bl s"><span class="ansfill">to</span></span>）＋ 原形（もとの形） で表す。</li>
     <li><button class="qn" onclick="toggleQn(this)">2</button>主語が <span class="en">he・she</span> のときは（<span class="bl"><span class="ansfill">has to</span></span>）になる。</li>
-    <li><button class="qn" onclick="toggleQn(this)">3</button>打ち消しは（<span class="bl"><span class="ansfill">don't</span></span>）＋ <span class="en">have to</span> の形にする。</li>
+    <li><button class="qn" onclick="toggleQn(this)">3</button>否定文は（<span class="bl"><span class="ansfill">don't</span></span>）＋ <span class="en">have to</span> の形にする。</li>
     <li><button class="qn" onclick="toggleQn(this)">4</button><span class="en">don&#39;t have to</span> は「～し（<span class="bl"><span class="ansfill">なくてよい</span></span>）」という意味になる。</li>
     <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>過去のことを言うときは（<span class="bl"><span class="ansfill">had to</span></span>）を使う。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
     <div class="faint">語群：<span class="en">to</span> ／ <span class="en">has to</span> ／ <span class="en">don&#39;t</span> ／ なくてよい ／ <span class="en">had to</span></div></div>
-  <div class="expbox"><b>なぜ？</b>　<span class="en">have to</span> は「～することを持っている」＝「やることになっている」というイメージです。<br>それを打ち消すと「やることになっていない」＝<b>しなくてよい</b>。禁止ではないのはこのためです。</div>
+  <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">have to</span> は「～することを持っている」＝「やることになっている」というイメージです。<br>それを否定文にすると「やることになっていない」＝<b>しなくてよい</b>。禁止ではないのはこのためです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -849,6 +911,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">He has to（<span class="bl s"><span class="ansfill">clean</span></span>）his room.</span></div>
   </div>
   <div class="expbox"><b>見分け方</b>　<span class="en">he・she・it</span> → <span class="en">has to / doesn&#39;t have to / Does</span>（2・3・6・8）<br>そのほか → <span class="en">have to / don&#39;t have to / Do</span>（1・4・5・7）<br>過去はどの主語でも <span class="en">had to</span>（9）。10 は <span class="en">to</span> のうしろなので<b>原形（もとの形）</b>。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -865,6 +928,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">He doesn&#39;t has to go.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
   <div class="expbox"><b>直し方</b>　2 → <span class="en">has to</span>　4 → <span class="en">don&#39;t have to</span><br>6 → <span class="en">Does</span>　8 → <span class="en">have to</span>（<span class="en">doesn&#39;t</span> のうしろは原形（もとの形））</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -880,6 +944,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button>行かなくてよかったです。<span class="en">I （ア didn&#39;t have to ／イ must not） go.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
   <div class="expbox"><b>ここが大事</b>　1・2・6 は<b>意味</b>で選びます。「ダメ」なら <span class="en">must not</span>、「しなくていい」なら <span class="en">don&#39;t have to</span>。<br>3・4 は主語、5 は <span class="en">to</span> のうしろの形です。</div>
+
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
@@ -887,7 +952,7 @@
     <svg class="ic-l beat"><use href="#i-heart"/></svg>
     <b>合言葉</b><span class="s"><span class="en">have to</span> ＝「～しなければならない」。<b><span class="en">don&#39;t have to</span> は「～しなくてよい」</b>。<span class="en">must not</span> と まったくちがう。</span>
   </div>
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 5-2　have to</span><span>2 / 4　文法たしかめ</span></div>
 </section>
@@ -922,18 +987,18 @@
     <h3 class="sec">レベル2チェック　並べかえ<em>（　）の語を正しい順にならべよう。文の最初は大文字、終わりにピリオドを。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　主語 → <span class="en">have / has to</span> → 原形（もとの形）、の順。</div>
     <ol class="q numq">
-      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしたちは部屋をそうじしなければなりません。</span>　<span class="paren en">（ our room / have to / We / clean ）</span><div class="lines tight"><div><span class="fill2">We have to clean our room.</span></div></div></div><div class="qnote"><span class="en">have to clean</span> と続ける。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは来なくてもよいです。</span>　<span class="paren en">（ come / don&#39;t have to / You ）</span><div class="lines tight"><div><span class="fill2">You don&#39;t have to come.</span></div></div></div><div class="qnote"><span class="en">don&#39;t have to</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今、行かなければなりません。</span>　<span class="paren en">（ now / has to / He / go ）</span><div class="lines tight"><div><span class="fill2">He has to go now.</span></div></div></div><div class="qnote"><span class="en">has to</span> を選ぶ。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は行かなくてもよいです。</span>　<span class="paren en">（ go / doesn&#39;t have to / He ）</span><div class="lines tight"><div><span class="fill2">He doesn&#39;t have to go.</span></div></div></div><div class="qnote"><span class="en">doesn&#39;t have to</span> の形。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">彼は行かなければなりませんか。</span>　<span class="paren en">（ go / he / Does / have to ）</span><div class="lines tight"><div><span class="fill2">Does he have to go?</span></div></div></div><div class="qnote"><span class="en">Does</span> が先頭。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは早く家に帰らなければなりませんでした。</span>　<span class="paren en">（ early / had to / I / go home ）</span><div class="lines tight"><div><span class="fill2">I had to go home early.</span></div></div></div><div class="qnote">過去の <span class="en">had to</span>。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼は部屋をそうじしなければなりません。</span>　<span class="paren en">（ his room / He / clean / has to ）</span><div class="lines tight"><div><span class="fill2">He has to clean his room.</span></div></div></div><div class="qnote"><span class="en">clean</span> は原形（もとの形）。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしたちは部屋をそうじしなければなりません。</span>　<span class="paren en">（ clean / to / We / have / our room ）</span><div class="lines tight"><div><span class="fill2">We have to clean our room.</span></div></div></div><div class="qnote"><span class="en">have to clean</span> と続ける。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは来なくてもよいです。</span>　<span class="paren en">（ come / You / to / don&#39;t / have ）</span><div class="lines tight"><div><span class="fill2">You don&#39;t have to come.</span></div></div></div><div class="qnote"><span class="en">don&#39;t have to</span> でひとかたまり。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今、行かなければなりません。</span>　<span class="paren en">（ to / now / has / He / go ）</span><div class="lines tight"><div><span class="fill2">He has to go now.</span></div></div></div><div class="qnote"><span class="en">has to</span> を選ぶ。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は行かなくてもよいです。</span>　<span class="paren en">（ have / to / He / go / doesn&#39;t ）</span><div class="lines tight"><div><span class="fill2">He doesn&#39;t have to go.</span></div></div></div><div class="qnote"><span class="en">doesn&#39;t have to</span> の形。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">彼は行かなければなりませんか。</span>　<span class="paren en">（ have / go / he / Does / to ）</span><div class="lines tight"><div><span class="fill2">Does he have to go?</span></div></div></div><div class="qnote"><span class="en">Does</span> が先頭。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは早く家に帰らなければなりませんでした。</span>　<span class="paren en">（ go home / to / had / I / early ）</span><div class="lines tight"><div><span class="fill2">I had to go home early.</span></div></div></div><div class="qnote">過去の <span class="en">had to</span>。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">彼は部屋をそうじしなければなりません。</span>　<span class="paren en">（ has / clean / to / He / his room ）</span><div class="lines tight"><div><span class="fill2">He has to clean his room.</span></div></div></div><div class="qnote"><span class="en">clean</span> は原形（もとの形）。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
 
-  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+  <div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 5-2　have to</span><span>3 / 4　文法かるく使える</span></div>
 </section>
@@ -998,7 +1063,7 @@
     <span class="rmsg" id="rmsg"></span>
   </div>
 
-<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button></div>
+<div class="ansbar"><span class="msg">ぜんぶ終わったら押そう</span><button class="abtn" onclick="toggleSheet(this)">全体の答えを見る</button><a class="tophome" href="index.html">トップ</a></div>
 
   <div class="foot"><span>Here We Go! 2 ／ Unit 5-2　have to</span><span>4 / 4　文法しっかり使える</span></div>
 </section>
@@ -1268,7 +1333,7 @@ function makeRetry(){
     + '<div class="hint">もう一度ノートに解いてから、下の「答えを見る」を押そう。</div>'
     + body
     + '<div class="ansbar"><span class="msg">とけたら押そう</span>'
-    + '<button class="abtn" onclick="ta(this)">答えを見る</button></div>'
+    + '<button class="abtn" onclick="ta(this)">答えを見る</button><a class="tophome" href="index.html">トップ</a></div>'
     + '<div class="foot"><span>' + title + '　解き直し</span>'
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
@@ -1370,6 +1435,13 @@ function toggleMore(btn){
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toggleMini(btn){
+  var m = btn.parentNode;
+  var on = m.classList.toggle('open');
+  var pm = btn.querySelector('.pm');
+  if (pm) pm.textContent = on ? '−' : '＋';
 }
 
 function toggleHint(btn){
