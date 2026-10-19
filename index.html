@@ -10,7 +10,7 @@
   --be:#1F4E9C; --gv:#C2185B; --ink:#2A2A33; --sub:#6B6B78;
   --card:#FFFFFF; --rule:#E7E2D6; --pen:#35B44B;
   --u1:#2E7DD1; --u2:#22A58C; --u3:#E08A1E; --u4:#8A5CD6; --u5:#E4557A;
-  --u6:#C2185B; --u7:#1F8A70; --u8:#3F6CC4;
+  --u6:#C2185B; --u7:#1F8A70; --u8:#3F6CC4; --dl:#F2E14A;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
@@ -88,7 +88,7 @@ h1 .en{font-family:"Lexend",sans-serif;font-weight:700;}
 .utxt .us{font-size:11px;color:var(--sub);line-height:1.35;margin-top:1px;}
 .utxt .pg{font-family:"Lexend",sans-serif;font-size:10px;margin-left:5px;opacity:.75;}
 
-.parts{flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.parts{flex:1;min-width:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
 a.pt{
   display:block;background:var(--card);border:2px solid var(--rule);
   border-radius:11px;padding:5px 10px 6px;text-decoration:none;color:var(--ink);
@@ -122,6 +122,9 @@ a.pt .pj{display:block;font-size:11px;color:var(--sub);line-height:1.45;margin-t
 .u7 a.pt:hover{border-color:var(--u7);} .u7 a.pt .pe{color:var(--u7);}
 .u8 .unum{background:var(--u8);} .u8 a.pt .pn{background:var(--u8);}
 .u8 a.pt:hover{border-color:var(--u8);} .u8 a.pt .pe{color:var(--u8);}
+a.pt.dl .pn{background:transparent;color:var(--dl);border:1.5px solid var(--dl);padding:0 6px;}
+a.pt.dl:hover{border-color:var(--dl);}
+a.pt.dl .pe{color:var(--dl);}
 
 /* ===== 学年タブ ===== */
 .gtabs{display:flex;gap:11px;justify-content:center;margin:0 0 15px;}
@@ -238,6 +241,7 @@ footer .lg{
         <a class="pt" href="u4-1.html"><span class="pn">4-1</span><span class="pe">He is ～. / She is ～.</span><span class="pj">彼は ～ です／彼女は ～ です</span></a>
         <a class="pt" href="u4-2.html"><span class="pn">4-2</span><span class="pe">Who's ～?</span><span class="pj">～は だれ ですか</span></a>
         <a class="pt" href="u4-3.html"><span class="pn">4-3</span><span class="pe">Is this ～? / This is not ～.</span><span class="pj">これは ～ ですか／～ ではありません</span></a>
+        <a class="pt dl" href="dl-1.html"><span class="pn">DL 1</span><span class="pe">Whose pencil case is that?</span><span class="pj">落とし物　あれは 誰の 筆箱ですか</span></a>
       </div>
     </section>
     <section class="unit u5">
@@ -247,6 +251,7 @@ footer .lg{
         <a class="pt" href="u5-1.html"><span class="pn">5-1</span><span class="pe">Look at this. / Don't ～. / Let's ～.</span><span class="pj">命令文　～して／～しないで</span></a>
         <a class="pt" href="u5-2.html"><span class="pn">5-2</span><span class="pe">Where ～?</span><span class="pj">～は どこ ですか</span></a>
         <a class="pt" href="u5-3.html"><span class="pn">5-3</span><span class="pe">When ～?</span><span class="pj">～は いつ ですか</span></a>
+        <a class="pt dl" href="dl-2.html"><span class="pn">DL 2</span><span class="pe">Can I have the spaghetti?</span><span class="pj">注文　スパゲッティを ください</span></a>
       </div>
     </section>
     <section class="unit u6">
@@ -256,16 +261,19 @@ footer .lg{
         <a class="pt" href="u6-1.html"><span class="pn">6-1</span><span class="pe">He plays ～. / She likes ～.</span><span class="pj">三単現の s　彼は ～ します</span></a>
         <a class="pt" href="u6-2.html"><span class="pn">6-2</span><span class="pe">Does he ～?</span><span class="pj">彼は ～ しますか</span></a>
         <a class="pt" href="u6-3.html"><span class="pn">6-3</span><span class="pe">He doesn't ～.</span><span class="pj">彼は ～ しません</span></a>
+        <a class="pt dl" href="dl-3.html"><span class="pn">DL 3</span><span class="pe">What time does the next bus come?</span><span class="pj">バス停　次の バスは 何時に 来ますか</span></a>
+        <a class="pt dl" href="dl-4.html"><span class="pn">DL 4</span><span class="pe">How can I get to ～?</span><span class="pj">道案内　どうやって 行けば いいですか</span></a>
       </div>
     </section>
     <section class="unit u7">
       <div class="uhead"><div class="unum">7</div>
-        <div class="utxt"><div class="ut">Unit 7</div><div class="us">きのうのことを言う（過去形）<span class="pg">p.102〜109</span></div></div></div>
+        <div class="utxt"><div class="ut">Unit 7</div><div class="us">過去のことを言う（過去形）<span class="pg">p.102〜109</span></div></div></div>
       <div class="parts">
         <a class="pt" href="u7-1.html"><span class="pn">7-1</span><span class="pe">I played ～.</span><span class="pj">一般動詞の過去形　～しました</span></a>
         <a class="pt" href="u7-2.html"><span class="pn">7-2</span><span class="pe">Did you ～? / I didn't ～.</span><span class="pj">過去の疑問文・否定文</span></a>
         <a class="pt" href="u7-3.html"><span class="pn">7-3</span><span class="pe">What a big lantern!</span><span class="pj">なんて 大きな ちょうちん</span></a>
         <a class="pt" href="u7-4.html"><span class="pn">7-4</span><span class="pe">I was ～. / You were ～.</span><span class="pj">be動詞の過去形　～でした</span></a>
+        <a class="pt dl" href="dl-5.html"><span class="pn">DL 5</span><span class="pe">How much does it cost?</span><span class="pj">イベントの案内　費用は いくらですか</span></a>
       </div>
     </section>
     <section class="unit u8">
