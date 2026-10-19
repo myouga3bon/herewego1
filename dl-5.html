@@ -1243,7 +1243,7 @@ function makeRetry(){
   groups.forEach(g => {
     body += g.head;
     body += (g.kind === 'ol')
-      ? '<ol class="q sp numq">' + g.items.join('\n') + '</ol>'
+      ? '<ol class="q numq">' + g.items.join('\n') + '</ol>'
       : '<div class="grid2">' + g.items.join('\n') + '</div>';
   });
 
@@ -1280,9 +1280,18 @@ function makeRetry(){
     + 's.querySelectorAll(".qsec").forEach(function(q){q.classList.toggle("showans",on);});}'
     + '<\/script></body></html>';
 
-  const w = window.open('', '_blank');
-  if(!w){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
-  w.document.open(); w.document.write(html); w.document.close();
+  // v22: about:blank への document.write だと、タブレットで viewport が効かず
+  //      ページ全体が極小表示になる。Blob URL で本物のページとして開く。
+  var opened = null;
+  try{
+    var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    opened = window.open(URL.createObjectURL(blob), '_blank');
+  }catch(err){ opened = null; }
+  if(!opened){
+    opened = window.open('', '_blank');
+    if(opened){ opened.document.open(); opened.document.write(html); opened.document.close(); }
+  }
+  if(!opened){ if(msg) msg.textContent = '新しいページが開けませんでした。ブラウザのポップアップ許可を確認してください。'; return; }
 }
 
 // ===== v5: 英語を押すと読み上げる（Web Speech API） =====
@@ -1313,6 +1322,7 @@ function toggleSlow(btn){
   // 読み上げ対象に .sp を付ける（まちがいの例ははずす）
   const SEL = '.en, .exline .s, .judge .ex, .judge .ttl span, .eqbox .eq, '
             + '.hero .big, .fill2, .ansfill, table.kind td.e, .model .ex';
+  document.querySelectorAll('ol.q.sp, ul.sp').forEach(o => o.classList.remove('sp'));
   document.querySelectorAll(SEL).forEach(el => {
     if(el.closest('.bad, .xm, .x, s, .qzq')) return;
     if(el.closest('.hbtn, .kbtn, .ksm, .abtn, .sbtn, .qzb, .rbtn, .spbtn')) return;
@@ -1340,8 +1350,11 @@ function toggleSlow(btn){
   }
 
   document.addEventListener('click', e => {
+    // v22: 番号ボタンなどの操作は読み上げない（英語を押したときだけ読む）
+    if(e.target.closest('.qn, button, a, input, select, label, summary')) return;
     const el = e.target.closest('.sp');
     if(!el) return;
+    if(el.tagName === 'OL' || el.tagName === 'UL' || el.tagName === 'LI') return;
     const t = textOf(el);
     if(!t || !/[A-Za-z]/.test(t)) return;
     try{ speechSynthesis.cancel(); }catch(err){}
