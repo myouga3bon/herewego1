@@ -715,7 +715,7 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.76〜77</div>
@@ -864,7 +864,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
@@ -949,7 +949,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
@@ -995,7 +995,7 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ゆっくり</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 6 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
@@ -1329,7 +1329,7 @@ function makeRetry(){
     + '<span>まちがえた ' + picked.length + ' 問</span></div>'
     + '</section>'
     + '<script>'
-    + 'var SV=null;function pv(){var vs=speechSynthesis.getVoices();SV=vs.filter(function(v){return /^en/i.test(v.lang);})[0]||null;}if(window.speechSynthesis){pv();speechSynthesis.addEventListener("voiceschanged",pv);document.addEventListener("click",function(e){var el=e.target.closest(".sp");if(!el)return;var c=el.cloneNode(true);c.querySelectorAll("rt").forEach(function(x){x.remove();});if(!el.closest(".showans"))c.querySelectorAll(".ansfill,.fill2,.ansmark").forEach(function(x){x.remove();});var t=c.textContent.replace(/[()（）]/g," ").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim();if(!t||!/[A-Za-z]/.test(t))return;speechSynthesis.cancel();el.classList.add("playing");var u=new SpeechSynthesisUtterance(t);u.lang=(SV&&SV.lang)||"en-US";if(SV)u.voice=SV;u.rate=0.9;u.onend=u.onerror=function(){el.classList.remove("playing");};speechSynthesis.speak(u);});}'
+    + 'var SV=null;function pv(){var vs=speechSynthesis.getVoices();SV=vs.filter(function(v){return /^en/i.test(v.lang);})[0]||null;}if(window.speechSynthesis){pv();speechSynthesis.addEventListener("voiceschanged",pv);document.addEventListener("click",function(e){var el=e.target.closest(".sp");if(!el)return;var c=el.cloneNode(true);c.querySelectorAll("rt").forEach(function(x){x.remove();});if(!el.closest(".showans"))c.querySelectorAll(".ansfill,.fill2,.ansmark").forEach(function(x){x.remove();});var t=c.textContent.replace(/[()（）]/g," ").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim();if(!t||!/[A-Za-z]/.test(t))return;speechSynthesis.cancel();el.classList.add("playing");var u=new SpeechSynthesisUtterance(t);u.lang=(SV&&SV.lang)||"en-US";if(SV)u.voice=SV;u.rate=0.6;u.onend=u.onerror=function(){el.classList.remove("playing");};speechSynthesis.speak(u);});}'
     + 'function tk(b){var s=b.closest(".sheet");var on=s.classList.toggle("showkana");'
     + 'b.textContent=on?"カタカナを消す":"カタカナ";b.classList.toggle("on",on);}'
     + 'function ta(b){var s=b.closest(".sheet");var on=s.classList.toggle("showans");'
@@ -1352,12 +1352,12 @@ function makeRetry(){
 }
 
 // ===== v5: 英語を押すと読み上げる（Web Speech API） =====
-const SPEECH = {slow:false, voice:null, el:null};
+const SPEECH = {slow:true, voice:null, el:null};   // v23: 既定は ゆっくり
 
 function toggleSlow(btn){
   SPEECH.slow = !SPEECH.slow;
   document.querySelectorAll('.spbtn').forEach(b => {
-    b.classList.toggle('on', SPEECH.slow);
+    b.classList.toggle('on', !SPEECH.slow);
     b.textContent = SPEECH.slow ? 'ふつうの速さ' : 'ゆっくり';
   });
 }
