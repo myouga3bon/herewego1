@@ -295,7 +295,7 @@
   .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
     padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
     font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
-  .copy svg{width:24px;height:24px;flex:none;color:#35B44B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#FF5CA8;}
   .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
   .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
     color:#6B4E0B;margin-top:3px;line-height:1.7;}
@@ -324,7 +324,7 @@
   /* ブロック間を半行ずつ空ける */
   .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
   /* きほんの文（書き写す3文）の鉛筆マーク */
-  .exline .pn{width:14px;height:14px;flex:none;color:#35B44B;align-self:center;margin-right:-5px;}
+  .exline .pn{width:14px;height:14px;flex:none;color:#FF5CA8;align-self:center;margin-right:-5px;}
 
   /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
   .talk{text-indent:1em;}
@@ -619,6 +619,42 @@
     background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
   .morehint b{color:#3C7A14;}
   .simple .morehint{display:flex;}
+
+
+
+
+
+  /* ===== v29: 基本 / シンプル / 超シンプル ===== */
+  .modes{display:inline-flex;align-items:center;gap:6px;margin-right:auto;}
+  .modes .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:9.5pt;
+    border-radius:999px;padding:2px 14px 3px;cursor:pointer;line-height:1.5;
+    display:inline-flex;align-items:center;text-decoration:none;flex:none;
+    border:2px solid #9BC96B;background:#F4FBEC;color:#4F8C1F;}
+  .modes .mbtn.m-sim{border-color:#9AB6E0;background:#F4F8FD;color:#2E68C4;}
+  .modes .mbtn.m-ss{border-color:#FF5CA8;background:#FFF0F7;color:#C2185B;}
+  .modes .mbtn:hover{filter:brightness(.97);}
+  .modes .mbtn:active{transform:translateY(1px);}
+  .modes .mbtn.on{background:#4F8C1F;border-color:#4F8C1F;color:#fff;}
+  .modes .mbtn.m-sim.on{background:#2E68C4;border-color:#2E68C4;color:#fff;}
+  .modes .mbtn.m-ss.on{background:#C2185B;border-color:#C2185B;color:#fff;}
+  @media print{.modes{display:none;}}
+  /* ===== v27: クイズの別解 ===== */
+  .qza .alt{display:block;font-family:"Lexend",sans-serif;font-weight:600;
+    font-size:11pt;color:#1F8A70;margin-top:2px;}
+  .qza .alt .lb{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+    font-size:8pt;color:#fff;background:#1F8A70;border-radius:4px;
+    padding:0 6px 1px;margin-right:6px;vertical-align:1px;}
+  .qza .alt .ajp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#245C45;margin-left:7px;}
+  /* ===== v26: s を目立たせる ===== */
+  .sx{color:#7A2FD0;font-weight:900;}
+  /* ===== v25: クイズは ふつう5問 / シンプル3問 ===== */
+  .qzi.qz-off{display:none;}
+  @media print{ .qzi.qz-off{display:none;} }
+  /* ===== v24: シンプル版はクイズ4問まで ===== */
+  .simple .qzi.qz-more{display:none;}
+  @media print{ .qzi.qz-more{display:block;} }
+
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
   /* ===== v12: シンプル時は問題も約2割へらす ===== */
@@ -715,16 +751,16 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u5-1-ss.html">超シンプル</a></span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 1 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.60〜61</div>
   </div>
 
   <div class="hero">
-    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="star"><svg><use href="#i-star"/></svg></div>
     <div class="mid">
-      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回のテーマ！</div>
       <div class="big">You must study hard.</div>
       <div class="jp">あなたは 一生けんめい 勉強しなければ なりません</div>
     </div>
@@ -823,12 +859,12 @@
     <p class="talk"><span class="en">must be</span> の <span class="en">be</span> を忘れる人が多いところです。<br>　「～<b>でなければならない</b>」と、ようすのことばが続くときは <span class="en">be</span> が必要です。</p>
   </div>
 
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ You must studies hard. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ You must <span class="fx">study</span> hard.</span><span class="gjp">あなたは 一生けんめい 勉強しなければ なりません。</span><span class="qzp"><b>ポイント</b>　助動詞のうしろは<b>原形（もとの形）</b>。<span class="en">s</span> はつけません。</span></div>
+      <div class="qza"><span class="good en">○ You must <span class="fx">study</span> hard.</span><span class="gjp">あなたは 一生けんめい 勉強しなければ なりません。</span><span class="qzp"><b>ポイント</b>　助動詞のうしろは<b>原形（もとの形）</b>。<span class="en sx">s</span> はつけません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ He musts go now. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -838,15 +874,15 @@
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ You must not to run here. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ You must not <span class="dl"></span>run here.</span><span class="gjp">あなたは ここで 走っては いけません。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> はいりません。<span class="en">must not</span> ＋ 原形（もとの形）。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ You don&#39;t must run here. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ You <span class="dl"></span>must <span class="fx">not</span> run here.</span><span class="gjp">あなたは ここで 走っては いけません。</span><span class="qzp"><b>ポイント</b>　否定文は <span class="en">must</span> のうしろに <b><span class="en">not</span></b>。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ You must careful. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ You must <span class="fx">be</span> careful.</span><span class="gjp">あなたは 気をつけなければ なりません。</span><span class="qzp"><b>ポイント</b>　「気をつけ<b>なければならない</b>」のように、ようすのことばが続くときは <b><span class="en">be</span></b> が必要です。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-off">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ You must not forget to bringing your bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ You must not forget to <span class="fx">bring</span> your bag.</span><span class="gjp">あなたは かばんを 持ってくるのを 忘れては いけません。</span><span class="qzp"><b>ポイント</b>　<span class="en">to</span> のうしろも<b>原形（もとの形）</b>です。</span></div>
     </div>
@@ -858,7 +894,7 @@
       <ul class="sumlist">
         <li><b><span class="en">must ＋ 原形（もとの形）</span></b> ＝「～しなければならない」。強い言い方。</li>
         <li><b><span class="en">must not</span> ＝「～してはいけない」</b>（禁止）。「しなくてよい」ではない。</li>
-        <li><span class="en">must</span> は <b>形が変わらない</b>。主語が <span class="en">he</span> でも <span class="en">s</span> をつけない。</li>
+        <li><span class="en">must</span> は <b>形が変わらない</b>。主語が <span class="en">he</span> でも <span class="en sx">s</span> をつけない。</li>
         <li>「～でなければならない」でようすのことばが続くときは <b><span class="en">must be</span></b>。<span class="en">be</span> を忘れない。</li>
       </ul>
     </div>
@@ -869,13 +905,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u5-1-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 1 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -886,7 +922,7 @@
     <li class="opt"><button class="qn" onclick="toggleQn(this)">5</button>「～でなければならない」でようすのことばが続くときは、<span class="en">must</span> のうしろに（<span class="bl s"><span class="ansfill">be</span></span>）を置く。</li>
   </ol>
   <div class="hintwrap"><button class="hbtn" onclick="toggleHint(this)">どうしてもわからない時のヒント</button>
-    <div class="faint">語群：ならない ／ もと ／ <span class="en">s</span> ／ いけない ／ <span class="en">be</span></div></div>
+    <div class="faint">語群：ならない ／ もと ／ <span class="en sx">s</span> ／ いけない ／ <span class="en">be</span></div></div>
   <div class="expbox nohead"><div class="mini"><button class="minibtn" onclick="toggleMini(this)">💡 文法ミニ知識<span class="pm">＋</span></button><div class="minibody"><span class="en">not</span> は<b>すぐうしろのことば</b>を否定文にします。<br><span class="en">must not run</span> は「走る、を しない ことが must」＝<b>走らないことが義務</b>。だから「してはいけない」になるのです。</div></div></div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -923,7 +959,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">7</button><span class="en">You must be careful.</span><span class="tfbox"><span class="ansmark">○</span></span></div>
     <div class="opt"><button class="qn" onclick="toggleQn(this)">8</button><span class="en">You must careful.</span><span class="tfbox"><span class="ansmark">✕</span></span></div>
   </div>
-  <div class="expbox"><b>直し方</b>　2 → <span class="en">study</span>　4 → <span class="en">must</span>（<span class="en">s</span> をとる）<br>6 → <span class="en">You must not run here.</span>　8 → <span class="en">be</span> を入れる</div>
+  <div class="expbox"><b>直し方</b>　2 → <span class="en">study</span>　4 → <span class="en">must</span>（<span class="en sx">s</span> をとる）<br>6 → <span class="en">You must not run here.</span>　8 → <span class="en">be</span> を入れる</div>
 
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -939,7 +975,7 @@
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">You must not （ア to touch ／イ touch） it.</span>（<span class="bl s"><span class="ansfill">イ</span></span>）</div>
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button>手を洗わなければならない。<span class="en">You （ア must ／イ must not） wash your hands.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
-  <div class="expbox"><b>ここが大事</b>　2・6 は意味で <span class="en">must</span> と <span class="en">must not</span> を選びます。<br>1・3・5 は形のルール（原形（もとの形）・<span class="en">s</span> なし・<span class="en">to</span> なし）。4 は <span class="en">be</span> の有無です。</div>
+  <div class="expbox"><b>ここが大事</b>　2・6 は意味で <span class="en">must</span> と <span class="en">must not</span> を選びます。<br>1・3・5 は形のルール（原形（もとの形）・<span class="en sx">s</span> なし・<span class="en">to</span> なし）。4 は <span class="en">be</span> の有無です。</div>
 
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -954,13 +990,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u5-1-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 1 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">must</span> を書いたら、うしろは<b>何もつけない形</b>にしよう。</div>
@@ -986,7 +1022,7 @@
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは一生けんめい勉強しなければなりません。</span>　<span class="paren en">（ study / hard / You / must ）</span><div class="lines tight"><div><span class="fill2">You must study hard.</span></div></div></div><div class="qnote"><span class="en">must study</span> の順。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">ここで走ってはいけません。</span>　<span class="paren en">（ run / here / You / must not ）</span><div class="lines tight"><div><span class="fill2">You must not run here.</span></div></div></div><div class="qnote"><span class="en">must not</span> でひとかたまり。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">あなたは気をつけなければなりません。</span>　<span class="paren en">（ careful / must / You / be ）</span><div class="lines tight"><div><span class="fill2">You must be careful.</span></div></div></div><div class="qnote"><span class="en">must be</span> を続ける。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今、行かなければなりません。</span>　<span class="paren en">（ must / He / now / go ）</span><div class="lines tight"><div><span class="fill2">He must go now.</span></div></div></div><div class="qnote"><span class="en">must</span> に <span class="en">s</span> はつかない。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼は今、行かなければなりません。</span>　<span class="paren en">（ must / He / now / go ）</span><div class="lines tight"><div><span class="fill2">He must go now.</span></div></div></div><div class="qnote"><span class="en">must</span> に <span class="en sx">s</span> はつかない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">手を洗わなければなりません。</span>　<span class="paren en">（ must / your hands / You / wash ）</span><div class="lines tight"><div><span class="fill2">You must wash your hands.</span></div></div></div><div class="qnote">「何を」はうしろ。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">それにさわってはいけません。</span>　<span class="paren en">（ touch / must not / You / it ）</span><div class="lines tight"><div><span class="fill2">You must not touch it.</span></div></div></div><div class="qnote">禁止の形。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしたちは静かにしなければなりません。</span>　<span class="paren en">（ must / We / quiet / be ）</span><div class="lines tight"><div><span class="fill2">We must be quiet.</span></div></div></div><div class="qnote"><span class="en">be quiet</span> で「静かにする」。</div></div></li>
@@ -1000,13 +1036,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u5-1-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 5 − 1 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -1048,7 +1084,7 @@
     </div>
     <div class="ribbon">
       <svg class="ic-l beat"><use href="#i-heart"/></svg>
-      <b>書けたら 見直し</b><span class="s">じぶんの文の <span class="en">must</span> のうしろに○をつけよう。<span class="en">s</span> や <span class="en">to</span> があったら、そこがまちがい。</span>
+      <b>書けたら 見直し</b><span class="s">じぶんの文の <span class="en">must</span> のうしろに○をつけよう。<span class="en sx">s</span> や <span class="en">to</span> があったら、そこがまちがい。</span>
     </div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1434,13 +1470,21 @@ function toggleSlow(btn){
   });
 })();
 
+function setMode(btn, mode){
+  var simple = (mode === 'simple');
+  document.querySelectorAll('.sheet').forEach(function(s){ s.classList.toggle('simple', simple); });
+  document.querySelectorAll('.modes .mbtn').forEach(function(b){
+    if(b.dataset.m) b.classList.toggle('on', b.dataset.m === mode);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
 function toggleMore(btn){
   const on = !btn.classList.contains('on');
   document.querySelectorAll('.sheet').forEach(function(s){
     s.classList.toggle('simple', on);
   });
   document.querySelectorAll('.mbtn').forEach(function(b){
-    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.firstChild.nodeValue = on ? '基本版 ' : 'シンプル版 ';
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
