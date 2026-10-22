@@ -295,7 +295,7 @@
   .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
     padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
     font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
-  .copy svg{width:24px;height:24px;flex:none;color:#35B44B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#FF5CA8;}
   .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
   .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
     color:#6B4E0B;margin-top:3px;line-height:1.7;}
@@ -324,7 +324,7 @@
   /* ブロック間を半行ずつ空ける */
   .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
   /* きほんの文（書き写す3文）の鉛筆マーク */
-  .exline .pn{width:14px;height:14px;flex:none;color:#35B44B;align-self:center;margin-right:-5px;}
+  .exline .pn{width:14px;height:14px;flex:none;color:#FF5CA8;align-self:center;margin-right:-5px;}
 
   /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
   .talk{text-indent:1em;}
@@ -619,6 +619,42 @@
     background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
   .morehint b{color:#3C7A14;}
   .simple .morehint{display:flex;}
+
+
+
+
+
+  /* ===== v29: 基本 / シンプル / 超シンプル ===== */
+  .modes{display:inline-flex;align-items:center;gap:6px;margin-right:auto;}
+  .modes .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:9.5pt;
+    border-radius:999px;padding:2px 14px 3px;cursor:pointer;line-height:1.5;
+    display:inline-flex;align-items:center;text-decoration:none;flex:none;
+    border:2px solid #9BC96B;background:#F4FBEC;color:#4F8C1F;}
+  .modes .mbtn.m-sim{border-color:#9AB6E0;background:#F4F8FD;color:#2E68C4;}
+  .modes .mbtn.m-ss{border-color:#FF5CA8;background:#FFF0F7;color:#C2185B;}
+  .modes .mbtn:hover{filter:brightness(.97);}
+  .modes .mbtn:active{transform:translateY(1px);}
+  .modes .mbtn.on{background:#4F8C1F;border-color:#4F8C1F;color:#fff;}
+  .modes .mbtn.m-sim.on{background:#2E68C4;border-color:#2E68C4;color:#fff;}
+  .modes .mbtn.m-ss.on{background:#C2185B;border-color:#C2185B;color:#fff;}
+  @media print{.modes{display:none;}}
+  /* ===== v27: クイズの別解 ===== */
+  .qza .alt{display:block;font-family:"Lexend",sans-serif;font-weight:600;
+    font-size:11pt;color:#1F8A70;margin-top:2px;}
+  .qza .alt .lb{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+    font-size:8pt;color:#fff;background:#1F8A70;border-radius:4px;
+    padding:0 6px 1px;margin-right:6px;vertical-align:1px;}
+  .qza .alt .ajp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#245C45;margin-left:7px;}
+  /* ===== v26: s を目立たせる ===== */
+  .sx{color:#7A2FD0;font-weight:900;}
+  /* ===== v25: クイズは ふつう5問 / シンプル3問 ===== */
+  .qzi.qz-off{display:none;}
+  @media print{ .qzi.qz-off{display:none;} }
+  /* ===== v24: シンプル版はクイズ4問まで ===== */
+  .simple .qzi.qz-more{display:none;}
+  @media print{ .qzi.qz-more{display:block;} }
+
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
   /* ===== v12: シンプル時は問題も約2割へらす ===== */
@@ -715,16 +751,16 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u2-3-ss.html">超シンプル</a></span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.24〜25</div>
   </div>
 
   <div class="hero">
-    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="star"><svg><use href="#i-star"/></svg></div>
     <div class="mid">
-      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回のテーマ！</div>
       <div class="big">I think that he is kind.</div>
       <div class="jp">わたしは 彼は やさしいと 思います</div>
     </div>
@@ -810,12 +846,12 @@
     <p class="talk"><span class="en">I think he isn&#39;t busy.</span> とは、ふつう言いません。<br>　<b>否定文は前に出す</b>とおぼえましょう。</p>
   </div>
 
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
       <div class="qzq"><span class="no">1.</span><span class="xm">✕ I think did you a great job. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I think <span class="fx">you</span> did <span class="dl"></span>a great job.</span><span class="gjp">わたしは あなたが よくやったと 思います。</span><span class="qzp"><b>ポイント</b>　<span class="en">that</span> のうしろは<b>ふつうの文</b>。たずねる文の形にしません。</span></div>
+      <div class="qza"><span class="good en">○ I think <span class="fx">you</span> did <span class="dl"></span>a great job.</span><span class="gjp">わたしは あなたが よくやったと 思います。</span><span class="alt"><span class="lb">べつの言い方</span>I think that you did a great job.</span><span class="qzp"><b>ポイント</b>　<span class="en">that</span> のうしろは<b>ふつうの文</b>。たずねる文の形にしません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ I think that. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
@@ -825,15 +861,15 @@
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ I am think you did a great job. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ I <span class="dl"></span>think you did a great job.</span><span class="gjp">わたしは あなたが よくやったと 思います。</span><span class="qzp"><b>ポイント</b>　<span class="en">am</span> と <span class="en">think</span> で<b>心臓が2つ</b>。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ I know is he kind. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ I know <span class="fx">he</span> is <span class="dl"></span>kind.</span><span class="gjp">わたしは 彼が やさしいと 知って います。</span><span class="qzp"><b>ポイント</b>　<b>主語 → 動詞</b> の順にもどします。</span></div>
+      <div class="qza"><span class="good en">○ I know <span class="fx">he</span> is <span class="dl"></span>kind.</span><span class="gjp">わたしは 彼が やさしいと 知って います。</span><span class="alt"><span class="lb">べつの言い方</span>I know that he is kind.</span><span class="qzp"><b>ポイント</b>　<b>主語 → 動詞</b> の順にもどします。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ He think you did a great job. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ He <span class="fx">thinks</span> you did a great job.</span><span class="gjp">彼は あなたが よくやったと 思って います。</span><span class="qzp"><b>ポイント</b>　主語が <span class="en">He</span> なので <b><span class="en">thinks</span></b>。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-off">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ I think he isn&#39;t busy. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ I <span class="fx">don&#39;t</span> think he <span class="fx">is</span> busy.</span><span class="gjp">わたしは 彼が いそがしいとは 思いません。</span><span class="qzp"><b>ポイント</b>　「～ではないと思う」は<b>前の動詞</b>を否定文にします。</span></div>
     </div>
@@ -856,13 +892,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u2-3-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -893,7 +929,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">I hope it（<span class="bl s"><span class="ansfill">is</span></span>）sunny.</span></div>
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">I know you（<span class="bl s"><span class="ansfill">can</span></span>）do it.</span></div>
   </div>
-  <div class="expbox"><b>かくにん</b>　どれも<b>ふつうの文</b>です。主語を見て、be動詞か動作のことばかを決めます。<br>8 は主語が <span class="en">she</span> なので <span class="en">likes</span>。<b>うしろの文にも三単現の <span class="en">s</span> がつきます</b>。</div>
+  <div class="expbox"><b>かくにん</b>　どれも<b>ふつうの文</b>です。主語を見て、be動詞か動作のことばかを決めます。<br>8 は主語が <span class="en">she</span> なので <span class="en">likes</span>。<b>うしろの文にも三単現の <span class="en sx">s</span> がつきます</b>。</div>
 
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -926,7 +962,7 @@
     <div><button class="qn" onclick="toggleQn(this)">5</button><span class="en">（ア I don&#39;t think ／イ I think not） he is busy.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
     <div class="opt"><button class="qn" onclick="toggleQn(this)">6</button><span class="en">I&#39;m sure （ア you can ／イ can you） do it.</span>（<span class="bl s"><span class="ansfill">ア</span></span>）</div>
   </div>
-  <div class="expbox"><b>ここが大事</b>　1・6 はたずねる文の形にしないこと。2 は前の動詞、4 はうしろの動詞に <span class="en">s</span> がつきます。<br>5 は<b>否定文は前に出す</b>というルールです。<span class="en">I think not ～</span> とは言いません。</div>
+  <div class="expbox"><b>ここが大事</b>　1・6 はたずねる文の形にしないこと。2 は前の動詞、4 はうしろの動詞に <span class="en sx">s</span> がつきます。<br>5 は<b>否定文は前に出す</b>というルールです。<span class="en">I think not ～</span> とは言いません。</div>
 
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -941,13 +977,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u2-3-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　<span class="en">I think</span> のうしろは、そのまま文を書けばよい。</div>
@@ -957,7 +993,7 @@
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたがそれを気に入るといいと思います。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">hope</span></span>）you like it.</span></div><div class="qnote">「～だといい」は <span class="en">hope</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはきっと彼が来ると思います。</span>　<span class="en">I&#39;m（<span class="bl s"><span class="ansfill">sure</span></span>）he will come.</span></div><div class="qnote">「きっと～」は <span class="en">be sure</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしが忙しいと思っています。</span>　<span class="en">He（<span class="bl s"><span class="ansfill">thinks</span></span>）I am busy.</span></div><div class="qnote"><span class="en">He</span> なので <span class="en">thinks</span>。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼女がサッカーが好きだと思います。</span>　<span class="en">I think she（<span class="bl s"><span class="ansfill">likes</span></span>）soccer.</span></div><div class="qnote">うしろの文にも <span class="en">s</span> がつく。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼女がサッカーが好きだと思います。</span>　<span class="en">I think she（<span class="bl s"><span class="ansfill">likes</span></span>）soccer.</span></div><div class="qnote">うしろの文にも <span class="en sx">s</span> がつく。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼が忙しいとは思いません。</span>　<span class="en">I（<span class="bl s"><span class="ansfill">don't</span></span>）think he is busy.</span></div><div class="qnote">否定文は<b>前</b>に出す。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">8</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼らがうれしいと思います。</span>　<span class="en">I think they（<span class="bl s"><span class="ansfill">are</span></span>）happy.</span></div><div class="qnote"><span class="en">They</span> なので <span class="en">are</span>。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">9</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたがそれをできると知っています。</span>　<span class="en">I know you（<span class="bl s"><span class="ansfill">can</span></span>）do it.</span></div><div class="qnote"><span class="en">can</span> もそのまま入る。</div></div></li>
@@ -973,10 +1009,10 @@
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたがよくやったと思います。</span>　<span class="paren en">（ did / think / a great job / I / you ）</span><div class="lines tight"><div><span class="fill2">I think you did a great job.</span></div></div></div><div class="qnote"><span class="en">I think</span> → ふつうの文 の順。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼が親切だと知っています。</span>　<span class="paren en">（ he / kind / is / I / know ）</span><div class="lines tight"><div><span class="fill2">I know he is kind.</span></div></div></div><div class="qnote">うしろは <span class="en">he is kind</span> のまま。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはきっと彼が来ると思います。</span>　<span class="paren en">（ he / sure / I&#39;m / come / will ）</span><div class="lines tight"><div><span class="fill2">I&#39;m sure he will come.</span></div></div></div><div class="qnote"><span class="en">I&#39;m sure</span> でひとかたまり。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしが忙しいと思っています。</span>　<span class="paren en">（ am / He / thinks / busy / I ）</span><div class="lines tight"><div><span class="fill2">He thinks I am busy.</span></div></div></div><div class="qnote">前の動詞に <span class="en">s</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain"><span class="jp-cue">彼はわたしが忙しいと思っています。</span>　<span class="paren en">（ am / He / thinks / busy / I ）</span><div class="lines tight"><div><span class="fill2">He thinks I am busy.</span></div></div></div><div class="qnote">前の動詞に <span class="en sx">s</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼が忙しいとは思いません。</span>　<span class="paren en">（ he / think / I / is / don&#39;t / busy ）</span><div class="lines tight"><div><span class="fill2">I don&#39;t think he is busy.</span></div></div></div><div class="qnote">否定文は前。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain"><span class="jp-cue">わたしはあなたがそれを気に入るといいと思います。</span>　<span class="paren en">（ it / you / like / I / hope ）</span><div class="lines tight"><div><span class="fill2">I hope you like it.</span></div></div></div><div class="qnote"><span class="en">hope</span> のうしろも文。</div></div></li>
-      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼女がサッカーが好きだと思います。</span>　<span class="paren en">（ likes / soccer / I / she / think ）</span><div class="lines tight"><div><span class="fill2">I think she likes soccer.</span></div></div></div><div class="qnote">うしろの <span class="en">likes</span> の <span class="en">s</span> に注意。</div></div></li>
+      <li class="opt"><button class="qn" onclick="toggleQn(this)">7</button><div class="row"><div class="qmain"><span class="jp-cue">わたしは彼女がサッカーが好きだと思います。</span>　<span class="paren en">（ likes / soccer / I / she / think ）</span><div class="lines tight"><div><span class="fill2">I think she likes soccer.</span></div></div></div><div class="qnote">うしろの <span class="en">likes</span> の <span class="en sx">s</span> に注意。</div></div></li>
     </ol>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -987,20 +1023,20 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g2-u2-3-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 2 − 3 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
       <li><button class="qn" onclick="toggleQn(this)">1</button><div class="row"><div class="qmain">わたしはあなたがよくやったと思います。<div class="lines"><div><span class="fill2">I think you did a great job.</span></div></div></div><div class="qnote"><span class="en">that</span> を入れても正解。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">2</button><div class="row"><div class="qmain">わたしは彼が親切だと知っています。<div class="lines"><div><span class="fill2">I know he is kind.</span></div></div></div><div class="qnote">うしろをたずねる文にしない。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">3</button><div class="row"><div class="qmain">わたしはきっと彼が来ると思います。<div class="lines"><div><span class="fill2">I&#39;m sure he will come.</span></div></div></div><div class="qnote"><span class="en">I am sure</span> でも正解。</div></div></li>
-      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">彼はわたしが忙しいと思っています。<div class="lines"><div><span class="fill2">He thinks I am busy.</span></div></div></div><div class="qnote"><span class="en">thinks</span> の <span class="en">s</span>。</div></div></li>
+      <li><button class="qn" onclick="toggleQn(this)">4</button><div class="row"><div class="qmain">彼はわたしが忙しいと思っています。<div class="lines"><div><span class="fill2">He thinks I am busy.</span></div></div></div><div class="qnote"><span class="en">thinks</span> の <span class="en sx">s</span>。</div></div></li>
       <li><button class="qn" onclick="toggleQn(this)">5</button><div class="row"><div class="qmain">わたしは彼が忙しいとは思いません。<div class="lines"><div><span class="fill2">I don&#39;t think he is busy.</span></div></div></div><div class="qnote">否定文を前に出す。</div></div></li>
       <li class="opt"><button class="qn" onclick="toggleQn(this)">6</button><div class="row"><div class="qmain">わたしは彼女がサッカーが好きだと思います。<div class="lines"><div><span class="fill2">I think she likes soccer.</span></div></div></div><div class="qnote">うしろの <span class="en">likes</span> も忘れずに。</div></div></li>
     </ol>
@@ -1421,13 +1457,21 @@ function toggleSlow(btn){
   });
 })();
 
+function setMode(btn, mode){
+  var simple = (mode === 'simple');
+  document.querySelectorAll('.sheet').forEach(function(s){ s.classList.toggle('simple', simple); });
+  document.querySelectorAll('.modes .mbtn').forEach(function(b){
+    if(b.dataset.m) b.classList.toggle('on', b.dataset.m === mode);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
 function toggleMore(btn){
   const on = !btn.classList.contains('on');
   document.querySelectorAll('.sheet').forEach(function(s){
     s.classList.toggle('simple', on);
   });
   document.querySelectorAll('.mbtn').forEach(function(b){
-    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.firstChild.nodeValue = on ? '基本版 ' : 'シンプル版 ';
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
