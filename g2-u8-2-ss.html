@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8-2｜超シンプル版</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2F2F3A; --sub:#6E6E7C; --paper:#FFFCF3; --card:#FFFFFF; --rule:#EDE6D6;
+  --wh:#7A2FD0;      /* Where */
+  --pl:#0E7A54;      /* 場所 */
+  --be:#1F4E9C;      /* be動詞 */
+  --gv:#C2185B;      /* 一般動詞 */
+  --pen:#FF5CA8; --key:#1F4E9C; --warn:#B5273F;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+  font-size:16.5px;line-height:2.0;padding:0 14px 60px;-webkit-text-size-adjust:100%;}
+.en{font-family:"Lexend",sans-serif;font-weight:600;letter-spacing:.2px;}
+ruby rt{font-family:"Zen Maru Gothic",sans-serif;font-size:.5em;font-weight:500;
+  color:#8C8C9A;line-height:1.1;display:none;}
+body.kana ruby rt{display:revert;}
+.wrap{max-width:760px;margin:0 auto;}
+
+/* ---- ヘッダー ---- */
+header{text-align:center;padding:20px 0 8px;}
+.tag{display:inline-block;background:#FFE9F4;border:2px solid var(--pen);color:#C2185B;
+  border-radius:999px;padding:2px 16px;font-weight:900;font-size:13px;margin-bottom:8px;}
+.modes{display:inline-flex;align-items:center;gap:6px;margin-bottom:9px;flex-wrap:wrap;
+  justify-content:center;}
+.modes .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12.5px;
+  border-radius:999px;padding:2px 14px 3px;cursor:pointer;line-height:1.5;
+  display:inline-flex;align-items:center;text-decoration:none;flex:none;
+  border:2px solid #9BC96B;background:#F4FBEC;color:#4F8C1F;}
+.modes .mbtn.m-sim{border-color:#9AB6E0;background:#F4F8FD;color:#2E68C4;}
+.modes .mbtn.m-ss{border-color:#FF5CA8;background:#FFF0F7;color:#C2185B;}
+.modes .mbtn.m-ss.on{background:#C2185B;border-color:#C2185B;color:#fff;cursor:default;}
+.modes .mbtn:hover{filter:brightness(.97);}
+@media print{.modes{display:none;}}
+.ksm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12px;
+  border:2px solid #D8C49A;border-radius:999px;padding:2px 13px;cursor:pointer;
+  background:#FFFBF2;color:#A8884A;margin-left:auto;flex:none;line-height:1.6;}
+.ksm:hover{border-color:#C88A16;color:#8A5A0B;}
+.ksm.on{background:#C88A16;border-color:#C88A16;color:#fff;}
+@media print{.ksm{display:none;}}
+h1{font-size:30px;font-weight:900;margin:0;line-height:1.3;color:var(--wh);}
+h1 small{display:block;font-size:15px;color:var(--sub);font-weight:700;margin-top:4px;}
+
+/* ---- カード ---- */
+.card{background:var(--card);border:2px solid var(--rule);border-radius:18px;
+  padding:20px 22px 24px;margin:18px 0;box-shadow:0 3px 0 rgba(0,0,0,.04);}
+.card > h2{display:flex;align-items:center;gap:11px;margin:0 0 12px;font-size:20px;
+  font-weight:900;line-height:1.4;}
+.num{flex:none;width:36px;height:36px;border-radius:50%;background:var(--wh);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  font-family:"Lexend",sans-serif;font-weight:700;}
+.card p{margin:8px 0;}
+.big{font-size:15px;}
+
+/* ---- 大きな式 ---- */
+.form{background:#F6F2FF;border:2px dashed #C9AEF2;border-radius:14px;
+  padding:14px 16px;margin:14px 0;text-align:center;font-size:21px;line-height:1.9;}
+.form .w{color:var(--wh);font-weight:700;}
+.form .b{color:var(--be);font-weight:700;}
+.form .g{color:var(--gv);font-weight:700;}
+.form .p{color:var(--pl);font-weight:700;}
+.form small{display:block;font-size:13px;color:var(--sub);margin-top:4px;}
+
+/* ---- 例文 ---- */
+.ex{border-left:6px solid var(--pen);background:#FFF8FC;border-radius:0 12px 12px 0;
+  padding:10px 14px;margin:12px 0;}
+.ex .e{font-size:19px;line-height:2.4;}
+.ex .j{font-size:14px;color:#55555F;margin-top:2px;}
+.ex .a{display:block;margin-top:6px;padding-top:6px;border-top:1px dashed #F0C6DD;}
+.ex .a .lb{font-size:12px;font-weight:900;color:var(--pl);margin-right:6px;}
+
+/* ---- 注意・ポイント ---- */
+.tip{background:#FFFAE8;border:2px solid #F0D27A;border-radius:12px;
+  padding:11px 15px;margin:13px 0;font-size:15px;}
+.tip b{color:#9A6B06;}
+.ng{background:#FFF1F2;border:2px solid #F2B8BE;border-radius:12px;
+  padding:11px 15px;margin:13px 0;font-size:15px;}
+.ng b{color:var(--warn);}
+.ok{color:var(--pl);font-weight:700;}
+.bad{color:var(--warn);font-weight:700;text-decoration:line-through;}
+
+/* ---- 場所の絵 ---- */
+.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;}
+.pic{border:2px solid var(--rule);border-radius:12px;padding:8px 4px 10px;text-align:center;}
+.pic svg{width:62px;height:52px;}
+.pic .w2{display:block;font-family:"Lexend",sans-serif;font-weight:700;font-size:16px;
+  color:var(--pl);margin-top:2px;}
+.pic .j2{display:block;font-size:12.5px;color:var(--sub);}
+
+/* ---- ミニチェック（解説の とちゅうに はさむ 軽い確認） ---- */
+.mini{background:#F2F8FF;border:2px solid #AECBEC;border-radius:14px;
+  padding:12px 15px 14px;margin:15px 0 4px;}
+.mini .mh{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:900;
+  color:#2E6FBF;margin-bottom:5px;}
+.mini .mh .dot{width:9px;height:9px;border-radius:50%;background:#2E6FBF;flex:none;}
+.mini .mq{font-size:16.5px;font-weight:700;margin-bottom:9px;line-height:1.8;}
+.mini .mo{display:flex;gap:9px;flex-wrap:wrap;}
+.opt{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:16px;
+  border:2.5px solid #AECBEC;border-radius:12px;padding:7px 18px;cursor:pointer;
+  background:#fff;color:#2F2F3A;line-height:1.7;}
+.opt .en{font-weight:700;}
+.opt:hover{border-color:#5E9BE0;}
+.opt:active{transform:translateY(2px);}
+.opt.sel{border-color:#0E7A54;background:#E7F6EF;color:#0E7A54;}
+.opt.sel.miss{border-color:var(--warn);background:#FFF1F3;color:var(--warn);}
+.fb{display:none;margin-top:9px;font-size:15px;line-height:1.8;font-weight:700;}
+.fb.y{color:#0E7A54;} .fb.n{color:var(--warn);}
+.mini.yes .fb.y{display:block;}
+.mini.miss .fb.n{display:block;}
+@media print{.mini{break-inside:avoid;} .fb.y{display:block;}}
+
+/* ---- 練習 ---- */
+.q{margin:14px 0 0;}
+.q .qh{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:900;
+  margin:0 0 4px;color:var(--be);}
+.q .qh .n2{flex:none;background:var(--be);color:#fff;border-radius:7px;
+  padding:0 9px;font-size:14px;font-family:"Lexend",sans-serif;}
+.q .qs{font-size:13.5px;color:var(--sub);margin:0 0 10px;}
+ol.items{list-style:none;margin:0;padding:0;}
+ol.items > li{display:flex;gap:10px;align-items:flex-start;
+  padding:9px 0;border-bottom:1px dashed #E8E2D4;}
+.qn{position:relative;flex:none;width:28px;height:28px;border-radius:50%;margin-top:4px;
+  border:2px solid #9FC2E8;background:#F2F8FF;color:var(--be);
+  font-family:"Lexend",sans-serif;font-weight:700;font-size:13px;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;}
+.qn:hover{border-color:#5E9BE0;background:#E3F0FF;}
+.qn.on{background:#FFF1F3;border-color:var(--warn);color:transparent;}
+.qn.on::after{content:"✓";position:absolute;inset:0;display:flex;
+  align-items:center;justify-content:center;font-size:19px;line-height:1;
+  color:var(--warn);font-weight:900;pointer-events:none;}
+ol.items > li.wrong{background:#FFF5F6;border-radius:10px;}
+body.redoing .card:not(.prac){display:none;}
+body.redoing ol.items > li:not(.wrong){display:none;}
+body.redoing .q.nohit{display:none;}
+body.redoing .cknote,body.redoing .abar.all{display:none;}
+body.redoing .prac > h2 .ttl2::after{content:"（まちがえた問題）";font-size:14px;color:var(--warn);}
+.rbtn.back{background:#0E7A54;}
+.cknote{font-size:13px;color:#7E93A8;margin:2px 0 8px;display:flex;align-items:center;gap:7px;}
+.cknote i{display:inline-block;width:17px;height:17px;border:2px solid #9FC2E8;
+  border-radius:50%;background:#F2F8FF;flex:none;}
+.redo{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:16px;
+  padding-top:14px;border-top:2px dashed #E8E2D4;flex-wrap:wrap;}
+.redo .msg{font-size:13.5px;color:var(--sub);margin-right:auto;}
+.redo .cnt{font-family:"Lexend",sans-serif;font-weight:700;color:var(--warn);font-size:15px;}
+.rbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:16px;
+  border:none;border-radius:12px;padding:10px 26px;cursor:pointer;
+  background:var(--warn);color:#fff;}
+.rbtn:disabled{background:#C9C4BC;cursor:default;}
+.rbtn:active:not(:disabled){transform:translateY(2px);}
+@media print{.qn{border-color:#BBB;background:#fff;color:#333;}
+  .qn.on::after{color:#333;} .redo,.cknote{display:none;}}
+.it{flex:1;min-width:0;}
+.it .ja{font-size:14.5px;color:#4A4A55;}
+.it .qq{font-size:18px;line-height:2.3;}
+.bl{display:inline-block;min-width:88px;border-bottom:2.5px solid #9AA6B8;margin:0 5px;
+  text-align:center;font-family:"Lexend",sans-serif;font-weight:700;}
+.bl::after{content:attr(data-a);color:transparent;}
+.show .bl::after{color:#D1004B;}
+.bl.long{display:block;width:100%;max-width:450px;min-height:30px;margin:3px 0 0;
+  text-align:left;}
+.show .bl.long::after{padding-left:6px;}
+.bl.ch2{min-width:54px;}
+.ch{font-family:"Lexend",sans-serif;font-weight:600;}
+.why{display:none;font-family:"Zen Maru Gothic",sans-serif;font-size:13.5px;
+  font-weight:500;color:#0E7A54;margin-top:2px;line-height:1.7;}
+.show .why{display:block;}
+.why .en{color:#0E7A54;}
+.abar{display:flex;justify-content:flex-end;gap:10px;margin-top:12px;}
+.abar.all{justify-content:center;margin-top:22px;}
+.abar.all .abtn{font-size:17px;padding:10px 32px;border-radius:12px;}
+.abtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:15px;
+  border:none;border-radius:10px;padding:7px 20px;cursor:pointer;
+  background:#0E7A54;color:#fff;}
+.abtn.off{background:#B5273F;}
+.abtn:active{transform:translateY(2px);}
+
+/* ---- まとめ ---- */
+.sum{background:#FFFBEA;border:2px solid #F0D27A;border-radius:16px;padding:16px 20px;}
+.sum h2{color:#9A6B06;}
+.sum ul{margin:6px 0 0;padding-left:1.1em;}
+.sum li{margin:7px 0;font-size:16px;}
+
+/* ---- 下 ---- */
+.foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:22px 0 0;font-size:13px;color:var(--sub);}
+.home{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;
+  border-radius:50%;border:2.5px solid #9BC96B;color:#4F8C1F;background:transparent;
+  font-weight:900;font-size:12px;text-decoration:none;flex:none;}
+.spk{font-size:13px;color:#5A7FA8;}
+.en{cursor:pointer;border-radius:4px;}
+.en:hover{background:#EAF1FB;}
+.en.playing{background:#FFE9A8;}
+.opt .en:hover,.opt .en{background:transparent;}
+@media print{.en{cursor:auto;}}
+
+
+/* ---- ゲージ（乾電池）と タイマー ---- */
+.gauge{position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:60;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  pointer-events:none;user-select:none;}
+.gauge .cap{width:10px;height:4px;background:#C2185B;border-radius:2px 2px 0 0;}
+.gauge .body{width:21px;height:80px;border:2.5px solid #C2185B;border-radius:5px;
+  background:#fff;padding:2px;display:flex;flex-direction:column-reverse;
+  overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14);}
+.gauge .fill{width:100%;height:0%;border-radius:2px;
+  background:repeating-linear-gradient(to top,
+    #FF6B8A 0, #FF6B8A 5.4px, #E0447A 5.4px, #E0447A 6.8px);
+  transition:height .3s ease;}
+.gauge .pct{font-family:"Lexend",sans-serif;font-weight:700;font-size:10px;
+  color:#C2185B;line-height:1;}
+.clock{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:10px;}
+.clock .cl{width:36px;height:36px;display:block;}
+.clock .cf{fill:#fff;stroke:var(--key);stroke-width:2.4;}
+.clock .cp{fill:#FFA726;fill-opacity:.78;}
+.clock .ct{stroke:var(--key);stroke-width:1.5;opacity:.55;}
+.clock .ch{stroke:var(--key);stroke-width:2;stroke-linecap:round;}
+.clock .cc{fill:var(--key);}
+.clock .cm{font-family:"Lexend",sans-serif;font-weight:700;font-size:10px;
+  color:var(--key);line-height:1;}
+.clock.over .cf{stroke:var(--warn);} .clock.over .cp{fill:#E8485F;fill-opacity:.7;}
+.clock.over .ct{stroke:var(--warn);} .clock.over .ch{stroke:var(--warn);}
+.clock.over .cc{fill:var(--warn);}  .clock.over .cm{color:var(--warn);}
+@media print{.gauge{display:none;}}
+@media (max-width:560px){
+  .gauge{left:1px;} .gauge .body{width:15px;height:58px;}
+  .gauge .cap{width:8px;} .gauge .pct{font-size:8px;}
+  .clock .cl{width:27px;height:27px;} .clock .cm{font-size:8px;}
+}
+
+@media (max-width:560px){
+  body{font-size:16px;}
+  .card{padding:16px 14px 20px;border-radius:14px;}
+  h1{font-size:24px;}
+  .form{font-size:18px;}
+  .ex .e{font-size:17px;}
+  .it .qq{font-size:16.5px;}
+  .pics{grid-template-columns:repeat(2,1fr);}
+}
+@media print{
+  body{background:#fff;font-size:11pt;padding:0;}
+  .card{break-inside:avoid;box-shadow:none;}
+  .abar,.home,.spk{display:none;}
+  .ans{display:block;}
+}
+</style></head><body>
+<div class="gauge">
+  <div class="cap"></div>
+  <div class="body"><div class="fill" id="gfill"></div></div>
+  <div class="pct" id="gpct">0%</div>
+  <div class="clock" id="clock">
+    <svg class="cl" viewBox="0 0 40 40">
+      <circle class="cf" cx="20" cy="20" r="17"/>
+      <path class="cp" id="cpie" d=""/>
+      <g class="ct">
+        <line x1="20" y1="4.4" x2="20" y2="7.4"/><line x1="35.6" y1="20" x2="32.6" y2="20"/>
+        <line x1="20" y1="35.6" x2="20" y2="32.6"/><line x1="4.4" y1="20" x2="7.4" y2="20"/>
+      </g>
+      <line class="ch" id="chand" x1="20" y1="20" x2="20" y2="6.5"/>
+      <circle class="cc" cx="20" cy="20" r="2.1"/>
+    </svg>
+    <div class="cm" id="cmin">0分</div>
+  </div>
+</div>
+<div class="wrap">
+<header>
+  <div class="modes">
+    <a class="mbtn m-base" href="g2-u8-2.html">基本</a>
+    <a class="mbtn m-sim" href="g2-u8-2.html">シンプル</a>
+    <span class="mbtn m-ss on">超シンプル</span>
+  </div>
+  <h1>この歌は わたしを うれしく させます<small>Unit 8-2　教科書 p.104〜105</small></h1>
+</header>
+<section class="card "><h2><span class="num">1</span><span class="ttl2">きょう おぼえる かたち</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h2>
+<div class="form"><span class="w en">This song makes me happy.</span><small>この歌は わたしを うれしく させます</small></div>
+<p class="big">「この歌は わたしを <b>うれしく させる</b>」「ねこを <b>モモと よぶ</b>」のように、動詞のうしろに<b>2つことばをならべる</b>形です。</p>
+<p class="big">使う動詞で、2つめに置くものがちがいます。</p>
+<div class="mini"><div class="mh"><span class="dot"></span>ちょっと チェック</div><div class="mq">ただしいのは どっち？<br><span style="font-size:14px;font-weight:500;color:#6E6E7C">それは わたしを きんちょうさせます。</span></div><div class="mo"><button class="opt" onclick="pick(this,1)"><span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span></button><button class="opt" onclick="pick(this,0)"><span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>to<rt>トゥ</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span></button></div><div class="fb y">そう！　<span class="en"><ruby>to<rt>トゥ</rt></ruby></span> は<b>入りません</b>。2つならべるだけ。</div><div class="fb n">おしい。<span class="en"><ruby>to<rt>トゥ</rt></ruby></span> は<b>入りません</b>。2つならべるだけ。</div></div>
+</section>
+
+<section class="card "><h2><span class="num">2</span><span class="ttl2">かたち①　make ＋ 人 ＋ ようすのことば　<span style="font-size:14px;color:#6E6E7C">「（人）を～にする」</span></span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h2>
+<div class="form"><span class="p">わたしを うれしく させる</span><br><span class="w en">makes me happy</span></div>
+<div class="ex"><div class="e"><span class="en"><ruby>This<rt>ズィス</rt></ruby> <ruby>song<rt>ソング</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>happy<rt>ハピィ</rt></ruby>.</span></div><div class="j">この歌は わたしを うれしく させます。</div></div>
+<div class="ex"><div class="e"><span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span></div><div class="j">それは わたしを きんちょうさせます。</div></div>
+<div class="tip"><b>ポイント</b>　2つめは <b>ようすのことば</b>（<span class="en"><ruby>happy<rt>ハピィ</rt></ruby>・<ruby>nervous<rt>ナーバス</rt></ruby></span>）。間に <span class="en"><ruby>to<rt>トゥ</rt></ruby></span> や <span class="en"><ruby>is<rt>イズ</rt></ruby></span> は<b>入れません</b>。</div>
+<div class="mini"><div class="mh"><span class="dot"></span>ちょっと チェック</div><div class="mq">ただしいのは どっち？<br><span style="font-size:14px;font-weight:500;color:#6E6E7C">わたしたちは ねこを モモと よびます。</span></div><div class="mo"><button class="opt" onclick="pick(this,0)"><span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> Momo our <ruby>cat<rt>キャット</rt></ruby>.</span></button><button class="opt" onclick="pick(this,1)"><span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> our <ruby>cat<rt>キャット</rt></ruby> Momo.</span></button></div><div class="fb y">そう！　<b>よぶもの → 名前</b>の順。</div><div class="fb n">おしい。<b>よぶもの → 名前</b>の順。</div></div>
+</section>
+
+<section class="card "><h2><span class="num">3</span><span class="ttl2">かたち②　call ＋ A ＋ B　<span style="font-size:14px;color:#6E6E7C">「A を B とよぶ」</span></span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h2>
+<div class="form"><span class="p">ねこを モモと よぶ</span><br><span class="w en">call our cat Momo</span></div>
+<div class="ex"><div class="e"><span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> our <ruby>cat<rt>キャット</rt></ruby> Momo.</span></div><div class="j">わたしたちは ねこを モモと よびます。</div></div>
+<div class="ex"><div class="e"><span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> <ruby>him<rt>ヒム</rt></ruby> <ruby>Ken<rt>ケン</rt></ruby>.</span></div><div class="j">わたしたちは 彼を ケンと よびます。</div></div>
+<div class="tip"><b>ポイント</b>　2つめは <b>名前</b>。<b>よぶもの → 名前</b> の順です。</div>
+<div class="mini"><div class="mh"><span class="dot"></span>ちょっと チェック</div><div class="mq">ただしいのは どっち？<br><span style="font-size:14px;font-weight:500;color:#6E6E7C">そのニュースは わたしを 悲しくさせました。</span></div><div class="mo"><button class="opt" onclick="pick(this,0)"><span class="en"><ruby>The<rt>ザ</rt></ruby> <ruby>news<rt>ニューズ</rt></ruby> <ruby>made<rt>メイド</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>to<rt>トゥ</rt></ruby> <ruby>sad<rt>サッド</rt></ruby>.</span></button><button class="opt" onclick="pick(this,1)"><span class="en"><ruby>The<rt>ザ</rt></ruby> <ruby>news<rt>ニューズ</rt></ruby> <ruby>made<rt>メイド</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>sad<rt>サッド</rt></ruby>.</span></button></div><div class="fb y">そう！　<span class="en"><ruby>to<rt>トゥ</rt></ruby></span> を入れません。<span class="en"><ruby>made<rt>メイド</rt></ruby></span> は <span class="en"><ruby>make<rt>メイク</rt></ruby></span> の過去形。</div><div class="fb n">おしい。<span class="en"><ruby>to<rt>トゥ</rt></ruby></span> を入れません。<span class="en"><ruby>made<rt>メイド</rt></ruby></span> は <span class="en"><ruby>make<rt>メイク</rt></ruby></span> の過去形。</div></div>
+</section>
+
+<section class="card "><h2><span class="num">4</span><span class="ttl2">テストによく出ることば</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h2>
+<p class="big">気持ちを表すことばと組み合わせて、よく使います。</p>
+<table class="kind kw">
+      <thead><tr><th>ことば</th><th>意味</th><th>れい</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en"><ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>happy<rt>ハピィ</rt></ruby></span></td><td class="k">わたしを うれしくさせる</td><td class="e">The song <u>makes me happy</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en"><ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>sad<rt>サッド</rt></ruby></span></td><td class="k">わたしを 悲しくさせる</td><td class="e">The news <u>makes me sad</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en"><ruby>call<rt>コール</rt></ruby> ～ …</span></td><td class="k">～を …とよぶ</td><td class="e">We <u>call</u> our cat <u>Momo</u>.</td></tr>
+        <tr><td class="k"><svg class="pn"><use href="#i-pen"/></svg><span class="en"><ruby>nervous<rt>ナーバス</rt></ruby></span></td><td class="k">きんちょうした</td><td class="e">That makes me <u>nervous</u>.</td></tr>
+      </tbody>
+    </table>
+</section>
+
+<section class="card prac"><h2><span class="num">5</span><span class="ttl2">やって みよう</span><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h2>
+<p class="big">ぜんぶで <b>23もん</b>。できなくても だいじょうぶ。<b>答えを見てから、もう一度</b> やれば それで よいです。</p>
+<div class="cknote"><i></i>まちがえた問題は、左の <b>番号</b> を押すと ✓ が つきます。</div>
+<div class="q"><div class="qh"><span class="n2">1</span>どちらが 正しい？</div>
+<p class="qs">えらんで、（　）に ア か イ を 書こう。（3問）</p>
+<ol class="items">
+<li><button class="qn" onclick="mark(this)">1</button><div class="it"><div class="ja">それは わたしを きんちょうさせます。</div><div class="qq"><span class="ch">（ア <span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>I<rt>アイ</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span> ／イ <span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span>）</span> <span class="bl ch2" data-a="イ"></span></div><div class="why">はさむ人は <b><span class="en"><ruby>me<rt>ミー</rt></ruby></span></b> の形。</div></div></li>
+<li><button class="qn" onclick="mark(this)">2</button><div class="it"><div class="ja">それは わたしを きんちょうさせます。</div><div class="qq"><span class="ch">（ア <span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span> ／イ <span class="en"><ruby>That<rt>ザット</rt></ruby> <ruby>make<rt>メイク</rt></ruby> <ruby>me<rt>ミー</rt></ruby> <ruby>nervous<rt>ナーバス</rt></ruby>.</span>）</span> <span class="bl ch2" data-a="ア"></span></div><div class="why">主語が <span class="en"><ruby>That<rt>ザット</rt></ruby></span> なので <b><span class="en"><ruby>makes<rt>メイクス</rt></ruby></span></b>。</div></div></li>
+<li><button class="qn" onclick="mark(this)">3</button><div class="it"><div class="ja">わたしたちは ねこを モモと よびます。</div><div class="qq"><span class="ch">（ア <span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> our <ruby>cat<rt>キャット</rt></ruby> <ruby>is<rt>イズ</rt></ruby> Momo.</span> ／イ <span class="en"><ruby>We<rt>ウィー</rt></ruby> <ruby>call<rt>コール</rt></ruby> our <ruby>cat<rt>キャット</rt></ruby> Momo.</span>）</span> <span class="bl ch2" data-a="イ"></span></div><div class="why"><span class="en"><ruby>is<rt>イズ</rt></ruby></span> は<b>入りません</b>。</div></div></li>
+</ol>
+<div class="abar"><button class="abtn" onclick="toggleAns(this)">答えを見る</button></div>
+</div>
+<div class="q"><div class="qh"><span class="n2">2</span>（　）に 1つ 入れよう</div>
+<p class="qs">上の カード を 見ながらで かまいません。（10問）</p>
+<ol class="items">
+<li><button class="qn" onclick="mark(this)">1</button><div class="it"><div class="ja">それはわたしをきんちょうさせます。</div><div class="qq"><span class="en">That<span class="bl " data-a="makes"></span>me nervous.</span></div><div class="why">主語は <span class="en"><ruby>That<rt>ザット</rt></ruby></span>。</div></div></li>
+<li><button class="qn" onclick="mark(this)">2</button><div class="it"><div class="ja">その歌はわたしをうれしくさせます。</div><div class="qq"><span class="en">The song makes<span class="bl " data-a="me"></span>happy.</span></div><div class="why"><span class="en"><ruby>I<rt>アイ</rt></ruby></span> にしない。</div></div></li>
+<li><button class="qn" onclick="mark(this)">3</button><div class="it"><div class="ja">そのニュースはわたしを悲しくさせました。</div><div class="qq"><span class="en">The news<span class="bl " data-a="made"></span>me sad.</span></div><div class="why">過去の形。</div></div></li>
+<li><button class="qn" onclick="mark(this)">4</button><div class="it"><div class="ja">わたしたちはねこをモモとよびます。</div><div class="qq"><span class="en">We<span class="bl " data-a="call"></span>our cat Momo.</span></div><div class="why">よぶもの → 名前。</div></div></li>
+<li><button class="qn" onclick="mark(this)">5</button><div class="it"><div class="ja">わたしたちは彼をケンとよびます。</div><div class="qq"><span class="en">We call<span class="bl " data-a="him"></span>Ken.</span></div><div class="why"><span class="en"><ruby>he<rt>ヒー</rt></ruby></span> にしない。</div></div></li>
+<li><button class="qn" onclick="mark(this)">6</button><div class="it"><div class="ja">それは彼女をおこらせます。</div><div class="qq"><span class="en">That makes<span class="bl " data-a="her"></span>angry.</span></div><div class="why"><span class="en"><ruby>she<rt>シー</rt></ruby></span> にしない。</div></div></li>
+<li><button class="qn" onclick="mark(this)">7</button><div class="it"><div class="ja">それはわたしをきんちょうさせます。</div><div class="qq"><span class="en">That makes me（<span class="bl"><span class="ansfill">nervous</span></span>）.</span></div><div class="why"><span class="en"><ruby>to<rt>トゥ</rt></ruby></span> はいらない。</div></div></li>
+<li><button class="qn" onclick="mark(this)">8</button><div class="it"><div class="ja">彼らは彼をボブとよびます。</div><div class="qq"><span class="en">They<span class="bl " data-a="call"></span>him<span class="bl " data-a="Bob"></span>.</span></div><div class="why">（　）が2つ。</div></div></li>
+<li><button class="qn" onclick="mark(this)">9</button><div class="it"><div class="ja">その歌は彼をうれしくさせます。</div><div class="qq"><span class="en">The song<span class="bl " data-a="makes"></span>him happy.</span></div><div class="why"><span class="en sx">s</span> を忘れない。</div></div></li>
+<li><button class="qn" onclick="mark(this)">10</button><div class="it"><div class="ja">そのニュースは彼女を悲しくさせました。</div><div class="qq"><span class="en">The news made<span class="bl " data-a="her"></span>sad.</span></div><div class="why">人の形。</div></div></li>
+</ol>
+<div class="abar"><button class="abtn" onclick="toggleAns(this)">答えを見る</button></div>
+</div>
+<div class="q"><div class="qh"><span class="n2">3</span>ならべて 文に しよう</div>
+<p class="qs">さいごに <b>?</b> か <b>.</b> を つけよう。（4問）</p>
+<ol class="items">
+<li><button class="qn" onclick="mark(this)">1</button><div class="it"><div class="ja">それはわたしをきんちょうさせます。</div><div class="qq"><span class="en">（ <ruby>me<rt>ミー</rt></ruby> / <ruby>That<rt>ザット</rt></ruby> / <ruby>nervous<rt>ナーバス</rt></ruby> / <ruby>makes<rt>メイクス</rt></ruby> ）</span><span class="bl long" data-a="That makes me nervous."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">2</button><div class="it"><div class="ja">その歌はわたしをうれしくさせます。</div><div class="qq"><span class="en">（ <ruby>me<rt>ミー</rt></ruby> / <ruby>The<rt>ザ</rt></ruby> <ruby>song<rt>ソング</rt></ruby> <ruby>makes<rt>メイクス</rt></ruby> / <ruby>happy<rt>ハピィ</rt></ruby> ）</span><span class="bl long" data-a="The song makes me happy."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">3</button><div class="it"><div class="ja">わたしたちはねこをモモとよびます。</div><div class="qq"><span class="en">（ our <ruby>cat<rt>キャット</rt></ruby> Momo / <ruby>call<rt>コール</rt></ruby> / <ruby>We<rt>ウィー</rt></ruby> ）</span><span class="bl long" data-a="We call our cat Momo."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">4</button><div class="it"><div class="ja">そのニュースはわたしを悲しくさせました。</div><div class="qq"><span class="en">（ <ruby>made<rt>メイド</rt></ruby> / <ruby>The<rt>ザ</rt></ruby> <ruby>news<rt>ニューズ</rt></ruby> / <ruby>me<rt>ミー</rt></ruby> / <ruby>sad<rt>サッド</rt></ruby> ）</span><span class="bl long" data-a="The news made me sad."></span></div></div></li>
+</ol>
+<div class="abar"><button class="abtn" onclick="toggleAns(this)">答えを見る</button></div>
+</div>
+<div class="q"><div class="qh"><span class="n2">4</span>日本語を 英語に しよう</div>
+<p class="qs">書けなかったら、上の カードを 見てもよい。（6問）</p>
+<ol class="items">
+<li><button class="qn" onclick="mark(this)">1</button><div class="it"><div class="ja">それはわたしをきんちょうさせます。</div><div class="qq"><span class="bl long" data-a="That makes me nervous."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">2</button><div class="it"><div class="ja">その歌はわたしをうれしくさせます。</div><div class="qq"><span class="bl long" data-a="The song makes me happy."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">3</button><div class="it"><div class="ja">わたしたちはねこをモモとよびます。</div><div class="qq"><span class="bl long" data-a="We call our cat Momo."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">4</button><div class="it"><div class="ja">そのニュースはわたしを悲しくさせました。</div><div class="qq"><span class="bl long" data-a="The news made me sad."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">5</button><div class="it"><div class="ja">わたしたちは彼をケンとよびます。</div><div class="qq"><span class="bl long" data-a="We call him Ken."></span></div></div></li>
+<li><button class="qn" onclick="mark(this)">6</button><div class="it"><div class="ja">それは彼女をおこらせます。</div><div class="qq"><span class="bl long" data-a="That makes her angry."></span></div></div></li>
+</ol>
+<div class="abar"><button class="abtn" onclick="toggleAns(this)">答えを見る</button></div>
+</div>
+<div class="abar all"><button class="abtn" onclick="allAns(this)">全体の答えを見る</button></div>
+<div class="redo"><span class="msg" id="rdnote">✓ を つけてから 押そう</span><span class="cnt" id="rdn">0問</span><button class="rbtn" id="rdbtn" onclick="redo(this)" disabled>まちがえた問題を 解き直す</button></div>
+</section>
+
+<section class="card sum"><h2><span class="num" style="background:#C88A16;">★</span><span class="ttl2">きょうの まとめ</span></h2><ul><li><b><span class="en"><ruby>make<rt>メイク</rt></ruby> ＋ 人 ＋ ようすのことば</span></b> ＝「（人）を～にする」。</li><li><b><span class="en"><ruby>call<rt>コール</rt></ruby> ＋ <ruby>A<rt>ア</rt></ruby> ＋ B</span></b> ＝「A を B とよぶ」。</li><li>うしろの<b>2つはイコール</b>。<span class="en"><ruby>to<rt>トゥ</rt></ruby></span> や <span class="en"><ruby>is<rt>イズ</rt></ruby></span> は入れない。</li><li>はさむ人は <b><span class="en"><ruby>me<rt>ミー</rt></ruby>・<ruby>him<rt>ヒム</rt></ruby>・<ruby>her<rt>ハー</rt></ruby></span></b> の形。主語はものでもよい。</li></ul></section>
+<div class="foot">
+  <span class="spk">英語を押すと ゆっくり読みます</span>
+  <a class="home" href="index.html">トップ</a>
+</div>
+</div>
+<script>
+function toggleAns(btn){
+  var box = btn.closest('.q');
+  var on = box.classList.toggle('show');
+  btn.textContent = on ? '答えをかくす' : '答えを見る';
+  btn.classList.toggle('off', on);
+}
+function allAns(btn){
+  var on = !document.body.classList.contains('allon');
+  document.body.classList.toggle('allon', on);
+  document.querySelectorAll('.q').forEach(function(q){ q.classList.toggle('show', on); });
+  document.querySelectorAll('.q .abtn').forEach(function(b){
+    b.textContent = on ? '答えをかくす' : '答えを見る';
+    b.classList.toggle('off', on);
+  });
+  btn.textContent = on ? '全体の答えをかくす' : '全体の答えを見る';
+  btn.classList.toggle('off', on);
+}
+function pick(b, ok){
+  var m = b.closest('.mini');
+  m.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel','miss'); });
+  m.classList.remove('yes','miss');
+  b.classList.add('sel');
+  if(ok){ m.classList.add('yes'); }
+  else { b.classList.add('miss'); m.classList.add('miss'); }
+}
+function toggleKanaBlock(btn){
+  var on = document.body.classList.toggle('kana');
+  document.querySelectorAll('.ksm').forEach(function(b){
+    b.textContent = on ? 'カタカナを消す' : 'カタカナ';
+    b.classList.toggle('on', on);
+  });
+}
+function mark(b){
+  b.classList.toggle('on');
+  b.closest('li').classList.toggle('wrong', b.classList.contains('on'));
+  var n = document.querySelectorAll('ol.items > li.wrong').length;
+  var c = document.getElementById('rdn'); if(c) c.textContent = n + '問';
+  var r = document.getElementById('rdbtn'); if(r) r.disabled = (n === 0);
+}
+function redo(btn){
+  var on = document.body.classList.toggle('redoing');
+  if(on){
+    document.querySelectorAll('.q').forEach(function(q){
+      q.classList.toggle('nohit', q.querySelectorAll('li.wrong').length === 0);
+    });
+  }
+  btn.textContent = on ? 'ぜんぶの問題に もどる' : 'まちがえた問題を 解き直す';
+  btn.classList.toggle('back', on);
+  var note = document.getElementById('rdnote');
+  if(note) note.textContent = on ? 'まちがえた問題だけ 出しています' : '✓ を つけてから 押そう';
+  document.querySelector('.prac').scrollIntoView({behavior:'smooth', block:'start'});
+}
+(function energyGauge(){
+  var fill = document.getElementById('gfill'), pct = document.getElementById('gpct');
+  if(!fill) return;
+  var shown = -1;
+  function update(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var r = max > 0 ? window.scrollY / max : 0;
+    var p = Math.max(0, Math.min(100, Math.round(r * 10) * 10));
+    if(p === shown) return;
+    shown = p; fill.style.height = p + '%'; pct.textContent = p + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+(function setTimer(){
+  var box = document.getElementById('clock'), pie = document.getElementById('cpie'),
+      hand = document.getElementById('chand'), lab = document.getElementById('cmin');
+  if(!box) return;
+  var FULL = 30 * 60, WARN = 20 * 60, KEY = 'hwg_timer_' + location.pathname, sec = 0;
+  try{ sec = parseInt(sessionStorage.getItem(KEY) || '0', 10) || 0; }catch(e){}
+  function sector(a){
+    if(a <= 0) return '';
+    if(a >= 359.9) a = 359.9;
+    var r = 17, c = 20, rad = a * Math.PI / 180;
+    var x = c + r * Math.sin(rad), y = c - r * Math.cos(rad);
+    return 'M' + c + ',' + c + ' L' + c + ',' + (c - r) + ' A' + r + ',' + r +
+           ' 0 ' + (a > 180 ? 1 : 0) + ',1 ' + x.toFixed(2) + ',' + y.toFixed(2) + ' Z';
+  }
+  function draw(){
+    var t = Math.min(sec, FULL);
+    pie.setAttribute('d', sector(t / FULL * 360));
+    hand.setAttribute('transform', 'rotate(' + (sec / FULL * 360) % 360 + ',20,20)');
+    lab.textContent = Math.floor(sec / 60) + '分';
+    box.classList.toggle('over', sec >= WARN);
+  }
+  draw();
+  setInterval(function(){
+    if(document.hidden) return;
+    sec++;
+    try{ sessionStorage.setItem(KEY, String(sec)); }catch(e){}
+    draw();
+  }, 1000);
+})();
+(function(){
+  if(!('speechSynthesis' in window)) return;
+  var V = null;
+  function pick(){ var vs = speechSynthesis.getVoices();
+    V = vs.filter(function(v){ return /^en/i.test(v.lang); })[0] || null; }
+  pick(); speechSynthesis.addEventListener('voiceschanged', pick);
+  document.addEventListener('click', function(e){
+    if(e.target.closest('button, a, input, label')) return;
+    var el = e.target.closest('.en');
+    if(!el) return;
+    var c = el.cloneNode(true);
+    c.querySelectorAll('rt').forEach(function(x){ x.remove(); });
+    var t = c.textContent.replace(/[（）()]/g,' ').replace(/[^\x20-\x7E]/g,' ')
+             .replace(/\s+/g,' ').trim();
+    if(!t || !/[A-Za-z]/.test(t)) return;
+    try{ speechSynthesis.cancel(); }catch(err){}
+    el.classList.add('playing');
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = (V && V.lang) || 'en-US'; if(V) u.voice = V;
+    u.rate = 0.6;
+    u.onend = u.onerror = function(){ el.classList.remove('playing'); };
+    try{ speechSynthesis.speak(u); }catch(err){ el.classList.remove('playing'); }
+  });
+})();
+</script>
+</body></html>

@@ -295,7 +295,7 @@
   .copy{background:#FFF8E8;border:2px solid #E5B65A;border-radius:7px;
     padding:7px 13px;margin:7px 0 0;display:flex;align-items:center;gap:10px;
     font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11.5pt;color:#8A5A0B;}
-  .copy svg{width:24px;height:24px;flex:none;color:#35B44B;}
+  .copy svg{width:24px;height:24px;flex:none;color:#FF5CA8;}
   .copy small{display:block;font-weight:500;font-size:9.5pt;color:#7A6231;margin-top:1px;}
   .copy .cpx{font-family:"Lexend",sans-serif;font-weight:600;font-size:12pt;
     color:#6B4E0B;margin-top:3px;line-height:1.7;}
@@ -324,7 +324,7 @@
   /* ブロック間を半行ずつ空ける */
   .blk-sec + .blk-sec{margin-top:8px;padding-top:14px;}
   /* きほんの文（書き写す3文）の鉛筆マーク */
-  .exline .pn{width:14px;height:14px;flex:none;color:#35B44B;align-self:center;margin-right:-5px;}
+  .exline .pn{width:14px;height:14px;flex:none;color:#FF5CA8;align-self:center;margin-right:-5px;}
 
   /* 解説文は1文ごとに改行＋字下げ（低学力生徒の視認性のため） */
   .talk{text-indent:1em;}
@@ -619,6 +619,42 @@
     background:#F5FBEC;color:var(--mut);font-size:9.5pt;}
   .morehint b{color:#3C7A14;}
   .simple .morehint{display:flex;}
+
+
+
+
+
+  /* ===== v29: 基本 / シンプル / 超シンプル ===== */
+  .modes{display:inline-flex;align-items:center;gap:6px;margin-right:auto;}
+  .modes .mbtn{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:9.5pt;
+    border-radius:999px;padding:2px 14px 3px;cursor:pointer;line-height:1.5;
+    display:inline-flex;align-items:center;text-decoration:none;flex:none;
+    border:2px solid #9BC96B;background:#F4FBEC;color:#4F8C1F;}
+  .modes .mbtn.m-sim{border-color:#9AB6E0;background:#F4F8FD;color:#2E68C4;}
+  .modes .mbtn.m-ss{border-color:#FF5CA8;background:#FFF0F7;color:#C2185B;}
+  .modes .mbtn:hover{filter:brightness(.97);}
+  .modes .mbtn:active{transform:translateY(1px);}
+  .modes .mbtn.on{background:#4F8C1F;border-color:#4F8C1F;color:#fff;}
+  .modes .mbtn.m-sim.on{background:#2E68C4;border-color:#2E68C4;color:#fff;}
+  .modes .mbtn.m-ss.on{background:#C2185B;border-color:#C2185B;color:#fff;}
+  @media print{.modes{display:none;}}
+  /* ===== v27: クイズの別解 ===== */
+  .qza .alt{display:block;font-family:"Lexend",sans-serif;font-weight:600;
+    font-size:11pt;color:#1F8A70;margin-top:2px;}
+  .qza .alt .lb{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+    font-size:8pt;color:#fff;background:#1F8A70;border-radius:4px;
+    padding:0 6px 1px;margin-right:6px;vertical-align:1px;}
+  .qza .alt .ajp{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:500;
+    font-size:9.5pt;color:#245C45;margin-left:7px;}
+  /* ===== v26: s を目立たせる ===== */
+  .sx{color:#7A2FD0;font-weight:900;}
+  /* ===== v25: クイズは ふつう5問 / シンプル3問 ===== */
+  .qzi.qz-off{display:none;}
+  @media print{ .qzi.qz-off{display:none;} }
+  /* ===== v24: シンプル版はクイズ4問まで ===== */
+  .simple .qzi.qz-more{display:none;}
+  @media print{ .qzi.qz-more{display:block;} }
+
   @media print{ .mbtn,.morehint{display:none;} .blk-sec.more{display:block;} }
 
   /* ===== v12: シンプル時は問題も約2割へらす ===== */
@@ -715,16 +751,16 @@
 </div>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g3-u1-2-ss.html">超シンプル</a></span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 2 <small>Here We Go!</small></div>
     <div class="sub"><b>① 文法わかるページ</b><br>教科書 p.12〜13</div>
   </div>
 
   <div class="hero">
-    <div class="star"><svg><use href="#i-star"/></svg><span>主役</span></div>
+    <div class="star"><svg><use href="#i-star"/></svg></div>
     <div class="mid">
-      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回の文法テーマ！</div>
+      <div class="lbl"><svg class="lblpen"><use href="#i-pen"/></svg>今回のテーマ！</div>
       <div class="big">Let me show you my bag.</div>
       <div class="jp">わたしに かばんを 見せ させて ください</div>
     </div>
@@ -818,7 +854,7 @@
     <p class="talk">ただし <b><span class="en">let</span> は ぜったいに <span class="en">to</span> なし</b>。<br>　まずは<b>両方とも to なし</b>でおぼえるのが安全です。</p>
   </div>
 
-  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+  <div class="morehint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている説明を読みたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="quiz">
     <div class="qzh">✕ よくある間違いさがしクイズ！<span class="qzs">どこがまちがい？　ノートに直してから答えを押そう</span></div>
     <div class="qzi">
@@ -827,21 +863,21 @@
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">2.</span><span class="xm">✕ Let me shows you my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
-      <div class="qza"><span class="good en">○ Let me <span class="fx">show</span> you my bag.</span><span class="gjp">わたしに かばんを 見せ させて ください。</span><span class="qzp"><b>ポイント</b>　うしろは<b>原形（もとの形）</b>。<span class="en">s</span> はつけません。</span></div>
+      <div class="qza"><span class="good en">○ Let me <span class="fx">show</span> you my bag.</span><span class="gjp">わたしに かばんを 見せ させて ください。</span><span class="qzp"><b>ポイント</b>　うしろは<b>原形（もとの形）</b>。<span class="en sx">s</span> はつけません。</span></div>
     </div>
     <div class="qzi">
       <div class="qzq"><span class="no">3.</span><span class="xm">✕ Let I show you my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ Let <span class="fx">me</span> show you my bag.</span><span class="gjp">わたしに かばんを 見せ させて ください。</span><span class="qzp"><b>ポイント</b>　はさむ人は <b><span class="en">me</span></b> の形。<span class="en">I</span> は主語のときの形です。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">4.</span><span class="xm">✕ Let me showing you my bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ Let me <span class="fx">show</span> you my bag.</span><span class="gjp">わたしに かばんを 見せ させて ください。</span><span class="qzp"><b>ポイント</b>　<span class="en">ing</span> にしません。<b>原形（もとの形）</b>です。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-more">
       <div class="qzq"><span class="no">5.</span><span class="xm">✕ He helped I carry the bag. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ He helped <span class="fx">me</span> carry the bag.</span><span class="gjp">彼は わたしが かばんを 運ぶのを 手伝いました。</span><span class="qzp"><b>ポイント</b>　はさむ人は <b><span class="en">me</span></b> の形。</span></div>
     </div>
-    <div class="qzi">
+    <div class="qzi qz-off">
       <div class="qzq"><span class="no">6.</span><span class="xm">✕ I will help you cleaning your room. ✕</span><button class="qzb" onclick="toggleQz(this)">答え</button></div>
       <div class="qza"><span class="good en">○ I will help you <span class="fx">clean</span> your room.</span><span class="gjp">わたしは あなたが 部屋を そうじするのを 手伝います。</span><span class="qzp"><b>ポイント</b>　<span class="en">help</span> のうしろも<b>原形（もとの形）</b>。</span></div>
     </div>
@@ -864,13 +900,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g3-u1-2-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 2 <small>基本事項チェック</small></div>
     <div class="sub"><b>② 文法たしかめページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="qsec">
   <h3 class="sec">A　説明の（　）をうめよう<em>語群から選びます（同じ語を2回使ってもよい）</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
   <ol class="q numq">
@@ -901,7 +937,7 @@
     <div class="opt"><button class="qn" onclick="toggleQn(this)">9</button><span class="en">（<span class="bl"><span class="ansfill">Let's</span></span>）go to the park.</span>（行きましょう）</div>
     <div class="opt"><button class="qn" onclick="toggleQn(this)">10</button><span class="en">Let me（<span class="bl s"><span class="ansfill">try</span></span>）it again.</span>（やってみる）</div>
   </div>
-  <div class="expbox"><b>かくにん</b>　2・6・10 は<b>原形（もとの形）</b>。<span class="en">to</span> も <span class="en">s</span> も <span class="en">ing</span> もつけません。<br>1・5・7・8 は <span class="en">me・him・her</span> の形です。</div>
+  <div class="expbox"><b>かくにん</b>　2・6・10 は<b>原形（もとの形）</b>。<span class="en">to</span> も <span class="en sx">s</span> も <span class="en">ing</span> もつけません。<br>1・5・7・8 は <span class="en">me・him・her</span> の形です。</div>
 
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -949,13 +985,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g3-u1-2-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 2 <small>レベル 1・2</small></div>
     <div class="sub"><b>③ 文法かるく使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル1チェック　文法あなうめ<em>日本語に合うように、（　）に1語ずつ入れよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <div class="hint"><b>コツ</b>　動詞 → 人 → <b>原形（もとの形）</b> の順。<span class="en">to</span> は入れない。</div>
@@ -995,13 +1031,13 @@
 </section>
 
 <section class="sheet">
-  <div class="toolbar"><button class="mbtn" onclick="toggleMore(this)">シンプルに <span class="cv">▼</span></button><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
+  <div class="toolbar"><span class="modes"><button class="mbtn m-base on" data-m="base" onclick="setMode(this,'base')">基本</button><button class="mbtn m-sim" data-m="simple" onclick="setMode(this,'simple')">シンプル</button><a class="mbtn m-ss" href="g3-u1-2-ss.html">超シンプル</a></span><span class="cknote"><i></i>まちがえた問題は 番号を押す</span><span class="spnote"><svg><use href="#i-sound"/></svg>英語を押すと読み上げ</span><button class="spbtn" onclick="toggleSlow(this)">ふつうの速さ</button><button class="kbtn" onclick="toggleKana(this)">ぜんぶカタカナ</button></div>
   <div class="head">
     <div class="tag">Unit 1 − 2 <small>レベル 3・4</small></div>
     <div class="sub"><b>④ 文法しっかり使えるページ</b><br></div>
   </div>
 
-    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「ぜんぶ表示」</b> を押そう。</div></div>
+    <div class="qhint"><svg style="width:15px;height:15px;flex:none;color:#1F4E9C"><use href="#i-pen"/></svg><div>かくれている問題もやりたいときは、上の <b>「基本版」</b> を押そう。</div></div>
   <div class="half qsec">
     <h3 class="sec">レベル3チェック　和文英訳<em>次の日本語を英語にしよう。</em><button class="ksm" onclick="toggleKanaBlock(this)">カタカナ</button></h3>
     <ol class="q numq">
@@ -1043,7 +1079,7 @@
     </div>
     <div class="ribbon">
       <svg class="ic-l beat"><use href="#i-heart"/></svg>
-      <b>書けたら 見直し</b><span class="s">じぶんの文の 人 のうしろの動詞に○をつけよう。<span class="en">to</span> や <span class="en">s</span> がついていたら、そこがまちがい。</span>
+      <b>書けたら 見直し</b><span class="s">じぶんの文の 人 のうしろの動詞に○をつけよう。<span class="en">to</span> や <span class="en sx">s</span> がついていたら、そこがまちがい。</span>
     </div>
     <div class="secbar"><button class="sbtn" onclick="toggleSec(this)">答えを見る</button></div>
   </div>
@@ -1429,13 +1465,21 @@ function toggleSlow(btn){
   });
 })();
 
+function setMode(btn, mode){
+  var simple = (mode === 'simple');
+  document.querySelectorAll('.sheet').forEach(function(s){ s.classList.toggle('simple', simple); });
+  document.querySelectorAll('.modes .mbtn').forEach(function(b){
+    if(b.dataset.m) b.classList.toggle('on', b.dataset.m === mode);
+  });
+  btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
+}
 function toggleMore(btn){
   const on = !btn.classList.contains('on');
   document.querySelectorAll('.sheet').forEach(function(s){
     s.classList.toggle('simple', on);
   });
   document.querySelectorAll('.mbtn').forEach(function(b){
-    b.firstChild.nodeValue = on ? 'ぜんぶ表示 ' : 'シンプルに ';
+    b.firstChild.nodeValue = on ? '基本版 ' : 'シンプル版 ';
     b.classList.toggle('on', on);
   });
   btn.closest('.sheet').scrollIntoView({behavior:'smooth', block:'start'});
