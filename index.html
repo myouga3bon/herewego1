@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Here We Go! 中学英文法ページ</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<title>イナサト英語 オンライン</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lexend:wght@400;600;700&family=M+PLUS+Rounded+1c:wght@800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --be:#1F4E9C; --gv:#C2185B; --ink:#2A2A33; --sub:#6B6B78;
@@ -29,19 +29,24 @@ body{
 .wrap{max-width:1000px;margin:0 auto;}
 
 /* ===== ヘッダー ===== */
-header{text-align:center;padding:13px 0 10px;}
-.badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:#FFF3C9;border:2px solid #F0C44A;border-radius:999px;
-  padding:3px 14px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
-  font-size:12px;color:#9A6B06;margin-bottom:7px;
-}
-.badge svg{width:14px;height:14px;}
+header{text-align:center;padding:6px 0 12px;}
 h1{
   font-family:"Zen Maru Gothic",sans-serif;font-weight:900;
   font-size:clamp(21px,4.6vw,28px);line-height:1.25;margin:0;color:var(--be);
 }
 h1 .en{font-family:"Lexend",sans-serif;font-weight:700;}
+/* ブランドロゴ */
+h1.brand{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
+  gap:2px 10px;
+  font-family:"M PLUS Rounded 1c","Zen Maru Gothic",sans-serif;font-weight:800;
+  letter-spacing:.03em;
+}
+.brand .b1{color:#7A2FD0;}
+.brand .b2{color:#7A2FD0;}
+.brand .st{width:clamp(14px,2.4vw,19px);height:clamp(14px,2.4vw,19px);
+  color:#BFA0EC;align-self:center;flex:0 0 auto;}
+
 
 /* ===== つかいかた ===== */
 .howto{
@@ -130,7 +135,7 @@ a.pt.gm:hover{border-color:#7A2FD0;}
 a.pt.gm .pe{color:#7A2FD0;}
 
 /* ===== 学年タブ ===== */
-.gtabs{display:flex;gap:11px;justify-content:center;margin:0 0 15px;}
+.gtabs{display:flex;gap:11px;justify-content:center;margin:12px 0 2px;}
 .gt{
   font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:17px;
   padding:9px 38px;border-radius:999px;cursor:pointer;
@@ -188,9 +193,14 @@ footer .lg{
 </svg>
 
 <div class="wrap">
+  <div class="gtabs">
+    <button class="gt on" onclick="switchGrade(1,this)">1年</button>
+    <button class="gt" onclick="switchGrade(2,this)">2年</button>
+    <button class="gt" onclick="switchGrade(3,this)">3年</button>
+  </div>
+
   <header>
-    <div class="badge"><svg><use href="#i-star"/></svg>中学1年　英語</div>
-    <h1><span class="en">Here We Go!</span> 1年　文法ページ</h1>
+    <h1 class="brand"><svg class="st"><use href="#i-star"/></svg><span class="b1">イナサト英語</span><span class="b2">オンライン</span><svg class="st"><use href="#i-star"/></svg></h1>
   </header>
 
   <details class="howto" open>
@@ -203,12 +213,6 @@ footer .lg{
       <li><span class="n">5</span><div>最後に <span class="pill r">まちがえた問題を解き直し</span> を押して、<b>もう一度解こう</b>。</div></li>
     </ul>
   </details>
-
-  <div class="gtabs">
-    <button class="gt on" onclick="switchGrade(1,this)">1年</button>
-    <button class="gt" onclick="switchGrade(2,this)">2年</button>
-    <button class="gt" onclick="switchGrade(3,this)">3年</button>
-  </div>
 
   <div id="g1">
     <section class="unit u1">
@@ -482,10 +486,7 @@ function switchGrade(n, btn){
   document.getElementById('g2').hidden = (n !== 2);
   document.querySelectorAll('.gt').forEach(function(b){ b.classList.remove('on'); });
   btn.classList.add('on');
-  document.querySelector('.badge').lastChild.nodeValue = '中学' + n + '年　英語';
-  document.querySelector('h1').innerHTML =
-    '<span class="en">Here We Go!</span> ' + n + '年　文法ページ';
-  document.title = 'Here We Go! ' + n + '年　文法ページ';
+  document.title = 'イナサト英語 オンライン　中学' + n + '年';
   document.getElementById('g3').hidden = (n !== 3);
   document.getElementById('m1').hidden = (n !== 1);
   document.getElementById('m2').hidden = (n !== 2);
